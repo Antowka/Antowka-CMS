@@ -3,7 +3,9 @@ package ru.antowka.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -14,10 +16,15 @@ import java.util.Map;
 public class MainController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String main(Map<String, Object> model) {
+    public ModelAndView homePage() {
+
+        Map model = new HashMap<String, Object>();
 
         model.put("title", "Antowka CMS");
         model.put("msg", "HELLO WORLD");
-        return "home";
+
+        return new ModelAndView("main", "msg", model);
     }
 }
+
+//todo - working on security - http://devcolibri.com/3810

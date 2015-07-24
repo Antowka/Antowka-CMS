@@ -13,5 +13,10 @@ repositories {
  
 dependencies {
 	compile 'org.springframework:spring-webmvc:4.1.6.RELEASE'
+    compile 'org.springframework.security:spring-security-web:4.0.2.RELEASE'
 	compile 'javax.servlet:jstl:1.2'
+    compile 'org.apache.tiles:tiles-jsp:3.0.5'
+    compile 'org.apache.tiles:tiles-servlet:3.0.5'
+    compile 'org.apache.tiles:tiles-template:3.0.5'
+    compile 'org.apache.tiles:tiles-el:3.0.5'
 }

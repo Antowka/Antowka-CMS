@@ -22,6 +22,22 @@
           <element id="library" level="project" name="Gradle: org.springframework:spring-context:4.1.6.RELEASE" />
           <element id="library" level="project" name="Gradle: org.springframework:spring-core:4.1.6.RELEASE" />
           <element id="library" level="project" name="Gradle: org.springframework:spring-expression:4.1.6.RELEASE" />
+          <element id="library" level="project" name="Gradle: org.apache.tiles:tiles-jsp:3.0.5" />
+          <element id="library" level="project" name="Gradle: org.apache.tiles:tiles-core:3.0.5" />
+          <element id="library" level="project" name="Gradle: org.apache.tiles:tiles-request-servlet:1.0.6" />
+          <element id="library" level="project" name="Gradle: org.apache.tiles:tiles-api:3.0.5" />
+          <element id="library" level="project" name="Gradle: org.apache.tiles:tiles-autotag-core-runtime:1.1.0" />
+          <element id="library" level="project" name="Gradle: org.apache.tiles:tiles-request-api:1.0.6" />
+          <element id="library" level="project" name="Gradle: commons-digester:commons-digester:2.0" />
+          <element id="library" level="project" name="Gradle: org.slf4j:jcl-over-slf4j:1.7.6" />
+          <element id="library" level="project" name="Gradle: commons-beanutils:commons-beanutils:1.8.0" />
+          <element id="library" level="project" name="Gradle: org.apache.tiles:tiles-servlet:3.0.5" />
+          <element id="library" level="project" name="Gradle: org.apache.tiles:tiles-template:3.0.5" />
+          <element id="library" level="project" name="Gradle: org.slf4j:slf4j-api:1.7.6" />
+          <element id="library" level="project" name="Gradle: org.apache.tiles:tiles-request-jsp:1.0.6" />
+          <element id="library" level="project" name="Gradle: org.apache.tiles:tiles-el:3.0.5" />
+          <element id="library" level="project" name="Gradle: org.springframework.security:spring-security-web:4.0.2.RELEASE" />
+          <element id="library" level="project" name="Gradle: org.springframework.security:spring-security-core:4.0.2.RELEASE" />
         </element>
       </element>
       <element id="directory" name="META-INF">

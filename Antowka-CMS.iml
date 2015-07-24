@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module external.linked.project.id="Antowka-CMS" external.linked.project.path="$USER_HOME$/Desktop/Projects/JAVA/Antowka-CMS" external.root.project.path="$MODULE_DIR$" external.system.id="GRADLE" external.system.module.group="" external.system.module.version="unspecified" type="JAVA_MODULE" version="4">
   <component name="FacetManager">
+    <facet type="Spring" name="Spring">
+      <configuration>
+        <fileset id="fileset" name="Spring Application Context" removed="false">
+          <dependency>web antowkacms servlet context</dependency>
+          <file>file://$USER_HOME$/Desktop/Projects/JAVA/Antowka-CMS/src/main/webapp/WEB-INF/config/core-config.xml</file>
+        </fileset>
+      </configuration>
+    </facet>
     <facet type="web" name="Web Gradle : Antowka-CMS.war">
       <configuration>
         <descriptors>
@@ -40,5 +48,21 @@
     <orderEntry type="library" name="Gradle: org.springframework:spring-context:4.1.6.RELEASE" level="project" />
     <orderEntry type="library" name="Gradle: org.springframework:spring-core:4.1.6.RELEASE" level="project" />
     <orderEntry type="library" name="Gradle: org.springframework:spring-expression:4.1.6.RELEASE" level="project" />
+    <orderEntry type="library" name="Gradle: org.apache.tiles:tiles-jsp:3.0.5" level="project" />
+    <orderEntry type="library" name="Gradle: org.apache.tiles:tiles-core:3.0.5" level="project" />
+    <orderEntry type="library" name="Gradle: org.apache.tiles:tiles-request-servlet:1.0.6" level="project" />
+    <orderEntry type="library" name="Gradle: org.apache.tiles:tiles-api:3.0.5" level="project" />
+    <orderEntry type="library" name="Gradle: org.apache.tiles:tiles-autotag-core-runtime:1.1.0" level="project" />
+    <orderEntry type="library" name="Gradle: org.apache.tiles:tiles-request-api:1.0.6" level="project" />
+    <orderEntry type="library" name="Gradle: commons-digester:commons-digester:2.0" level="project" />
+    <orderEntry type="library" name="Gradle: org.slf4j:jcl-over-slf4j:1.7.6" level="project" />
+    <orderEntry type="library" name="Gradle: commons-beanutils:commons-beanutils:1.8.0" level="project" />
+    <orderEntry type="library" name="Gradle: org.apache.tiles:tiles-servlet:3.0.5" level="project" />
+    <orderEntry type="library" name="Gradle: org.apache.tiles:tiles-template:3.0.5" level="project" />
+    <orderEntry type="library" name="Gradle: org.slf4j:slf4j-api:1.7.6" level="project" />
+    <orderEntry type="library" name="Gradle: org.apache.tiles:tiles-request-jsp:1.0.6" level="project" />
+    <orderEntry type="library" name="Gradle: org.apache.tiles:tiles-el:3.0.5" level="project" />
+    <orderEntry type="library" name="Gradle: org.springframework.security:spring-security-web:4.0.2.RELEASE" level="project" />
+    <orderEntry type="library" name="Gradle: org.springframework.security:spring-security-core:4.0.2.RELEASE" level="project" />
   </component>
 </module>
