@@ -2,8 +2,8 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
-       xmlns:mvc="http://www.springframework.org/schema/mvc"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+       xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
        <context:property-placeholder location="/WEB-INF/properties/*.properties" />
 
@@ -18,7 +18,8 @@
 
        <mvc:annotation-driven />
 
-       <!-- TILES TEMPLATES -->
+
+<!-- TILES TEMPLATES -->
        <bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
               <property name="definitions">
                      <list>
@@ -26,5 +27,45 @@
                      </list>
               </property>
        </bean>
+
+
+
+<!-- START DB CONFIG -->
+
+       <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
+              <property name="driverClassName" value="${jdbc.driverClassName}" />
+              <property name="url" value="${jdbc.url}" />
+              <property name="username" value="${jdbc.username}" />
+              <property name="password" value="${jdbc.password}" />
+       </bean>
+
+       <!-- Hibernate 4 SessionFactory Bean definition -->
+       <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+              <property name="dataSource" ref="dataSource" />
+              <property name="packagesToScan" value="ru.antowka.entity" />
+
+              <property name="hibernateProperties">
+                     <props>
+                            <prop key="hibernate.dialect">${jdbc.dialect}</prop>
+                            <prop key="hibernate.show_sql">true</prop>
+                     </props>
+              </property>
+       </bean>
+
+       <bean id="hibernateSessionFactory" class="ru.antowka.dao.Impl.HibernateSessionFactoryImpl">
+              <property name="sessionFactory" ref="sessionFactory" />
+       </bean>
+
+       <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+              <property name="sessionFactory" ref="sessionFactory"/>
+       </bean>
+
+       <tx:annotation-driven mode="proxy" transaction-manager="transactionManager"/>
+
+       <bean id="persistenceExceptionTranslationPostProcessor"
+             class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>
+
+<!-- END DB CONFIG -->
+
 
 </beans>

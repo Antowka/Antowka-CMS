@@ -12,11 +12,15 @@ repositories {
 }
  
 dependencies {
-	compile 'org.springframework:spring-webmvc:4.1.6.RELEASE'
+	compile 'org.springframework:spring-webmvc:4.1.7.RELEASE'
     compile 'org.springframework.security:spring-security-web:4.0.2.RELEASE'
 	compile 'javax.servlet:jstl:1.2'
     compile 'org.apache.tiles:tiles-jsp:3.0.5'
     compile 'org.apache.tiles:tiles-servlet:3.0.5'
     compile 'org.apache.tiles:tiles-template:3.0.5'
     compile 'org.apache.tiles:tiles-el:3.0.5'
+    compile 'org.springframework:spring-orm:4.1.7.RELEASE'
+    compile 'org.hibernate:hibernate-core:4.3.10.Final'
+    compile 'org.postgresql:postgresql:9.4-1201-jdbc41'
+    compile 'org.apache.commons:commons-dbcp2:2.1'
 }
