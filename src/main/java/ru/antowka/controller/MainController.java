@@ -18,7 +18,7 @@ public class MainController {
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView homePage() {
 
-        Map model = new HashMap<String, Object>();
+        Map<String, Object> model = new HashMap<String, Object>();
 
         model.put("title", "Antowka CMS");
         model.put("msg", "HELLO WORLD");

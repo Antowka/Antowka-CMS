@@ -55,6 +55,9 @@
           <element id="library" level="project" name="Gradle: org.springframework:spring-aop:4.1.7.RELEASE" />
           <element id="library" level="project" name="Gradle: org.springframework:spring-expression:4.1.7.RELEASE" />
           <element id="library" level="project" name="Gradle: org.springframework:spring-web:4.1.7.RELEASE" />
+          <element id="library" level="project" name="Gradle: org.springframework.security:spring-security-config:4.0.2.RELEASE" />
+          <element id="library" level="project" name="Gradle: org.springframework.security:spring-security-taglibs:4.0.2.RELEASE" />
+          <element id="library" level="project" name="Gradle: org.springframework.security:spring-security-acl:4.0.2.RELEASE" />
         </element>
       </element>
       <element id="directory" name="META-INF">
