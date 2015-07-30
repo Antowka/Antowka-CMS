@@ -8,6 +8,9 @@ import ru.antowka.dao.HibernateSessionFactory;
 import ru.antowka.dao.UserDao;
 import ru.antowka.entity.User;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 /**
  * Created by Anton Nik on 25.07.15.
@@ -34,7 +37,20 @@ public class UserDaoImpl implements UserDao{
     @Override
     @Transactional
     public User getUserById(long userId) {
-        return null;
+
+        User user = null;
+
+        try {
+
+            user = (User) this.hibernateSessionFactory
+                                   .getSession()
+                                   .get(User.class, userId);
+
+        } catch (RuntimeException e) {
+            String test = "0";
+        }
+
+        return user;
     }
 
     @Override
@@ -44,8 +60,11 @@ public class UserDaoImpl implements UserDao{
         User user = null;
 
         try {
-            Session session = hibernateSessionFactory.getSession();
-            user = (User) session.get(User.class, login);
+
+            user = (User) this.hibernateSessionFactory
+                    .getSession()
+                    .get(User.class, login);
+
         } catch (RuntimeException e) {
             String test = "0";
         }
@@ -56,7 +75,19 @@ public class UserDaoImpl implements UserDao{
     @Override
     @Transactional
     public User getUserByEmail(String email) {
-        return null;
+        User user = null;
+
+        try {
+
+            user = (User) this.hibernateSessionFactory
+                    .getSession()
+                    .get(User.class, email);
+
+        } catch (RuntimeException e) {
+            String test = "0";
+        }
+
+        return user;
     }
 
     @Override

@@ -1,8 +1,14 @@
 package ru.antowka.entity;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
 /**
  * Created by anton on 25.07.15.
  */
+
+@Entity
+@Table(name = "users")
 public class User {
 
     private String firstName;
@@ -10,6 +16,8 @@ public class User {
     private String login;
     private String password;
     private String email;
+    private String role;
+    private boolean enable;
 
 
     public String getLogin() {
@@ -50,5 +58,21 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public boolean isEnable() {
+        return enable;
+    }
+
+    public void setEnable(boolean enable) {
+        this.enable = enable;
     }
 }
