@@ -2,7 +2,7 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-    <class name="ru.antowka.entity.UserRole" table="user_roles" catalog="test">
+    <class name="ru.antowka.entity.UserRole" table="role">
 
         <id name="roleId" type="java.lang.Integer">
             <column name="role_id" />
@@ -10,7 +10,7 @@
         </id>
 
         <many-to-one name="userId" class="ru.antowka.entity.User" fetch="select">
-            <column name="userId" length="45" not-null="true" />
+            <column name="user_id" length="45" not-null="true" />
         </many-to-one>
 
         <property name="role" type="string">

@@ -17,6 +17,8 @@
     <div class="msg">${msg}</div>
   </c:if>
 
+  <c:url value="/login_validator" var="loginUrl" />
+
   <form name='loginForm' action="${loginUrl}" method='POST'>
 
     <table>
@@ -28,7 +30,7 @@
 
       <tr>
         <td>Password:</td>
-        <td><input type='password' name='password' /></td>
+        <td><input type='password' name="password" /></td>
       </tr>
 
       <tr>

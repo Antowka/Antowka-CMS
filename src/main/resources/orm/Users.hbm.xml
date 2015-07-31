@@ -3,10 +3,10 @@
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 
-    <class name="ru.antowka.entity.User" table="users" catalog="test">
+    <class name="ru.antowka.entity.User" table="users">
 
         <id name="login" type="string">
-            <column name="username" length="45" />
+            <column name="login" length="45" />
             <generator class="assigned" />
         </id>
 
@@ -15,12 +15,12 @@
         </property>
 
         <property name="enable" type="boolean">
-            <column name="enabled" not-null="true" />
+            <column name="enable" not-null="true" />
         </property>
 
-        <set name="role" table="user_roles" inverse="true" lazy="true" fetch="select">
+        <set name="role" table="role" inverse="true" lazy="true" fetch="select">
             <key>
-                <column name="login" length="45" not-null="true" />
+                <column name="user_id" length="45" not-null="true" />
             </key>
             <one-to-many class="ru.antowka.entity.UserRole" />
         </set>
