@@ -11,6 +11,20 @@
               <put-attribute name="footer" value="/WEB-INF/resources/antowka_theme/templates/footer.jsp" />
        </definition>
 
+
+       <!-- Admin panel -->
+       <definition name="login" extends="base.definition">
+              <put-attribute name="title" value="Login Page" />
+              <put-attribute name="body" value="/WEB-INF/resources/antowka_theme/templates/admin/login.jsp" />
+       </definition>
+
+       <definition name="panel" extends="base.definition">
+              <put-attribute name="title" value="Admin Panel" />
+              <put-attribute name="body" value="/WEB-INF/resources/antowka_theme/templates/admin/panel.jsp" />
+       </definition>
+
+
+       <!-- Client Side -->
        <definition name="main" extends="base.definition">
               <put-attribute name="title" value="Main Page Title" />
               <put-attribute name="body" value="/WEB-INF/resources/antowka_theme/templates/pages/main.jsp" />

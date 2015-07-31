@@ -1,40 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<module external.linked.project.id="Antowka-CMS" external.linked.project.path="$USER_HOME$/Desktop/Projects/JAVA/Antowka-CMS" external.root.project.path="$MODULE_DIR$" external.system.id="GRADLE" external.system.module.group="" external.system.module.version="unspecified" type="JAVA_MODULE" version="4">
+<module external.linked.project.id="Antowka-CMS" external.linked.project.path="$MODULE_DIR$" external.root.project.path="$MODULE_DIR$" external.system.id="GRADLE" external.system.module.group="" external.system.module.version="unspecified" type="JAVA_MODULE" version="4">
   <component name="FacetManager">
     <facet type="Spring" name="Spring">
       <configuration>
         <fileset id="fileset" name="Spring Application Context" removed="false">
           <dependency>web antowkacms servlet context</dependency>
-          <file>file://$USER_HOME$/Desktop/Projects/JAVA/Antowka-CMS/src/main/webapp/WEB-INF/config/core-config.xml</file>
+          <file>file://$MODULE_DIR$/src/main/webapp/WEB-INF/config/core-config.xml</file>
+          <file>file://$MODULE_DIR$/src/main/webapp/WEB-INF/config/database-config.xml</file>
         </fileset>
       </configuration>
     </facet>
     <facet type="web" name="Web Gradle : Antowka-CMS.war">
       <configuration>
         <descriptors>
-          <deploymentDescriptor name="web.xml" url="file://$USER_HOME$/Desktop/Projects/JAVA/Antowka-CMS/src/main/webapp/WEB-INF/web.xml" />
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/src/main/webapp/WEB-INF/web.xml" />
         </descriptors>
         <webroots>
-          <root url="file://$USER_HOME$/Desktop/Projects/JAVA/Antowka-CMS/src/main/webapp" relative="/" />
+          <root url="file://$MODULE_DIR$/src/main/webapp" relative="/" />
         </webroots>
         <sourceRoots>
-          <root url="file://$USER_HOME$/Desktop/Projects/JAVA/Antowka-CMS/src/main/java" />
-          <root url="file://$USER_HOME$/Desktop/Projects/JAVA/Antowka-CMS/src/main/resources" />
+          <root url="file://$MODULE_DIR$/src/main/java" />
+          <root url="file://$MODULE_DIR$/src/main/resources" />
         </sourceRoots>
       </configuration>
     </facet>
   </component>
   <component name="NewModuleRootManager" inherit-compiler-output="false">
-    <output url="file://$USER_HOME$/Desktop/Projects/JAVA/Antowka-CMS/build/classes/main" />
-    <output-test url="file://$USER_HOME$/Desktop/Projects/JAVA/Antowka-CMS/build/classes/test" />
+    <output url="file://$MODULE_DIR$/build/classes/main" />
+    <output-test url="file://$MODULE_DIR$/build/classes/test" />
     <exclude-output />
-    <content url="file://$USER_HOME$/Desktop/Projects/JAVA/Antowka-CMS">
-      <sourceFolder url="file://$USER_HOME$/Desktop/Projects/JAVA/Antowka-CMS/src/main/java" isTestSource="false" />
-      <sourceFolder url="file://$USER_HOME$/Desktop/Projects/JAVA/Antowka-CMS/src/test/java" isTestSource="true" />
-      <sourceFolder url="file://$USER_HOME$/Desktop/Projects/JAVA/Antowka-CMS/src/main/resources" type="java-resource" />
-      <sourceFolder url="file://$USER_HOME$/Desktop/Projects/JAVA/Antowka-CMS/src/test/resources" type="java-test-resource" />
-      <excludeFolder url="file://$USER_HOME$/Desktop/Projects/JAVA/Antowka-CMS/.gradle" />
-      <excludeFolder url="file://$USER_HOME$/Desktop/Projects/JAVA/Antowka-CMS/build" />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/src/main/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/test/java" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/main/resources" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/test/resources" type="java-test-resource" />
+      <excludeFolder url="file://$MODULE_DIR$/.gradle" />
+      <excludeFolder url="file://$MODULE_DIR$/build" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
@@ -84,5 +85,7 @@
     <orderEntry type="library" name="Gradle: org.springframework.security:spring-security-config:4.0.2.RELEASE" level="project" />
     <orderEntry type="library" name="Gradle: org.springframework.security:spring-security-taglibs:4.0.2.RELEASE" level="project" />
     <orderEntry type="library" name="Gradle: org.springframework.security:spring-security-acl:4.0.2.RELEASE" level="project" />
+    <orderEntry type="library" name="Gradle: org.springframework:spring-aspects:4.1.7.RELEASE" level="project" />
+    <orderEntry type="library" name="Gradle: org.aspectj:aspectjweaver:1.8.6" level="project" />
   </component>
 </module>

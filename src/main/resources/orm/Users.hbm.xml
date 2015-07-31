@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="ru.antowka.entity.User" table="users" catalog="test">
+
+        <id name="login" type="string">
+            <column name="username" length="45" />
+            <generator class="assigned" />
+        </id>
+
+        <property name="password" type="string">
+            <column name="password" length="60" not-null="true" />
+        </property>
+
+        <property name="enable" type="boolean">
+            <column name="enabled" not-null="true" />
+        </property>
+
+        <set name="role" table="user_roles" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="login" length="45" not-null="true" />
+            </key>
+            <one-to-many class="ru.antowka.entity.UserRole" />
+        </set>
+
+    </class>
+
+</hibernate-mapping>

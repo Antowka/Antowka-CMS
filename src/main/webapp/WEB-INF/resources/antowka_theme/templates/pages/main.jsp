@@ -5,4 +5,9 @@
   Time: 1:07
   To change this template use File | Settings | File Templates.
 --%>
-<h1>Main blok: ${msg}</h1>
+
+<h2>Main Page</h2>
+
+<a href="/login">Login Page</a>
+
+<p>Main blok: ${msg}</p>

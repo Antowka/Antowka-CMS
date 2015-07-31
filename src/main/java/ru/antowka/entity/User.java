@@ -2,13 +2,13 @@ package ru.antowka.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by anton on 25.07.15.
  */
 
-@Entity
-@Table(name = "users")
 public class User {
 
     private String firstName;
@@ -16,7 +16,7 @@ public class User {
     private String login;
     private String password;
     private String email;
-    private String role;
+    private Set<UserRole> role = new HashSet<UserRole>(0);
     private boolean enable;
 
 
@@ -60,11 +60,11 @@ public class User {
         this.email = email;
     }
 
-    public String getRole() {
-        return role;
+    public  Set<UserRole> getRole() {
+        return this.role;
     }
 
-    public void setRole(String role) {
+    public void setRole(Set<UserRole> role) {
         this.role = role;
     }
 

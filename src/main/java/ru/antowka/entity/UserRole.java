@@ -1,14 +1,10 @@
 package ru.antowka.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
 
 /**
  * Created by anton on 30.07.15.
  */
 
-@Entity
-@Table(name="role")
 public class UserRole {
 
     private int roleId;

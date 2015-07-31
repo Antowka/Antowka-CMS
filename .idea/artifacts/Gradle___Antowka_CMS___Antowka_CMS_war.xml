@@ -2,14 +2,14 @@
   <artifact type="war" name="Gradle : Antowka-CMS : Antowka-CMS.war">
     <output-path>$PROJECT_DIR$/build/classes/artifacts/Antowka-CMS</output-path>
     <properties id="gradle-properties">
-      <options external-project-path="$USER_HOME$/Desktop/Projects/JAVA/Antowka-CMS" />
+      <options external-project-path="$PROJECT_DIR$" />
     </properties>
     <root id="archive" name="Antowka-CMS.war">
       <element id="javaee-facet-resources" facet="Antowka-CMS/web/Web Gradle : Antowka-CMS.war" />
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
           <element id="module-output" name="Antowka-CMS" />
-          <element id="dir-copy" path="$USER_HOME$/Desktop/Projects/JAVA/Antowka-CMS/build/resources/main" />
+          <element id="dir-copy" path="$PROJECT_DIR$/build/resources/main" />
         </element>
         <element id="directory" name="lib">
           <element id="library" level="project" name="Gradle: javax.servlet:jstl:1.2" />
@@ -58,6 +58,8 @@
           <element id="library" level="project" name="Gradle: org.springframework.security:spring-security-config:4.0.2.RELEASE" />
           <element id="library" level="project" name="Gradle: org.springframework.security:spring-security-taglibs:4.0.2.RELEASE" />
           <element id="library" level="project" name="Gradle: org.springframework.security:spring-security-acl:4.0.2.RELEASE" />
+          <element id="library" level="project" name="Gradle: org.springframework:spring-aspects:4.1.7.RELEASE" />
+          <element id="library" level="project" name="Gradle: org.aspectj:aspectjweaver:1.8.6" />
         </element>
       </element>
       <element id="directory" name="META-INF">

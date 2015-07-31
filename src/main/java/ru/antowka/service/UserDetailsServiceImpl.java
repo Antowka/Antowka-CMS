@@ -1,17 +1,17 @@
 package ru.antowka.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.transaction.annotation.Transactional;
 import ru.antowka.dao.UserDao;
-import ru.antowka.entity.User;
-import ru.antowka.entity.enums.UserRoleEnum;
+import ru.antowka.entity.UserRole;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -19,30 +19,60 @@ import java.util.Set;
  */
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-    @Autowired
-    public UserDao userDao;
+    private UserDao userDao;
+
+    /**
+     *   ***********************Getters and Setters *****************************
+     */
+
+    public UserDao getUserDao() {
+        return userDao;
+    }
+
+
+    public void setUserDao(UserDao userDao) {
+        this.userDao = userDao;
+    }
+
+
+
+    /**
+     *  ***************************** Logic *************************************
+     */
+
 
     @Override
-    @Transactional(readOnly=true)
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(final String username) throws UsernameNotFoundException {
 
-        // с помощью нашего сервиса UserService получаем User
-        User user = userDao.getUserByLogin(username);
+        ru.antowka.entity.User user = userDao.findByUserName(username);
+        List<GrantedAuthority> authorities = buildUserAuthority(user.getRole());
 
-        // указываем роли для этого пользователя
-        Set<GrantedAuthority> roles = new HashSet<>(0);
+        return buildUserForAuthentication(user, authorities);
+    }
 
-        roles.add(new SimpleGrantedAuthority(UserRoleEnum.USER.name()));
 
-        // на основании полученныйх даных формируем объект UserDetails
-        // который позволит проверить введеный пользователем логин и пароль
-        // и уже потом аутентифицировать пользователя
-        UserDetails userDetails = new org.springframework.security.core.userdetails.User(
-                user.getLogin(),
-                user.getPassword(),
-                roles
-        );
 
-        return userDetails;
+    // Converts our user to org.springframework.security.core.userdetails.User
+    private User buildUserForAuthentication(ru.antowka.entity.User user, List<GrantedAuthority> authorities) {
+
+        return new User(user.getLogin(), user.getPassword(), user.isEnable(),true, true, true, authorities);
+    }
+
+
+
+    private List<GrantedAuthority> buildUserAuthority(Set<UserRole> userRoles) {
+
+        Set<GrantedAuthority> setAuths = new HashSet<GrantedAuthority>();
+
+        List<GrantedAuthority> Result = null;
+
+        // Build user's authorities
+        for (UserRole userRole : userRoles) {
+            setAuths.add(new SimpleGrantedAuthority(userRole.getRole()));
+        }
+
+        Result = new ArrayList<GrantedAuthority>(setAuths);
+
+        return Result;
     }
 }
