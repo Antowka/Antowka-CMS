@@ -10,6 +10,8 @@
             <generator class="assigned" />
         </id>
 
+        <property name="userId" type="integer" column="user_id" />
+
         <property name="password" type="string">
             <column name="password" length="60" not-null="true" />
         </property>
@@ -18,11 +20,9 @@
             <column name="enable" not-null="true" />
         </property>
 
-        <set name="role" table="role" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="user_id" length="45" not-null="true" />
-            </key>
-            <one-to-many class="ru.antowka.entity.UserRole" />
+        <set name="role" table="user_role" cascade="all" inverse="true" lazy="false" fetch="select">
+            <key column="user_id" property-ref="userId" />
+            <one-to-many class="ru.antowka.entity.Role" />
         </set>
 
     </class>

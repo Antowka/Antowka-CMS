@@ -1,7 +1,5 @@
 package ru.antowka.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -11,14 +9,23 @@ import java.util.Set;
 
 public class User {
 
+    private Integer userId;
     private String firstName;
     private String lastName;
     private String login;
     private String password;
     private String email;
-    private Set<UserRole> role = new HashSet<UserRole>(0);
+    private Set<Role> role = new HashSet<Role>(0);
     private boolean enable;
 
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
 
     public String getLogin() {
         return login;
@@ -60,11 +67,11 @@ public class User {
         this.email = email;
     }
 
-    public  Set<UserRole> getRole() {
+    public  Set<Role> getRole() {
         return this.role;
     }
 
-    public void setRole(Set<UserRole> role) {
+    public void setRole(Set<Role> role) {
         this.role = role;
     }
 

@@ -15,35 +15,17 @@ import javax.transaction.Transactional;
 @Repository
 public class UserDaoImpl implements UserDao{
 
-
     private HibernateSessionFactory hibernateSessionFactory;
-
-
-
-    public HibernateSessionFactory getHibernateSessionFactory() {
-        return hibernateSessionFactory;
-    }
 
     public void setHibernateSessionFactory(HibernateSessionFactory hibernateSessionFactory) {
         this.hibernateSessionFactory = hibernateSessionFactory;
     }
 
-
-
     @Transactional
     public User findByUserName(String login) {
 
-        User user = null;
-
-
-
-        try {
-            Session session = hibernateSessionFactory.getSession();
-            user = (User) session.get(User.class, login);
-        } catch (RuntimeException e){
-            String test ="0";
-        }
-
+        Session session = hibernateSessionFactory.getSession();
+        User user = (User) session.get(User.class, login);
         return user;
     }
 }

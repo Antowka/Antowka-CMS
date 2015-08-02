@@ -12,15 +12,21 @@
               <!-- access denied page -->
               <security:access-denied-handler error-page="/403" />
 
+
               <security:form-login
                       login-page="/login"
                       default-target-url="/panel"
                       authentication-failure-url="/login?error"
                       login-processing-url="/login_validator"
+
                       username-parameter="login"
                       password-parameter="password" />
 
-              <security:logout logout-success-url="/login?logout" />
+              <security:logout
+                      logout-url="/logout"
+                      logout-success-url="/login?logout" />
+
+
 
               <!-- enable csrf protection -->
               <security:csrf />
