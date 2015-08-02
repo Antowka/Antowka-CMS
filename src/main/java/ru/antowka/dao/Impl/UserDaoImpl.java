@@ -1,6 +1,7 @@
 package ru.antowka.dao.Impl;
 
 import org.hibernate.Session;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import ru.antowka.dao.HibernateSessionFactory;
 import ru.antowka.dao.UserDao;
@@ -15,12 +16,10 @@ import javax.transaction.Transactional;
 @Repository
 public class UserDaoImpl implements UserDao{
 
+    @Autowired
     private HibernateSessionFactory hibernateSessionFactory;
 
-    public void setHibernateSessionFactory(HibernateSessionFactory hibernateSessionFactory) {
-        this.hibernateSessionFactory = hibernateSessionFactory;
-    }
-
+    @Override
     @Transactional
     public User findByUserName(String login) {
 

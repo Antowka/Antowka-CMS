@@ -30,19 +30,5 @@
               <put-attribute name="body" value="/WEB-INF/resources/antowka_theme/templates/pages/main.jsp" />
        </definition>
 
-       <definition name="article" extends="base.definition">
-              <put-attribute name="title" value="Main Page Title" />
-              <put-attribute name="body" value="/WEB-INF/resources/antowka_theme/templates/pages/article.jsp" />
-       </definition>
-
-       <definition name="category" extends="base.definition">
-              <put-attribute name="title" value="Main Page Title" />
-              <put-attribute name="body" value="/WEB-INF/resources/antowka_theme/templates/pages/category.jsp" />
-       </definition>
-
-       <definition name="about" extends="base.definition">
-              <put-attribute name="title" value="About Us Title" />
-              <put-attribute name="body" value="/WEB-INF/resources/antowka_theme/templates/pages/about.jsp" />
-       </definition>
 
 </tiles-definitions>  

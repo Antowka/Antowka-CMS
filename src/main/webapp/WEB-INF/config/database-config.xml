@@ -47,14 +47,6 @@
               <property name="sessionFactory" ref="sessionFactory" />
        </bean>
 
-       <bean id="userDao" class="ru.antowka.dao.Impl.UserDaoImpl">
-              <property name="hibernateSessionFactory" ref="hibernateSessionFactory" />
-       </bean>
-
-       <bean id="myUserDetailsService" class="ru.antowka.service.UserDetailsServiceImpl">
-              <property name="userDao" ref="userDao" />
-       </bean>
-
 <!-- END DB CONFIG -->
 
 </beans>

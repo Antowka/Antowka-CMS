@@ -2,6 +2,7 @@ package ru.antowka.dao.Impl;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.springframework.stereotype.Component;
 import ru.antowka.dao.HibernateSessionFactory;
 
 /**

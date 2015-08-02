@@ -26,5 +26,3 @@ public class MainController {
         return new ModelAndView("main", "msg", model);
     }
 }
-
-//todo - working on security - http://devcolibri.com/3810
