@@ -5,31 +5,22 @@ package ru.antowka.entity;
  */
 public class Setting {
 
-    private int setingId;
-    private String settingname;
-    private int value;
+    private String settingName;
+    private String value;
 
-    public int getSetingId() {
-        return setingId;
+    public String getSettingName() {
+        return settingName;
     }
 
-    public void setSetingId(int setingId) {
-        this.setingId = setingId;
+    public void setSettingName(String settingName) {
+        this.settingName = settingName;
     }
 
-    public String getSettingname() {
-        return settingname;
-    }
-
-    public void setSettingname(String settingname) {
-        this.settingname = settingname;
-    }
-
-    public int getValue() {
+    public String getValue() {
         return value;
     }
 
-    public void setValue(int value) {
+    public void setValue(String value) {
         this.value = value;
     }
 }

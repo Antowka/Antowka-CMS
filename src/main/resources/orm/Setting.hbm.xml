@@ -3,7 +3,10 @@
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-    <class name="ru.antowka.entity.Setting" table="settings">
+    <class name="ru.antowka.entity.Setting" table="settings" lazy="true">
+
+        <id name="settingName" column="setting_name" type="java.lang.String" />
+        <property name="value" column="value" type="java.lang.String" />
 
     </class>
 </hibernate-mapping>

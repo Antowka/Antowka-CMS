@@ -24,6 +24,7 @@
                 /WEB-INF/config/database-config.xml
                 /WEB-INF/config/security-config.xml
                 /WEB-INF/config/main-config.xml
+                /WEB-INF/config/controllers-config.xml
             </param-value>
 
         </context-param>

@@ -3,7 +3,10 @@
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-    <class name="ru.antowka.entity.CategoryArticle" table="category_articles">
-
+    <class name="ru.antowka.entity.CategoryArticle" table="category_articles" lazy="true">
+        <id name="categoryArticleId" column="category_article_id" type="java.lang.Integer" />
+        <property name="parentCategoryId" column="parent_category_id" type="java.lang.Integer" />
+        <property name="title" column="title" type="java.lang.String" />
+        <property name="description" column="description" type="java.lang.String" />
     </class>
 </hibernate-mapping>

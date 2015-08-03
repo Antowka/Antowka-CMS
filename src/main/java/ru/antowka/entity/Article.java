@@ -7,7 +7,7 @@ public class Article {
 
     private int articleId;
     private String title;
-    private String short_descripion;
+    private String shortDescripion;
     private String description;
 
     public int getArticleId() {
@@ -26,12 +26,12 @@ public class Article {
         this.title = title;
     }
 
-    public String getShort_descripion() {
-        return short_descripion;
+    public String getShortDescripion() {
+        return shortDescripion;
     }
 
-    public void setShort_descripion(String short_descripion) {
-        this.short_descripion = short_descripion;
+    public void setShortDescripion(String shortDescripion) {
+        this.shortDescripion = shortDescripion;
     }
 
     public String getDescription() {

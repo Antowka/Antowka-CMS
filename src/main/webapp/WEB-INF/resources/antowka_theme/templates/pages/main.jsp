@@ -10,4 +10,4 @@
 
 <a href="/login">Login Page</a>
 
-<p>Main blok: ${msg}</p>
+<p>Main blok: ${vars.settings.site_description}</p>
