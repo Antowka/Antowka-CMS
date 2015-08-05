@@ -3,13 +3,13 @@
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
     <hibernate-mapping>
-        <class name="ru.antowka.entity.Role" table="user_role">
+        <class name="ru.antowka.entity.UserRole" table="user_role">
 
             <id name="roleId" column="role_id" type="integer" />
 
             <join table="role">
               <key column="role_id" />
-              <property name="role" type="string" />
+              <property name="userRole" column="role" type="string" />
             </join>
 
         </class>

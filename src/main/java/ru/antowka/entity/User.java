@@ -15,7 +15,7 @@ public class User {
     private String login;
     private String password;
     private String email;
-    private Set<Role> role = new HashSet<Role>(0);
+    private Set<UserRole> userRoles = new HashSet<UserRole>(0);
     private boolean enable;
 
 
@@ -67,12 +67,12 @@ public class User {
         this.email = email;
     }
 
-    public  Set<Role> getRole() {
-        return this.role;
+    public  Set<UserRole> getUserRoles() {
+        return this.userRoles;
     }
 
-    public void setRole(Set<Role> role) {
-        this.role = role;
+    public void setUserRoles(Set<UserRole> userRoles) {
+        this.userRoles = userRoles;
     }
 
     public boolean isEnable() {

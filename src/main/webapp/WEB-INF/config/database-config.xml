@@ -19,7 +19,7 @@
               <property name="mappingResources">
                      <list>
                             <value>orm/Users.hbm.xml</value>
-                            <value>orm/Role.hbm.xml</value>
+                            <value>orm/UserRole.hbm.xml</value>
                             <value>orm/Setting.hbm.xml</value>
                             <value>orm/Article.hbm.xml</value>
                             <value>orm/CategoryArticle.hbm.xml</value>

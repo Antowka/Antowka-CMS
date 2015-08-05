@@ -9,7 +9,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import ru.antowka.dao.UserDao;
-import ru.antowka.entity.Role;
+import ru.antowka.entity.UserRole;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -34,7 +34,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(final String username) throws UsernameNotFoundException {
         ru.antowka.entity.User user = userDao.findByUserName(username);
-        List<GrantedAuthority> authorities = buildUserAuthority(user.getRole());
+        List<GrantedAuthority> authorities = buildUserAuthority(user.getUserRoles());
         return buildUserForAuthentication(user, authorities);
     }
 
@@ -48,11 +48,11 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
 
 
-    private List<GrantedAuthority> buildUserAuthority(Set<Role> userRoles) {
+    private List<GrantedAuthority> buildUserAuthority(Set<UserRole> userRoles) {
 
         Set<GrantedAuthority> setAuths = new HashSet<>();
         List<GrantedAuthority> Result = null;
-        userRoles.stream().forEach(userRole -> setAuths.add(new SimpleGrantedAuthority(userRole.getRole())));
+        userRoles.stream().forEach(userRole -> setAuths.add(new SimpleGrantedAuthority(userRole.getUserRole())));
         Result = new ArrayList<GrantedAuthority>(setAuths);
         return Result;
     }

@@ -1,16 +1,14 @@
 package ru.antowka.entity;
 
 
-import java.util.Set;
-
 /**
  * Created by anton on 30.07.15.
  */
 
-public class Role {
+public class UserRole {
 
     private int roleId;
-    private String role;
+    private String userRole;
 
     public int getRoleId() {
         return roleId;
@@ -20,11 +18,11 @@ public class Role {
         this.roleId = roleId;
     }
 
-    public String getRole() {
-        return this.role;
+    public String getUserRole() {
+        return this.userRole;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setUserRole(String userRole) {
+        this.userRole = userRole;
     }
 }

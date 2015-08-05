@@ -20,9 +20,9 @@
             <column name="enable" not-null="true" />
         </property>
 
-        <set name="role" table="user_role" cascade="all" inverse="true" lazy="false" fetch="select">
+        <set name="userRoles" table="user_role" cascade="all" inverse="true" lazy="false" fetch="select">
             <key column="user_id" property-ref="userId" />
-            <one-to-many class="ru.antowka.entity.Role" />
+            <one-to-many class="ru.antowka.entity.UserRole" />
         </set>
 
     </class>

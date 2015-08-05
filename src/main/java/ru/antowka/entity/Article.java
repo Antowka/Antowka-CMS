@@ -6,6 +6,7 @@ package ru.antowka.entity;
 public class Article {
 
     private int articleId;
+    private int userOwnerid;
     private String title;
     private String shortDescripion;
     private String description;
@@ -16,6 +17,14 @@ public class Article {
 
     public void setArticleId(int articleId) {
         this.articleId = articleId;
+    }
+
+    public int getUserOwnerid() {
+        return userOwnerid;
+    }
+
+    public void setUserOwnerid(int userOwnerid) {
+        this.userOwnerid = userOwnerid;
     }
 
     public String getTitle() {
@@ -41,25 +50,4 @@ public class Article {
     public void setDescription(String description) {
         this.description = description;
     }
-
-    public boolean isSystem() {
-        return isSystem;
-    }
-
-    public void setIsSystem(boolean isSystem) {
-        this.isSystem = isSystem;
-    }
-
-    public boolean isDelete() {
-        return isDelete;
-    }
-
-    public void setIsDelete(boolean isDelete) {
-        this.isDelete = isDelete;
-    }
-
-    private boolean isSystem;
-    private boolean isDelete;
-
-
 }

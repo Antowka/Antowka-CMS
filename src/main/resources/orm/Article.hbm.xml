@@ -5,6 +5,7 @@
 <hibernate-mapping>
     <class name="ru.antowka.entity.Article" table="articles" lazy="true">
         <id name="articleId" column="article_id" type="java.lang.Integer" />
+        <property name="userOwnerid" column="user_owner_id" type="java.lang.Integer" />
         <property name="title" column="title" type="java.lang.String" />
         <property name="shortDescripion" column="shortDescripion" type="java.lang.String" />
         <property name="description" column="description" type="java.lang.String" />
