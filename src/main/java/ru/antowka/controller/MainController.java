@@ -19,12 +19,6 @@ public class MainController {
     @Autowired
     private SettingsService settingsService;
 
-    @Autowired
-    private TicketService ticketService;
-
-    @Autowired
-    private TicketCategoryService ticketCategoryService;
-
     private String[] settingsList;
 
 
@@ -44,16 +38,6 @@ public class MainController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView mainPage() {
-
-        //****************************Experement**********************************
-
-        User user = new User();
-        user.setUserId(1);
-
-        List<Ticket> tickets = ticketService.getTicketsByUser(user);
-        TicketCategory category = ticketCategoryService.getCategoryById(1);
-
-        //****************************end Experement******************************
 
         Map<String, Object> model = new HashMap<String, Object>();
 

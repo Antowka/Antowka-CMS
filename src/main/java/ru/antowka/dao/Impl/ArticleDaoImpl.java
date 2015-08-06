@@ -2,6 +2,7 @@ package ru.antowka.dao.Impl;
 
 
 import org.hibernate.Session;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -23,6 +24,44 @@ public class ArticleDaoImpl implements ArticleDao {
 
     @Autowired
     public HibernateSessionFactory hibernateSessionFactory;
+
+    @Override
+    @Transactional
+    @SuppressWarnings("unchecked")
+    public List<Article> getAllArticles(int limit, String order, String orderField) {
+
+        Order orderObj = null;
+
+        switch (order){
+            case "asc":
+
+                orderObj = Order.asc(orderField);
+
+                break;
+
+            case "desc":
+
+                orderObj = Order.desc(orderField);
+
+                break;
+
+            default:
+
+                orderObj = Order.desc(orderField);
+
+                break;
+        }
+
+        List<Article> articles = null;
+        Session session = hibernateSessionFactory.getSession();
+        articles = (List<Article>)session.createCriteria(Article.class)
+                                         .addOrder(orderObj)
+                                         .setMaxResults(limit)
+                                         .list();
+
+        return articles;
+
+    }
 
     @Override
     @Transactional

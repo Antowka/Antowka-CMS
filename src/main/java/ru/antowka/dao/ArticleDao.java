@@ -10,6 +10,7 @@ import java.util.List;
  */
 public interface ArticleDao {
 
+    List<Article> getAllArticles(int limit, String order, String orderField);
     Article findArticleById(int articleId);
     List<Article> findArticlesByUserOwner(User user);
 }

@@ -1,5 +1,7 @@
 package ru.antowka.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.Set;
 
 /**
@@ -15,6 +17,8 @@ public class Ticket {
     private String title;
     private String description;
     private String creationDate;
+
+    @JsonIgnore
     private Set<TicketCategory> categories;
 
     public int getTicketId() {

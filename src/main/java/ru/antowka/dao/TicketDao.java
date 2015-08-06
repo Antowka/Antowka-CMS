@@ -10,6 +10,7 @@ import java.util.List;
  */
 public interface TicketDao {
 
-    public Ticket findTicketCategoryById(int ticketId);
-    public List<Ticket> findTicketsByUserOwner(User user);
+    List<Ticket> getAllTickets(int limit, String order, String orderField);
+    Ticket findTicketCategoryById(int ticketId);
+    List<Ticket> findTicketsByUserOwner(User user);
 }

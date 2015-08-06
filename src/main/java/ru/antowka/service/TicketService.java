@@ -17,6 +17,9 @@ public class TicketService {
     @Autowired
     private TicketDao ticketDao;
 
+    public List<Ticket> getAllTickets(int limit, String order, String orderField){
+        return ticketDao.getAllTickets(limit, order, orderField);
+    }
 
     public Ticket getTicketById(int ticketId){
         return ticketDao.findTicketCategoryById(ticketId);
