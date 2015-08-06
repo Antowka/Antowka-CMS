@@ -11,7 +11,7 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 /**
- * Created by anton on 03.08.15.
+ * Created by Anton Nik on 03.08.15.
  */
 @Repository
 public class ArticleCategoryDaoImpl implements ArticleCategoryDao {

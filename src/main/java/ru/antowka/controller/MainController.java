@@ -5,12 +5,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-import ru.antowka.entity.Article;
-import ru.antowka.entity.ArticleCategory;
-import ru.antowka.entity.User;
-import ru.antowka.service.ArticleService;
-import ru.antowka.service.ArticleCategoryService;
-import ru.antowka.service.SettingsService;
+import ru.antowka.entity.*;
+import ru.antowka.service.*;
 
 import java.util.*;
 
@@ -24,10 +20,10 @@ public class MainController {
     private SettingsService settingsService;
 
     @Autowired
-    private ArticleService articleService;
+    private TicketService ticketService;
 
     @Autowired
-    private ArticleCategoryService categoryArticlesService;
+    private TicketCategoryService ticketCategoryService;
 
     private String[] settingsList;
 
@@ -53,11 +49,9 @@ public class MainController {
 
         User user = new User();
         user.setUserId(1);
-        List<Article> articles = articleService.getArticlesByUser(user);
-        Set<ArticleCategory> categories = articles.get(0).getCategories();
 
-        Set<Article> articles1 = categoryArticlesService.getArticlesByCategoryId(1);
-
+        List<Ticket> tickets = ticketService.getTicketsByUser(user);
+        TicketCategory category = ticketCategoryService.getCategoryById(1);
 
         //****************************end Experement******************************
 
