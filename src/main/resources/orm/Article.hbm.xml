@@ -4,10 +4,19 @@
 
 <hibernate-mapping>
     <class name="ru.antowka.entity.Article" table="articles" lazy="true">
-        <id name="articleId" column="article_id" type="java.lang.Integer" />
-        <property name="userOwnerid" column="user_owner_id" type="java.lang.Integer" />
+        <id name="articleId" column="article_id" type="java.lang.Integer">
+            <generator class="identity" />
+        </id>
+
+        <property name="userOwnerId" column="user_owner_id" type="java.lang.Integer" />
         <property name="title" column="title" type="java.lang.String" />
-        <property name="shortDescripion" column="shortDescripion" type="java.lang.String" />
+        <property name="shortDescription" column="short_description" type="java.lang.String" />
         <property name="description" column="description" type="java.lang.String" />
+
+        <set name="categories" table="articles_categories_rel" inverse="true" lazy="true" fetch="select">
+            <key column="article_id" />
+            <many-to-many column="article_category_id" class="ru.antowka.entity.CategoryArticle" />
+        </set>
+
     </class>
 </hibernate-mapping>

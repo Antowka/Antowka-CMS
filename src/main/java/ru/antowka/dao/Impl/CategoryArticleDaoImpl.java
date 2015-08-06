@@ -1,6 +1,7 @@
 package ru.antowka.dao.Impl;
 
 import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import ru.antowka.dao.CategoryArticleDao;
@@ -9,6 +10,7 @@ import ru.antowka.entity.Article;
 import ru.antowka.entity.CategoryArticle;
 
 import javax.transaction.Transactional;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -24,16 +26,18 @@ public class CategoryArticleDaoImpl implements CategoryArticleDao {
 
     @Override
     @Transactional
-    public CategoryArticle findCategoryById(int articleId) {
+    public CategoryArticle findCategoryById(int categoryId) {
 
         CategoryArticle category = null;
         Session session = hibernateSessionFactory.getSession();
-        category = (CategoryArticle) session.get(CategoryArticle.class, articleId);
+        category = (CategoryArticle) session.get(CategoryArticle.class, categoryId);
 
         return category;
     }
 
+
     @Override
+    @SuppressWarnings("unchecked")
     @Transactional
     public Set<CategoryArticle> findAllCategories() {
 

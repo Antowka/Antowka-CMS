@@ -1,15 +1,18 @@
 package ru.antowka.entity;
 
+import java.util.Set;
+
 /**
  * Created by anton on 03.08.15.
  */
 public class Article {
 
     private int articleId;
-    private int userOwnerid;
+    private int userOwnerId;
     private String title;
-    private String shortDescripion;
+    private String shortDescription;
     private String description;
+    private Set<CategoryArticle> categories;
 
     public int getArticleId() {
         return articleId;
@@ -19,12 +22,12 @@ public class Article {
         this.articleId = articleId;
     }
 
-    public int getUserOwnerid() {
-        return userOwnerid;
+    public int getUserOwnerId() {
+        return userOwnerId;
     }
 
-    public void setUserOwnerid(int userOwnerid) {
-        this.userOwnerid = userOwnerid;
+    public void setUserOwnerId(int userOwnerId) {
+        this.userOwnerId = userOwnerId;
     }
 
     public String getTitle() {
@@ -35,12 +38,12 @@ public class Article {
         this.title = title;
     }
 
-    public String getShortDescripion() {
-        return shortDescripion;
+    public String getShortDescription() {
+        return shortDescription;
     }
 
-    public void setShortDescripion(String shortDescripion) {
-        this.shortDescripion = shortDescripion;
+    public void setShortDescription(String shortDescription) {
+        this.shortDescription = shortDescription;
     }
 
     public String getDescription() {
@@ -49,5 +52,13 @@ public class Article {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Set<CategoryArticle> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(Set<CategoryArticle> categories) {
+        this.categories = categories;
     }
 }

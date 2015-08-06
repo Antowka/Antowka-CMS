@@ -1,8 +1,10 @@
 package ru.antowka.dao;
 
 
+import ru.antowka.entity.Article;
 import ru.antowka.entity.CategoryArticle;
 
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -10,6 +12,6 @@ import java.util.Set;
  */
 public interface CategoryArticleDao {
 
-    CategoryArticle findCategoryById(int articleId);
+    CategoryArticle findCategoryById(int categoryId);
     Set<CategoryArticle> findAllCategories();
 }

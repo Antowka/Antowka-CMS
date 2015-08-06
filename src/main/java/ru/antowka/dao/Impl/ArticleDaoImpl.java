@@ -2,14 +2,18 @@ package ru.antowka.dao.Impl;
 
 
 import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import ru.antowka.dao.ArticleDao;
 import ru.antowka.dao.HibernateSessionFactory;
 import ru.antowka.entity.Article;
+import ru.antowka.entity.CategoryArticle;
 import ru.antowka.entity.User;
 
 import javax.transaction.Transactional;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 
@@ -34,20 +38,19 @@ public class ArticleDaoImpl implements ArticleDao {
         return article;
     }
 
+
     @Override
     @Transactional
-    public Set<Article> findArticlesByCategoryId(int categoryId) {
+    @SuppressWarnings("unchecked")
+    public List<Article> findArticlesByUserOwnerId(User user) {
 
-        Set<Article> articles = null;
+        List<Article> articles = null;
         Session session = hibernateSessionFactory.getSession();
-        articles = (Set<Article>)session.get(Article.class, categoryId);
+        articles = (List<Article>)session.createCriteria(Article.class)
+                .add(Restrictions.eq("userOwnerId", user.getUserId()))
+                .list();
 
         return articles;
-    }
-
-    @Override
-    public Set<Article> findArticlesByUserOwnerId(User user) {
-        return null;
     }
 }
 

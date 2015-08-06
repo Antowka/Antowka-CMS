@@ -1,5 +1,7 @@
 package ru.antowka.entity;
 
+import java.util.Set;
+
 /**
  * Created by anton on 03.08.15.
  */
@@ -9,6 +11,7 @@ public class CategoryArticle {
     private int parentCategoryId;
     private String title;
     private String description;
+    private Set<Article> articles;
 
     public String getDescription() {
         return description;
@@ -40,5 +43,13 @@ public class CategoryArticle {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public Set<Article> getArticles() {
+        return articles;
+    }
+
+    public void setArticles(Set<Article> articles) {
+        this.articles = articles;
     }
 }
