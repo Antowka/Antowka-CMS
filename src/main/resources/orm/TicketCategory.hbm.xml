@@ -3,17 +3,17 @@
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-    <class name="ru.antowka.entity.CategoryArticle" table="articles_category" lazy="true">
-        <id name="categoryArticleId" column="article_category_id" type="java.lang.Integer">
+    <class name="ru.antowka.entity.TicketCategory" table="tickets_category" lazy="true">
+        <id name="TicketCategoryId" column="ticket_category_id" type="java.lang.Integer">
             <generator class="identity" />
         </id>
         <property name="parentCategoryId" column="parent_category_id" type="java.lang.Integer" />
         <property name="title" column="title" type="java.lang.String" />
         <property name="description" column="description" type="java.lang.String" />
 
-        <set name="articles" table="articles_categories_rel" lazy="true" fetch="select" cascade="all">
-            <key column="article_category_id" />
-            <many-to-many column="article_id" class="ru.antowka.entity.Article" />
+        <set name="tickets" table="tickets_categories_rel" lazy="true" fetch="select" cascade="all">
+            <key column="ticket_category_id" />
+            <many-to-many column="ticket_id" class="ru.antowka.entity.Ticket" />
         </set>
     </class>
 </hibernate-mapping>

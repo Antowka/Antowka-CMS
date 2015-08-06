@@ -21,7 +21,7 @@ public class ArticleService {
 
         List<Article> articles = null;
 
-        articles = articleDao.findArticlesByUserOwnerId(user);
+        articles = articleDao.findArticlesByUserOwner(user);
 
         return articles;
     }

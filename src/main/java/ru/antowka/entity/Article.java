@@ -12,7 +12,7 @@ public class Article {
     private String title;
     private String shortDescription;
     private String description;
-    private Set<CategoryArticle> categories;
+    private Set<ArticleCategory> categories;
 
     public int getArticleId() {
         return articleId;
@@ -54,11 +54,11 @@ public class Article {
         this.description = description;
     }
 
-    public Set<CategoryArticle> getCategories() {
+    public Set<ArticleCategory> getCategories() {
         return categories;
     }
 
-    public void setCategories(Set<CategoryArticle> categories) {
+    public void setCategories(Set<ArticleCategory> categories) {
         this.categories = categories;
     }
 }

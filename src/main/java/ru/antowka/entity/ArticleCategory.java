@@ -5,9 +5,9 @@ import java.util.Set;
 /**
  * Created by anton on 03.08.15.
  */
-public class CategoryArticle {
+public class ArticleCategory {
 
-    private int categoryArticleId;
+    private int articleCategoryId;
     private int parentCategoryId;
     private String title;
     private String description;
@@ -21,12 +21,12 @@ public class CategoryArticle {
         this.description = description;
     }
 
-    public int getCategoryArticleId() {
-        return categoryArticleId;
+    public int getArticleCategoryId() {
+        return articleCategoryId;
     }
 
-    public void setCategoryArticleId(int categoryArticleId) {
-        this.categoryArticleId = categoryArticleId;
+    public void setArticleCategoryId(int articleCategoryId) {
+        this.articleCategoryId = articleCategoryId;
     }
 
     public int getParentCategoryId() {

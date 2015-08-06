@@ -5,14 +5,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-import ru.antowka.dao.CategoryArticleDao;
-import ru.antowka.dao.SettingDao;
 import ru.antowka.entity.Article;
-import ru.antowka.entity.CategoryArticle;
-import ru.antowka.entity.Setting;
+import ru.antowka.entity.ArticleCategory;
 import ru.antowka.entity.User;
 import ru.antowka.service.ArticleService;
-import ru.antowka.service.CategoryArticlesService;
+import ru.antowka.service.ArticleCategoryService;
 import ru.antowka.service.SettingsService;
 
 import java.util.*;
@@ -30,7 +27,7 @@ public class MainController {
     private ArticleService articleService;
 
     @Autowired
-    private CategoryArticlesService categoryArticlesService;
+    private ArticleCategoryService categoryArticlesService;
 
     private String[] settingsList;
 
@@ -57,7 +54,7 @@ public class MainController {
         User user = new User();
         user.setUserId(1);
         List<Article> articles = articleService.getArticlesByUser(user);
-        Set<CategoryArticle> categories = articles.get(0).getCategories();
+        Set<ArticleCategory> categories = articles.get(0).getCategories();
 
         Set<Article> articles1 = categoryArticlesService.getArticlesByCategoryId(1);
 

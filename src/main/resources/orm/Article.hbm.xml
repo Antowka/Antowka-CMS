@@ -15,7 +15,7 @@
 
         <set name="categories" table="articles_categories_rel" inverse="true" lazy="true" fetch="select">
             <key column="article_id" />
-            <many-to-many column="article_category_id" class="ru.antowka.entity.CategoryArticle" />
+            <many-to-many column="article_category_id" class="ru.antowka.entity.ArticleCategory" />
         </set>
 
     </class>

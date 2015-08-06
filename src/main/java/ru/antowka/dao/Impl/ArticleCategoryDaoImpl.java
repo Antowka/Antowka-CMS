@@ -1,23 +1,20 @@
 package ru.antowka.dao.Impl;
 
 import org.hibernate.Session;
-import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import ru.antowka.dao.CategoryArticleDao;
+import ru.antowka.dao.ArticleCategoryDao;
 import ru.antowka.dao.HibernateSessionFactory;
-import ru.antowka.entity.Article;
-import ru.antowka.entity.CategoryArticle;
+import ru.antowka.entity.ArticleCategory;
 
 import javax.transaction.Transactional;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Created by anton on 03.08.15.
  */
 @Repository
-public class CategoryArticleDaoImpl implements CategoryArticleDao {
+public class ArticleCategoryDaoImpl implements ArticleCategoryDao {
 
 
     @Autowired
@@ -26,11 +23,11 @@ public class CategoryArticleDaoImpl implements CategoryArticleDao {
 
     @Override
     @Transactional
-    public CategoryArticle findCategoryById(int categoryId) {
+    public ArticleCategory findCategoryById(int categoryId) {
 
-        CategoryArticle category = null;
+        ArticleCategory category = null;
         Session session = hibernateSessionFactory.getSession();
-        category = (CategoryArticle) session.get(CategoryArticle.class, categoryId);
+        category = (ArticleCategory) session.get(ArticleCategory.class, categoryId);
 
         return category;
     }
@@ -39,11 +36,11 @@ public class CategoryArticleDaoImpl implements CategoryArticleDao {
     @Override
     @SuppressWarnings("unchecked")
     @Transactional
-    public Set<CategoryArticle> findAllCategories() {
+    public List<ArticleCategory> findAllCategories() {
 
-        Set<CategoryArticle> categories = null;
+        List<ArticleCategory> categories = null;
         Session session = hibernateSessionFactory.getSession();
-        categories = (Set<CategoryArticle>) session.createCriteria(CategoryArticle.class).list();
+        categories = (List<ArticleCategory>) session.createCriteria(ArticleCategory.class).list();
 
         return categories;
     }

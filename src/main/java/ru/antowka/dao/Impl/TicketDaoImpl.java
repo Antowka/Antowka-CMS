@@ -1,53 +1,50 @@
 package ru.antowka.dao.Impl;
 
-
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import ru.antowka.dao.ArticleDao;
 import ru.antowka.dao.HibernateSessionFactory;
-import ru.antowka.entity.Article;
+import ru.antowka.dao.TicketDao;
+import ru.antowka.entity.Ticket;
 import ru.antowka.entity.User;
 
 import javax.transaction.Transactional;
 import java.util.List;
 
-
 /**
- * Created by Anton Nik on 03.08.15.
+ * Created by anton on 06.08.15.
  */
-
 @Repository
-public class ArticleDaoImpl implements ArticleDao {
+public class TicketDaoImpl implements TicketDao{
 
     @Autowired
-    public HibernateSessionFactory hibernateSessionFactory;
+    private HibernateSessionFactory hibernateSessionFactory;
 
     @Override
     @Transactional
-    public Article findArticleById(int articleId) {
+    public Ticket findTicketCategoryById(int ticketId) {
 
-        Article article = null;
+        Ticket ticket = null;
         Session session = hibernateSessionFactory.getSession();
-        article = (Article) session.get(Article.class, articleId);
+        ticket = (Ticket)session.get(Ticket.class, ticketId);
 
-        return article;
+        return ticket;
     }
 
 
     @Override
     @Transactional
     @SuppressWarnings("unchecked")
-    public List<Article> findArticlesByUserOwner(User user) {
+    public List<Ticket> findTicketsByUserOwner(User user) {
 
-        List<Article> articles = null;
+        List<Ticket> articles = null;
+
         Session session = hibernateSessionFactory.getSession();
-        articles = (List<Article>)session.createCriteria(Article.class)
+        articles = (List<Ticket>)session.createCriteria(Ticket.class)
                 .add(Restrictions.eq("userOwnerId", user.getUserId()))
                 .list();
 
         return articles;
     }
 }
-

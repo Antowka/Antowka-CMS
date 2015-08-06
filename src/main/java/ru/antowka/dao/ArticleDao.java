@@ -1,11 +1,9 @@
 package ru.antowka.dao;
 
 import ru.antowka.entity.Article;
-import ru.antowka.entity.CategoryArticle;
 import ru.antowka.entity.User;
 
 import java.util.List;
-import java.util.Set;
 
 /**
  * Created by anton on 03.08.15.
@@ -13,5 +11,5 @@ import java.util.Set;
 public interface ArticleDao {
 
     Article findArticleById(int articleId);
-    List<Article> findArticlesByUserOwnerId(User user);
+    List<Article> findArticlesByUserOwner(User user);
 }
