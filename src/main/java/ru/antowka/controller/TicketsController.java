@@ -26,14 +26,14 @@ public class TicketsController {
     @Autowired
     private TicketCategoryService ticketCategoryService;
 
-    //todo - working
+    @RequestMapping(value = "/tickets/get-tickets", method = RequestMethod.GET)
     public @ResponseBody List<Ticket> getTicketsAll(org.springframework.web.context.request.WebRequest request){
 
         List<Ticket> tickets = null;
 
         tickets = ticketService.getAllTickets(Integer.parseInt(request.getParameter("limit")),
-                                              request.getParameter("order"),
-                                              request.getParameter("orderField"));
+                                                               request.getParameter("order"),
+                                                               request.getParameter("orderField"));
 
         return tickets;
     }

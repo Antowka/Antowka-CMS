@@ -1,5 +1,6 @@
 package ru.antowka.service;
 
+import org.hibernate.criterion.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.antowka.dao.TicketDao;
@@ -18,7 +19,30 @@ public class TicketService {
     private TicketDao ticketDao;
 
     public List<Ticket> getAllTickets(int limit, String order, String orderField){
-        return ticketDao.getAllTickets(limit, order, orderField);
+
+        Order orderObj = null;
+
+        switch (order){
+            case "asc":
+
+                orderObj = Order.asc(orderField);
+
+                break;
+
+            case "desc":
+
+                orderObj = Order.desc(orderField);
+
+                break;
+
+            default:
+
+                orderObj = Order.desc(orderField);
+
+                break;
+        }
+
+        return ticketDao.getAllTickets(limit, orderObj);
     }
 
     public Ticket getTicketById(int ticketId){

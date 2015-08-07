@@ -27,34 +27,12 @@ public class TicketDaoImpl implements TicketDao{
     @Override
     @Transactional
     @SuppressWarnings("unchecked")
-    public List<Ticket> getAllTickets(int limit, String order, String orderField) {
-
-        Order orderObj = null;
-
-        switch (order){
-            case "asc":
-
-                orderObj = Order.asc(orderField);
-
-                break;
-
-            case "desc":
-
-                orderObj = Order.desc(orderField);
-
-                break;
-
-            default:
-
-                orderObj = Order.desc(orderField);
-
-                break;
-        }
+    public List<Ticket> getAllTickets(int limit, Order order) {
 
         List<Ticket> tickets = null;
         Session session = hibernateSessionFactory.getSession();
         tickets = (List<Ticket>)session.createCriteria(Ticket.class)
-                .addOrder(orderObj)
+                .addOrder(order)
                 .setMaxResults(limit)
                 .list();
 

@@ -1,5 +1,6 @@
 package ru.antowka.dao;
 
+import org.hibernate.criterion.Order;
 import ru.antowka.entity.Ticket;
 import ru.antowka.entity.User;
 
@@ -10,7 +11,7 @@ import java.util.List;
  */
 public interface TicketDao {
 
-    List<Ticket> getAllTickets(int limit, String order, String orderField);
+    List<Ticket> getAllTickets(int limit, Order order);
     Ticket findTicketCategoryById(int ticketId);
     List<Ticket> findTicketsByUserOwner(User user);
 }
