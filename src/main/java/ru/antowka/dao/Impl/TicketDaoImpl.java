@@ -65,4 +65,10 @@ public class TicketDaoImpl implements TicketDao{
 
         return articles;
     }
+
+    @Override
+    public int createTicket(Ticket ticket) {
+        Session session = hibernateSessionFactory.getSession();
+        return (int)session.save(ticket);
+    }
 }

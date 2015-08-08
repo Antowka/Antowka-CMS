@@ -2,6 +2,7 @@ package ru.antowka.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import javax.persistence.Transient;
 import java.io.Serializable;
 import java.util.Set;
 

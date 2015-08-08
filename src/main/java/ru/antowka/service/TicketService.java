@@ -52,4 +52,11 @@ public class TicketService {
     public List<Ticket> getTicketsByUser(User user){
         return ticketDao.findTicketsByUserOwner(user);
     }
+
+    public Ticket createTicket(Ticket ticket){
+
+        Integer ticketId = ticketDao.createTicket(ticket);
+        ticket = this.getTicketById(ticketId);
+        return ticket;
+    }
 }

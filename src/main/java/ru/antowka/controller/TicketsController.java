@@ -78,9 +78,7 @@ public class TicketsController {
     @RequestMapping(value = "create-ticket", method = RequestMethod.POST)
     public @ResponseBody Ticket createTicket(@RequestBody Ticket ticket){
 
-        String test ="d";
-
-        return ticket;
+        return ticketService.createTicket(ticket);
     }
 
 }
