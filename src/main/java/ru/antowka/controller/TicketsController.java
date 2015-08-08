@@ -1,12 +1,8 @@
 package ru.antowka.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.web.bind.annotation.*;
 import ru.antowka.entity.Ticket;
 import ru.antowka.entity.User;
 import ru.antowka.service.TicketCategoryService;
@@ -17,7 +13,8 @@ import java.util.List;
 /**
  * Created by anton on 06.08.15.
  */
-@Controller
+@RestController
+@RequestMapping("tickets")
 public class TicketsController {
 
     @Autowired
@@ -26,7 +23,15 @@ public class TicketsController {
     @Autowired
     private TicketCategoryService ticketCategoryService;
 
-    @RequestMapping(value = "/tickets/get-tickets", method = RequestMethod.GET)
+    /**
+     * Response tickets by a few params
+     *
+     * Link: http://localhost:8080/tickets/get-tickets/?limit=2&orderField=creationDate&order=desc
+     *
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "get-tickets", method = RequestMethod.GET)
     public @ResponseBody List<Ticket> getTicketsAll(org.springframework.web.context.request.WebRequest request){
 
         List<Ticket> tickets = null;
@@ -46,12 +51,11 @@ public class TicketsController {
      * @param ticket
      * @return
      */
-    @RequestMapping(value = "/tickets/get-ticket", method = RequestMethod.GET)
+    @RequestMapping(value = "get-ticket", method = RequestMethod.GET)
     public @ResponseBody Ticket getTicket(@ModelAttribute Ticket ticket){
         ticket = ticketService.getTicketById(ticket.getTicketId());
         return ticket;
     }
-
 
     /**
      * Response tickets list by User over JSON-response
@@ -61,13 +65,22 @@ public class TicketsController {
      * @param user
      * @return
      */
-    @RequestMapping(value = "/tickets/get-tickets-by-user", method = RequestMethod.GET)
+    @RequestMapping(value = "get-tickets-by-user", method = RequestMethod.GET)
     public @ResponseBody List<Ticket> getTicketsByUser(@ModelAttribute User user){
 
         List<Ticket> tickets = null;
         tickets = ticketService.getTicketsByUser(user);
 
         return tickets;
+    }
+
+
+    @RequestMapping(value = "create-ticket", method = RequestMethod.POST)
+    public @ResponseBody Ticket createTicket(@RequestBody Ticket ticket){
+
+        String test ="d";
+
+        return ticket;
     }
 
 }

@@ -14,6 +14,7 @@ import java.util.*;
  * Created by anton on 24.07.15.
  */
 @Controller
+@RequestMapping(value = "/")
 public class MainController {
 
     @Autowired
@@ -36,7 +37,7 @@ public class MainController {
      ******************************* Logic *********************************************************
      */
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET)
     public ModelAndView mainPage() {
 
         Map<String, Object> model = new HashMap<String, Object>();

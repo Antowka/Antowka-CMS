@@ -2,12 +2,13 @@ package ru.antowka.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import java.io.Serializable;
 import java.util.Set;
 
 /**
  * Created by anton on 06.08.15.
  */
-public class Ticket {
+public class Ticket implements Serializable {
 
     private int ticketId;
     private int userOwnerId;

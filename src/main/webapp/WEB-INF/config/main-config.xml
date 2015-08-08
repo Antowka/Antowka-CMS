@@ -9,12 +9,13 @@
        <context:component-scan base-package="ru.antowka" />
        <context:annotation-config/>
 
+
 <!-- MVC -->
        <bean id="viewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
               <property name="viewClass" value="org.springframework.web.servlet.view.tiles3.TilesView"/>
        </bean>
 
-       <mvc:resources mapping="/resources/**" location="../resources/${theme}/static" />
+       <mvc:resources mapping="/resources/**" location="WEB-INF/resources/${theme}/static/" />
 
        <mvc:annotation-driven />
 <!-- end MVC -->
