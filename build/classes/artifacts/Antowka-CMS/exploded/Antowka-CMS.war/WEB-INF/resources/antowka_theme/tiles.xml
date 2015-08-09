@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+        "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+        "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
+<tiles-definitions>
+       <definition name="base.definition" template="/WEB-INF/resources/antowka_theme/templates/layout.jsp">
+              <put-attribute name="title" value="" />
+              <put-attribute name="header" value="/WEB-INF/resources/antowka_theme/templates/header.jsp" />
+              <put-attribute name="body" value="" />
+              <put-attribute name="footer" value="/WEB-INF/resources/antowka_theme/templates/footer.jsp" />
+       </definition>
+
+
+       <!-- Admin panel -->
+       <definition name="login" extends="base.definition">
+              <put-attribute name="title" value="Login Page" />
+              <put-attribute name="body" value="/WEB-INF/resources/antowka_theme/templates/admin/login.jsp" />
+       </definition>
+
+       <definition name="panel" extends="base.definition">
+              <put-attribute name="title" value="Admin Panel" />
+              <put-attribute name="body" value="/WEB-INF/resources/antowka_theme/templates/admin/panel.jsp" />
+       </definition>
+
+
+       <!-- Client Side -->
+       <definition name="main" extends="base.definition">
+              <put-attribute name="title" value="Main Page Title" />
+              <put-attribute name="body" value="/WEB-INF/resources/antowka_theme/templates/pages/main.jsp" />
+       </definition>
+
+
+</tiles-definitions>  

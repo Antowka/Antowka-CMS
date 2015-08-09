@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="ru.antowka.entity.TicketCategory" table="tickets_category" lazy="true">
+        <id name="TicketCategoryId" column="ticket_category_id" type="java.lang.Integer">
+            <generator class="identity" />
+        </id>
+        <property name="parentCategoryId" column="parent_category_id" type="java.lang.Integer" />
+        <property name="title" column="title" type="java.lang.String" />
+        <property name="description" column="description" type="java.lang.String" />
+
+        <set name="tickets" table="tickets_categories_rel" inverse="true" lazy="true" fetch="select">
+            <key column="ticket_category_id" />
+            <many-to-many column="ticket_id" class="ru.antowka.entity.Ticket" />
+        </set>
+    </class>
+</hibernate-mapping>

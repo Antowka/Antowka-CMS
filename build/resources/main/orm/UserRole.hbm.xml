@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+    <hibernate-mapping>
+        <class name="ru.antowka.entity.UserRole" table="user_role">
+
+            <id name="roleId" column="role_id" type="integer" />
+
+            <join table="role">
+              <key column="role_id" />
+              <property name="userRole" column="role" type="string" />
+            </join>
+
+        </class>
+    </hibernate-mapping>

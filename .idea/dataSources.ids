@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="dataSourceStorage">
+  <data-source name="PostgreSQL - antowkacms@dbs" uuid="f8d7fd0e-ef17-48e3-b217-4c945146f50e">
+    <database-info product="PostgreSQL" version="9.4.4" jdbc-version="4.0" driver-name="PostgreSQL Native Driver" driver-version="PostgreSQL 9.4 JDBC4 (build 1201)">
+      <identifier-quote-string>&quot;</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="lower" quoted-identifiers="exact"/>
+    <schema name="public" catalog="antowkacms"/>
+    <table name="articles" schema="public" catalog="antowkacms" type="TABLE">
+      <column name="article_id" sqlType="serial" precision="10" scale="0" nullable="false" jdbcType="4" def="bmV4dHZhbCgnYXJ0aWNsZXNfYXJ0aWNsZV9pZF9zZXEnOjpyZWdjbGFzcyk=" autoIncrement="true"/>
+      <column name="title" sqlType="varchar" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="short_description" sqlType="text" precision="2147483647" scale="0" nullable="false" jdbcType="12"/>
+      <column name="description" sqlType="text" precision="2147483647" scale="0" nullable="false" jdbcType="12"/>
+      <column name="user_owner_id" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <primary-key name="articles_pkey" columns="article_id"/>
+      <foreign-key name="articles_user_owner_id_fkey" columns="user_owner_id" ref-table="users" ref-schema="public" ref-catalog="" ref-columns="user_id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="articles_categories_rel_article_id_fkey" table="articles_categories_rel" schema="public" catalog="antowkacms" columns="article_id"/>
+      <index name="unique_article_id" unique="true" columns="article_id"/>
+    </table>
+    <table name="articles_article_id_seq" schema="public" catalog="antowkacms" type="SEQUENCE">
+      <column name="sequence_name" sqlType="name" precision="2147483647" scale="0" nullable="false" jdbcType="12"/>
+      <column name="last_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="start_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="increment_by" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="max_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="min_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="cache_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="log_cnt" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="is_cycled" sqlType="bool" precision="1" scale="0" nullable="false" jdbcType="-7"/>
+      <column name="is_called" sqlType="bool" precision="1" scale="0" nullable="false" jdbcType="-7"/>
+    </table>
+    <table name="articles_categories_rel" schema="public" catalog="antowkacms" type="TABLE">
+      <column name="article_category_id" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="article_id" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <foreign-key name="articles_categories_rel_article_id_fkey" columns="article_id" ref-table="articles" ref-schema="public" ref-catalog="" ref-columns="article_id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="articles_categories_rel_articles_category_id_fkey" columns="article_category_id" ref-table="articles_category" ref-schema="public" ref-catalog="" ref-columns="article_category_id" update-rule="3" delete-rule="3" deferrability="2"/>
+    </table>
+    <table name="articles_category" schema="public" catalog="antowkacms" type="TABLE">
+      <column name="article_category_id" sqlType="serial" precision="10" scale="0" nullable="false" jdbcType="4" def="bmV4dHZhbCgnY2F0ZWdvcnlfYXJ0aWNsZV9jYXRlZ29yeV9pZF9zZXEnOjpyZWdjbGFzcyk=" autoIncrement="true"/>
+      <column name="parent_category_id" sqlType="int4" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="title" sqlType="varchar" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="description" sqlType="text" precision="2147483647" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="category_article_pkey" columns="article_category_id"/>
+      <exported-key name="articles_categories_rel_articles_category_id_fkey" table="articles_categories_rel" schema="public" catalog="antowkacms" columns="article_category_id"/>
+      <index name="unique_category_id" unique="true" columns="article_category_id"/>
+    </table>
+    <table name="articles_status" schema="public" catalog="antowkacms" type="TABLE">
+      <column name="article_status_id" sqlType="serial" precision="10" scale="0" nullable="false" jdbcType="4" def="bmV4dHZhbCgnYXJ0aWNsZXNfc3RhdHVzX3N0YXR1c19pZF9zZXEnOjpyZWdjbGFzcyk=" autoIncrement="true"/>
+      <column name="status" sqlType="varchar" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="articles_status_pkey" columns="article_status_id"/>
+      <index name="unique_status_id" unique="true" columns="article_status_id"/>
+    </table>
+    <table name="articles_status_status_id_seq" schema="public" catalog="antowkacms" type="SEQUENCE">
+      <column name="sequence_name" sqlType="name" precision="2147483647" scale="0" nullable="false" jdbcType="12"/>
+      <column name="last_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="start_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="increment_by" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="max_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="min_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="cache_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="log_cnt" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="is_cycled" sqlType="bool" precision="1" scale="0" nullable="false" jdbcType="-7"/>
+      <column name="is_called" sqlType="bool" precision="1" scale="0" nullable="false" jdbcType="-7"/>
+    </table>
+    <table name="category_article_category_id_seq" schema="public" catalog="antowkacms" type="SEQUENCE">
+      <column name="sequence_name" sqlType="name" precision="2147483647" scale="0" nullable="false" jdbcType="12"/>
+      <column name="last_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="start_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="increment_by" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="max_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="min_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="cache_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="log_cnt" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="is_cycled" sqlType="bool" precision="1" scale="0" nullable="false" jdbcType="-7"/>
+      <column name="is_called" sqlType="bool" precision="1" scale="0" nullable="false" jdbcType="-7"/>
+    </table>
+    <table name="category_tickets_category_tickets_id_seq" schema="public" catalog="antowkacms" type="SEQUENCE">
+      <column name="sequence_name" sqlType="name" precision="2147483647" scale="0" nullable="false" jdbcType="12"/>
+      <column name="last_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="start_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="increment_by" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="max_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="min_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="cache_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="log_cnt" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="is_cycled" sqlType="bool" precision="1" scale="0" nullable="false" jdbcType="-7"/>
+      <column name="is_called" sqlType="bool" precision="1" scale="0" nullable="false" jdbcType="-7"/>
+    </table>
+    <table name="role" schema="public" catalog="antowkacms" type="TABLE">
+      <column name="role_id" sqlType="serial" precision="10" scale="0" nullable="false" jdbcType="4" def="bmV4dHZhbCgncm9sZV9pZF9zZXEnOjpyZWdjbGFzcyk=" autoIncrement="true"/>
+      <column name="role" sqlType="varchar" precision="55" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="role_pkey" columns="role_id"/>
+      <exported-key name="user_role_role_id_fkey" table="user_role" schema="public" catalog="antowkacms" columns="role_id"/>
+      <index name="unique_id" unique="true" columns="role_id"/>
+    </table>
+    <table name="role_id_seq" schema="public" catalog="antowkacms" type="SEQUENCE">
+      <column name="sequence_name" sqlType="name" precision="2147483647" scale="0" nullable="false" jdbcType="12"/>
+      <column name="last_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="start_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="increment_by" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="max_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="min_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="cache_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="log_cnt" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="is_cycled" sqlType="bool" precision="1" scale="0" nullable="false" jdbcType="-7"/>
+      <column name="is_called" sqlType="bool" precision="1" scale="0" nullable="false" jdbcType="-7"/>
+    </table>
+    <table name="settings" schema="public" catalog="antowkacms" type="TABLE">
+      <column name="setting_name" sqlType="varchar" precision="55" scale="0" nullable="false" jdbcType="12"/>
+      <column name="value" sqlType="varchar" precision="1024" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="settings_pkey" columns="setting_name"/>
+      <index name="unique_setting_name" unique="true" columns="setting_name"/>
+    </table>
+    <table name="tickets" schema="public" catalog="antowkacms" type="TABLE">
+      <column name="ticket_id" sqlType="serial" precision="10" scale="0" nullable="false" jdbcType="4" def="bmV4dHZhbCgndGlja2V0c190aWNrZXRfaWRfc2VxJzo6cmVnY2xhc3Mp" autoIncrement="true"/>
+      <column name="user_owner_id" sqlType="int8" precision="19" scale="0" nullable="true" jdbcType="-5"/>
+      <column name="email" sqlType="varchar" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="title" sqlType="varchar" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="description" sqlType="text" precision="2147483647" scale="0" nullable="false" jdbcType="12"/>
+      <column name="first_name" sqlType="varchar" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="last_name" sqlType="varchar" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="creation_date" sqlType="timestamp" precision="29" scale="6" nullable="false" jdbcType="93" def="bm93KCk="/>
+      <column name="ticket_status_id" sqlType="int4" precision="10" scale="0" nullable="false" jdbcType="4" def="MQ=="/>
+      <column name="phone" sqlType="varchar" precision="55" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="tickets_pkey" columns="ticket_id"/>
+      <foreign-key name="tickets_status_fkey" columns="ticket_status_id" ref-table="tickets_status" ref-schema="public" ref-catalog="" ref-columns="ticket_status_id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="tickets_user_owner_id_fkey" columns="user_owner_id" ref-table="users" ref-schema="public" ref-catalog="" ref-columns="user_id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="tickets_categories_rel_ticket_id_fkey" table="tickets_categories_rel" schema="public" catalog="antowkacms" columns="ticket_id"/>
+      <index name="unique_ticket_id" unique="true" columns="ticket_id"/>
+    </table>
+    <table name="tickets_categories_rel" schema="public" catalog="antowkacms" type="TABLE">
+      <column name="ticket_category_id" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="ticket_id" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <foreign-key name="tickets_categories_rel_ticket_id_fkey" columns="ticket_id" ref-table="tickets" ref-schema="public" ref-catalog="" ref-columns="ticket_id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="tickets_categories_rel_tickets_category_id_fkey" columns="ticket_category_id" ref-table="tickets_category" ref-schema="public" ref-catalog="" ref-columns="ticket_category_id" update-rule="3" delete-rule="3" deferrability="2"/>
+    </table>
+    <table name="tickets_category" schema="public" catalog="antowkacms" type="TABLE">
+      <column name="ticket_category_id" sqlType="serial" precision="10" scale="0" nullable="false" jdbcType="4" def="bmV4dHZhbCgnY2F0ZWdvcnlfdGlja2V0c19jYXRlZ29yeV90aWNrZXRzX2lkX3NlcSc6OnJlZ2NsYXNzKQ==" autoIncrement="true"/>
+      <column name="title" sqlType="varchar" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="description" sqlType="text" precision="2147483647" scale="0" nullable="false" jdbcType="12"/>
+      <column name="parent_category_id" sqlType="int4" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <primary-key name="category_tickets_pkey" columns="ticket_category_id"/>
+      <exported-key name="tickets_categories_rel_tickets_category_id_fkey" table="tickets_categories_rel" schema="public" catalog="antowkacms" columns="ticket_category_id"/>
+      <index name="unique_category_tickets_id" unique="true" columns="ticket_category_id"/>
+    </table>
+    <table name="tickets_status" schema="public" catalog="antowkacms" type="TABLE">
+      <column name="ticket_status_id" sqlType="int4" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="status" sqlType="varchar" precision="55" scale="0" nullable="false" jdbcType="12"/>
+      <column name="public_status" sqlType="bool" precision="1" scale="0" nullable="true" jdbcType="-7"/>
+      <primary-key name="tickets_status_pkey" columns="ticket_status_id"/>
+      <exported-key name="tickets_status_fkey" table="tickets" schema="public" catalog="antowkacms" columns="ticket_status_id"/>
+    </table>
+    <table name="tickets_ticket_id_seq" schema="public" catalog="antowkacms" type="SEQUENCE">
+      <column name="sequence_name" sqlType="name" precision="2147483647" scale="0" nullable="false" jdbcType="12"/>
+      <column name="last_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="start_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="increment_by" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="max_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="min_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="cache_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="log_cnt" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="is_cycled" sqlType="bool" precision="1" scale="0" nullable="false" jdbcType="-7"/>
+      <column name="is_called" sqlType="bool" precision="1" scale="0" nullable="false" jdbcType="-7"/>
+    </table>
+    <table name="user_role" schema="public" catalog="antowkacms" type="TABLE">
+      <column name="user_role_id" sqlType="int4" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="user_id" sqlType="int4" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="role_id" sqlType="int4" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <primary-key name="user_role_pkey" columns="user_role_id"/>
+      <foreign-key name="user_role_role_id_fkey" columns="role_id" ref-table="role" ref-schema="public" ref-catalog="" ref-columns="role_id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="user_role_user_id_fkey" columns="user_id" ref-table="users" ref-schema="public" ref-catalog="" ref-columns="user_id" update-rule="3" delete-rule="3" deferrability="2"/>
+    </table>
+    <table name="users" schema="public" catalog="antowkacms" type="TABLE">
+      <column name="user_id" sqlType="int4" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="first_name" sqlType="text" precision="2147483647" scale="0" nullable="true" jdbcType="12"/>
+      <column name="last_name" sqlType="text" precision="2147483647" scale="0" nullable="true" jdbcType="12"/>
+      <column name="login" sqlType="text" precision="2147483647" scale="0" nullable="true" jdbcType="12"/>
+      <column name="email" sqlType="text" precision="2147483647" scale="0" nullable="true" jdbcType="12"/>
+      <column name="password" sqlType="text" precision="2147483647" scale="0" nullable="true" jdbcType="12"/>
+      <column name="enable" sqlType="int4" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="users_pkey" columns="user_id"/>
+      <exported-key name="articles_user_owner_id_fkey" table="articles" schema="public" catalog="antowkacms" columns="user_owner_id"/>
+      <exported-key name="tickets_user_owner_id_fkey" table="tickets" schema="public" catalog="antowkacms" columns="user_owner_id"/>
+      <exported-key name="user_role_user_id_fkey" table="user_role" schema="public" catalog="antowkacms" columns="user_id"/>
+      <index name="unique_user_id" unique="true" columns="user_id"/>
+    </table>
+  </data-source>
+  <data-source name="PostgreSQL - spring_task_mng@dbs" uuid="de7c4146-6b17-4f3c-ae2c-a7f7ccfc884c">
+    <database-info product="PostgreSQL" version="9.4.4" jdbc-version="4.0" driver-name="PostgreSQL Native Driver" driver-version="PostgreSQL 9.4 JDBC4 (build 1201)">
+      <identifier-quote-string>&quot;</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="lower" quoted-identifiers="exact"/>
+    <schema name="public" catalog="spring_task_mng"/>
+    <table name="role" schema="public" catalog="spring_task_mng" type="TABLE">
+      <column name="id" sqlType="serial" precision="10" scale="0" nullable="false" jdbcType="4" def="bmV4dHZhbCgncm9sZV9pZF9zZXEnOjpyZWdjbGFzcyk=" autoIncrement="true"/>
+      <column name="name" sqlType="varchar" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="role_pkey" columns="id"/>
+    </table>
+    <table name="role_id_seq" schema="public" catalog="spring_task_mng" type="SEQUENCE">
+      <column name="sequence_name" sqlType="name" precision="2147483647" scale="0" nullable="false" jdbcType="12"/>
+      <column name="last_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="start_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="increment_by" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="max_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="min_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="cache_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="log_cnt" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="is_cycled" sqlType="bool" precision="1" scale="0" nullable="false" jdbcType="-7"/>
+      <column name="is_called" sqlType="bool" precision="1" scale="0" nullable="false" jdbcType="-7"/>
+    </table>
+    <table name="tasks" schema="public" catalog="spring_task_mng" type="TABLE">
+      <column name="id" sqlType="serial" precision="10" scale="0" nullable="false" jdbcType="4" def="bmV4dHZhbCgndGFza3NfaWRfc2VxJzo6cmVnY2xhc3Mp" autoIncrement="true"/>
+      <column name="title" sqlType="varchar" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="description" sqlType="text" precision="2147483647" scale="0" nullable="false" jdbcType="12"/>
+      <column name="owner" sqlType="int4" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="tasks_pkey" columns="id"/>
+    </table>
+    <table name="tasks_id_seq" schema="public" catalog="spring_task_mng" type="SEQUENCE">
+      <column name="sequence_name" sqlType="name" precision="2147483647" scale="0" nullable="false" jdbcType="12"/>
+      <column name="last_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="start_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="increment_by" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="max_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="min_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="cache_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="log_cnt" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="is_cycled" sqlType="bool" precision="1" scale="0" nullable="false" jdbcType="-7"/>
+      <column name="is_called" sqlType="bool" precision="1" scale="0" nullable="false" jdbcType="-7"/>
+    </table>
+    <table name="users" schema="public" catalog="spring_task_mng" type="TABLE">
+      <column name="id" sqlType="serial" precision="10" scale="0" nullable="false" jdbcType="4" def="bmV4dHZhbCgndXNlcnNfaWRfc2VxJzo6cmVnY2xhc3Mp" autoIncrement="true"/>
+      <column name="login" sqlType="varchar" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="email" sqlType="varchar" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="role" sqlType="int4" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="fname" sqlType="varchar" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="lname" sqlType="varchar" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="phone" sqlType="varchar" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <column name="password" sqlType="varchar" precision="55" scale="0" nullable="false" jdbcType="12"/>
+      <column name="is_enable" sqlType="int4" precision="10" scale="0" nullable="false" jdbcType="4" def="MA=="/>
+      <primary-key name="users_pkey" columns="id"/>
+      <index name="unique_email" unique="true" columns="email"/>
+      <index name="unique_id" unique="true" columns="id"/>
+    </table>
+    <table name="users_id_seq" schema="public" catalog="spring_task_mng" type="SEQUENCE">
+      <column name="sequence_name" sqlType="name" precision="2147483647" scale="0" nullable="false" jdbcType="12"/>
+      <column name="last_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="start_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="increment_by" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="max_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="min_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="cache_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="log_cnt" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="is_cycled" sqlType="bool" precision="1" scale="0" nullable="false" jdbcType="-7"/>
+      <column name="is_called" sqlType="bool" precision="1" scale="0" nullable="false" jdbcType="-7"/>
+    </table>
+  </data-source>
+</component>

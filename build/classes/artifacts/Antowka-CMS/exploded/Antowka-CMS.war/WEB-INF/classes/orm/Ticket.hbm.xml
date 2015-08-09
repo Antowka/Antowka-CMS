@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="ru.antowka.entity.Ticket" table="tickets" lazy="true">
+        <id name="ticketId" column="ticket_id" type="java.lang.Integer">
+            <generator class="identity" />
+        </id>
+
+        <property name="userOwnerId" column="user_owner_id" type="java.lang.Integer" />
+        <property name="firstName" column="first_name" type="java.lang.String" />
+        <property name="lastName" column="last_name" type="java.lang.String" />
+        <property name="email" column="email" type="java.lang.String" />
+        <property name="title" column="title" type="java.lang.String" />
+        <property name="description" column="description" type="java.lang.String" />
+        <property name="creationDate" column="creation_date" type="java.lang.String" insert="false" />
+
+        <many-to-one name="status" column="ticket_status_id" class="ru.antowka.entity.TicketStatus" />
+
+        <set name="categories" table="tickets_categories_rel" inverse="true" lazy="true" fetch="select">
+            <key column="ticket_id" />
+            <many-to-many column="ticket_category_id" class="ru.antowka.entity.TicketCategory" />
+        </set>
+
+    </class>
+</hibernate-mapping>
