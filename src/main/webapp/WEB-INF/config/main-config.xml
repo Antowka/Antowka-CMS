@@ -30,5 +30,6 @@
        </bean>
 <!-- end TILES TEMPLATES -->
 
+       <bean id="messageResponse" class="ru.antowka.entity.MessageResponse" />
 
 </beans>

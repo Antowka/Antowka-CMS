@@ -1,8 +1,5 @@
 package ru.antowka.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import javax.persistence.Transient;
 import java.io.Serializable;
 import java.util.Set;
 
@@ -16,11 +13,11 @@ public class Ticket implements Serializable {
     private String firstName;
     private String lastName;
     private String email;
+    private String phone;
     private String title;
     private String description;
     private String creationDate;
-
-    @JsonIgnore
+    private TicketStatus status;
     private Set<TicketCategory> categories;
 
     public int getTicketId() {
@@ -63,6 +60,14 @@ public class Ticket implements Serializable {
         this.email = email;
     }
 
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
     public String getTitle() {
         return title;
     }
@@ -93,5 +98,13 @@ public class Ticket implements Serializable {
 
     public void setCategories(Set<TicketCategory> categories) {
         this.categories = categories;
+    }
+
+    public TicketStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(TicketStatus status) {
+        this.status = status;
     }
 }

@@ -1,16 +1,24 @@
 package ru.antowka.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import java.io.Serializable;
+import java.util.List;
 import java.util.Set;
 
 /**
  * Created by anton on 06.08.15.
  */
-public class TicketCategory {
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+public class TicketCategory implements Serializable{
 
     private int ticketCategoryId;
     private int parentCategoryId;
     private String title;
     private String description;
+
+    @JsonIgnore
     private Set<Ticket> tickets;
 
     public int getTicketCategoryId() {

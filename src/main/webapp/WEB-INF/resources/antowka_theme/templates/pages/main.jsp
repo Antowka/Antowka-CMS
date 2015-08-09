@@ -27,6 +27,8 @@
         "lastName": "Nik",
         "email": "662307@gmail.com",
         "title": "Test ticket from client side",
+        "phone": "911-99-99",
+        "categories": [{"ticketCategoryId":2}],
         "description": "Description for ticket from client side"
       };
 

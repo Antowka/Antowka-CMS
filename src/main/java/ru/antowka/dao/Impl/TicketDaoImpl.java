@@ -9,10 +9,11 @@ import ru.antowka.dao.HibernateSessionFactory;
 import ru.antowka.dao.TicketDao;
 import ru.antowka.entity.Article;
 import ru.antowka.entity.Ticket;
+import ru.antowka.entity.TicketStatus;
 import ru.antowka.entity.User;
 
 import javax.transaction.Transactional;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by anton on 06.08.15.
@@ -31,7 +32,9 @@ public class TicketDaoImpl implements TicketDao{
 
         List<Ticket> tickets = null;
         Session session = hibernateSessionFactory.getSession();
-        tickets = (List<Ticket>)session.createCriteria(Ticket.class)
+        tickets = (List<Ticket>)session.createCriteria(Ticket.class, "ticket")
+                .createAlias("ticket.status", "status")
+                .add(Restrictions.eq("status.publicStatus", true))
                 .addOrder(order)
                 .setMaxResults(limit)
                 .list();
@@ -41,11 +44,15 @@ public class TicketDaoImpl implements TicketDao{
 
     @Override
     @Transactional
-    public Ticket findTicketCategoryById(int ticketId) {
+    public Ticket findTicketById(int ticketId) {
 
         Ticket ticket = null;
         Session session = hibernateSessionFactory.getSession();
-        ticket = (Ticket)session.get(Ticket.class, ticketId);
+        ticket = (Ticket)session.createCriteria(Ticket.class, "ticket")
+                                .createAlias("ticket.status", "status")
+                                .add(Restrictions.eq("status.publicStatus", true))
+                                .add(Restrictions.eq("ticket.ticketId", ticketId))
+                                .uniqueResult();
 
         return ticket;
     }
@@ -59,8 +66,10 @@ public class TicketDaoImpl implements TicketDao{
         List<Ticket> articles = null;
 
         Session session = hibernateSessionFactory.getSession();
-        articles = (List<Ticket>)session.createCriteria(Ticket.class)
-                .add(Restrictions.eq("userOwnerId", user.getUserId()))
+        articles = (List<Ticket>)session.createCriteria(Ticket.class, "ticket")
+                .createAlias("ticket.status", "status")
+                .add(Restrictions.eq("status.publicStatus", true))
+                .add(Restrictions.eq("ticket.userOwnerId", user.getUserId()))
                 .list();
 
         return articles;

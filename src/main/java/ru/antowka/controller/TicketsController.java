@@ -3,7 +3,9 @@ package ru.antowka.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
+import ru.antowka.entity.MessageResponse;
 import ru.antowka.entity.Ticket;
+import ru.antowka.entity.TicketCategory;
 import ru.antowka.entity.User;
 import ru.antowka.service.TicketCategoryService;
 import ru.antowka.service.TicketService;
@@ -22,6 +24,32 @@ public class TicketsController {
 
     @Autowired
     private TicketCategoryService ticketCategoryService;
+
+    /**
+     * ****************************** CATEGORIES TICKETS ****************************************
+     */
+
+
+    /**
+     * Response all categories for tickets
+     *
+     * Link: http://localhost:8080/tickets/get-categories
+     *
+     * @return
+     */
+    @RequestMapping(value = "get-categories", method = RequestMethod.GET)
+    public @ResponseBody List<TicketCategory> getCategoriesAll(){
+
+        List<TicketCategory> ticketCategories = null;
+        ticketCategories = ticketCategoryService.getAllCategories();
+
+        return ticketCategories;
+    }
+
+
+    /**
+     * ****************************** TICKETS ****************************************
+     */
 
     /**
      * Response tickets by a few params
@@ -74,10 +102,15 @@ public class TicketsController {
         return tickets;
     }
 
-
+    /**
+     * Creating new ticket
+     *
+     * @param ticket
+     * @return
+     */
     @RequestMapping(value = "create-ticket", method = RequestMethod.POST)
-    public @ResponseBody Ticket createTicket(@RequestBody Ticket ticket){
-
+    public @ResponseBody
+    MessageResponse createTicket(@RequestBody Ticket ticket){
         return ticketService.createTicket(ticket);
     }
 
