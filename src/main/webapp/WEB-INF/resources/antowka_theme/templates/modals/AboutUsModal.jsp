@@ -1,3 +1,4 @@
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%--
   Created by IntelliJ IDEA.
   User: Lika / people-06
@@ -5,6 +6,7 @@
   Time: 22:51
   To change this template use File | Settings | File Templates.
 --%>
+<spring:url value="/resources" var="resourceUrl"/>
 
 <div ng-controller="AboutUsCtrl">
   <script  type="text/ng-template" id="AboutUsModal.html">

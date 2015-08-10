@@ -3,7 +3,6 @@ var CommissionApp = angular.module('CommissionApp', ['ui.bootstrap']);
 // Requests
 
 CommissionApp.service('dataService', function($http) {
-    delete $http.defaults.headers.common['X-Requested-With'];
     this.getData = function(callbackFunc) {
         $http({
             method: 'GET',
@@ -17,13 +16,11 @@ CommissionApp.service('dataService', function($http) {
     }
 });
 
-//
-CommissionApp.controller('ShowRequestsCtrl', function ($scope){
+CommissionApp.controller('ShowRequestsCtrl', function ($scope, dataService){
     $scope.data = null;
     dataService.getData(function(dataResponse) {
         $scope.requests = dataResponse;
     });
-
 });
 
 //
