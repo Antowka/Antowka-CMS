@@ -24,6 +24,9 @@
 
         <tiles:insertAttribute name="footer" />
 
+        <tiles:insertAttribute name="AboutUsModal" />
+        <tiles:insertAttribute name="RequestFormModal" />
+
 
         <!-- JS FILES -->
         <script src="${resourceUrl}/js/angular.min.js"></script>

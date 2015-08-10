@@ -1,3 +1,4 @@
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%--
   Created by IntelliJ IDEA.
   User: anton
@@ -5,6 +6,7 @@
   Time: 1:07
   To change this template use File | Settings | File Templates.
 --%>
+<spring:url value="/resources" var="resourceUrl"/>
 
 <section class="hero"></section>
 
