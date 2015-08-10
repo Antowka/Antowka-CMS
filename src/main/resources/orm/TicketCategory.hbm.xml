@@ -12,7 +12,7 @@
         <property name="description" column="description" type="java.lang.String" />
 
         <set name="tickets" table="tickets_categories_rel" inverse="true" lazy="true" fetch="select">
-            <key column="ticket_category_id" />
+            <key column="ticket_category_id" not-null="true" />
             <many-to-many column="ticket_id" class="ru.antowka.entity.Ticket" />
         </set>
     </class>
