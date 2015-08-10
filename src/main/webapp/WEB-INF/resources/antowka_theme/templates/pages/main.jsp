@@ -6,47 +6,24 @@
   To change this template use File | Settings | File Templates.
 --%>
 
-<h2>Main Page</h2>
+<section class="hero"></section>
 
-<a href="/login">Login Page</a>
-<br><br>
-<button id="test_form">Send Test Form</button>
-<br><br>
-<p>Main blok: ${vars.settings.site_description}</p>
+<section class="index-questions" id="questions" ng-controller="ShowRequestsCtrl">
+  <div class="container">
+    <header class="section-header">
+      <h1>Open Questions</h1>
+      <h4>We got <strong>{{requests.length}}</strong> requests</h4>
+    </header>
+    <div class="row">
+      <article class="col-sm-6 col-md-3 request-preview" ng-repeat="request in requests">
+        <a href="" id="request-{{request.ticketId}}">
+          <div class="img-wrap no-image">
+            <img src="${resourceUrl}/img/random/home175.png"/>
+          </div>
+          <h3 class="caption">{{request.description}}</h3>
+        </a>
+      </article>
+    </div>
+  </div>
+</section>
 
-
-<script>
-
-  $(document).ready(function() {
-    $("#test_form").click(function(){
-
-      console.log("Test send form");
-
-      var ticket = {
-        "firstName": "Anton",
-        "lastName": "Nik",
-        "email": "662307@gmail.com",
-        "title": "Test ticket from client side",
-        "phone": "911-99-99",
-        "categories": [{"ticketCategoryId":2}],
-        "description": "Description for ticket from client side"
-      };
-
-
-      $.ajax({
-        url: "tickets/create-ticket",
-        type: "post",
-        data: JSON.stringify(ticket),
-        dataType: "json",
-        contentType: "application/json; charset=utf-8",
-        processData: false,
-        success: function (a) {
-          console.log(a);
-        },
-        error: function (e) {
-          console.log(e);
-        }
-      });
-    });
-  });
-</script>

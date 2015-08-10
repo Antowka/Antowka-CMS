@@ -7,21 +7,29 @@
 
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
         <spring:url value="/resources" var="resourceUrl"/>
-        <script type="application/javascript" src="${resourceUrl}/js/jquery-2.1.4.min.js"></script>
         <title><tiles:insertAttribute name="title" ignore="true" /></title>
+
+        <link rel="stylesheet" href="${resourceUrl}/css/bootstrap.css">
+        <link rel="stylesheet" href="${resourceUrl}/css/style.css">
     </head>
 
-    <header>
+    <body ng-app="CommissionApp">
+
         <tiles:insertAttribute name="header" />
-    </header>
 
-    <body>
         <tiles:insertAttribute name="body" />
-    </body>
 
-    <div>
         <tiles:insertAttribute name="footer" />
-    </div>
+
+
+        <!-- JS FILES -->
+        <script src="${resourceUrl}/js/angular.min.js"></script>
+        <script src="${resourceUrl}/js/ui-bootstrap-tpls-0.13.3.js"></script>
+        <script src="${resourceUrl}/js/app.js"></script>
+
+    </body>
 
 </html>  
