@@ -1,4 +1,5 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+
 <%--
   Created by IntelliJ IDEA.
   User: anton
@@ -6,14 +7,14 @@
   Time: 1:07
   To change this template use File | Settings | File Templates.
 --%>
-<spring:url value="/resources" var="resourceUrl"/>
+<spring:url value="/resources" var="resourceUrl" />
 
 <section class="hero"></section>
 
 <section class="index-questions" id="questions" ng-controller="ShowRequestsCtrl">
   <div class="container">
     <header class="section-header">
-      <h1>Open Questions</h1>
+      <h1><spring:message code="lang.openTicket" /></h1>
       <h4>We got <strong>{{requests.length}}</strong> requests</h4>
     </header>
     <div class="row">

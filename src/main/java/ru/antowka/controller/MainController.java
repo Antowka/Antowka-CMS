@@ -1,6 +1,7 @@
 package ru.antowka.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -19,6 +20,10 @@ public class MainController {
 
     @Autowired
     private SettingsService settingsService;
+
+    @Autowired
+    private MessageSource messageSource;
+
 
     private String[] settingsList;
 
@@ -45,7 +50,6 @@ public class MainController {
         Map<String, String> settings = settingsService.getSettings(this.settingsList);
 
         model.put("settings", settings);
-
         return new ModelAndView("main", "vars", model);
     }
 }
