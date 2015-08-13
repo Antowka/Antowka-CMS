@@ -30,6 +30,14 @@
        </bean>
 <!-- end TILES TEMPLATES -->
 
-       <bean id="messageResponse" class="ru.antowka.entity.MessageResponse" />
+
+<!-- UPLOAD FILES -->
+       <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+              <property name="maxUploadSize" value="${file.maxSizeFileUpload}"/>
+       </bean>
+<!-- end UPLOAD FILES -->
+
+
+<bean id="messageResponse" class="ru.antowka.entity.MessageResponse" />
 
 </beans>

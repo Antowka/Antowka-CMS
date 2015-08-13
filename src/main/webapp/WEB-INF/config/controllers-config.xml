@@ -8,4 +8,9 @@
               <property name="settingsList" value="site_title, site_description" />
        </bean>
 
+       <!-- FileController -->
+       <bean id="fileController" class="ru.antowka.controller.FileController">
+              <property name="storagePath" value="${file.storagePath}" />
+       </bean>
+
 </beans>
