@@ -10,7 +10,8 @@
               <put-attribute name="body" value="" />
               <put-attribute name="footer" value="/WEB-INF/resources/antowka_theme/templates/footer.jsp" />
               <put-attribute name="AboutUsModal" value="/WEB-INF/resources/antowka_theme/templates/modals/AboutUsModal.jsp" />
-              <put-attribute name="RequestFormModal" value="/WEB-INF/resources/antowka_theme/templates/modals/RequestFormModal.jsp" />
+              <put-attribute name="RequestFormModal" value="/WEB-INF/resources/antowka_theme/templates/modals/TicketFormModal.jsp" />
+              <put-attribute name="TicketViewModal" value="/WEB-INF/resources/antowka_theme/templates/modals/TicketViewModal.jsp" />
        </definition>
 
 
