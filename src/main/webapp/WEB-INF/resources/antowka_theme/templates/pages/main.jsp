@@ -11,19 +11,19 @@
 
 <section class="hero"></section>
 
-<section class="index-questions" id="questions" ng-controller="ShowRequestsCtrl">
+<section class="index-questions" id="questions" ng-controller="ShowTicketsCtrl">
   <div class="container">
     <header class="section-header">
       <h1><spring:message code="lang.openTicket" /></h1>
-      <h4>We got <strong>{{requests.length}}</strong> requests</h4>
+      <h4>We got <strong>{{tickets.length}}</strong> requests</h4>
     </header>
     <div class="row">
-      <article class="col-sm-6 col-md-3 request-preview" ng-repeat="request in requests">
-        <a href="" id="request-{{request.ticketId}}">
+      <article class="col-sm-6 col-md-3 request-preview" ng-repeat="ticket in tickets">
+        <a class="link-to-ticket" id="request-{{ticket.ticketId}}" ng-click="open(ticket);">
           <div class="img-wrap no-image">
             <img src="${resourceUrl}/img/random/home175.png"/>
           </div>
-          <h3 class="caption">{{request.description}}</h3>
+          <h3 class="caption">{{ticket.description}}</h3>
         </a>
       </article>
     </div>

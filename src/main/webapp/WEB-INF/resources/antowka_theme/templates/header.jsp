@@ -30,7 +30,7 @@
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav navbar-right">
-          <li ng-controller="RequestFormCtrl">
+          <li ng-controller="TicketFormCtrl">
             <a ng-click="open()"><span class="glyphicon glyphicon-edit"></span> Send request</a>
           </li>
           <li><a href="#questions">Open questions</a></li>
