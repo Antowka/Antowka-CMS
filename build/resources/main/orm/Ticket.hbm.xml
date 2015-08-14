@@ -4,6 +4,7 @@
 
 <hibernate-mapping>
     <class name="ru.antowka.entity.Ticket" table="tickets" lazy="true">
+
         <id name="ticketId" column="ticket_id" type="java.lang.Integer">
             <generator class="identity" />
         </id>
@@ -17,12 +18,12 @@
         <property name="description" column="description" type="java.lang.String" />
         <property name="creationDate" column="creation_date" type="java.lang.String" insert="false" />
 
-        <many-to-one name="status" column="ticket_status_id" class="ru.antowka.entity.TicketStatus" insert="false" />
-
-        <set name="categories" table="tickets_categories_rel" inverse="false" lazy="true" fetch="select" cascade="all">
-            <key column="ticket_id" />
+        <set name="categories" table="tickets_categories_rel" inverse="false" lazy="true" fetch="select" cascade="persist">
+            <key column="ticket_id" not-null="true" />
             <many-to-many column="ticket_category_id" class="ru.antowka.entity.TicketCategory" />
         </set>
+
+        <many-to-one name="status" column="ticket_status_id" class="ru.antowka.entity.TicketStatus" insert="false" />
 
     </class>
 </hibernate-mapping>
