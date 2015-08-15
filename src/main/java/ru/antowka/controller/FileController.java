@@ -69,14 +69,16 @@ public class FileController {
                     }
 
                     //Create path for new file
-                    String path = generatePathForFile(md5File.toString());
+                    String extension=multipartFile.getOriginalFilename().substring(multipartFile.getOriginalFilename().lastIndexOf("."));
+                    String path = generatePathForFile(md5File.toString(), extension);
 
                     //Save file
-                    String extension=multipartFile.getOriginalFilename().substring(multipartFile.getOriginalFilename().lastIndexOf("."));
-                    String fileFullPath = storagePath + path + md5File.toString() + extension;
-                    multipartFile.transferTo(new File(fileFullPath));
+                    File file = new File(path);
+                    if(file.mkdirs()) {
+                        multipartFile.transferTo(file);
+                    }
 
-                    fileNames.add(fileName);
+                    fileNames.add(path);
                 }
             }
         }
@@ -91,11 +93,12 @@ public class FileController {
      * @param hashFile
      * @return
      */
-    private String generatePathForFile(String hashFile){
+    private String generatePathForFile(String hashFile, String extension){
 
-        String path = hashFile;
+        String folder1 = hashFile.substring(0, 2);
+        String folder2 = hashFile.substring(2, 4);
 
-        return path;
+        return  storagePath + folder1 + "/" + folder2 + "/" + hashFile  + extension;
     }
 
 
