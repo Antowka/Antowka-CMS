@@ -51,18 +51,16 @@
 
             <!-- ADDRESS -->
             <div class="col-xs-8 form-control-wrap">
-              <input type="text" class="form-control" placeholder="Address, where happen a problem">
+              <input type="text" name="address" class="form-control" placeholder="Address, where happen a problem">
             </div>
           </div>
           <div class="form-group row">
 
             <!-- CATEGORIES -->
             <div class="col-xs-4 form-control-wrap">
-              <select class="form-control">
-                <option value="" selected="selected" disabled>Please specify a problem</option>
-                <option ng-repeat="category in categories"  name="categoryID" value="{{category.ticketCategoryId}}" title="{{category.description}}">
-                  {{category.title}}</option>
-              </select>
+                <select class="form-control"  ng-model="category" ng-options="category.title for category in categories">
+                  <option value="" selected="selected" disabled>Please specify a problem</option>
+                </select>
             </div>
 
             <!-- TITLE -->

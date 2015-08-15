@@ -79,7 +79,6 @@ CommissionApp.controller('CloseAboutUsCtrl', function ($scope, $modalInstance) {
 
 // Controllers for Request View Modal
 CommissionApp.controller('TicketViewCtrl', function ($scope, $modal) {
-    alert(true);
     $scope.open = function (ticket) {
         var modalInstance = $modal.open({
             templateUrl: 'ticketViewModal.html',
@@ -102,23 +101,36 @@ CommissionApp.controller('CloseTicketViewCtrl', function ($scope, $modalInstance
 
 // Save form to the data
 
-CommissionApp.controller('sendFormCtrl', ['$scope', function($scope, dataService){
+CommissionApp.controller('sendFormCtrl', ['$scope','dataService', '$http', function($scope, dataService, $http){
     $scope.data = null;
+
     dataService.getCategories(function(dataResponse) {
         $scope.categories = dataResponse;
     });
+
     var formData = {};
 
     $scope.processForm = function() {
         formData = {
             "firstName": $scope.name,
             "lastName": $scope.surname,
+            "email": $scope.email,
+            "title":  $scope.title,
             "phone": $scope.phone,
             "address": $scope.address,
-            "title":  $scope.title,
+            "categories": {
+                "ticketCategoryId": $scope.category.ticketCategoryId,
+                "parentCategoryId": $scope.category.parentCategoryId
+            },
             "description":  $scope.description
         };
-        console.log(formData);
+
+        $http.post('tickets/create-ticket', JSON.stringify(formData))
+            .success(function(){
+                alert(true);
+            }).error(function(){
+                alert(false);
+            });
     };
 }]);
 
