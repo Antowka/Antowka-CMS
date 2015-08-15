@@ -118,14 +118,20 @@ CommissionApp.controller('sendFormCtrl', ['$scope','dataService', '$http', funct
             "title":  $scope.title,
             "phone": $scope.phone,
             "address": $scope.address,
-            "categories": {
+            "categories": [{
                 "ticketCategoryId": $scope.category.ticketCategoryId,
                 "parentCategoryId": $scope.category.parentCategoryId
-            },
+            }],
             "description":  $scope.description
         };
 
-        $http.post('tickets/create-ticket', JSON.stringify(formData))
+        $http({
+                url: 'tickets/create-ticket',
+                headers: {'Content-Type': 'application/json; charset=utf-8'},
+                data: JSON.stringify(formData),
+                transformRequest: false,
+                method: 'POST'
+            })
             .success(function(){
                 alert(true);
             }).error(function(){

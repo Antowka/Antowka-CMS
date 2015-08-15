@@ -79,7 +79,6 @@ public class TicketDaoImpl implements TicketDao{
     @Transactional
     public int createTicket(Ticket ticket) {
         Session session = hibernateSessionFactory.getSession();
-        Integer ticketId = (int)session.save(ticket);
-        return ticketId;
+        return (int)session.save(ticket);
     }
 }
