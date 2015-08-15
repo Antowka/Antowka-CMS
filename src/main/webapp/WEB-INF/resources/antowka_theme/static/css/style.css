@@ -230,6 +230,13 @@ body {
 .close {
   outline: none;
 }
+.close:hover {
+  -webkit-animation-name: jello;
+  animation-name: jello;
+  -webkit-transform-origin: center;
+  transform-origin: center;
+  animation-duration: 1s;
+}
 .section-header {
   text-align: center;
   margin-bottom: 3em;
@@ -278,13 +285,6 @@ body {
   -webkit-animation: animateDayColor 12s infinite;
   animation: animateDayColor 12s infinite;
 }
-.index-about .close:hover {
-  -webkit-animation-name: jello;
-  animation-name: jello;
-  -webkit-transform-origin: center;
-  transform-origin: center;
-  animation-duration: 1s;
-}
 .index-about .city-img {
   background-position: 92% 0;
   background-repeat: no-repeat;
@@ -301,6 +301,23 @@ body {
 .index-form .form-control {
   border-bottom: 2px solid #3f51b5;
   box-shadow: none;
+}
+.index-form .form-control.ng-invalid-pattern {
+  border-bottom-color: #F44336;
+}
+.index-form .form-control-wrap {
+  position: relative;
+}
+.index-form .form-control-wrap .text-danger {
+  position: absolute;
+  left: 15px;
+  top: 100%;
+}
+.index-form .file-control {
+  overflow: hidden;
+}
+.index-form .file-control .text-danger {
+  position: static;
 }
 .index-form select {
   border-radius: 0;
@@ -319,6 +336,7 @@ body {
   text-align: center;
 }
 .modal-header h1,
+.modal-header h2,
 .modal-header h4 {
   margin: 0;
 }
@@ -330,31 +348,32 @@ body {
 .index-questions h1 {
   font-weight: 700;
 }
-.index-questions .request-preview {
+.index-questions .ticket-preview {
   background: #fff;
   margin: 0 1% 2.5em;
   padding: 0;
   width: 23%;
+  cursor: pointer;
 }
-.index-questions .request-preview a {
+.index-questions .ticket-preview a {
   text-decoration: none;
 }
-.index-questions .request-preview .caption {
+.index-questions .ticket-preview .caption {
   font-size: 16px;
   margin: 0;
   padding: 1em;
   text-transform: uppercase;
   height: 4.1em;
 }
-.index-questions .request-preview .btn {
+.index-questions .ticket-preview .btn {
   width: 100%;
 }
-.index-questions .request-preview .btn:hover .glyphicon {
+.index-questions .ticket-preview .btn:hover .glyphicon {
   -webkit-animation-name: bounceIn;
   animation-name: bounceIn;
   animation-duration: 1s;
 }
-.index-questions .request-preview .btn .glyphicon {
+.index-questions .ticket-preview .btn .glyphicon {
   margin-left: 5px;
 }
 .index-questions .img-wrap {
@@ -363,7 +382,7 @@ body {
   overflow: hidden;
 }
 .index-questions .img-wrap.no-image {
-  background: #A5E6DF;
+  background: #C8F0EC;
   padding: 1em 1em 0;
 }
 .index-questions .img-wrap.no-image img {
@@ -394,6 +413,15 @@ body {
 .index-questions img {
   max-width: 100%;
   width: 100%;
+}
+.ticket-view .modal-header h2 {
+  font-size: 20px;
+  text-align: left;
+  text-transform: uppercase;
+}
+.ticket-view .label-status {
+  text-transform: lowercase;
+  font-variant: small-caps;
 }
 .site-footer {
   background: #1A237E;
