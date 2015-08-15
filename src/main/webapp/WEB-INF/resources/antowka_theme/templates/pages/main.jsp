@@ -2,7 +2,7 @@
 
 <%--
   Created by IntelliJ IDEA.
-  User: anton
+  User: Lika /people-06
   Date: 25.07.15
   Time: 1:07
   To change this template use File | Settings | File Templates.
@@ -18,8 +18,8 @@
       <h4>We got <strong>{{tickets.length}}</strong> requests</h4>
     </header>
     <div class="row">
-      <article class="col-sm-6 col-md-3 request-preview" ng-repeat="ticket in tickets">
-        <a class="link-to-ticket" id="request-{{ticket.ticketId}}" ng-click="open(ticket);">
+      <article class="col-sm-6 col-md-3 ticket-preview" ng-repeat="ticket in tickets" ng-controller="TicketViewCtrl">
+        <a class="link-to-ticket" id="ticket-{{ticket.ticketId}}" ng-click="open(ticket);">
           <div class="img-wrap no-image">
             <img src="${resourceUrl}/img/random/home175.png"/>
           </div>

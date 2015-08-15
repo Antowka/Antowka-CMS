@@ -3,7 +3,7 @@ var CommissionApp = angular.module('CommissionApp', ['ui.bootstrap']);
 // Requests
 
 CommissionApp.service('dataService', function($http) {
-    this.getData = function(callbackFunc) {
+    this.getTickets = function(callbackFunc) {
         $http({
             method: 'GET',
             url: 'tickets/get-tickets/?limit=2&orderField=creationDate&order=desc'
@@ -14,12 +14,23 @@ CommissionApp.service('dataService', function($http) {
             alert("error");
         });
     }
+    this.getCategories = function(callbackFunc) {
+        $http({
+            method: 'GET',
+            url: 'tickets/get-categories'
+        }).success(function(data){
+            // With the data succesfully returned, call our callback
+            callbackFunc(data);
+        }).error(function(){
+            alert("error");
+        });
+    }
 });
 
-CommissionApp.controller('ShowRequestsCtrl', function ($scope, dataService){
+CommissionApp.controller('ShowTicketsCtrl', function ($scope, dataService){
     $scope.data = null;
-    dataService.getData(function(dataResponse) {
-        $scope.requests = dataResponse;
+    dataService.getTickets(function(dataResponse) {
+        $scope.tickets = dataResponse;
     });
     $scope.formatDate = function(date){
         var dateOut = new Date(date);
@@ -90,19 +101,36 @@ CommissionApp.controller('CloseTicketViewCtrl', function ($scope, $modalInstance
 
 // Save form to the data
 
-CommissionApp.controller('sendFormCtrl', ['$scope', function($scope){
+CommissionApp.controller('sendFormCtrl', ['$scope','dataService', '$http', function($scope, dataService, $http){
+    $scope.data = null;
+
+    dataService.getCategories(function(dataResponse) {
+        $scope.categories = dataResponse;
+    });
+
     var formData = {};
 
     $scope.processForm = function() {
         formData = {
             "firstName": $scope.name,
             "lastName": $scope.surname,
+            "email": $scope.email,
+            "title":  $scope.title,
             "phone": $scope.phone,
             "address": $scope.address,
-            "title":  $scope.title,
+            "categories": {
+                "ticketCategoryId": $scope.category.ticketCategoryId,
+                "parentCategoryId": $scope.category.parentCategoryId
+            },
             "description":  $scope.description
         };
-        console.log(formData);
+
+        $http.post('tickets/create-ticket', JSON.stringify(formData))
+            .success(function(){
+                alert(true);
+            }).error(function(){
+                alert(false);
+            });
     };
 }]);
 
