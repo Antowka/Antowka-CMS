@@ -26,6 +26,7 @@
                 /WEB-INF/config/main-config.xml
                 /WEB-INF/config/controllers-config.xml
                 /WEB-INF/config/lang-config.xml
+                /WEB-INF/config/services-config.xml
             </param-value>
 
         </context-param>

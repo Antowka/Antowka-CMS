@@ -5,19 +5,20 @@ import java.io.Serializable;
 /**
  * Created by Anton Nik on 13.08.15.
  */
-public class File implements Serializable{
+public class Attachment implements Serializable{
 
-    private int fileId;
+    private int attachmentId;
+    private int userOwnerId;
     private String realFileName;
     private String filePathInStorage;
     private Float fileSize;
 
-    public int getFileId() {
-        return fileId;
+    public int getAttachmentId() {
+        return attachmentId;
     }
 
-    public void setFileId(int fileId) {
-        this.fileId = fileId;
+    public void setAttachmentId(int attachmentId) {
+        this.attachmentId = attachmentId;
     }
 
     public String getRealFileName() {
@@ -42,5 +43,13 @@ public class File implements Serializable{
 
     public void setFileSize(Float fileSize) {
         this.fileSize = fileSize;
+    }
+
+    public int getUserOwnerId() {
+        return userOwnerId;
+    }
+
+    public void setUserOwnerId(int userOwnerId) {
+        this.userOwnerId = userOwnerId;
     }
 }

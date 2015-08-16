@@ -1,10 +1,12 @@
 package ru.antowka.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import ru.antowka.form.FileUploadForm;
+import ru.antowka.service.AttachmentService;
 
 import java.io.File;
 import java.io.IOException;
@@ -18,17 +20,10 @@ import java.util.List;
  * Created by Anton Nik on 12.08.15.
  */
 @Controller
-public class FileController {
+public class AttachmentController {
 
-    private String storagePath;
-
-    /**
-     *  **************************** Getters and Setters ************************************
-     */
-
-    public void setStoragePath(String storagePath) {
-        this.storagePath = storagePath;
-    }
+    @Autowired
+    private AttachmentService attachmentService;
 
 
     /**
@@ -70,7 +65,7 @@ public class FileController {
 
                     //Create path for new file
                     String extension=multipartFile.getOriginalFilename().substring(multipartFile.getOriginalFilename().lastIndexOf("."));
-                    String path = generatePathForFile(md5File.toString(), extension);
+                    String path = attachmentService.generatePathForFile(md5File.toString(), extension);
 
                     //Save file
                     File file = new File(path);
@@ -86,20 +81,4 @@ public class FileController {
         map.addAttribute("files", fileNames);
         return "file_upload_success";
     }
-
-    /**
-     * Method generate path for file and create dirs
-     *
-     * @param hashFile
-     * @return
-     */
-    private String generatePathForFile(String hashFile, String extension){
-
-        String folder1 = hashFile.substring(0, 2);
-        String folder2 = hashFile.substring(2, 4);
-
-        return  storagePath + folder1 + "/" + folder2 + "/" + hashFile  + extension;
-    }
-
-
 }
