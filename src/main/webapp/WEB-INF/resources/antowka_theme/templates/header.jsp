@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@page session="true"%>
 
 <%--
@@ -31,11 +32,11 @@
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav navbar-right">
           <li ng-controller="TicketFormCtrl">
-            <a ng-click="open()"><span class="glyphicon glyphicon-edit"></span> Send request</a>
+            <a ng-click="open()"><span class="glyphicon glyphicon-edit"></span> <spring:message code="lang.createTicket" /></a>
           </li>
-          <li><a href="#questions">Open questions</a></li>
+          <li><a href="#questions"> <spring:message code="lang.openTickets" /></a></li>
           <li ng-controller="AboutUsCtrl">
-            <a ng-click="open()"><span class="glyphicon glyphicon-info-sign"></span> About Us</a>
+            <a ng-click="open()"><span class="glyphicon glyphicon-info-sign"> </span> <spring:message code="lang.aboutUs" /></a>
           </li>
         </ul>
       </div>

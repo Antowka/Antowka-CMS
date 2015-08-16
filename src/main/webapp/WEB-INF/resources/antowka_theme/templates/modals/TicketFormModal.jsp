@@ -1,3 +1,4 @@
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%--
   Created by IntelliJ IDEA.
   User: Lika / people-06
@@ -11,12 +12,12 @@
 
     <section class="index-form" id="apply">
       <header class="modal-header">
-        <h1>Open the Question</h1>
-        <h4>Make World better!</h4>
+        <h1><spring:message code="lang.createTicket" /></h1>
+        <h4><spring:message code="lang.MakeCityPetter" />!</h4>
       </header>
       <form class="request-form"  role="form" name="requestTicket" ng-controller="sendFormCtrl" novalidate ng-submit="processForm()">
         <div class="modal-body">
-          <p class="help-block pull-right"><small>Be sure, your surname, email and phone number is confidential information and will not be shown at the site</small></p>
+          <p class="help-block pull-right"><small><spring:message code="lang.ConditionsPrivacy" /></small></p>
           <div class="form-group row">
 
             <!-- NAME -->

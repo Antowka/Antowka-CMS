@@ -14,8 +14,8 @@
 <section class="index-questions" id="questions" ng-controller="ShowTicketsCtrl">
   <div class="container">
     <header class="section-header">
-      <h1><spring:message code="lang.openTicket" /></h1>
-      <h4>We got <strong>{{tickets.length}}</strong> requests</h4>
+      <h1><spring:message code="lang.openTickets" /></h1>
+      <h4><spring:message code="lang.weGot" /> <strong>{{tickets.length}}</strong> <spring:message code="lang.tickets" /></h4>
     </header>
     <div class="row">
       <article class="col-sm-6 col-md-3 ticket-preview" ng-repeat="ticket in tickets" ng-controller="TicketViewCtrl">
