@@ -6,7 +6,7 @@ CommissionApp.service('dataService', function($http) {
     this.getTickets = function(callbackFunc) {
         $http({
             method: 'GET',
-            url: 'tickets/get-tickets/?limit=2&orderField=creationDate&order=desc'
+            url: 'tickets/get-tickets/?limit=10&offset=0&orderField=creationDate&order=desc'
         }).success(function(data){
             // With the data succesfully returned, call our callback
             callbackFunc(data);
