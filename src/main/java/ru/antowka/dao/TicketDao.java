@@ -11,7 +11,7 @@ import java.util.List;
  */
 public interface TicketDao {
 
-    List<Ticket> getAllTickets(int limit, Order order);
+    List<Ticket> getAllTickets(int limit, int offset, Order order);
     Ticket findTicketById(int ticketId);
     List<Ticket> findTicketsByUserOwner(User user);
     int createTicket(Ticket ticket);

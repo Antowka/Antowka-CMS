@@ -54,7 +54,7 @@ public class TicketsController {
     /**
      * Response tickets by a few params
      *
-     * Link: http://localhost:8080/tickets/get-tickets/?limit=2&orderField=creationDate&order=desc
+     * Link: http://localhost:8080/tickets/get-tickets/?limit=2&offset=5orderField=creationDate&order=desc
      *
      * @param request
      * @return
@@ -65,6 +65,7 @@ public class TicketsController {
         List<Ticket> tickets = null;
 
         tickets = ticketService.getAllTickets(Integer.parseInt(request.getParameter("limit")),
+                                              Integer.parseInt(request.getParameter("offset")),
                                                                request.getParameter("order"),
                                                                request.getParameter("orderField"));
 

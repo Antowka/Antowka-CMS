@@ -28,7 +28,7 @@ public class TicketDaoImpl implements TicketDao{
     @Override
     @Transactional
     @SuppressWarnings("unchecked")
-    public List<Ticket> getAllTickets(int limit, Order order) {
+    public List<Ticket> getAllTickets(int limit, int offset, Order order) {
 
         List<Ticket> tickets = null;
         Session session = hibernateSessionFactory.getSession();
@@ -36,6 +36,7 @@ public class TicketDaoImpl implements TicketDao{
                 .createAlias("ticket.status", "status")
                 .add(Restrictions.eq("status.publicStatus", true))
                 .addOrder(order)
+                .setFirstResult(offset)
                 .setMaxResults(limit)
                 .list();
 

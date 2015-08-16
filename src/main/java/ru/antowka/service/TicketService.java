@@ -22,7 +22,7 @@ public class TicketService {
     @Autowired
     private MessageResponse messageResponse;
 
-    public List<Ticket> getAllTickets(int limit, String order, String orderField){
+    public List<Ticket> getAllTickets(int limit, int offset, String order, String orderField){
 
         Order orderObj = null;
 
@@ -46,7 +46,7 @@ public class TicketService {
                 break;
         }
 
-        return ticketDao.getAllTickets(limit, orderObj);
+        return ticketDao.getAllTickets(limit, offset, orderObj);
     }
 
     public Ticket getTicketById(int ticketId){
