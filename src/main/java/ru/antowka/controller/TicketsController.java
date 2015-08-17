@@ -54,7 +54,7 @@ public class TicketsController {
     /**
      * Response tickets by a few params
      *
-     * Link: http://localhost:8080/tickets/get-tickets/?limit=2&offset=5orderField=creationDate&order=desc
+     * Link: http://localhost:8080/tickets/get-tickets/?limit=2&offset=5&orderField=creationDate&order=desc
      *
      * @param request
      * @return
@@ -62,14 +62,10 @@ public class TicketsController {
     @RequestMapping(value = "get-tickets", method = RequestMethod.GET)
     public @ResponseBody List<Ticket> getTicketsAll(org.springframework.web.context.request.WebRequest request){
 
-        List<Ticket> tickets = null;
-
-        tickets = ticketService.getAllTickets(Integer.parseInt(request.getParameter("limit")),
+        return ticketService.getAllTickets(Integer.parseInt(request.getParameter("limit")),
                                               Integer.parseInt(request.getParameter("offset")),
                                                                request.getParameter("order"),
                                                                request.getParameter("orderField"));
-
-        return tickets;
     }
 
     /**
@@ -112,6 +108,7 @@ public class TicketsController {
     @RequestMapping(value = "create-ticket", method = RequestMethod.POST)
     public @ResponseBody
     MessageResponse createTicket(@RequestBody Ticket ticket){
+        System.out.println("twstwtwtwtwttwtwtwtwtwttwtw");
         return ticketService.createTicket(ticket);
     }
 

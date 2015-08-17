@@ -23,7 +23,7 @@
           <div class="img-wrap no-image">
             <img src="${resourceUrl}/img/random/home175.png"/>
           </div>
-          <h3 class="caption">{{ticket.description}}</h3>
+          <h3 class="caption">{{ticket.title}}</h3>
         </a>
       </article>
     </div>

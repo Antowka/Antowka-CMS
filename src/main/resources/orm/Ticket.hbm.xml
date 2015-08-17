@@ -11,9 +11,9 @@
 
         <property name="userOwnerId" column="user_owner_id" type="java.lang.Integer" />
         <property name="firstName" column="first_name" type="java.lang.String" />
-        <property name="lastName" column="last_name" type="java.lang.String" />
-        <property name="email" column="email" type="java.lang.String" />
-        <property name="phone" column="phone" type="java.lang.String" />
+        <property name="lastName" column="last_name" type="java.lang.String" lazy="true" />
+        <property name="email" column="email" type="java.lang.String" lazy="true" />
+        <property name="phone" column="phone" type="java.lang.String" lazy="true" />
         <property name="title" column="title" type="java.lang.String" />
         <property name="description" column="description" type="java.lang.String" />
         <property name="creationDate" column="creation_date" type="java.lang.String" insert="false" />

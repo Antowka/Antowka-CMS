@@ -3,6 +3,7 @@ var CommissionApp = angular.module('CommissionApp', ['ui.bootstrap']);
 // Requests
 
 CommissionApp.service('dataService', function($http) {
+
     this.getTickets = function(callbackFunc) {
         $http({
             method: 'GET',
@@ -14,10 +15,23 @@ CommissionApp.service('dataService', function($http) {
             alert("error");
         });
     }
+
     this.getCategories = function(callbackFunc) {
         $http({
             method: 'GET',
             url: 'tickets/get-categories'
+        }).success(function(data){
+            // With the data succesfully returned, call our callback
+            callbackFunc(data);
+        }).error(function(){
+            alert("error");
+        });
+    }
+
+    this.getTicket = function(ticketId, callbackFunc){
+        $http({
+            method: 'GET',
+            url: 'tickets/get-ticket/?ticketId='+ticketId
         }).success(function(data){
             // With the data succesfully returned, call our callback
             callbackFunc(data);
@@ -78,17 +92,20 @@ CommissionApp.controller('CloseAboutUsCtrl', function ($scope, $modalInstance) {
 });
 
 // Controllers for Request View Modal
-CommissionApp.controller('TicketViewCtrl', function ($scope, $modal) {
+CommissionApp.controller('TicketViewCtrl', function ($scope, $modal, dataService) {
     $scope.open = function (ticket) {
-        var modalInstance = $modal.open({
-            templateUrl: 'ticketViewModal.html',
-            controller: 'CloseTicketViewCtrl',
-            scope: $scope,
-            resolve: {
-                ticket: function () {
-                    return ticket;
+
+        dataService.getTicket(ticket.ticketId, function(ticket){
+            var modalInstance = $modal.open({
+                templateUrl: 'ticketViewModal.html',
+                controller: 'CloseTicketViewCtrl',
+                scope: $scope,
+                resolve: {
+                    ticket: function () {
+                        return ticket;
+                    }
                 }
-            }
+            });
         });
     };
 });

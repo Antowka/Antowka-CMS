@@ -2,6 +2,7 @@ package ru.antowka.dao.Impl;
 
 import org.hibernate.Session;
 import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -30,17 +31,14 @@ public class TicketDaoImpl implements TicketDao{
     @SuppressWarnings("unchecked")
     public List<Ticket> getAllTickets(int limit, int offset, Order order) {
 
-        List<Ticket> tickets = null;
         Session session = hibernateSessionFactory.getSession();
-        tickets = (List<Ticket>)session.createCriteria(Ticket.class, "ticket")
+        return (List<Ticket>)session.createCriteria(Ticket.class, "ticket")
                 .createAlias("ticket.status", "status")
                 .add(Restrictions.eq("status.publicStatus", true))
                 .addOrder(order)
                 .setFirstResult(offset)
                 .setMaxResults(limit)
                 .list();
-
-        return tickets;
     }
 
     @Override

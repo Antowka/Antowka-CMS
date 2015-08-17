@@ -1,5 +1,7 @@
 package ru.antowka.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.io.Serializable;
 import java.util.Set;
 
@@ -13,6 +15,7 @@ public class Ticket implements Serializable {
     private String firstName;
     private String lastName;
     private String email;
+    private String address;
     private String phone;
     private String title;
     private String description;
@@ -58,6 +61,14 @@ public class Ticket implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getPhone() {
