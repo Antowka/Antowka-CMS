@@ -3,9 +3,11 @@ package ru.antowka.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.antowka.dao.AttachmentDao;
+import ru.antowka.entity.Attachment;
+import ru.antowka.entity.MessageResponse;
 
 /**
- * Created by anton on 16.08.15.
+ * Created by Anton Nik on 16.08.15.
  */
 @Service
 public class AttachmentService {
@@ -13,6 +15,8 @@ public class AttachmentService {
     @Autowired
     private AttachmentDao attachmentDao;
 
+    @Autowired
+    private MessageResponse messageResponse;
 
     private String storagePath;
 
@@ -23,6 +27,38 @@ public class AttachmentService {
     public void setStoragePath(String storagePath) {
         this.storagePath = storagePath;
     }
+
+
+    /**
+     * ***************************** Functionality methods **********************************
+     */
+
+
+    /**
+     * Create attachment
+     *
+     * @param attachment
+     * @return
+     */
+    public MessageResponse createAttachment(Attachment attachment){
+
+        Integer attachmentId = attachmentDao.createAttachment(attachment);
+
+        if(!attachmentId.equals(0)){
+
+            messageResponse.setCode(1);
+            messageResponse.setTitle("Successful");
+            messageResponse.setMessage("You attachment added to system with #"+attachmentId);
+        } else{
+
+            messageResponse.setCode(0);
+            messageResponse.setTitle("Ticket has not been saved");
+            messageResponse.setMessage("You ticket was not add to system with #"+attachmentId);
+        }
+
+        return messageResponse;
+    }
+
 
     /**
      * Method generate path for file and create dirs

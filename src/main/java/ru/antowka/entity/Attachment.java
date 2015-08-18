@@ -1,17 +1,34 @@
 package ru.antowka.entity;
 
+
+import javax.persistence.Entity;
 import java.io.Serializable;
 
 /**
  * Created by Anton Nik on 13.08.15.
  */
+@Entity
 public class Attachment implements Serializable{
 
     private int attachmentId;
     private int userOwnerId;
     private String realFileName;
     private String filePathInStorage;
-    private Float fileSize;
+    private Long fileSize;
+    private String mimeType;
+
+    /**
+     * Create new Instance Attachment
+     * @return
+     */
+    public Attachment newAttachment(){
+        return new Attachment();
+    }
+
+
+    /**
+     * ****************************** Getters and Setters ***************************************
+     */
 
     public int getAttachmentId() {
         return attachmentId;
@@ -37,11 +54,11 @@ public class Attachment implements Serializable{
         this.filePathInStorage = filePathInStorage;
     }
 
-    public Float getFileSize() {
+    public Long getFileSize() {
         return fileSize;
     }
 
-    public void setFileSize(Float fileSize) {
+    public void setFileSize(Long fileSize) {
         this.fileSize = fileSize;
     }
 
@@ -51,5 +68,13 @@ public class Attachment implements Serializable{
 
     public void setUserOwnerId(int userOwnerId) {
         this.userOwnerId = userOwnerId;
+    }
+
+    public String getMimeType() {
+        return mimeType;
+    }
+
+    public void setMimeType(String mimeType) {
+        this.mimeType = mimeType;
     }
 }

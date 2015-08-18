@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import ru.antowka.entity.Attachment;
 import ru.antowka.form.FileUploadForm;
 import ru.antowka.service.AttachmentService;
 
@@ -24,6 +25,9 @@ public class AttachmentController {
 
     @Autowired
     private AttachmentService attachmentService;
+
+    @Autowired
+    private Attachment attachment;
 
 
     /**
@@ -45,14 +49,13 @@ public class AttachmentController {
             throws IllegalStateException, IOException, NoSuchAlgorithmException {
         List<MultipartFile> files = uploadForm.getFiles();
 
-        List<String> fileNames = new ArrayList<String>();
-
         if(null != files && files.size() > 0) {
+
+            List<Attachment> attachments = new ArrayList<Attachment>();
+
             for (MultipartFile multipartFile : files) {
 
                 String fileName = multipartFile.getOriginalFilename();
-                fileNames.add(fileName);
-
 
                 if (!"".equalsIgnoreCase(fileName)) {
 
@@ -69,16 +72,24 @@ public class AttachmentController {
 
                     //Save file
                     File file = new File(path);
-                    if(file.mkdirs()) {
-                        multipartFile.transferTo(file);
-                    }
 
-                    fileNames.add(path);
+                    if(file.mkdirs()) {
+                        //Save file to FS
+                        multipartFile.transferTo(file);
+
+                        //Create entity Attachment for new file;
+                        attachment.newAttachment();
+                        attachment.setFilePathInStorage(path);
+                        attachment.setFileSize(multipartFile.getSize());
+                        attachment.setMimeType(multipartFile.getContentType());
+
+                        attachments.add(attachment);
+                        //todo  - send to create attachments
+                    }
                 }
             }
         }
 
-        map.addAttribute("files", fileNames);
         return "file_upload_success";
     }
 }
