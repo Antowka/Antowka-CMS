@@ -37,6 +37,8 @@
         <script src="${resourceUrl}/js/angular.min.js"></script>
         <script src="${resourceUrl}/js/ui-bootstrap-tpls-0.13.3.js"></script>
         <script src="${resourceUrl}/js/app.js"></script>
+        <script src="${resourceUrl}/js/controllers.js"></script>
+        <script src="${resourceUrl}/js/directives.js"></script>
 
     </body>
 
