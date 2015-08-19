@@ -21,6 +21,7 @@
                             <value>orm/Users.hbm.xml</value>
                             <value>orm/UserRole.hbm.xml</value>
                             <value>orm/Setting.hbm.xml</value>
+                            <value>orm/Attachment.hbm.xml</value>
                             <value>orm/Article.hbm.xml</value>
                             <value>orm/ArticleCategory.hbm.xml</value>
                             <value>orm/Ticket.hbm.xml</value>

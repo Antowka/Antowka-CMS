@@ -6,6 +6,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import ru.antowka.entity.Attachment;
+import ru.antowka.entity.MessageResponse;
+import ru.antowka.entity.factory.AttachmentFactory;
 import ru.antowka.form.FileUploadForm;
 import ru.antowka.service.AttachmentService;
 
@@ -29,6 +31,9 @@ public class AttachmentController {
     @Autowired
     private Attachment attachment;
 
+    @Autowired
+    private AttachmentFactory attachmentFactory;
+
 
     /**
      *  **************************** Functionality methods **********************************
@@ -45,13 +50,13 @@ public class AttachmentController {
 
     @RequestMapping(value="/upload", method=RequestMethod.POST)
     @ResponseBody
-    public String save(@ModelAttribute("uploadFiles") FileUploadForm uploadForm, Model map)
+    public MessageResponse save(@ModelAttribute("uploadFiles") FileUploadForm uploadForm, Model map)
             throws IllegalStateException, IOException, NoSuchAlgorithmException {
         List<MultipartFile> files = uploadForm.getFiles();
 
-        if(null != files && files.size() > 0) {
+        List<Attachment> attachments = new ArrayList<Attachment>();
 
-            List<Attachment> attachments = new ArrayList<Attachment>();
+        if(null != files && files.size() > 0) {
 
             for (MultipartFile multipartFile : files) {
 
@@ -78,18 +83,18 @@ public class AttachmentController {
                         multipartFile.transferTo(file);
 
                         //Create entity Attachment for new file;
-                        attachment.newAttachment();
+                        attachmentFactory.newAttachment();
+                        attachment.setRealFileName(fileName);
                         attachment.setFilePathInStorage(path);
                         attachment.setFileSize(multipartFile.getSize());
                         attachment.setMimeType(multipartFile.getContentType());
 
                         attachments.add(attachment);
-                        //todo  - send to create attachments
                     }
                 }
             }
         }
 
-        return "file_upload_success";
+        return attachmentService.createAttachments(attachments);
     }
 }

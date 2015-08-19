@@ -1,6 +1,7 @@
 package ru.antowka.dao.Impl;
 
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -10,6 +11,7 @@ import ru.antowka.entity.Attachment;
 import ru.antowka.entity.User;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -42,9 +44,15 @@ public class AttachmentDaoImpl implements AttachmentDao {
 
     @Override
     @Transactional
-    public int createAttachment(Attachment attachment) {
+    public  List<Integer> createAttachments(List<Attachment> attachments) {
 
         Session session = hibernateSessionFactory.getSession();
-        return (int)session.save(attachment);
+        List<Integer> attachmentIds = new ArrayList<Integer>();
+
+        attachments.stream().forEach(attachment -> {
+            attachmentIds.add((int) session.save(attachment));
+        });
+
+        return attachmentIds;
     }
 }

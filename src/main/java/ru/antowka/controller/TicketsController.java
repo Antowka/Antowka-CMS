@@ -108,7 +108,6 @@ public class TicketsController {
     @RequestMapping(value = "create-ticket", method = RequestMethod.POST)
     public @ResponseBody
     MessageResponse createTicket(@RequestBody Ticket ticket){
-        System.out.println("twstwtwtwtwttwtwtwtwtwttwtw");
         return ticketService.createTicket(ticket);
     }
 

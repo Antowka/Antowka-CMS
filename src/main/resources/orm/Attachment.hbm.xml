@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="ru.antowka.entity.Attachment" table="attachments" lazy="true">
+
+        <id name="attachmentId" column="attachment_id" type="java.lang.Integer">
+            <generator class="identity" />
+        </id>
+
+        <property name="userOwnerId" column="user_owner_id" type="java.lang.Integer" />
+        <property name="realFileName" column="real_file_name" type="java.lang.String" lazy="true" />
+        <property name="filePathInStorage" column="file_path_in_storage" />
+        <property name="previewPath" column="preview_path" type="java.lang.String" />
+        <property name="fileSize" column="file_size" type="java.lang.Long" lazy="true" />
+        <property name="mimeType" column="mime_type" type="java.lang.String" lazy="true" />
+
+    </class>
+</hibernate-mapping>

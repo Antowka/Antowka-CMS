@@ -14,16 +14,9 @@ public class Attachment implements Serializable{
     private int userOwnerId;
     private String realFileName;
     private String filePathInStorage;
+    private String previewPath;
     private Long fileSize;
     private String mimeType;
-
-    /**
-     * Create new Instance Attachment
-     * @return
-     */
-    public Attachment newAttachment(){
-        return new Attachment();
-    }
 
 
     /**
@@ -52,6 +45,14 @@ public class Attachment implements Serializable{
 
     public void setFilePathInStorage(String filePathInStorage) {
         this.filePathInStorage = filePathInStorage;
+    }
+
+    public String getPreviewPath() {
+        return previewPath;
+    }
+
+    public void setPreviewPath(String previewPath) {
+        this.previewPath = previewPath;
     }
 
     public Long getFileSize() {

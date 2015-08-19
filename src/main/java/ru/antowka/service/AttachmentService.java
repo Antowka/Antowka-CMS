@@ -6,6 +6,8 @@ import ru.antowka.dao.AttachmentDao;
 import ru.antowka.entity.Attachment;
 import ru.antowka.entity.MessageResponse;
 
+import java.util.List;
+
 /**
  * Created by Anton Nik on 16.08.15.
  */
@@ -37,23 +39,31 @@ public class AttachmentService {
     /**
      * Create attachment
      *
-     * @param attachment
+     * @param attachments
      * @return
      */
-    public MessageResponse createAttachment(Attachment attachment){
+    public MessageResponse createAttachments(List<Attachment> attachments){
 
-        Integer attachmentId = attachmentDao.createAttachment(attachment);
+        if(attachments.size() > 0) {
 
-        if(!attachmentId.equals(0)){
+            List<Integer> attachmentIds = attachmentDao.createAttachments(attachments);
 
-            messageResponse.setCode(1);
-            messageResponse.setTitle("Successful");
-            messageResponse.setMessage("You attachment added to system with #"+attachmentId);
-        } else{
+            if(attachmentIds.size() > 0){
+
+                messageResponse.setCode(1);
+                messageResponse.setTitle("Successful");
+                messageResponse.setMessage("You attachments added to system");
+            } else{
+
+                messageResponse.setCode(0);
+                messageResponse.setTitle("Attachment has not been saved");
+                messageResponse.setMessage("You attachments was not add to system");
+            }
+        }else{
 
             messageResponse.setCode(0);
-            messageResponse.setTitle("Ticket has not been saved");
-            messageResponse.setMessage("You ticket was not add to system with #"+attachmentId);
+            messageResponse.setTitle("Attachment has not been saved");
+            messageResponse.setMessage("Not found upload files");
         }
 
         return messageResponse;
