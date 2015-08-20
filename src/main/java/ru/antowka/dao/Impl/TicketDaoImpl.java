@@ -1,9 +1,13 @@
 package ru.antowka.dao.Impl;
 
+import org.hibernate.FetchMode;
 import org.hibernate.Session;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Property;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.sql.JoinType;
+import org.hibernate.transform.Transformers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import ru.antowka.dao.HibernateSessionFactory;
@@ -33,6 +37,10 @@ public class TicketDaoImpl implements TicketDao{
 
         Session session = hibernateSessionFactory.getSession();
         return (List<Ticket>)session.createCriteria(Ticket.class, "ticket")
+                .setProjection(Projections.projectionList()
+                        .add(Projections.property("ticket.ticketId"),"ticketId")
+                        .add(Projections.property("ticket.title"), "title")
+                ).setResultTransformer(Transformers.aliasToBean(Ticket.class))
                 .createAlias("ticket.status", "status")
                 .add(Restrictions.eq("status.publicStatus", true))
                 .addOrder(order)
@@ -45,12 +53,24 @@ public class TicketDaoImpl implements TicketDao{
     @Transactional
     public Ticket findTicketById(int ticketId) {
 
+        //todo - added categories collection to property
         Ticket ticket = null;
         Session session = hibernateSessionFactory.getSession();
         ticket = (Ticket)session.createCriteria(Ticket.class, "ticket")
                                 .createAlias("ticket.status", "status")
-                                .add(Restrictions.eq("status.publicStatus", true))
+                                //.createAlias("ticket.categories", "categories")
                                 .add(Restrictions.eq("ticket.ticketId", ticketId))
+                                .add(Restrictions.eq("status.publicStatus", true))
+                                .setProjection(Projections.projectionList()
+                                    .add(Projections.property("ticket.ticketId"), "ticketId")
+                                    .add(Projections.property("ticket.title"), "title")
+                                    .add(Projections.property("ticket.description"), "description")
+                                    .add(Projections.property("ticket.address"), "address")
+                                    .add(Projections.property("ticket.firstName"), "firstName")
+                                    .add(Projections.property("ticket.creationDate"), "creationDate")
+                                    .add(Projections.property("status"), "status")
+                                   //.add(Projections.property("categories"), "categories")
+                                ).setResultTransformer(Transformers.aliasToBean(Ticket.class))
                                 .uniqueResult();
 
         return ticket;

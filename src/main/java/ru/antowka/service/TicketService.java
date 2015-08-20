@@ -51,15 +51,7 @@ public class TicketService {
 
     public Ticket getTicketById(int ticketId){
 
-        Ticket ticket = ticketDao.findTicketById(ticketId);
-
-        //hide private user data from public access
-        ticket.setLastName(null);
-        ticket.setPhone(null);
-        ticket.setEmail(null);
-        ticket.setUserOwnerId(0);
-
-        return ticket;
+        return ticketDao.findTicketById(ticketId);
     }
 
     public List<Ticket> getTicketsByUser(User user){
