@@ -3,10 +3,18 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+       <!-- Attachment -->
        <bean id="attachment" class="ru.antowka.entity.Attachment" scope="prototype" lazy-init="true" />
 
        <bean id="attachmentFactory" class="ru.antowka.entity.factory.AttachmentFactory">
              <lookup-method name="newAttachment" bean="attachment"/>
+       </bean>
+
+       <!-- MessageResponse -->
+       <bean id="messageResponse" class="ru.antowka.entity.MessageResponse" scope="prototype" lazy-init="true" />
+
+       <bean id="MessageResponseFactory" class="ru.antowka.entity.factory.MessageResponseFactory">
+              <lookup-method name="newMessage" bean="messageResponse" />
        </bean>
 
 </beans>

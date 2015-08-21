@@ -28,11 +28,7 @@ public class AttachmentController {
     @Autowired
     private AttachmentService attachmentService;
 
-    @Autowired
-    private Attachment attachment;
 
-    @Autowired
-    private AttachmentFactory attachmentFactory;
 
 
     /**
@@ -50,51 +46,8 @@ public class AttachmentController {
 
     @RequestMapping(value="/upload", method=RequestMethod.POST)
     @ResponseBody
-    public MessageResponse save(@ModelAttribute("uploadFiles") FileUploadForm uploadForm, Model map)
-            throws IllegalStateException, IOException, NoSuchAlgorithmException {
-        List<MultipartFile> files = uploadForm.getFiles();
+    public MessageResponse save(@ModelAttribute("uploadFiles") FileUploadForm uploadForm, Model map) throws IOException, NoSuchAlgorithmException {
 
-        List<Attachment> attachments = new ArrayList<Attachment>();
-
-        if(null != files && files.size() > 0) {
-
-            for (MultipartFile multipartFile : files) {
-
-                String fileName = multipartFile.getOriginalFilename();
-
-                if (!"".equalsIgnoreCase(fileName)) {
-
-                    //Generate MD5 for new file
-                    byte[] hashFile = MessageDigest.getInstance("MD5").digest(multipartFile.getBytes());
-                    StringBuilder md5File = new StringBuilder();
-                    for(byte b: hashFile) {
-                        md5File.append(Integer.toString((b & 0xff) + 0x100, 16).substring(1));
-                    }
-
-                    //Create path for new file
-                    String extension=multipartFile.getOriginalFilename().substring(multipartFile.getOriginalFilename().lastIndexOf("."));
-                    String path = attachmentService.generatePathForFile(md5File.toString(), extension);
-
-                    //Save file
-                    File file = new File(path);
-
-                    if(file.mkdirs()) {
-                        //Save file to FS
-                        multipartFile.transferTo(file);
-
-                        //Create entity Attachment for new file;
-                        attachmentFactory.newAttachment();
-                        attachment.setRealFileName(fileName);
-                        attachment.setFilePathInStorage(path);
-                        attachment.setFileSize(multipartFile.getSize());
-                        attachment.setMimeType(multipartFile.getContentType());
-
-                        attachments.add(attachment);
-                    }
-                }
-            }
-        }
-
-        return attachmentService.createAttachments(attachments);
+        return attachmentService.createAttachments(uploadForm.getFiles());
     }
 }
