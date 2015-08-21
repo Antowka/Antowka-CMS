@@ -50,18 +50,7 @@ public class TicketService {
     }
 
     public Ticket getTicketById(int ticketId){
-        Ticket ticket = ticketDao.findTicketById(ticketId);
-
-        //todo - make remove this fields in DAO in query
-        // Hide private fields from public response
-        // ***************** no good solution ******************
-        ticket.setEmail(null);
-        ticket.setPhone(null);
-        ticket.setLastName(null);
-        ticket.setUserOwnerId(0);
-        // ***************** no good solution ******************
-
-        return ticket;
+        return  ticketDao.findTicketById(ticketId);
     }
 
     public List<Ticket> getTicketsByUser(User user){

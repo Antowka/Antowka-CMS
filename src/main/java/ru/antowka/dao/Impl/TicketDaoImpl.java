@@ -48,16 +48,33 @@ public class TicketDaoImpl implements TicketDao{
 
     @Override
     @Transactional
+    @SuppressWarnings("unchecked")
     public Ticket findTicketById(int ticketId) {
 
-        //todo - added categories collection to property
-        Ticket ticket = null;
         Session session = hibernateSessionFactory.getSession();
-        ticket = (Ticket)session.createCriteria(Ticket.class, "ticket")
-                                .createAlias("ticket.status", "status")
-                                .add(Restrictions.eq("ticket.ticketId", ticketId))
-                                .add(Restrictions.eq("status.publicStatus", true))
-                                .uniqueResult();
+        Ticket ticket = (Ticket)session.createCriteria(Ticket.class, "ticket")
+                                        .createAlias("ticket.status", "status")
+                                        .add(Restrictions.eq("ticket.ticketId", ticketId))
+                                        .add(Restrictions.eq("status.publicStatus", true))
+                                        .setProjection(Projections.projectionList()
+                                                        .add(Projections.property("ticket.ticketId"), "ticketId")
+                                                        .add(Projections.property("ticket.title"), "title")
+                                                        .add(Projections.property("ticket.description"), "description")
+                                                        .add(Projections.property("ticket.address"), "address")
+                                                        .add(Projections.property("ticket.firstName"), "firstName")
+                                                        .add(Projections.property("ticket.creationDate"), "creationDate")
+                                                        .add(Projections.property("status"), "status")
+                                        )
+                                        .setResultTransformer(Transformers.aliasToBean(Ticket.class))
+                                        .uniqueResult();
+
+        //get categories for tickets
+        List<TicketCategory> ticketCategories = (List<TicketCategory>)session.createCriteria(TicketCategory.class, "tc")
+                                                                             .createAlias("tc.tickets", "tickets")
+                                                                             .add(Restrictions.eq("tickets.ticketId", ticketId))
+                                                                             .list();
+
+        ticket.setCategories(new HashSet<TicketCategory>(ticketCategories));
 
         return ticket;
     }
