@@ -27,6 +27,7 @@
         </a>
       </article>
     </div>
+
+  <button class="btn btn-primary" ng-show="showMoreBtn" ng-click="showMore()">Show more</button>
   </div>
 </section>
-

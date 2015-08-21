@@ -25,7 +25,7 @@
               <img src="${resourceUrl}/img/random/home175.png"/>
             </div></div>
           <div class="col-xs-7">
-            <h4>{{ticket.firstName}} <small class="date">{{formatDate(ticket.creationDate) |  date:"MM.dd.yyyy" }}</small> <span class="label label-status label-default pull-right">{{ticket.status.status}}</span></h4>
+            <h4>{{ticket.firstName}} <small class="date">{{formatDate(ticket.creationDate) |  date:"dd.MM.yyyy" }}</small> <span class="label label-status label-default pull-right">{{ticket.status.status}}</span></h4>
             <p class="small"><strong>Address:</strong> {{ticket.address}}</p>
             <div class="description">{{ticket.description}}</div>
           </div>
