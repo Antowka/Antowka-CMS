@@ -44,15 +44,14 @@ public class AttachmentDaoImpl implements AttachmentDao {
 
     @Override
     @Transactional
-    public  List<Integer> createAttachments(List<Attachment> attachments) {
+    public  List<Attachment> createAttachments(List<Attachment> attachments) {
 
         Session session = hibernateSessionFactory.getSession();
-        List<Integer> attachmentIds = new ArrayList<Integer>();
 
         attachments.stream().forEach(attachment -> {
-            attachmentIds.add((int) session.save(attachment));
+            attachment.setAttachmentId((int) session.save(attachment));
         });
 
-        return attachmentIds;
+        return attachments;
     }
 }

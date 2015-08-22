@@ -13,7 +13,7 @@
        <!-- MessageResponse -->
        <bean id="messageResponse" class="ru.antowka.entity.MessageResponse" scope="prototype" lazy-init="true" />
 
-       <bean id="MessageResponseFactory" class="ru.antowka.entity.factory.MessageResponseFactory">
+       <bean id="messageResponseFactory" class="ru.antowka.entity.factory.MessageResponseFactory">
               <lookup-method name="newMessage" bean="messageResponse" />
        </bean>
 

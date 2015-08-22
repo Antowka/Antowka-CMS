@@ -78,16 +78,15 @@ public class AttachmentService {
         //Response save result
         if(attachments.size() > 0) {
 
-            List<Integer> attachmentIds = attachmentDao.createAttachments(attachments);
+            attachments = attachmentDao.createAttachments(attachments);
 
-            if(attachmentIds.size() > 0){
+            if(attachments.size() > 0){
 
                 messageResponse.setCode(1);
                 messageResponse.setTitle("Successful");
                 messageResponse.setType("Attachment");
                 messageResponse.setMessage("You attachments added to system");
-                messageResponse.setParams(attachmentIds);
-
+                messageResponse.setParams(attachments);
             } else{
 
                 messageResponse.setCode(0);
