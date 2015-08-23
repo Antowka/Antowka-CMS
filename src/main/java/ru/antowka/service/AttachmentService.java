@@ -36,6 +36,8 @@ public class AttachmentService {
 
     private String storagePath;
 
+    private String pathDefaultPreview;
+
     /**
      *  **************************** Getters and Setters ************************************
      */
@@ -44,6 +46,9 @@ public class AttachmentService {
         this.storagePath = storagePath;
     }
 
+    public void setPathDefaultPreview(String pathDefaultPreview) {
+        this.pathDefaultPreview = pathDefaultPreview;
+    }
 
     /**
      * ***************************** Functionality methods **********************************
@@ -137,8 +142,8 @@ public class AttachmentService {
                     String path = generatePathForFile(md5File.toString());
 
                     //Save file
-                    File pathForSave = new File(path);
-                    File file = new File(path+md5File.toString()+extension);
+                    File pathForSave = new File(storagePath + path);
+                    File file = new File(storagePath + path + md5File.toString() + extension);
 
                     if(pathForSave.mkdirs()) {
                         //Save file to FS
@@ -147,7 +152,7 @@ public class AttachmentService {
                         //Create entity Attachment for new file;
                         attachmentFactory.newAttachment();
                         attachment.setRealFileName(fileName);
-                        attachment.setFilePathInStorage(path);
+                        attachment.setFilePathInStorage(path + md5File.toString() + extension);
                         attachment.setFileSize(multipartFile.getSize());
                         attachment.setMimeType(multipartFile.getContentType());
 
@@ -179,15 +184,20 @@ public class AttachmentService {
      */
     private String createPreview(String path, String fileName, String extension, String mimeType) throws IOException {
 
-        String previewPath = path + "preview/" + fileName + extension;
-        File filePreview = new File(path + "preview/");
+        String previewPath =  pathDefaultPreview;
 
-        if(filePreview.mkdirs()) {
-            Thumbnails.of(new File(path + fileName + extension))
-                    .size(150, 150)
-                    .outputQuality(0.8)
-                    .toFile(previewPath);
+        if (mimeType.startsWith("image/")) {
 
+            previewPath = path + "preview/" + fileName + extension;
+            File filePreview = new File(storagePath + path + "preview/");
+
+            if (filePreview.mkdirs()) {
+
+                Thumbnails.of(new File(storagePath + path + fileName + extension))
+                        .size(150, 150)
+                        .outputQuality(0.8)
+                        .toFile(storagePath + previewPath);
+            }
         }
 
         return previewPath;
@@ -204,7 +214,7 @@ public class AttachmentService {
         String folder1 = hashFile.substring(0, 2);
         String folder2 = hashFile.substring(2, 4);
 
-        return  storagePath + folder1 + "/" + folder2 + "/";
+        return  folder1 + "/" + folder2 + "/";
     }
 
 }
