@@ -1,5 +1,6 @@
 package ru.antowka.service;
 
+import net.coobird.thumbnailator.Thumbnails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -133,12 +134,13 @@ public class AttachmentService {
 
                     //Create path for new file
                     String extension=multipartFile.getOriginalFilename().substring(multipartFile.getOriginalFilename().lastIndexOf("."));
-                    String path = generatePathForFile(md5File.toString(), extension);
+                    String path = generatePathForFile(md5File.toString());
 
                     //Save file
-                    File file = new File(path);
+                    File pathForSave = new File(path);
+                    File file = new File(path+md5File.toString()+extension);
 
-                    if(file.mkdirs()) {
+                    if(pathForSave.mkdirs()) {
                         //Save file to FS
                         multipartFile.transferTo(file);
 
@@ -148,6 +150,14 @@ public class AttachmentService {
                         attachment.setFilePathInStorage(path);
                         attachment.setFileSize(multipartFile.getSize());
                         attachment.setMimeType(multipartFile.getContentType());
+
+                        //create preview for image
+                        attachment.setPreviewPath(createPreview(path,
+                                                                md5File.toString(),
+                                                                extension,
+                                                                multipartFile.getContentType()
+                                                               )
+                        );
 
                         attachments.add(attachment);
                     }
@@ -159,17 +169,42 @@ public class AttachmentService {
     }
 
     /**
+     * Create preview by path origin file
+     *
+     * @param path
+     * @param fileName
+     * @param extension
+     * @param mimeType
+     * @return
+     */
+    private String createPreview(String path, String fileName, String extension, String mimeType) throws IOException {
+
+        String previewPath = path + "preview/" + fileName + extension;
+        File filePreview = new File(path + "preview/");
+
+        if(filePreview.mkdirs()) {
+            Thumbnails.of(new File(path + fileName + extension))
+                    .size(150, 150)
+                    .outputQuality(0.8)
+                    .toFile(previewPath);
+
+        }
+
+        return previewPath;
+    }
+
+    /**
      * Method generate path for file and create dirs
      *
      * @param hashFile
      * @return
      */
-    private String generatePathForFile(String hashFile, String extension){
+    private String generatePathForFile(String hashFile){
 
         String folder1 = hashFile.substring(0, 2);
         String folder2 = hashFile.substring(2, 4);
 
-        return  storagePath + folder1 + "/" + folder2 + "/" + hashFile  + extension;
+        return  storagePath + folder1 + "/" + folder2 + "/";
     }
 
 }
