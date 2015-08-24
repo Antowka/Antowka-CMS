@@ -69,12 +69,12 @@ public class AttachmentService {
         try {
             attachments = saveFiles(files);
 
-        } catch (IOException | NoSuchAlgorithmException e) {
+        } catch (IOException | NoSuchAlgorithmException | IllegalStateException e) {
 
             messageResponse.setCode(0);
             messageResponse.setTitle("Attachment has not been saved");
             messageResponse.setType("Attachment");
-            messageResponse.setMessage("You attachments was not add to system");
+            messageResponse.setMessage(e.getMessage());
 
             return messageResponse;
 
@@ -133,38 +133,49 @@ public class AttachmentService {
                     byte[] hashFile = MessageDigest.getInstance("MD5").digest(multipartFile.getBytes());
 
                     StringBuilder md5File = new StringBuilder();
-                    for(byte b: hashFile) {
+                    for (byte b : hashFile) {
                         md5File.append(Integer.toString((b & 0xff) + 0x100, 16).substring(1));
                     }
 
                     //Create path for new file
-                    String extension=multipartFile.getOriginalFilename().substring(multipartFile.getOriginalFilename().lastIndexOf("."));
+                    String extension = multipartFile.getOriginalFilename().substring(multipartFile.getOriginalFilename().lastIndexOf("."));
                     String path = generatePathForFile(md5File.toString());
 
                     //Save file
                     File pathForSave = new File(storagePath + path);
                     File file = new File(storagePath + path + md5File.toString() + extension);
 
-                    if(pathForSave.mkdirs()) {
-                        //Save file to FS
-                        multipartFile.transferTo(file);
+                    //check exist file
+                    if (!file.exists()) {
 
-                        //Create entity Attachment for new file;
-                        attachmentFactory.newAttachment();
-                        attachment.setRealFileName(fileName);
-                        attachment.setFilePathInStorage(path + md5File.toString() + extension);
-                        attachment.setFileSize(multipartFile.getSize());
-                        attachment.setMimeType(multipartFile.getContentType());
+                        //create folders
+                        if (pathForSave.mkdirs()) {
 
-                        //create preview for image
-                        attachment.setPreviewPath(createPreview(path,
-                                                                md5File.toString(),
-                                                                extension,
-                                                                multipartFile.getContentType()
-                                                               )
-                        );
+                            //Save file to FS
+                            multipartFile.transferTo(file);
 
-                        attachments.add(attachment);
+                            //Create entity Attachment for new file;
+                            attachmentFactory.newAttachment();
+                            attachment.setRealFileName(fileName);
+                            attachment.setFilePathInStorage(path + md5File.toString() + extension);
+                            attachment.setFileSize(multipartFile.getSize());
+                            attachment.setMimeType(multipartFile.getContentType());
+
+                            //create preview for image
+                            attachment.setPreviewPath(createPreview(path,
+                                            md5File.toString(),
+                                            extension,
+                                            multipartFile.getContentType()
+                                    )
+                            );
+
+                            attachments.add(attachment);
+                        }
+                    }else{
+
+                        //if existed file
+                        String n = "ds";
+                        throw new NoSuchAlgorithmException("File already exist!");
                     }
                 }
             }

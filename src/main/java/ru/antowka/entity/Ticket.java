@@ -20,6 +20,7 @@ public class Ticket implements Serializable {
     private String creationDate;
     private TicketStatus status;
     private Set<TicketCategory> categories;
+    private Set<Attachment> attachments;
 
     public int getTicketId() {
         return ticketId;
@@ -115,5 +116,13 @@ public class Ticket implements Serializable {
 
     public void setStatus(TicketStatus status) {
         this.status = status;
+    }
+
+    public Set<Attachment> getAttachments() {
+        return attachments;
+    }
+
+    public void setAttachments(Set<Attachment> attachments) {
+        this.attachments = attachments;
     }
 }
