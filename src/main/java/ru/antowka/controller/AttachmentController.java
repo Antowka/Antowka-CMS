@@ -46,7 +46,7 @@ public class AttachmentController {
 
     @RequestMapping(value="/upload", method=RequestMethod.POST)
     @ResponseBody
-    public MessageResponse save(@ModelAttribute("uploadFiles") FileUploadForm uploadForm, Model map) throws IOException, NoSuchAlgorithmException {
+    public MessageResponse save(FileUploadForm uploadForm, Model map) throws IOException, NoSuchAlgorithmException {
 
         return attachmentService.createAttachments(uploadForm.getFiles());
     }

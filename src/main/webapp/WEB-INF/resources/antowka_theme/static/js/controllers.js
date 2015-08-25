@@ -102,7 +102,9 @@ CommissionApp.controller('CloseTicketViewCtrl', function ($scope, $modalInstance
 // Save form to the data
 
 CommissionApp.controller('sendFormCtrl', ['$scope','dataService', '$http', 'FileUploader', function($scope, dataService, $http, FileUploader){
+
     $scope.data = null;
+    $scope.attachments = [];
 
     dataService.getCategories(function(dataResponse) {
         $scope.categories = dataResponse;
@@ -122,7 +124,8 @@ CommissionApp.controller('sendFormCtrl', ['$scope','dataService', '$http', 'File
                 "ticketCategoryId": $scope.category.ticketCategoryId,
                 "parentCategoryId": $scope.category.parentCategoryId
             }],
-            "description":  $scope.description
+            "description":  $scope.description,
+            "attachments": $scope.attachments
         };
 
         console.log(formData);
@@ -143,7 +146,10 @@ CommissionApp.controller('sendFormCtrl', ['$scope','dataService', '$http', 'File
 
     //********************** Upload File ******************************
             var uploader = $scope.uploader = new FileUploader({
-                url: 'upload.php'
+                url: '/upload',
+                alias: 'files',
+                autoUpload: true,
+                isHTML5:true
             });
 
             // FILTERS
@@ -158,37 +164,40 @@ CommissionApp.controller('sendFormCtrl', ['$scope','dataService', '$http', 'File
             // CALLBACKS
 
             uploader.onWhenAddingFileFailed = function(item /*{File|FileLikeObject}*/, filter, options) {
-                console.info('onWhenAddingFileFailed', item, filter, options);
+                //console.info('onWhenAddingFileFailed', item, filter, options);
             };
             uploader.onAfterAddingFile = function(fileItem) {
-                console.info('onAfterAddingFile', fileItem);
+                //console.info('onAfterAddingFile', fileItem);
             };
             uploader.onAfterAddingAll = function(addedFileItems) {
-                console.info('onAfterAddingAll', addedFileItems);
+                //console.info('onAfterAddingAll', addedFileItems);
             };
             uploader.onBeforeUploadItem = function(item) {
-                console.info('onBeforeUploadItem', item);
+                //console.info('onBeforeUploadItem', item);
             };
             uploader.onProgressItem = function(fileItem, progress) {
-                console.info('onProgressItem', fileItem, progress);
+                //console.info('onProgressItem', fileItem, progress);
             };
             uploader.onProgressAll = function(progress) {
-                console.info('onProgressAll', progress);
+                //console.info('onProgressAll', progress);
             };
             uploader.onSuccessItem = function(fileItem, response, status, headers) {
-                console.info('onSuccessItem', fileItem, response, status, headers);
+                //console.info('onSuccessItem', fileItem, response, status, headers);
+                if(response.code == 1) {
+                    $scope.attachments.push(response.params[0]);
+                }
             };
             uploader.onErrorItem = function(fileItem, response, status, headers) {
-                console.info('onErrorItem', fileItem, response, status, headers);
+                //console.info('onErrorItem', fileItem, response, status, headers);
             };
             uploader.onCancelItem = function(fileItem, response, status, headers) {
-                console.info('onCancelItem', fileItem, response, status, headers);
+                //console.info('onCancelItem', fileItem, response, status, headers);
             };
             uploader.onCompleteItem = function(fileItem, response, status, headers) {
-                console.info('onCompleteItem', fileItem, response, status, headers);
+                //console.info('onCompleteItem', fileItem, response, status, headers);
             };
             uploader.onCompleteAll = function() {
-                console.info('onCompleteAll');
+                console.log($scope.attachments);
             };
     //******************************* End Upload Files ****************************************
 }]);

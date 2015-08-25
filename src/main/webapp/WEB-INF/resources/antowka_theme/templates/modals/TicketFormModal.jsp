@@ -123,31 +123,12 @@
                   </tr>
                   </tbody>
                 </table>
-
-                <div>
-                  <div>
-                    Queue progress:
-                    <div class="progress" style="">
-                      <div class="progress-bar" role="progressbar" ng-style="{ 'width': uploader.progress + '%' }"></div>
-                    </div>
-                  </div>
-                  <button type="button" class="btn btn-success btn-s" ng-click="uploader.uploadAll()" ng-disabled="!uploader.getNotUploadedItems().length">
-                    <span class="glyphicon glyphicon-upload"></span> Upload all
-                  </button>
-                  <button type="button" class="btn btn-warning btn-s" ng-click="uploader.cancelAll()" ng-disabled="!uploader.isUploading">
-                    <span class="glyphicon glyphicon-ban-circle"></span> Cancel all
-                  </button>
-                  <button type="button" class="btn btn-danger btn-s" ng-click="uploader.clearQueue()" ng-disabled="!uploader.queue.length">
-                    <span class="glyphicon glyphicon-trash"></span> Remove all
-                  </button>
-                </div>
-
             </div>
 
             <!-- UPLOAD BUTTON -->
             <div>
                 <label for="exampleInputFile">Upload</label>
-                <input type="file" name="file" id="exampleInputFile"  nv-file-select="" uploader="uploader" multiple>
+                <input type="file" id="exampleInputFile" nv-file-select="" uploader="uploader" multiple>
                 <span ng-show="requestTicket.file.$error.checkfile" class="text-danger"><spring:message code="lang.fileError" /></span>
                 <p class="help-block"><spring:message code="lang.fileHelp" /></p>
             </div>
