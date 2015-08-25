@@ -205,7 +205,7 @@ public class AttachmentService {
             if (filePreview.mkdirs()) {
 
                 Thumbnails.of(new File(storagePath + path + fileName + extension))
-                        .size(150, 150)
+                        .size(200, 200)
                         .outputQuality(0.8)
                         .toFile(storagePath + previewPath);
             }

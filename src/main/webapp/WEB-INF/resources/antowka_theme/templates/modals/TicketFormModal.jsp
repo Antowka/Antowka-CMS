@@ -52,7 +52,7 @@
 
             <!-- ADDRESS -->
             <div class="col-xs-8 form-control-wrap">
-              <input type="text" name="address" class="form-control" placeholder="<spring:message code="lang.Address" />">
+              <input type="text" name="address" ng-model="address" class="form-control" placeholder="<spring:message code="lang.Address" />">
             </div>
           </div>
           <div class="form-group row">

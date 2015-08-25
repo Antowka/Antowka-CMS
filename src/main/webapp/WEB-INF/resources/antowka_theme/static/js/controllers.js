@@ -74,9 +74,13 @@ CommissionApp.controller('CloseAboutUsCtrl', function ($scope, $modalInstance) {
 
 // Controllers for Request View Modal
 CommissionApp.controller('TicketViewCtrl', function ($scope, $modal, dataService) {
+
+    $scope.mainAttachment = null;
+
     $scope.open = function (ticket) {
 
         dataService.getTicket(ticket.ticketId, function(ticket){
+
             var modalInstance = $modal.open({
                 templateUrl: 'ticketViewModal.html',
                 controller: 'CloseTicketViewCtrl',
@@ -84,6 +88,14 @@ CommissionApp.controller('TicketViewCtrl', function ($scope, $modal, dataService
                 resolve: {
                     ticket: function () {
                         $scope.ticket = ticket;
+
+                        ticket.attachments.forEach(function(attachment){
+                            if(attachment.mimeType.indexOf("image/") > -1){
+                                $scope.mainAttachment = attachment;
+                                return false;
+                            }
+                        });
+
                         console.log(ticket);
                         return ticket;
                     }

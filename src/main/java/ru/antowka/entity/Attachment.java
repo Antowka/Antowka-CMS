@@ -1,8 +1,12 @@
 package ru.antowka.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.Entity;
 import java.io.Serializable;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Anton Nik on 13.08.15.
@@ -17,6 +21,9 @@ public class Attachment implements Serializable{
     private String previewPath;
     private Long fileSize;
     private String mimeType;
+
+    @JsonIgnore
+    private Set<Ticket> tickets;
 
 
     /**
@@ -77,5 +84,13 @@ public class Attachment implements Serializable{
 
     public void setMimeType(String mimeType) {
         this.mimeType = mimeType;
+    }
+
+    public Set<Ticket> getTickets() {
+        return tickets;
+    }
+
+    public void setTickets(Set<Ticket> tickets) {
+        this.tickets = tickets;
     }
 }

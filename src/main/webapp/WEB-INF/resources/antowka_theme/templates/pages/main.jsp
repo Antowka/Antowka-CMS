@@ -20,9 +20,12 @@
     <div class="row">
       <article class="col-sm-6 col-md-3 ticket-preview" ng-repeat="ticket in tickets" ng-controller="TicketViewCtrl">
         <a class="link-to-ticket" id="ticket-{{ticket.ticketId}}" ng-click="open(ticket);">
-          <div class="img-wrap no-image">
-            <img src="${resourceUrl}/img/random/home175.png"/>
+
+          <div  class="img-wrap no-image">
+            <img ng-if="ticket.attachments.length > 0" src="${resourceUrl}/uploads/{{ticket.attachments[0].previewPath}}"/>
+            <img ng-if="ticket.attachments.length == 0" src="${resourceUrl}/img/random/home175.png"/>
           </div>
+
           <h3 class="caption">{{ticket.title}}</h3>
         </a>
       </article>

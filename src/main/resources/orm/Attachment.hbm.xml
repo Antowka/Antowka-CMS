@@ -16,5 +16,10 @@
         <property name="fileSize" column="file_size" type="java.lang.Long" lazy="true" />
         <property name="mimeType" column="mime_type" type="java.lang.String" lazy="true" />
 
+        <set name="tickets" table="tickets_attachment" inverse="true" lazy="true" fetch="select">
+            <key column="attachment_id" not-null="true" />
+            <many-to-many column="ticket_id" class="ru.antowka.entity.Ticket" />
+        </set>
+
     </class>
 </hibernate-mapping>

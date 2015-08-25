@@ -33,17 +33,31 @@ public class TicketDaoImpl implements TicketDao{
     public List<Ticket> getAllTickets(int limit, int offset, Order order) {
 
         Session session = hibernateSessionFactory.getSession();
-        return (List<Ticket>)session.createCriteria(Ticket.class, "ticket")
-                .setProjection(Projections.projectionList()
-                        .add(Projections.property("ticket.ticketId"),"ticketId")
-                        .add(Projections.property("ticket.title"), "title")
-                ).setResultTransformer(Transformers.aliasToBean(Ticket.class))
-                .createAlias("ticket.status", "status")
-                .add(Restrictions.eq("status.publicStatus", true))
-                .addOrder(order)
-                .setFirstResult(offset)
-                .setMaxResults(limit)
-                .list();
+        List<Ticket> tickets = (List<Ticket>)session.createCriteria(Ticket.class, "ticket")
+                                                    .setProjection(Projections.projectionList()
+                                                                    .add(Projections.property("ticket.ticketId"), "ticketId")
+                                                                    .add(Projections.property("ticket.title"), "title")
+                                                    ).setResultTransformer(Transformers.aliasToBean(Ticket.class))
+                                                    .createAlias("ticket.status", "status")
+                                                    .add(Restrictions.eq("status.publicStatus", true))
+                                                    .addOrder(order)
+                                                    .setFirstResult(offset)
+                                                    .setMaxResults(limit)
+                                                    .list();
+
+        //get attachments for ticket
+        tickets.stream().forEach(ticket -> {
+
+            List<Attachment> ticketAttachments = (List<Attachment>)session.createCriteria(Attachment.class, "att")
+                    .createAlias("att.tickets", "tickets")
+                    .add(Restrictions.eq("tickets.ticketId", ticket.getTicketId()))
+                    .add(Restrictions.like("att.mimeType", "image/%"))
+                    .list();
+
+            ticket.setAttachments(new HashSet<Attachment>(ticketAttachments));
+        });
+
+        return tickets;
     }
 
     @Override
@@ -73,8 +87,14 @@ public class TicketDaoImpl implements TicketDao{
                                                                              .createAlias("tc.tickets", "tickets")
                                                                              .add(Restrictions.eq("tickets.ticketId", ticketId))
                                                                              .list();
+        //get attachments for ticket
+        List<Attachment> ticketAttachments = (List<Attachment>)session.createCriteria(Attachment.class, "att")
+                                                                            .createAlias("att.tickets", "tickets")
+                                                                            .add(Restrictions.eq("tickets.ticketId", ticketId))
+                                                                            .list();
 
         ticket.setCategories(new HashSet<TicketCategory>(ticketCategories));
+        ticket.setAttachments(new HashSet<Attachment>(ticketAttachments));
 
         return ticket;
     }
