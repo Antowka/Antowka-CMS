@@ -1,4 +1,4 @@
-var CommissionApp = angular.module('CommissionApp', ['ui.bootstrap']);
+var CommissionApp = angular.module('CommissionApp', ['ui.bootstrap',  'angularFileUpload']);
 
 // Requests
 

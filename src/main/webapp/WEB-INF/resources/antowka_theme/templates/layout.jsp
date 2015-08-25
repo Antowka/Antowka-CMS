@@ -13,7 +13,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <spring:url value="/resources" var="resourceUrl"/>
+        <spring:url value="/files" var="resourceUrl"/>
         <title><tiles:insertAttribute name="title" ignore="true" /></title>
 
         <link rel="stylesheet" href="${resourceUrl}/css/bootstrap.css">
@@ -36,6 +36,7 @@
         <!-- JS FILES -->
         <script src="${resourceUrl}/js/angular.min.js"></script>
         <script src="${resourceUrl}/js/ui-bootstrap-tpls-0.13.3.js"></script>
+        <script src="${resourceUrl}/js/libs/angular-file-upload.min.js"></script>
         <script src="${resourceUrl}/js/app.js"></script>
         <script src="${resourceUrl}/js/controllers.js"></script>
         <script src="${resourceUrl}/js/directives.js"></script>

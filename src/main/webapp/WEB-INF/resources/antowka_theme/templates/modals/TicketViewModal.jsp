@@ -6,7 +6,7 @@
   Time: 0:33
   To change this template use File | Settings | File Templates.
 --%>
-<spring:url value="/resources" var="resourceUrl" />
+<spring:url value="/files" var="resourceUrl" />
 
 <div ng-controller="TicketViewCtrl">
   <script  type="text/ng-template" id="ticketViewModal.html">
