@@ -21,5 +21,10 @@
             <many-to-many column="ticket_id" class="ru.antowka.entity.Ticket" />
         </set>
 
+        <set name="articles" table="articles_attachment" inverse="true" lazy="true" fetch="select">
+            <key column="attachment_id" not-null="true" />
+            <many-to-many column="article_id" class="ru.antowka.entity.Article" />
+        </set>
+
     </class>
 </hibernate-mapping>

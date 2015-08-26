@@ -25,6 +25,9 @@ public class Attachment implements Serializable{
     @JsonIgnore
     private Set<Ticket> tickets;
 
+    @JsonIgnore
+    private Set<Article> articles;
+
 
     /**
      * ****************************** Getters and Setters ***************************************
@@ -92,5 +95,13 @@ public class Attachment implements Serializable{
 
     public void setTickets(Set<Ticket> tickets) {
         this.tickets = tickets;
+    }
+
+    public Set<Article> getArticles() {
+        return articles;
+    }
+
+    public void setArticles(Set<Article> articles) {
+        this.articles = articles;
     }
 }
