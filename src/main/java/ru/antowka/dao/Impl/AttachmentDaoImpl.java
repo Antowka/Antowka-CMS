@@ -54,4 +54,21 @@ public class AttachmentDaoImpl implements AttachmentDao {
 
         return attachments;
     }
+
+    @Override
+    @Transactional
+    public Attachment removeAttachment(int attachmentId) {
+
+        Session session = hibernateSessionFactory.getSession();
+
+        Attachment attachment = (Attachment)session.createCriteria(Attachment.class)
+                                        .add(Restrictions.eq("attachmentId", attachmentId))
+                                        .add(Restrictions.sizeEq("tickets", 0))
+                                        .add(Restrictions.sizeEq("articles", 0))
+                                        .uniqueResult();
+
+        session.delete(attachment);
+
+        return attachment;
+    }
 }

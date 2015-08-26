@@ -13,4 +13,5 @@ public interface AttachmentDao {
     Attachment findAttachmentById(int attachmentId);
     List<Attachment> getAttachmentByUser(User user);
     List<Attachment> createAttachments(List<Attachment> attachments);
+    Attachment removeAttachment(int attachmentId);
 }

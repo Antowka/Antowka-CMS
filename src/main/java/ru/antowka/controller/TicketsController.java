@@ -108,9 +108,7 @@ public class TicketsController {
      * @return
      */
     @RequestMapping(value = "create-ticket", method = RequestMethod.POST)
-    public @ResponseBody
-    MessageResponse createTicket(@RequestBody Ticket ticket){
+    public @ResponseBody MessageResponse createTicket(@RequestBody Ticket ticket){
         return ticketService.createTicket(ticket);
     }
-
 }

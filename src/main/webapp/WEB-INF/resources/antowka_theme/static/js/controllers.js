@@ -112,7 +112,6 @@ CommissionApp.controller('CloseTicketViewCtrl', function ($scope, $modalInstance
 
 
 // Save form to the data
-
 CommissionApp.controller('sendFormCtrl', ['$scope','dataService', '$http', 'FileUploader', function($scope, dataService, $http, FileUploader){
 
     $scope.data = null;
@@ -140,8 +139,7 @@ CommissionApp.controller('sendFormCtrl', ['$scope','dataService', '$http', 'File
             "attachments": $scope.attachments
         };
 
-        console.log(formData);
-
+        //todo - replace to service
         $http({
             url: 'tickets/create-ticket',
             headers: {'Content-Type': 'application/json; charset=utf-8'},
@@ -149,23 +147,22 @@ CommissionApp.controller('sendFormCtrl', ['$scope','dataService', '$http', 'File
             transformRequest: false,
             method: 'POST'
         })
-            .success(function(){
+        .success(function(){
 
-            }).error(function(){
+        }).error(function(){
 
-            });
+        });
     };
 
     //********************** Upload File ******************************
             var uploader = $scope.uploader = new FileUploader({
-                url: '/upload',
+                url: '/attachments/upload',
                 alias: 'files',
                 autoUpload: true,
                 isHTML5:true
             });
 
             // FILTERS
-
             uploader.filters.push({
                 name: 'customFilter',
                 fn: function(item /*{File|FileLikeObject}*/, options) {
@@ -173,8 +170,9 @@ CommissionApp.controller('sendFormCtrl', ['$scope','dataService', '$http', 'File
                 }
             });
 
-            // CALLBACKS
 
+
+            // CALLBACKS
             uploader.onWhenAddingFileFailed = function(item /*{File|FileLikeObject}*/, filter, options) {
                 //console.info('onWhenAddingFileFailed', item, filter, options);
             };
@@ -194,9 +192,30 @@ CommissionApp.controller('sendFormCtrl', ['$scope','dataService', '$http', 'File
                 //console.info('onProgressAll', progress);
             };
             uploader.onSuccessItem = function(fileItem, response, status, headers) {
-                //console.info('onSuccessItem', fileItem, response, status, headers);
+
+                fileItem.remove = function(){
+
+                    //remove attachment from server
+                    dataService.removeAttachment(fileItem.attachmentId, function(data){
+                        if(data.code == 1) {
+
+                            //remove attachment from $scope.attachments
+                            $scope.attachments.slice(fileItem.attachmentIndex);
+
+                            //remove file from queue
+                            uploader.removeFromQueue(fileItem);
+                        }else{
+                            //todo - show error about remove attachment
+                            alert("Need will make error: Problem remove file");
+                        }
+                    });
+
+                }
+
+                //save position file in queue
                 if(response.code == 1) {
-                    $scope.attachments.push(response.params[0]);
+                    fileItem.attachmentIndex = $scope.attachments.push(response.params[0])-1;
+                    fileItem.attachmentId = response.params[0].attachmentId;
                 }
             };
             uploader.onErrorItem = function(fileItem, response, status, headers) {

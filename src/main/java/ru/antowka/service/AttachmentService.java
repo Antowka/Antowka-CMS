@@ -14,7 +14,9 @@ import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Anton Nik on 16.08.15.
@@ -60,7 +62,7 @@ public class AttachmentService {
      *
      * @return
      */
-    public MessageResponse createAttachments(List<MultipartFile> files) {
+    public MessageResponse createAttachment(List<MultipartFile> files) {
         
         //save files
 
@@ -111,6 +113,53 @@ public class AttachmentService {
         return messageResponse;
     }
 
+    /**
+     * Remove Attachment by AttachmentId
+     *
+     * @param attachmentId
+     * @return
+     */
+    public MessageResponse removeAttachment(int attachmentId){
+
+        Attachment attachment = attachmentDao.removeAttachment(attachmentId);
+        boolean isDeleted = false;
+        List<Attachment> attachments = new ArrayList<Attachment>();
+
+        if(attachment != null) {
+
+            attachments.add(attachment);
+
+            Map<Integer, Boolean> resultStatus = removefilesForAttachment(attachments);
+
+            if(resultStatus.get(attachmentId)){
+                isDeleted = true;
+            }
+        }
+
+        if(isDeleted){
+
+            messageResponse.setCode(1);
+            messageResponse.setTitle("Attachment has been removed");
+            messageResponse.setType("Attachment");
+            messageResponse.setMessage("Your attachment was remove from system");
+            messageResponse.setParams(attachments);
+        }else{
+
+            messageResponse.setCode(0);
+            messageResponse.setTitle("Attachment has been not removed");
+            messageResponse.setType("Attachment");
+            messageResponse.setMessage("Your attachment was not remove from system");
+            messageResponse.setParams(attachments);
+        }
+
+        return messageResponse;
+    }
+
+
+    /**
+     * ****************************** Inside Methods ******************************************* 
+     */
+    
     /**
      * Save files in fs
      *
@@ -228,4 +277,31 @@ public class AttachmentService {
         return  folder1 + "/" + folder2 + "/";
     }
 
+
+    /**
+     * remove files from FS
+     *
+     * @param attachments
+     * @return
+     */
+    private Map<Integer, Boolean> removefilesForAttachment(List<Attachment> attachments){
+
+        Map<Integer, Boolean> result = new HashMap<Integer, Boolean>();
+
+        attachments.stream().forEach(attachment -> {
+
+            File file = new File(storagePath + attachment.getFilePathInStorage());
+
+            //delete file
+            result.put(attachment.getAttachmentId(), file.delete());
+
+            //check on exist img preview
+            if(attachment.getMimeType().startsWith("image/")){
+                File preview = new File(storagePath + attachment.getPreviewPath());
+                result.replace(attachment.getAttachmentId(), preview.delete());
+            }
+        });
+
+        return result;
+    }
 }

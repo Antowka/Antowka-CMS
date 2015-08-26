@@ -4,25 +4,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 import ru.antowka.entity.Attachment;
 import ru.antowka.entity.MessageResponse;
-import ru.antowka.entity.factory.AttachmentFactory;
 import ru.antowka.form.FileUploadForm;
 import ru.antowka.service.AttachmentService;
 
-import java.io.File;
 import java.io.IOException;
-import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
-import java.util.List;
 
 
 /**
  * Created by Anton Nik on 12.08.15.
  */
 @Controller
+@RequestMapping("attachments")
 public class AttachmentController {
 
     @Autowired
@@ -44,10 +39,24 @@ public class AttachmentController {
      * @throws IOException
      */
 
-    @RequestMapping(value="/upload", method=RequestMethod.POST)
+    @RequestMapping(value="upload", method=RequestMethod.POST)
     @ResponseBody
     public MessageResponse save(FileUploadForm uploadForm, Model map) throws IOException, NoSuchAlgorithmException {
 
-        return attachmentService.createAttachments(uploadForm.getFiles());
+        return attachmentService.createAttachment(uploadForm.getFiles());
+    }
+
+    /**
+     * Remove Attachment without relationship with Tickets or Articles
+     *
+     * link: http://localhost:8080/attachments/remove?attachmentId=5
+     *
+     * @param attachment
+     * @return
+     */
+    @RequestMapping(value="remove", method=RequestMethod.GET)
+    public @ResponseBody MessageResponse remove(@ModelAttribute Attachment attachment){
+
+        return attachmentService.removeAttachment(attachment.getAttachmentId());
     }
 }
