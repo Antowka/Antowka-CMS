@@ -52,4 +52,3 @@ CommissionApp.service('dataService', function($http) {
         });
     }
 });
-

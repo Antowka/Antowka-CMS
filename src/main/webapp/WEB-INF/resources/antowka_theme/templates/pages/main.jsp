@@ -18,12 +18,12 @@
       <h4><spring:message code="lang.weGot" /> <strong>{{tickets.length}}</strong> <spring:message code="lang.tickets" /></h4>
     </header>
     <div class="row">
-      <article class="col-sm-6 col-md-3 ticket-preview" ng-repeat="ticket in tickets" ng-controller="TicketViewCtrl">
+      <article class="col-xs-2 col-sm-3 col-md-6 ticket-preview" ng-repeat="ticket in tickets" ng-controller="TicketViewCtrl">
         <a class="link-to-ticket" id="ticket-{{ticket.ticketId}}" ng-click="open(ticket);">
 
-          <div  class="img-wrap no-image">
-            <img ng-if="ticket.attachments.length > 0" src="${resourceUrl}/uploads/{{ticket.attachments[0].previewPath}}"/>
-            <img ng-if="ticket.attachments.length == 0" src="${resourceUrl}/img/random/home175.png"/>
+          <div  class="img-wrap">
+            <div ng-if="ticket.attachments.length > 0" style="background-image:url(${resourceUrl}/uploads/{{ticket.attachments[0].previewPath}})" class="tp-img"></div>
+            <img ng-if="ticket.attachments.length == 0" src="${resourceUrl}/img/random/home175.png" class="no-image"/>
           </div>
 
           <h3 class="caption">{{ticket.title}}</h3>

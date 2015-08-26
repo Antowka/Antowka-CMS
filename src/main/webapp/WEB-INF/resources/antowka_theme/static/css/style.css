@@ -364,6 +364,7 @@ body {
   padding: 1em;
   text-transform: uppercase;
   height: 4.1em;
+  overflow: hidden;
 }
 .index-questions .ticket-preview .btn {
   width: 100%;
@@ -380,12 +381,17 @@ body {
   display: block;
   text-align: center;
   overflow: hidden;
+  background: #E0E0E0;
+  height: 230px;
+  height: 15vw;
 }
-.index-questions .img-wrap.no-image {
-  background: #C8F0EC;
-  padding: 1em 1em 0;
+.index-questions .img-wrap .tp-img {
+  height: 230px;
+  height: 15vw;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
-.index-questions .img-wrap.no-image img {
+.index-questions .img-wrap img.no-image {
   max-width: 80%;
   -webkit-transition: all 0.5s ease;
   -moz-transition: all 0.5s ease;
@@ -422,6 +428,10 @@ body {
 .ticket-view .label-status {
   text-transform: lowercase;
   font-variant: small-caps;
+}
+.ticket-view .modal-footer img {
+  /*height: 120px;*/
+  max-width: 100%;
 }
 .site-footer {
   background: #1A237E;

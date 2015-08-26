@@ -38,12 +38,11 @@
       </div>
 
       <div class="modal-footer">
-
-        <div class="col-xs-7">
-          <a href="/files/uploads/{{attachment.filePathInStorage}}" ng-repeat="attachment in ticket.attachments" target="_blank">
-            <img src="/files/uploads/{{attachment.previewPath}}">
-          </a>
-        </div>
+          <div class="row">
+            <a href="/files/uploads/{{attachment.filePathInStorage}}" class="col-xs-3" ng-repeat="attachment in ticket.attachments" target="_blank" data-lightbox="roadtrip">
+              <img src="/files/uploads/{{attachment.previewPath}}">
+            </a>
+          </div>
 
       </div>
 
