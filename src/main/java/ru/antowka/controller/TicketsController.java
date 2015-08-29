@@ -13,7 +13,7 @@ import ru.antowka.service.TicketService;
 import java.util.List;
 
 /**
- * Created by anton on 06.08.15.
+ * Created by Anton Nik on 06.08.15.
  */
 @RestController
 @RequestMapping("tickets")

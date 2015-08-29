@@ -1,4 +1,4 @@
-package ru.antowka.form;
+package ru.antowka.entity.form;
 
 import org.springframework.web.multipart.MultipartFile;
 

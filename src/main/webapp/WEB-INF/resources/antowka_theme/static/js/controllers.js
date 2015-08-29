@@ -45,13 +45,28 @@ CommissionApp.controller('TicketFormCtrl', function ($scope, $modal) {
         });
     };
 });
-CommissionApp.controller('CloseTicketFormCtrl', function ($scope, $modalInstance) {
+CommissionApp.controller('CloseTicketFormCtrl', function ($scope, $modalInstance, dataService) {
+
+    $scope.attachments = [];
 
     $scope.ok = function () {
         $modalInstance.close();
     };
 
     $scope.cancel = function () {
+
+        console.log($scope.attachments);
+        $scope.attachments.forEach(function(attachment){
+
+            dataService.removeAttachment(attachment.attachmentId, function(data){
+
+                //remove no save attachment from server
+                if(data.code != 1) {
+                    console.log("Wrong remove file");
+                }
+            });
+        });
+
         $modalInstance.dismiss('cancel');
     };
 });
@@ -201,6 +216,7 @@ CommissionApp.controller('sendFormCtrl', ['$scope','dataService', '$http', 'File
 
                             //remove attachment from $scope.attachments
                             $scope.attachments.slice(fileItem.attachmentIndex);
+                            $scope.$parent.attachments = $scope.attachments;
 
                             //remove file from queue
                             uploader.removeFromQueue(fileItem);
@@ -214,8 +230,10 @@ CommissionApp.controller('sendFormCtrl', ['$scope','dataService', '$http', 'File
 
                 //save position file in queue
                 if(response.code == 1) {
+
                     fileItem.attachmentIndex = $scope.attachments.push(response.params[0])-1;
                     fileItem.attachmentId = response.params[0].attachmentId;
+                    $scope.$parent.attachments = $scope.attachments;
                 }
             };
             uploader.onErrorItem = function(fileItem, response, status, headers) {

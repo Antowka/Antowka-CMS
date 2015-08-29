@@ -6,7 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.antowka.entity.Attachment;
 import ru.antowka.entity.MessageResponse;
-import ru.antowka.form.FileUploadForm;
+import ru.antowka.entity.form.FileUploadForm;
 import ru.antowka.service.AttachmentService;
 
 import java.io.IOException;

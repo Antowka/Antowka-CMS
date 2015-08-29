@@ -12,6 +12,7 @@ repositories {
     mavenLocal()
     mavenCentral()
 }
+
  
 dependencies {
 	compile 'org.springframework:spring-webmvc:4.1.7.RELEASE'
@@ -34,4 +35,7 @@ dependencies {
     compile 'commons-io:commons-io:2.4'
     compile 'net.coobird:thumbnailator:0.4.8'
     compile 'log4j:log4j:1.2.17'
+
+    testCompile 'org.springframework:spring-test:4.2.0.RELEASE'
+    testCompile 'junit:junit:4.12'
 }

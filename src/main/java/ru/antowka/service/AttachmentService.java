@@ -198,7 +198,7 @@ public class AttachmentService {
                     if (!file.exists()) {
 
                         //create folders
-                        if (pathForSave.mkdirs()) {
+                        if (pathForSave.exists() || pathForSave.mkdirs()) {
 
                             //Save file to FS
                             multipartFile.transferTo(file);
@@ -251,7 +251,7 @@ public class AttachmentService {
             previewPath = path + "preview/" + fileName + extension;
             File filePreview = new File(storagePath + path + "preview/");
 
-            if (filePreview.mkdirs()) {
+            if (filePreview.exists() || filePreview.mkdirs()) {
 
                 Thumbnails.of(new File(storagePath + path + fileName + extension))
                         .size(200, 200)

@@ -1,12 +1,9 @@
 package ru.antowka.dao.Impl;
 
-import org.hibernate.FetchMode;
 import org.hibernate.Session;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
-import org.hibernate.criterion.Property;
 import org.hibernate.criterion.Restrictions;
-import org.hibernate.sql.JoinType;
 import org.hibernate.transform.Transformers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -18,7 +15,7 @@ import javax.transaction.Transactional;
 import java.util.*;
 
 /**
- * Created by anton on 06.08.15.
+ * Created by Anton nik on 06.08.15.
  */
 @Repository
 public class TicketDaoImpl implements TicketDao{

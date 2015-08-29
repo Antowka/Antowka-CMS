@@ -27,6 +27,7 @@
                             <value>orm/Ticket.hbm.xml</value>
                             <value>orm/TicketCategory.hbm.xml</value>
                             <value>orm/TicketStatus.hbm.xml</value>
+                            <value>orm/Region.hbm.xml</value>
                      </list>
               </property>
 
