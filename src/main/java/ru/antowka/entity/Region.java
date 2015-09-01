@@ -1,5 +1,6 @@
 package ru.antowka.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -12,7 +13,7 @@ public class Region {
     private int level;
     private String title;
     private String description;
-    private List<Region> childRegions;
+    private List<Region> childRegions = new ArrayList<Region>();
 
     public int getRegionId() {
         return regionId;
@@ -60,5 +61,9 @@ public class Region {
 
     public void setChildRegions(List<Region> childRegions) {
         this.childRegions = childRegions;
+    }
+
+    public void addChildRegion(Region region){
+        childRegions.add(region);
     }
 }

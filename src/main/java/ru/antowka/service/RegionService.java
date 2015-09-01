@@ -6,6 +6,7 @@ import ru.antowka.dao.RegionDao;
 import ru.antowka.entity.MessageResponse;
 import ru.antowka.entity.Region;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -38,7 +39,22 @@ public class RegionService {
     }
 
     public List<Region> getAllRegions(){
-        return regionDao.getAllRegions();
+
+        List<Region> regions = regionDao.getAllRegions();
+
+        regions.stream().forEach(region -> {
+            if(region.getParentId() != 0) {
+                regions.stream().forEach(regionParent -> {
+                    if (region.getParentId() == regionParent.getRegionId()) {
+                        regionParent.addChildRegion(region);
+                    }
+                });
+            }
+        });
+
+        regions.removeIf(regionRemove -> regionRemove.getLevel() != 0);
+
+        return regions;
     }
 
     public List<Region> getRegionsByLevel(int level){
