@@ -19,6 +19,7 @@ public class Ticket implements Serializable {
     private String description;
     private String creationDate;
     private TicketStatus status;
+    private boolean isDeleted = false;
     private Set<TicketCategory> categories;
     private Set<Attachment> attachments;
 
@@ -116,6 +117,14 @@ public class Ticket implements Serializable {
 
     public void setStatus(TicketStatus status) {
         this.status = status;
+    }
+
+    public boolean isDeleted() {
+        return isDeleted;
+    }
+
+    public void setIsDeleted(boolean isDeleted) {
+        this.isDeleted = isDeleted;
     }
 
     public Set<Attachment> getAttachments() {

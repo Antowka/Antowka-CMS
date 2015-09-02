@@ -75,4 +75,23 @@ public class TicketService {
 
         return messageResponse;
     }
+
+    public MessageResponse removeTicket(int ticketId){
+
+        Ticket ticket = ticketDao.removeTicket(ticketId);
+
+        if(ticket.isDeleted()){
+
+            messageResponse.setCode(1);
+            messageResponse.setTitle("Successful");
+            messageResponse.setMessage("Your ticket #" + ticket.getTicketId() + " removed from system");
+        } else{
+
+            messageResponse.setCode(0);
+            messageResponse.setTitle("Ticket has not been removed");
+            messageResponse.setMessage("Your ticket #" + ticketId + " removed to system");
+        }
+
+        return messageResponse;
+    }
 }

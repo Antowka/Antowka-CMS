@@ -23,7 +23,6 @@ public class TicketDaoImpl implements TicketDao{
     @Autowired
     private HibernateSessionFactory hibernateSessionFactory;
 
-
     @Override
     @Transactional
     @SuppressWarnings("unchecked")
@@ -46,10 +45,10 @@ public class TicketDaoImpl implements TicketDao{
         tickets.stream().forEach(ticket -> {
 
             List<Attachment> ticketAttachments = (List<Attachment>)session.createCriteria(Attachment.class, "att")
-                    .createAlias("att.tickets", "tickets")
-                    .add(Restrictions.eq("tickets.ticketId", ticket.getTicketId()))
-                    .add(Restrictions.like("att.mimeType", "image/%"))
-                    .list();
+                                                                        .createAlias("att.tickets", "tickets")
+                                                                        .add(Restrictions.eq("tickets.ticketId", ticket.getTicketId()))
+                                                                        .add(Restrictions.like("att.mimeType", "image/%"))
+                                                                        .list();
 
             ticket.setAttachments(new HashSet<Attachment>(ticketAttachments));
         });
@@ -119,5 +118,17 @@ public class TicketDaoImpl implements TicketDao{
     public int createTicket(Ticket ticket) {
         Session session = hibernateSessionFactory.getSession();
         return (int)session.save(ticket);
+    }
+
+    @Override
+    @Transactional
+    public Ticket removeTicket(int ticketId){
+
+        Session session = hibernateSessionFactory.getSession();
+        Ticket ticket = (Ticket)session.get(Ticket.class, ticketId);
+        session.delete(ticket);
+        ticket.setIsDeleted(true);
+
+        return ticket;
     }
 }
