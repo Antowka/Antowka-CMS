@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by anton on 16.08.15.
+ * Created by Anton Nik on 16.08.15.
  */
 @Repository
 public class AttachmentDaoImpl implements AttachmentDao {

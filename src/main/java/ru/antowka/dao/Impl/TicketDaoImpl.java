@@ -1,5 +1,6 @@
 package ru.antowka.dao.Impl;
 
+import org.hibernate.FetchMode;
 import org.hibernate.Session;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
@@ -48,6 +49,7 @@ public class TicketDaoImpl implements TicketDao{
                                                                         .createAlias("att.tickets", "tickets")
                                                                         .add(Restrictions.eq("tickets.ticketId", ticket.getTicketId()))
                                                                         .add(Restrictions.like("att.mimeType", "image/%"))
+                                                                        .setMaxResults(1)
                                                                         .list();
 
             ticket.setAttachments(new HashSet<Attachment>(ticketAttachments));
@@ -121,13 +123,23 @@ public class TicketDaoImpl implements TicketDao{
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     @Transactional
     public Ticket removeTicket(int ticketId){
 
         Session session = hibernateSessionFactory.getSession();
         Ticket ticket = (Ticket)session.get(Ticket.class, ticketId);
+
+        //get attachments for ticket
+        List<Attachment> ticketAttachments = (List<Attachment>)session.createCriteria(Attachment.class, "att")
+                .createAlias("att.tickets", "tickets")
+                .add(Restrictions.eq("tickets.ticketId", ticketId))
+                .list();
+
+
         session.delete(ticket);
         ticket.setIsDeleted(true);
+        ticket.setAttachments(new HashSet<Attachment>(ticketAttachments));
 
         return ticket;
     }

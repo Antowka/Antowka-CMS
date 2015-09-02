@@ -20,8 +20,8 @@ public class Ticket implements Serializable {
     private String creationDate;
     private TicketStatus status;
     private boolean isDeleted = false;
-    private Set<TicketCategory> categories;
-    private Set<Attachment> attachments;
+    private Set<TicketCategory> categories = null;
+    private Set<Attachment> attachments = null;
 
     public int getTicketId() {
         return ticketId;

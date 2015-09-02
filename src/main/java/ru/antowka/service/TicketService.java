@@ -20,6 +20,9 @@ public class TicketService {
     private TicketDao ticketDao;
 
     @Autowired
+    private AttachmentService attachmentService;
+
+    @Autowired
     private MessageResponse messageResponse;
 
     public List<Ticket> getAllTickets(int limit, int offset, String order, String orderField){
@@ -81,6 +84,11 @@ public class TicketService {
         Ticket ticket = ticketDao.removeTicket(ticketId);
 
         if(ticket.isDeleted()){
+
+            //remove attachments
+            ticket.getAttachments().stream().forEach(attachment -> {
+                attachmentService.removeAttachment(attachment.getAttachmentId());
+            });
 
             messageResponse.setCode(1);
             messageResponse.setTitle("Successful");

@@ -129,7 +129,7 @@ public class AttachmentService {
 
             attachments.add(attachment);
 
-            Map<Integer, Boolean> resultStatus = removefilesForAttachment(attachments);
+            Map<Integer, Boolean> resultStatus = removeFilesForAttachment(attachments);
 
             if(resultStatus.get(attachmentId)){
                 isDeleted = true;
@@ -284,7 +284,7 @@ public class AttachmentService {
      * @param attachments
      * @return
      */
-    private Map<Integer, Boolean> removefilesForAttachment(List<Attachment> attachments){
+    private Map<Integer, Boolean> removeFilesForAttachment(List<Attachment> attachments){
 
         Map<Integer, Boolean> result = new HashMap<Integer, Boolean>();
 
