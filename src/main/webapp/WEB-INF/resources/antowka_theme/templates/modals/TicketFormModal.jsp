@@ -59,7 +59,7 @@
 
             <!-- CATEGORIES -->
             <div class="col-xs-4 form-control-wrap">
-                <select class="form-control"  ng-model="category" ng-options="category.title for category in categories">
+                <select class="form-control"  ng-model="category" ng-options="category.title for category in categories" required>
                   <option value="" selected="selected" disabled><spring:message code="lang.CategoryDefault" /></option>
                 </select>
             </div>
@@ -150,5 +150,25 @@
         </footer>
       </form>
     </section>
+  </script>
+</div>
+
+<div ng-controller="sendFormCtrl">
+
+  <script  type="text/ng-template" id="SuccessModal.html">
+    <article class="success">
+
+      <header class="modal-header">
+        <button type="button" class="close pull-right" aria-label="Close" ng-click="cancel()">
+          <span aria-hidden="true">&#10007;</span>
+          <span class="sr-only">Close</span>
+        </button>
+        <h3><spring:message code="lang.successTitle" /></h3>
+      </header>
+      <div class="modal-body">
+        <h2><spring:message code="lang.successInfo" /></h2>
+      </div>
+
+    </article>
   </script>
 </div>

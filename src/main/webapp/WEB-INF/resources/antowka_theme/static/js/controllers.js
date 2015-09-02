@@ -127,7 +127,7 @@ CommissionApp.controller('CloseTicketViewCtrl', function ($scope, $modalInstance
 
 
 // Save form to the data
-CommissionApp.controller('sendFormCtrl', ['$scope','dataService', '$http', 'FileUploader', function($scope, dataService, $http, FileUploader){
+CommissionApp.controller('sendFormCtrl', ['$scope','dataService', '$http', 'FileUploader', '$modal', function($scope, dataService, $http, FileUploader, $modal){
 
     $scope.data = null;
     $scope.attachments = [];
@@ -135,6 +135,15 @@ CommissionApp.controller('sendFormCtrl', ['$scope','dataService', '$http', 'File
     dataService.getCategories(function(dataResponse) {
         $scope.categories = dataResponse;
     });
+
+    $scope.openSuccess = function (size) {
+        var modalInstance = $modal.open({
+            templateUrl: 'SuccessModal.html',
+            controller: 'CloseSuccessCtrl',
+            size: size,
+            windowClass: 'success-modal'
+        });
+    };
 
     var formData = {};
 
@@ -163,7 +172,7 @@ CommissionApp.controller('sendFormCtrl', ['$scope','dataService', '$http', 'File
             method: 'POST'
         })
         .success(function(){
-
+                $scope.openSuccess();
         }).error(function(){
 
         });
@@ -250,3 +259,10 @@ CommissionApp.controller('sendFormCtrl', ['$scope','dataService', '$http', 'File
             };
     //******************************* End Upload Files ****************************************
 }]);
+
+
+CommissionApp.controller('CloseSuccessCtrl', function ($scope, $modalInstance) {
+    $scope.cancel = function () {
+        $modalInstance.dismiss('cancel');
+    };
+});
