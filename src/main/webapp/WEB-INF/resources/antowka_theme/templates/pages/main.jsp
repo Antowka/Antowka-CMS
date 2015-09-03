@@ -9,7 +9,9 @@
 --%>
 <spring:url value="/files" var="resourceUrl" />
 
-<section class="hero"></section>
+<section class="hero">
+    <h1 class="hero__title"><spring:message code="lang.heroTitle" /></h1>
+</section>
 
 <section class="index-questions" id="questions" ng-controller="ShowTicketsCtrl">
   <div class="container">
@@ -31,6 +33,6 @@
       </article>
     </div>
 
-  <button class="btn btn-primary" ng-show="showMoreBtn" ng-click="showMore()">Show more</button>
+  <button class="btn btn-primary" ng-show="showMoreBtn" ng-click="showMore()"><spring:message code="lang.showMore" /></button>
   </div>
 </section>

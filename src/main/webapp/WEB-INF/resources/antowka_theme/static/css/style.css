@@ -278,6 +278,19 @@ body {
   position: relative;
   margin-top: 65px;
 }
+.hero__title {
+  color: #FF8384;
+  font-size: 5em;
+  font-weight: 900;
+  letter-spacing: -2px;
+  position: fixed;
+  top: 3em;
+  text-align: center;
+  text-shadow: 2px 2px 0 #FFFFFF;
+  text-transform: uppercase;
+  z-index: 0;
+  width: 100%;
+}
 .index-about {
   color: #fff;
   font-size: 18px;
@@ -337,6 +350,7 @@ body {
 }
 .modal-header h1,
 .modal-header h2,
+.modal-header h3,
 .modal-header h4 {
   margin: 0;
 }
@@ -344,6 +358,8 @@ body {
   background: #f1f1f1;
   border-top: 3px solid #3f51b5;
   padding: 3em 0 5em;
+  position: relative;
+  z-index: 1;
 }
 .index-questions h1 {
   font-weight: 700;
@@ -438,4 +454,15 @@ body {
   color: #fff;
   border-top: 3px solid #3f51b5;
   padding: 2em 0 3em;
+}
+.success-modal {
+  width: 600px;
+}
+.success-modal h3 {
+  font-weight: 300;
+  text-align: left;
+}
+.success-modal h2 {
+  font-weight: 300;
+  margin: 0.6em 0;
 }
