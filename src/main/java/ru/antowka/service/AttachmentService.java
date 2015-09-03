@@ -13,6 +13,7 @@ import java.io.File;
 import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -182,9 +183,22 @@ public class AttachmentService {
                     byte[] hashFile = MessageDigest.getInstance("MD5").digest(multipartFile.getBytes());
 
                     StringBuilder md5File = new StringBuilder();
+
+                    int iterator = 0;
+
                     for (byte b : hashFile) {
+
+                        if(iterator >= 6){
+                            break;
+                        }
+
                         md5File.append(Integer.toString((b & 0xff) + 0x100, 16).substring(1));
+                        ++iterator;
                     }
+
+                    md5File.append("_");
+                    md5File.append(Instant.now().getEpochSecond());
+
 
                     //Create path for new file
                     String extension = multipartFile.getOriginalFilename().substring(multipartFile.getOriginalFilename().lastIndexOf("."));
