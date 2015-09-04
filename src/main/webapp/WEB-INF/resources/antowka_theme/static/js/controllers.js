@@ -7,7 +7,6 @@ CommissionApp.controller('ShowTicketsCtrl', function ($scope, dataService){
 
     dataService.getTickets(0, function(dataResponse) {
         $scope.tickets = dataResponse;
-        console.log(dataResponse);
         if(dataResponse.length < limit ){
             $scope.showMoreBtn = false;
         }
@@ -56,7 +55,6 @@ CommissionApp.controller('CloseTicketFormCtrl', function ($scope, $modalInstance
 
     $scope.cancel = function () {
 
-        console.log($scope.attachments);
         $scope.attachments.forEach(function(attachment){
 
             dataService.removeAttachment(attachment.attachmentId, function(data){
@@ -112,7 +110,6 @@ CommissionApp.controller('TicketViewCtrl', function ($scope, $modal, dataService
                             }
                         });
 
-                        console.log(ticket);
                         return ticket;
                     }
                 }
@@ -160,7 +157,6 @@ CommissionApp.controller('sendFormCtrl', ['$scope','dataService', '$http', 'File
         getChildRegions(dataResponse);
 
         $scope.regions = regions;
-        console.log($scope.regions);
     });
 
     $scope.openSuccess = function (size) {
@@ -282,7 +278,7 @@ CommissionApp.controller('sendFormCtrl', ['$scope','dataService', '$http', 'File
                 //console.info('onCompleteItem', fileItem, response, status, headers);
             };
             uploader.onCompleteAll = function() {
-                console.log($scope.attachments);
+
             };
     //******************************* End Upload Files ****************************************
 }]);
