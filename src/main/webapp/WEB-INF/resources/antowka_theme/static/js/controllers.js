@@ -7,6 +7,7 @@ CommissionApp.controller('ShowTicketsCtrl', function ($scope, dataService){
 
     dataService.getTickets(0, function(dataResponse) {
         $scope.tickets = dataResponse;
+        console.log(dataResponse);
         if(dataResponse.length < limit ){
             $scope.showMoreBtn = false;
         }
@@ -134,6 +135,32 @@ CommissionApp.controller('sendFormCtrl', ['$scope','dataService', '$http', 'File
 
     dataService.getCategories(function(dataResponse) {
         $scope.categories = dataResponse;
+    });
+
+    dataService.getRegions(function(dataResponse) {
+
+        var regions = [];
+
+        //recursive
+        var getChildRegions = function(childRegions) {
+
+            childRegions.forEach(function (regionServer) {
+
+                regions.push(regionServer);
+
+                var childRegions = regionServer.childRegions;
+
+                if(childRegions.length > 0) {
+                    getChildRegions(childRegions);
+                }
+            });
+        };
+
+        //start recursion
+        getChildRegions(dataResponse);
+
+        $scope.regions = regions;
+        console.log($scope.regions);
     });
 
     $scope.openSuccess = function (size) {

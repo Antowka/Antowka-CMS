@@ -29,6 +29,7 @@
           </div>
 
           <h3 class="caption">{{ticket.title}}</h3>
+          <h4>{{ticket.region.title}}</h4>
         </a>
       </article>
     </div>

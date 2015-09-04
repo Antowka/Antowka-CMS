@@ -64,6 +64,13 @@
                 </select>
             </div>
 
+            <!-- REGION -->
+            <div class="col-xs-4 form-control-wrap">
+              <select class="form-control"  ng-model="region" ng-options="region.title for region in regions" required>
+                <option value="" selected="selected" disabled><spring:message code="lang.region" /></option>
+              </select>
+            </div>
+
             <!-- TITLE -->
             <div class="col-xs-8 form-control-wrap">
               <input type="text" class="form-control" placeholder="<spring:message code="lang.Title" />*" name="title" ng-model="title" required>

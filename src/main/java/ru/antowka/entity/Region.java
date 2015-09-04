@@ -1,12 +1,16 @@
 package ru.antowka.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Anton Nik on 27.08.15.
  */
-public class Region {
+public class Region implements Serializable{
 
     private int regionId;
     private int parentId;
@@ -14,6 +18,7 @@ public class Region {
     private String title;
     private String description;
     private List<Region> childRegions = new ArrayList<Region>();
+
 
     public int getRegionId() {
         return regionId;

@@ -28,6 +28,18 @@ CommissionApp.service('dataService', function($http) {
         });
     }
 
+    this.getRegions = function(callbackFunc) {
+        $http({
+            method: 'GET',
+            url: 'regions/getAll'
+        }).success(function(data){
+            // With the data succesfully returned, call our callback
+            callbackFunc(data);
+        }).error(function(){
+            console.log("error, you can't get regions");
+        });
+    }
+
     this.getTicket = function(ticketId, callbackFunc){
         $http({
             method: 'GET',

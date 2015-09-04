@@ -31,11 +31,13 @@ public class TicketDaoImpl implements TicketDao{
 
         Session session = hibernateSessionFactory.getSession();
         List<Ticket> tickets = (List<Ticket>)session.createCriteria(Ticket.class, "ticket")
+                                                    .createAlias("ticket.status", "status")
+                                                    .createAlias("ticket.region", "region")
                                                     .setProjection(Projections.projectionList()
                                                                     .add(Projections.property("ticket.ticketId"), "ticketId")
                                                                     .add(Projections.property("ticket.title"), "title")
+                                                                    .add(Projections.property("region"), "region")
                                                     ).setResultTransformer(Transformers.aliasToBean(Ticket.class))
-                                                    .createAlias("ticket.status", "status")
                                                     .add(Restrictions.eq("status.publicStatus", true))
                                                     .addOrder(order)
                                                     .setFirstResult(offset)
@@ -66,6 +68,7 @@ public class TicketDaoImpl implements TicketDao{
         Session session = hibernateSessionFactory.getSession();
         Ticket ticket = (Ticket)session.createCriteria(Ticket.class, "ticket")
                                         .createAlias("ticket.status", "status")
+                                        .createAlias("ticket.region", "region")
                                         .add(Restrictions.eq("ticket.ticketId", ticketId))
                                         .add(Restrictions.eq("status.publicStatus", true))
                                         .setProjection(Projections.projectionList()
@@ -76,6 +79,7 @@ public class TicketDaoImpl implements TicketDao{
                                                         .add(Projections.property("ticket.firstName"), "firstName")
                                                         .add(Projections.property("ticket.creationDate"), "creationDate")
                                                         .add(Projections.property("status"), "status")
+                                                        .add(Projections.property("region"), "region")
                                         )
                                         .setResultTransformer(Transformers.aliasToBean(Ticket.class))
                                         .uniqueResult();

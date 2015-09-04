@@ -184,16 +184,13 @@ public class AttachmentService {
 
                     StringBuilder md5File = new StringBuilder();
 
-                    int iterator = 0;
+                    for(int i = 0; i < hashFile.length; i++){
 
-                    for (byte b : hashFile) {
-
-                        if(iterator >= 6){
+                        if(i >= 6){
                             break;
                         }
 
-                        md5File.append(Integer.toString((b & 0xff) + 0x100, 16).substring(1));
-                        ++iterator;
+                        md5File.append(Integer.toString((hashFile[i] & 0xff) + 0x100, 16).substring(1));
                     }
 
                     md5File.append("_");

@@ -31,5 +31,7 @@
 
         <many-to-one name="status" column="ticket_status_id" class="ru.antowka.entity.TicketStatus" insert="false" />
 
+        <many-to-one name="region" column="ticket_region_id" class="ru.antowka.entity.Region" insert="false" lazy="false" />
+
     </class>
 </hibernate-mapping>
