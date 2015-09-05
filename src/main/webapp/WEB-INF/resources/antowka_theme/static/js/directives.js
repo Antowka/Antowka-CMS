@@ -17,6 +17,7 @@ CommissionApp.directive('checkname', function() {
         }
     };
 });
+
 // Email validation
 CommissionApp.directive('checkemail', function() {
     return {
@@ -51,6 +52,7 @@ CommissionApp.directive('checkphone', function() {
         }
     };
 });
+
 // File validation
 CommissionApp.directive('checkfile', function () {
 

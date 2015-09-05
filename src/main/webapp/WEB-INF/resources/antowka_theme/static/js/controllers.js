@@ -143,6 +143,10 @@ CommissionApp.controller('sendFormCtrl', ['$scope','dataService', '$http', 'File
 
             childRegions.forEach(function (regionServer) {
 
+                if(regionServer.level != 0) {
+                    regionServer.title = "•" + regionServer.title;
+                }
+
                 regions.push(regionServer);
 
                 var childRegions = regionServer.childRegions;
@@ -151,6 +155,8 @@ CommissionApp.controller('sendFormCtrl', ['$scope','dataService', '$http', 'File
                     getChildRegions(childRegions);
                 }
             });
+
+
         };
 
         //start recursion
@@ -171,6 +177,7 @@ CommissionApp.controller('sendFormCtrl', ['$scope','dataService', '$http', 'File
     var formData = {};
 
     $scope.processForm = function() {
+
         formData = {
             "firstName": $scope.name,
             "lastName": $scope.surname,
@@ -178,6 +185,7 @@ CommissionApp.controller('sendFormCtrl', ['$scope','dataService', '$http', 'File
             "title":  $scope.title,
             "phone": $scope.phone,
             "address": $scope.address,
+            "region": $scope.region,
             "categories": [{
                 "ticketCategoryId": $scope.category.ticketCategoryId,
                 "parentCategoryId": $scope.category.parentCategoryId

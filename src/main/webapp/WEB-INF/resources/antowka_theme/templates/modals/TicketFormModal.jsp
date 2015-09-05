@@ -54,9 +54,8 @@
 
             <!-- REGION -->
             <div class="col-xs-3 form-control-wrap">
-              <select class="form-control"  ng-model="region" required><!--ng-options="region.title for region in regions"-->
+              <select class="form-control"  ng-model="region" ng-options="region.title for region in regions" required>
                 <option value="" selected="selected" disabled><spring:message code="lang.region" />*</option>
-                <option value="{{region.regionId}}" label="{{region.title}}" class="level-{{region.level}}" ng-repeat="region in regions">{{region.title}}</option>
               </select>
             </div>
 
