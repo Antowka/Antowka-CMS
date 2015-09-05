@@ -35,6 +35,8 @@ dependencies {
     compile 'commons-io:commons-io:2.4'
     compile 'net.coobird:thumbnailator:0.4.8'
     compile 'log4j:log4j:1.2.17'
+    compile 'org.quartz-scheduler:quartz:2.2.1'
+    compile 'org.springframework:spring-support:2.0.8'
 
     testCompile 'org.springframework:spring-test:4.2.0.RELEASE'
     testCompile 'junit:junit:4.12'

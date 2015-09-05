@@ -28,6 +28,7 @@
                 /WEB-INF/config/lang-config.xml
                 /WEB-INF/config/services-config.xml
                 /WEB-INF/config/entity-config.xml
+                /WEB-INF/config/quartz-config.xml
             </param-value>
 
         </context-param>

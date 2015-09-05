@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+<!--CONFIGURATION -->
+       <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+
+              <property name="jobDetails">
+                     <list>
+                            <ref bean="countTicketsAndSetToSettingsJob" />
+                     </list>
+              </property>
+
+              <property name="triggers">
+                     <list>
+                            <ref bean="countTicketsAndSetToSettingsCronTrigger" />
+                     </list>
+              </property>
+       </bean>
+
+
+
+
+<!-- JOBS and TRIGGERS -->
+
+       <!-- COUNT PUBLIC TICKETS AND SET IN SETTINGS -->
+       <bean id="ticketCounter" class="ru.antowka.job.Tickets" />
+
+       <bean id="countTicketsAndSetToSettingsJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+              <property name="targetObject" ref="ticketCounter" />
+              <property name="targetMethod" value="updateCounterInSettings" />
+       </bean>
+
+       <bean id="countTicketsAndSetToSettingsCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+              <property name="jobDetail" ref="countTicketsAndSetToSettingsJob" />
+              <property name="cronExpression" value="* * * * * ?"/>
+       </bean>
+</beans>
