@@ -18,7 +18,15 @@
       <form class="request-form"  role="form" name="requestTicket" ng-controller="sendFormCtrl" nv-file-drop="" uploader="uploader" filters="queueLimit, customFilter" novalidate>
         <div class="modal-body">
           <p class="help-block pull-right"><small><spring:message code="lang.ConditionsPrivacy" /></small></p>
+
           <div class="form-group row">
+
+            <!-- EMAIL -->
+            <div class="col-xs-4 form-control-wrap">
+              <input type="text" class="form-control" placeholder="<spring:message code="lang.Email" />*" name="email" ng-model="email" checkemail required>
+              <span ng-show="requestTicket.email.$dirty && requestTicket.email.$invalid && !requestTicket.email.$error.required" class="text-danger"><spring:message code="lang.InvalidEmail" /></span>
+              <span ng-show="requestTicket.email.$dirty && requestTicket.email.$error.required" class="text-danger"><spring:message code="lang.required" /></span>
+            </div>
 
             <!-- NAME -->
             <div class="col-xs-4 form-control-wrap">
@@ -34,12 +42,6 @@
               <span ng-show="requestTicket.surname.$dirty && requestTicket.surname.$error.required" class="text-danger"><spring:message code="lang.required" /></span>
             </div>
 
-            <!-- EMAIL -->
-            <div class="col-xs-4 form-control-wrap">
-              <input type="text" class="form-control" placeholder="<spring:message code="lang.Email" />*" name="email" ng-model="email" checkemail required>
-              <span ng-show="requestTicket.email.$dirty && requestTicket.email.$invalid && !requestTicket.email.$error.required" class="text-danger"><spring:message code="lang.InvalidEmail" /></span>
-              <span ng-show="requestTicket.email.$dirty && requestTicket.email.$error.required" class="text-danger"><spring:message code="lang.required" /></span>
-            </div>
           </div>
           <div class="form-group row">
 
@@ -50,8 +52,16 @@
               <span ng-show="requestTicket.phone.$dirty && requestTicket.phone.$error.required" class="text-danger"><spring:message code="lang.required" /></span>
             </div>
 
+            <!-- REGION -->
+            <div class="col-xs-3 form-control-wrap">
+              <select class="form-control"  ng-model="region" required><!--ng-options="region.title for region in regions"-->
+                <option value="" selected="selected" disabled><spring:message code="lang.region" />*</option>
+                <option value="{{region.regionId}}" label="{{region.title}}" class="level-{{region.level}}" ng-repeat="region in regions">{{region.title}}</option>
+              </select>
+            </div>
+
             <!-- ADDRESS -->
-            <div class="col-xs-8 form-control-wrap">
+            <div class="col-xs-5 form-control-wrap address-input">
               <input type="text" name="address" ng-model="address" class="form-control" placeholder="<spring:message code="lang.Address" />">
             </div>
           </div>
@@ -59,15 +69,8 @@
 
             <!-- CATEGORIES -->
             <div class="col-xs-4 form-control-wrap">
-                <select class="form-control"  ng-model="category" ng-options="category.title for category in categories" required>
-                  <option value="" selected="selected" disabled><spring:message code="lang.CategoryDefault" /></option>
-                </select>
-            </div>
-
-            <!-- REGION -->
-            <div class="col-xs-4 form-control-wrap">
-              <select class="form-control"  ng-model="region" ng-options="region.title for region in regions" required>
-                <option value="" selected="selected" disabled><spring:message code="lang.region" /></option>
+              <select class="form-control"  ng-model="category" ng-options="category.title for category in categories" required>
+                <option value="" selected="selected" disabled><spring:message code="lang.CategoryDefault" />*</option>
               </select>
             </div>
 
@@ -76,14 +79,16 @@
               <input type="text" class="form-control" placeholder="<spring:message code="lang.Title" />*" name="title" ng-model="title" required>
               <span ng-show="requestTicket.title.$dirty && requestTicket.title.$error.required" class="text-danger"><spring:message code="lang.required" /></span>
             </div>
-          </div>
 
+          </div>
           <div class="form-group row">
+
             <!-- DESCRIPTION -->
-            <div class="col-xs-8 form-control-wrap">
+            <div class="col-xs-12 form-control-wrap">
               <textarea class="form-control" rows="5" placeholder="<spring:message code="lang.Description" />*" name="description" ng-model="description" required></textarea>
               <span ng-show="requestTicket.description.$dirty && requestTicket.description.$error.required" class="text-danger"><spring:message code="lang.required" /></span>
             </div>
+
           </div>
 
 
