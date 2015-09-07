@@ -17,10 +17,10 @@
           <span aria-hidden="true">&#10007;</span>
           <span class="sr-only">Close</span>
         </button>
-        <h1 class="text-center">${vars.settings.site_title}</h1>
+        <div class="text-center">${vars.settings.site_title}</div>
       </header>
       <div class="modal-body">
-        ${vars.settings.site_description}
+        <div  class="text-center content">${vars.settings.site_description}</div>
         <img src="${resourceUrl}/img/animation/city.png"  class="img-responsive city-img" alt="Our city">
       </div>
 

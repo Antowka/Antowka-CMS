@@ -305,6 +305,17 @@ body {
   -webkit-animation: animateDay 12s infinite;
   animation: animateDay 12s infinite;
 }
+.index-about .modal-header h1 {
+  font-size: 28px;
+}
+.index-about h3 {
+  font-size: 18px;
+  font-weight: 300;
+}
+.index-about .content {
+  width: 80%;
+  margin: 0.2em auto 1em;
+}
 .index-form .agreement {
   line-height: 1em;
 }
@@ -377,13 +388,18 @@ body {
 .index-questions .ticket-preview a {
   text-decoration: none;
 }
-.index-questions .ticket-preview .caption {
+.index-questions .caption {
+  padding: 1em;
+  height: 5em;
+  overflow: hidden;
+}
+.index-questions .caption h3,
+.index-questions .caption h4 {
   font-size: 16px;
   margin: 0;
-  padding: 1em;
+}
+.index-questions .caption h3{
   text-transform: uppercase;
-  height: 4.1em;
-  overflow: hidden;
 }
 .index-questions .ticket-preview .btn {
   width: 100%;
@@ -458,7 +474,7 @@ body {
   border-top: 3px solid #3f51b5;
   padding: 2em 0 3em;
 }
-.success-modal {
+.success-modal .modal-dialog {
   width: 600px;
 }
 .success-modal h3 {
