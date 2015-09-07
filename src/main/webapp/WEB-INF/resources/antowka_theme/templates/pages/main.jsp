@@ -27,9 +27,10 @@
             <div ng-if="ticketItem.attachments.length > 0" style="background-image:url(${resourceUrl}/uploads/{{ticketItem.attachments[0].previewPath}})" class="tp-img"></div>
             <img ng-if="ticketItem.attachments.length == 0" src="${resourceUrl}/img/random/home175.png" class="no-image"/>
           </div>
-
-          <h3 class="caption">{{ticketItem.title}}</h3>
-          <h4>{{ticketItem.region.title}}</h4>
+          <div class="caption">
+            <h3>{{ticketItem.title}}</h3>
+            <h4>{{ticketItem.region.title}}</h4>
+          </div>
         </a>
       </article>
     </div>

@@ -38,24 +38,21 @@
       </div>
 
       <div class="modal-footer">
-          <div class="row">
-            <ul>
-              <li ng-repeat="attachment in ticket.attachments" >
+            <ul class="row list-unstyled text-center">
+              <li ng-repeat="attachment in ticket.attachments"  class="col-xs-3">
 
                 <!-- IF IMAGE -->
-                <a ng-if="attachment.isImage" href="/files/uploads/{{attachment.filePathInStorage}}" class="col-xs-3" target="_blank" data-lightbox="roadtrip">
+                <a ng-if="attachment.isImage" href="/files/uploads/{{attachment.filePathInStorage}}" target="_blank" data-lightbox="roadtrip">
                   <img src="/files/uploads/{{attachment.previewPath}}">
                 </a>
 
                 <!-- IF NO IMAGE -->
-                <a ng-if="!attachment.isImage" href="/files/uploads/{{attachment.filePathInStorage}}" class="col-xs-3" target="_blank">
+                <a ng-if="!attachment.isImage" href="/files/uploads/{{attachment.filePathInStorage}}" target="_blank">
                   <img src="/files/uploads/{{attachment.previewPath}}">
                 </a>
 
               </li>
             </ul>
-          </div>
-
       </div>
 
     </article>
