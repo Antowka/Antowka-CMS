@@ -101,14 +101,25 @@ CommissionApp.controller('TicketViewCtrl', function ($scope, $modal, dataService
                 scope: $scope,
                 resolve: {
                     ticket: function () {
-                        $scope.ticket = ticket;
+
 
                         ticket.attachments.forEach(function(attachment){
+
                             if(attachment.mimeType.indexOf("image/") > -1){
-                                $scope.mainAttachment = attachment;
-                                return false;
+
+                                //Main Preview
+                                if($scope.mainAttachment == null) {
+                                    $scope.mainAttachment = attachment;
+                                }
+
+                                attachment.isImage = true;
+                            }else{
+                                attachment.isImage = false;
                             }
                         });
+
+                        $scope.ticket = ticket;
+                        console.log($scope.ticket);
 
                         return ticket;
                     }

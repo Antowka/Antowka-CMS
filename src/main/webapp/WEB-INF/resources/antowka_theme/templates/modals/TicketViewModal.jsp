@@ -39,9 +39,21 @@
 
       <div class="modal-footer">
           <div class="row">
-            <a href="/files/uploads/{{attachment.filePathInStorage}}" class="col-xs-3" ng-repeat="attachment in ticket.attachments" target="_blank" data-lightbox="roadtrip">
-              <img src="/files/uploads/{{attachment.previewPath}}">
-            </a>
+            <ul>
+              <li ng-repeat="attachment in ticket.attachments" >
+
+                <!-- IF IMAGE -->
+                <a ng-if="attachment.isImage" href="/files/uploads/{{attachment.filePathInStorage}}" class="col-xs-3" target="_blank" data-lightbox="roadtrip">
+                  <img src="/files/uploads/{{attachment.previewPath}}">
+                </a>
+
+                <!-- IF NO IMAGE -->
+                <a ng-if="!attachment.isImage" href="/files/uploads/{{attachment.filePathInStorage}}" class="col-xs-3" target="_blank">
+                  <img src="/files/uploads/{{attachment.previewPath}}">
+                </a>
+
+              </li>
+            </ul>
           </div>
 
       </div>

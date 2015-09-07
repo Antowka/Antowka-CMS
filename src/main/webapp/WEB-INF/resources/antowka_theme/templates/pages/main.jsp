@@ -20,16 +20,16 @@
       <h4><spring:message code="lang.weGot" /> <strong>{{tickets.length}}</strong> <spring:message code="lang.tickets" /></h4>
     </header>
     <div class="row">
-      <article class="col-xs-2 col-sm-3 col-md-6 ticket-preview" ng-repeat="ticket in tickets" ng-controller="TicketViewCtrl">
-        <a class="link-to-ticket" id="ticket-{{ticket.ticketId}}" ng-click="open(ticket);">
+      <article class="col-xs-2 col-sm-3 col-md-6 ticket-preview" ng-repeat="ticketItem in tickets" ng-controller="TicketViewCtrl">
+        <a class="link-to-ticket" id="ticket-{{ticketItem.ticketId}}" ng-click="open(ticketItem);">
 
           <div  class="img-wrap">
-            <div ng-if="ticket.attachments.length > 0" style="background-image:url(${resourceUrl}/uploads/{{ticket.attachments[0].previewPath}})" class="tp-img"></div>
-            <img ng-if="ticket.attachments.length == 0" src="${resourceUrl}/img/random/home175.png" class="no-image"/>
+            <div ng-if="ticketItem.attachments.length > 0" style="background-image:url(${resourceUrl}/uploads/{{ticketItem.attachments[0].previewPath}})" class="tp-img"></div>
+            <img ng-if="ticketItem.attachments.length == 0" src="${resourceUrl}/img/random/home175.png" class="no-image"/>
           </div>
 
-          <h3 class="caption">{{ticket.title}}</h3>
-          <h4>{{ticket.region.title}}</h4>
+          <h3 class="caption">{{ticketItem.title}}</h3>
+          <h4>{{ticketItem.region.title}}</h4>
         </a>
       </article>
     </div>

@@ -12,6 +12,6 @@ public class Tickets {
     private TicketService ticketService;
 
     public void updateCounterInSettings(){
-        System.out.println("TEST CRON IN SPRING");
+        //System.out.println("TEST CRON IN SPRING");
     }
 }
