@@ -352,7 +352,6 @@ body {
 .index-form footer .btn {
   vertical-align: middle;
   margin-left: 2.5%;
-  width: 30%;
 }
 .modal-content {
   border: 0;
@@ -379,13 +378,12 @@ body {
   font-weight: 700;
 }
 .index-questions .ticket-preview {
-  background: #fff;
-  margin: 0 1% 2.5em;
-  padding: 0;
-  width: 23%;
-  cursor: pointer;
+  margin-bottom: 2.5em;
 }
 .index-questions .ticket-preview a {
+  cursor: pointer;
+  display: block;
+  background: #fff;
   text-decoration: none;
 }
 .index-questions .caption {
@@ -393,17 +391,14 @@ body {
   height: 6em;
   overflow: hidden;
 }
-.index-questions .caption h3,
-.index-questions .caption h4 {
+.index-questions .caption h3 {
   font-size: 15px;
-  display: inline;
-}
-.index-questions .caption h3{
+  margin: 0;
   text-transform: uppercase;
 }
-.index-questions .caption h4{
+.index-questions .caption h4 {
   color:#8c8c8c;
-  display: block;
+  font-size: 15px;
 }
 .index-questions .ticket-preview .btn {
   width: 100%;
@@ -425,8 +420,7 @@ body {
   height: 15vw;
 }
 .index-questions .img-wrap .tp-img {
-  height: 230px;
-  height: 15vw;
+  height: 100%;
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -487,4 +481,76 @@ body {
 .success-modal h2 {
   font-weight: 300;
   margin: 0.6em 0;
+}
+
+@media (max-width: 992px) {
+  .index-questions .caption h3 {
+    font-size: 14px;
+    text-transform: none;
+  }
+  .index-questions .caption h4 {
+    font-size: 13px;
+  }
+  .modal-dialog {
+    width: 700px;
+  }
+  .hero__title {
+    font-size: 4em;
+    padding: 1em;
+    top: 1em;
+  }
+  .hero {
+    min-height: 350px;
+  }
+}
+
+@media (max-width: 768px) {
+  .modal-header h1 {
+    font-size: 28px;
+  }
+  .modal-header h2,
+  .ticket-view .modal-header h2{
+    font-size: 18px;
+  }
+  .ticket-view .modal-body .img-wrap {
+    display: none;
+  }
+  .index-questions .img-wrap {
+    height: 30vw;
+  }
+  .modal-dialog {
+    width: 90%;
+    margin: auto;
+  }
+  .index-form .form-group {
+    margin-bottom: 0;
+  }
+  .index-form .form-control {
+    margin-bottom: 15px;
+  }
+  .index-form .address-input {
+    padding-left: 15px;
+  }
+  .hero {
+    background-image: none;
+    min-height: 0;
+  }
+  .hero__title {
+    font-size: 3.5em;
+    position: static;
+    margin: 0;
+    padding: 1em 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .index-questions .ticket-preview {
+    width: 100%;
+  }
+  .index-questions .caption {
+    height: auto;
+  }
+  .hero__title {
+    font-size: 2.5em;
+  }
 }
