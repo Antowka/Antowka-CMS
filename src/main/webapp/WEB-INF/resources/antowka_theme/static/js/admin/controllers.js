@@ -103,3 +103,31 @@ adminApp.controller('CloseTicketViewCtrl', function ($scope, $modalInstance) {
         $modalInstance.dismiss('cancel');
     };
 });
+
+
+/**
+ * Comments
+ */
+
+// Save form to the data
+adminApp.controller('comments', ['$scope','dataService', '$http', '$modal', function($scope, dataService){
+
+    //Create new comment for ticket
+    $scope.createComment = function(ticketId) {
+
+        var dataForComment = {
+            "title":            $scope.title,
+            "description":      $scope.description,
+            "ticket": {
+                "ticketId": ticketId
+            }
+        };
+
+        console.log(dataForComment);
+
+        dataService.createComment(dataForComment, function(newComment){
+            console.log(newComment);
+        });
+    };
+
+}]);

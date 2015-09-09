@@ -44,6 +44,7 @@
             </div>
 
             <div class="modal-footer">
+                <!-- IMAGES -->
                 <ul class="row list-unstyled text-center">
                     <li ng-repeat="attachment in ticket.attachments"  class="col-xs-3">
 
@@ -59,7 +60,19 @@
 
                     </li>
                 </ul>
+
+                <!-- COMMENTS -->
+                <div class="comments" ng-controller="comments">
+                    <form class="request-form"  role="form" name="requestTicket">
+                        <input type="text" placeholder="Title" ng-model="title">
+                        <textarea placeholder="Comment" ng-model="description"></textarea>
+                        <button ng-click="createComment(ticket.ticketId)">Send Comment</button>
+                    </form>
+                </div>
+
             </div>
+
+
 
         </article>
     </script>

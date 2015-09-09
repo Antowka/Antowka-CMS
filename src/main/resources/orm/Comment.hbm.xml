@@ -11,8 +11,13 @@
 
         <property name="title" column="title" type="java.lang.String" />
         <property name="description" column="description" type="java.lang.String" lazy="true" />
-        <property name="creationDate" column="creation_date" />
+        <property name="creationDate" column="creation_date" insert="false" update="false" />
 
+
+        <join table="tickets_comment" fetch="select" inverse="false">
+            <key column="comment_id" />
+            <many-to-one name="ticket" column="ticket_id" class="ru.antowka.entity.Ticket" />
+        </join>
 
     </class>
 </hibernate-mapping>

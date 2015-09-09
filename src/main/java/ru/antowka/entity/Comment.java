@@ -1,5 +1,8 @@
 package ru.antowka.entity;
 
+import com.fasterxml.jackson.annotation.*;
+import org.hibernate.annotations.BatchSize;
+
 import javax.persistence.Entity;
 import java.io.Serializable;
 
@@ -13,6 +16,10 @@ public class Comment implements Serializable {
     private String title;
     private String description;
     private String creationDate;
+
+    @JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="ticketId")
+    @JsonIdentityReference(alwaysAsId=true)
+    private Ticket ticket;
 
     public int getCommentId() {
         return commentId;
@@ -44,5 +51,13 @@ public class Comment implements Serializable {
 
     public void setCreationDate(String creationDate) {
         this.creationDate = creationDate;
+    }
+
+    public Ticket getTicket() {
+        return ticket;
+    }
+
+    public void setTicket(Ticket ticket) {
+        this.ticket = ticket;
     }
 }

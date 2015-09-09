@@ -29,7 +29,7 @@
             <many-to-many column="attachment_id" class="ru.antowka.entity.Attachment" />
         </set>
 
-        <set name="comments" table="tickets_comment" inverse="false" lazy="true" fetch="select" cascade="persist">
+        <set name="comments" table="tickets_comment" inverse="true" lazy="true" fetch="select" cascade="all">
             <key column="ticket_id" not-null="true" />
             <many-to-many column="comment_id" class="ru.antowka.entity.Comment" />
         </set>

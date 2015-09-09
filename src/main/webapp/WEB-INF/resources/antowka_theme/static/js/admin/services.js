@@ -55,4 +55,20 @@ adminApp.service('dataService', function($http) {
             console.log("error, you can't get ticket preview");
         });
     };
+
+    this.createComment = function(formData, callbackFunc){
+        $http({
+            url: 'panel/comments/create',
+            headers: {'Content-Type': 'application/json; charset=utf-8', 'X-CSRF-TOKEN': document.getElementById("csrf").value},
+            data: JSON.stringify(formData),
+            transformRequest: false,
+            method: 'POST'
+        })
+        .success(function(newComment){
+                callbackFunc(newComment);
+                console.log("CREATED COMMENT");
+        }).error(function(){
+            console.log("ERROR IN CREATE COMMENT");
+        });
+    };
 });

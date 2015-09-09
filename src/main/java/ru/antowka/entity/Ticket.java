@@ -1,5 +1,7 @@
 package ru.antowka.entity;
 
+import org.hibernate.annotations.BatchSize;
+
 import javax.persistence.Entity;
 import java.io.Serializable;
 import java.util.Set;
