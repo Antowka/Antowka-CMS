@@ -29,6 +29,11 @@
             <many-to-many column="attachment_id" class="ru.antowka.entity.Attachment" />
         </set>
 
+        <set name="comments" table="tickets_comment" inverse="false" lazy="true" fetch="select" cascade="persist">
+            <key column="ticket_id" not-null="true" />
+            <many-to-many column="comment_id" class="ru.antowka.entity.Comment" />
+        </set>
+
         <many-to-one name="status" column="ticket_status_id" class="ru.antowka.entity.TicketStatus" insert="false" update="true" />
 
         <many-to-one name="region" column="ticket_region_id" class="ru.antowka.entity.Region" lazy="false" />

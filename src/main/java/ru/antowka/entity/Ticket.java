@@ -1,11 +1,13 @@
 package ru.antowka.entity;
 
+import javax.persistence.Entity;
 import java.io.Serializable;
 import java.util.Set;
 
 /**
  * Created by anton on 06.08.15.
  */
+@Entity
 public class Ticket implements Serializable {
 
     private int ticketId;
@@ -23,6 +25,7 @@ public class Ticket implements Serializable {
     private boolean isDeleted = false;
     private Set<TicketCategory> categories;
     private Set<Attachment> attachments;
+    private Set<Comment> comments;
 
     public int getTicketId() {
         return ticketId;
@@ -142,5 +145,13 @@ public class Ticket implements Serializable {
 
     public void setAttachments(Set<Attachment> attachments) {
         this.attachments = attachments;
+    }
+
+    public Set<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(Set<Comment> comments) {
+        this.comments = comments;
     }
 }
