@@ -37,6 +37,7 @@ public class RegionDaoImpl implements RegionDao {
         Session session = hibernateSessionFactory.getSession();
         return (List<Region>)session.createCriteria(Region.class)
                                                     .addOrder(Order.desc("level"))
+                                                    .addOrder(Order.asc("title"))
                                                     .list();
     }
 

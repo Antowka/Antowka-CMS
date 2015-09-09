@@ -1,0 +1,1 @@
+var adminApp = angular.module('adminApp', ['ui.bootstrap',  'angularFileUpload']);

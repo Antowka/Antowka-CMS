@@ -4,8 +4,10 @@ import org.hibernate.criterion.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.antowka.dao.TicketDao;
+import ru.antowka.dao.TicketStatusDao;
 import ru.antowka.entity.MessageResponse;
 import ru.antowka.entity.Ticket;
+import ru.antowka.entity.TicketStatus;
 import ru.antowka.entity.User;
 
 import java.util.List;
@@ -21,6 +23,9 @@ public class TicketService {
 
     @Autowired
     private AttachmentService attachmentService;
+
+    @Autowired
+    private TicketStatusDao ticketStatusDao;
 
     @Autowired
     private MessageResponse messageResponse;
@@ -49,7 +54,17 @@ public class TicketService {
                 break;
         }
 
-        return ticketDao.getAllTickets(limit, offset, orderObj);
+        List<Ticket> tickets = ticketDao.getAllTickets(limit, offset, orderObj);
+
+        //cut long title
+        //todo - set 45 to properties
+        tickets.stream().forEach(ticket->{
+            if(ticket.getTitle().length() > 45) {
+                ticket.setTitle(trimString(ticket.getTitle(), 45, true));
+            }
+        });
+
+        return tickets;
     }
 
     public Ticket getTicketById(int ticketId){
@@ -101,5 +116,88 @@ public class TicketService {
         }
 
         return messageResponse;
+    }
+
+    /**
+     ************************************************ Admin Panel *****************************************************
+     */
+    public List<Ticket> getAllTicketsAdmin(int limit, int offset, String order, String orderField){
+
+        Order orderObj = null;
+
+        switch (order){
+            case "asc":
+
+                orderObj = Order.asc(orderField);
+
+                break;
+
+            case "desc":
+
+                orderObj = Order.desc(orderField);
+
+                break;
+
+            default:
+
+                orderObj = Order.desc(orderField);
+
+                break;
+        }
+
+        return ticketDao.getAllTicketsAdmin(limit, offset, orderObj);
+    }
+
+    public MessageResponse updateStatusOnTicketAdmin(int ticketId, int statusId){
+
+        Ticket ticket = ticketDao.findTicketByIdAdmin(ticketId);
+        TicketStatus status = ticketStatusDao.getStatusById(statusId);
+        ticket.setStatus(status);
+        ticketDao.updateTicketAdmin(ticket);
+
+
+
+        if(ticket.getTicketId() == ticketId) {
+
+            messageResponse.setCode(1);
+            messageResponse.setTitle("Successful");
+            messageResponse.setMessage("Your ticket #" + ticket.getTicketId() + " updated in system");
+        }else{
+
+            messageResponse.setCode(0);
+            messageResponse.setTitle("Ticket has not been updated");
+            messageResponse.setMessage("Your ticket #" + ticketId + " has not updated in system");
+        }
+
+        return messageResponse;
+    }
+
+    public Ticket getTicketByIdAdmin(int ticketId) {
+        Ticket ticket = ticketDao.findTicketByIdAdmin(ticketId);
+        return ticket;
+    }
+
+
+    /**
+     * *************************** PRIVATE METHODS **************************************
+     */
+    //todo - replace to static utils
+    private String trimString(String string, int length, boolean soft) {
+
+        if(string == null || string.trim().isEmpty()){
+            return string;
+        }
+
+        StringBuffer sb = new StringBuffer(string);
+        int actualLength = length - 3;
+        if(sb.length() > actualLength){
+            if(!soft) {
+                return sb.insert(actualLength, "...").substring(0, actualLength + 3);
+            } else {
+                int endIndex = sb.indexOf(" ",actualLength);
+                return sb.insert(endIndex,"...").substring(0, endIndex+3);
+            }
+        }
+        return string;
     }
 }

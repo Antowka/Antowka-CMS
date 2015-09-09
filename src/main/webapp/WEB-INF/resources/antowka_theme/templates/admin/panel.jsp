@@ -18,4 +18,36 @@
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
   </form>
 
+
+  <table class="table table-striped" ng-controller="ticketsCtrl">
+    <thead>
+      <tr>
+        <th ng-click="sortingListTicket('ticketId', true, 0)">#</th>
+        <th ng-click="sortingListTicket('status', true, 0)">Status</th>
+        <th ng-click="sortingListTicket('creationDate', true, 0)">Date</th>
+        <th ng-click="sortingListTicket('phone', true, 0)">Phone</th>
+        <th ng-click="sortingListTicket('title', true, 0)">Name</th>
+        <th ng-click="sortingListTicket('firstName', true, 0)">UserName</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+
+    <tbody ng-controller="ticketViewCtrl">
+      <tr ng-repeat="ticket in tickets" ng-dblclick="openTicket(ticket.ticketId)">
+        <td>{{ticket.ticketId}}</td>
+        <td>{{ticket.status.status}}</td>
+        <td>{{ticket.creationDate}}</td>
+        <td>{{ticket.phone}}</td>
+        <td>{{ticket.title}}</td>
+        <td>{{ticket.firstName}} {{ticket.lastName}}</td>
+        <td>
+          <span ng-click="publicTicket(ticket.ticketId)" class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+          |
+          <span ng-click="removeTicket(ticket.ticketId)" class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+        </td>
+      </tr>
+    </tbody>
+
+    </table>
+
 </sec:authorize>

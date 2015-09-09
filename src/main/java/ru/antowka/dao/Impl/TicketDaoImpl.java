@@ -1,6 +1,5 @@
 package ru.antowka.dao.Impl;
 
-import org.hibernate.FetchMode;
 import org.hibernate.Session;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
@@ -101,7 +100,6 @@ public class TicketDaoImpl implements TicketDao{
         return ticket;
     }
 
-
     @Override
     @Transactional
     @SuppressWarnings("unchecked")
@@ -126,6 +124,13 @@ public class TicketDaoImpl implements TicketDao{
         return (int)session.save(ticket);
     }
 
+
+
+
+    /**
+     ********************************************** Admin Panel ******************************************************
+     */
+
     @Override
     @SuppressWarnings("unchecked")
     @Transactional
@@ -146,5 +151,35 @@ public class TicketDaoImpl implements TicketDao{
         ticket.setAttachments(new HashSet<Attachment>(ticketAttachments));
 
         return ticket;
+    }
+
+    @Override
+    @Transactional
+    @SuppressWarnings("unchecked")
+    public List<Ticket> getAllTicketsAdmin(int limit, int offset, Order order) {
+
+        Session session = hibernateSessionFactory.getSession();
+
+        return  (List<Ticket>)session.createCriteria(Ticket.class, "ticket")
+                                                    .addOrder(order)
+                                                    .setFirstResult(offset)
+                                                    .setMaxResults(limit)
+                                                    .list();
+    }
+
+    @Override
+    @Transactional
+    public void updateTicketAdmin(Ticket ticket){
+
+        Session session = hibernateSessionFactory.getSession();
+        session.update(ticket);
+    }
+
+    @Override
+    @Transactional
+    public Ticket findTicketByIdAdmin(int ticketId){
+
+        Session session = hibernateSessionFactory.getSession();
+        return (Ticket)session.get(Ticket.class, ticketId);
     }
 }

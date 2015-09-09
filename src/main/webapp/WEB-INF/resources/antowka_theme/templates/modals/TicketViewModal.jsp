@@ -20,14 +20,12 @@
       </div>
       <div class="modal-body">
         <div class="row">
-          <div class="col-xs-5">
-
-            <div class="img-wrap no-image">
+          <div class="col-xs-4 img-wrap">
               <img ng-if="mainAttachment == null" src="${resourceUrl}/img/random/home175.png"/>
               <img ng-if="mainAttachment != null" src="${resourceUrl}/uploads/{{mainAttachment.previewPath}}"/>
-            </div></div>
+          </div>
 
-          <div class="col-xs-7">
+          <div class="col-xs-8">
             <h4>{{ticket.firstName}} <small class="date">{{formatDate(ticket.creationDate) |  date:"dd.MM.yyyy" }}</small> <span class="label label-status label-default pull-right">{{ticket.status.status}}</span></h4>
             <p class="small"><strong>Address:</strong> {{ticket.address}}</p>
             <div class="description">{{ticket.description}}</div>

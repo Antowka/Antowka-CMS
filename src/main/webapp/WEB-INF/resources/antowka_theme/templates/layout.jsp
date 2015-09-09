@@ -12,6 +12,7 @@
         <meta charset="UTF-8">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="<tiles:insertAttribute name="description" ignore="true" />">
 
         <spring:url value="/files" var="resourceUrl"/>
         <title><tiles:insertAttribute name="title" ignore="true" /></title>

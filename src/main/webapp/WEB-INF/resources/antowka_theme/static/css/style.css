@@ -390,16 +390,20 @@ body {
 }
 .index-questions .caption {
   padding: 1em;
-  height: 5em;
+  height: 6em;
   overflow: hidden;
 }
 .index-questions .caption h3,
 .index-questions .caption h4 {
-  font-size: 16px;
-  margin: 0;
+  font-size: 15px;
+  display: inline;
 }
 .index-questions .caption h3{
   text-transform: uppercase;
+}
+.index-questions .caption h4{
+  color:#8c8c8c;
+  display: block;
 }
 .index-questions .ticket-preview .btn {
   width: 100%;
@@ -456,9 +460,8 @@ body {
   width: 100%;
 }
 .ticket-view .modal-header h2 {
-  font-size: 20px;
+  font-size: 21px;
   text-align: left;
-  text-transform: uppercase;
 }
 .ticket-view .label-status {
   text-transform: lowercase;

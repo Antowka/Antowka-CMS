@@ -28,18 +28,6 @@
         </a>
       </div>
 
-      <!-- Collect the nav links, forms, and other content for toggling -->
-      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <ul class="nav navbar-nav navbar-right">
-          <li ng-controller="TicketFormCtrl">
-            <a ng-click="open()"><span class="glyphicon glyphicon-edit"></span> <spring:message code="lang.createTicket" /></a>
-          </li>
-          <li><a href="#questions"> <spring:message code="lang.openTickets" /></a></li>
-          <li ng-controller="AboutUsCtrl">
-            <a ng-click="open()"><span class="glyphicon glyphicon-info-sign"> </span> <spring:message code="lang.aboutUs" /></a>
-          </li>
-        </ul>
-      </div>
       <!-- /.navbar-collapse -->
     </div>
     <!-- /.container-fluid -->
