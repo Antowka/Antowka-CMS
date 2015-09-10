@@ -20,7 +20,7 @@
       <h4><spring:message code="lang.weGot" /> <strong>{{tickets.length}}</strong> <spring:message code="lang.tickets" /></h4>
     </header>
     <div class="row">
-      <article class="col-xs-2 col-sm-3 col-md-6 ticket-preview" ng-repeat="ticketItem in tickets" ng-controller="TicketViewCtrl">
+      <article class="col-xs-6 col-sm-4 col-md-3 ticket-preview" ng-repeat="ticketItem in tickets" ng-controller="TicketViewCtrl">
         <a class="link-to-ticket" id="ticket-{{ticketItem.ticketId}}" ng-click="open(ticketItem);">
 
           <div  class="img-wrap">

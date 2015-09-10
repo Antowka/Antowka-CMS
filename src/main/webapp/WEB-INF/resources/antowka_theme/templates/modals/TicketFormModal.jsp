@@ -22,21 +22,21 @@
           <div class="form-group row">
 
             <!-- EMAIL -->
-            <div class="col-xs-4 form-control-wrap">
+            <div class="col-xs-12 col-sm-4 form-control-wrap">
               <input type="text" class="form-control" placeholder="<spring:message code="lang.Email" />*" name="email" ng-model="email" checkemail required>
               <span ng-show="requestTicket.email.$dirty && requestTicket.email.$invalid && !requestTicket.email.$error.required" class="text-danger"><spring:message code="lang.InvalidEmail" /></span>
               <span ng-show="requestTicket.email.$dirty && requestTicket.email.$error.required" class="text-danger"><spring:message code="lang.required" /></span>
             </div>
 
             <!-- NAME -->
-            <div class="col-xs-4 form-control-wrap">
+            <div class="col-xs-12 col-sm-4 form-control-wrap">
               <input type="text" class="form-control" placeholder="<spring:message code="lang.FirstName" />*" name="name" ng-model="name" checkname required>
               <span ng-show="requestTicket.name.$error.checkname" class="text-danger"><spring:message code="lang.InvalidFullName" /></span>
               <span ng-show="requestTicket.name.$dirty && requestTicket.name.$error.required" class="text-danger"><spring:message code="lang.required" /></span>
             </div>
 
             <!-- SURNAME -->
-            <div class="col-xs-4 form-control-wrap">
+            <div class="col-xs-12 col-sm-4 form-control-wrap">
               <input type="text" class="form-control" placeholder="<spring:message code="lang.Surname" />*" name="surname" ng-model="surname" checkName required>
               <span ng-show="requestTicket.surname.$error.checkname" class="text-danger"><spring:message code="lang.InvalidFullName" /></span>
               <span ng-show="requestTicket.surname.$dirty && requestTicket.surname.$error.required" class="text-danger"><spring:message code="lang.required" /></span>
@@ -46,35 +46,35 @@
           <div class="form-group row">
 
             <!-- PHONE -->
-            <div class="col-xs-4 form-control-wrap">
+            <div class="col-xs-12 col-sm-4 form-control-wrap">
               <input type="text" class="form-control" placeholder="<spring:message code="lang.Phone" />*" name="phone" ng-model="phone" checkphone required>
               <span ng-show="requestTicket.phone.$dirty && requestTicket.phone.$invalid && !requestTicket.phone.$error.required" class="text-danger"><spring:message code="lang.InvalidPhone" /></span>
               <span ng-show="requestTicket.phone.$dirty && requestTicket.phone.$error.required" class="text-danger"><spring:message code="lang.required" /></span>
             </div>
 
             <!-- REGION -->
-            <div class="col-xs-3 form-control-wrap">
+            <div class="col-xs-12 col-sm-3 form-control-wrap">
               <select class="form-control"  ng-model="region" ng-options="region.title for region in regions" required>
                 <option value="" selected="selected" disabled><spring:message code="lang.region" />*</option>
               </select>
             </div>
 
             <!-- ADDRESS -->
-            <div class="col-xs-5 form-control-wrap address-input">
+            <div class="col-xs-12 col-sm-5 form-control-wrap address-input">
               <input type="text" name="address" ng-model="address" class="form-control" placeholder="<spring:message code="lang.Address" />">
             </div>
           </div>
           <div class="form-group row">
 
             <!-- CATEGORIES -->
-            <div class="col-xs-4 form-control-wrap">
+            <div class="col-xs-12 col-sm-4 form-control-wrap">
               <select class="form-control"  ng-model="category" ng-options="category.title for category in categories" required>
                 <option value="" selected="selected" disabled><spring:message code="lang.CategoryDefault" />*</option>
               </select>
             </div>
 
             <!-- TITLE -->
-            <div class="col-xs-8 form-control-wrap">
+            <div class="col-xs-12 col-sm-8 form-control-wrap">
               <input type="text" class="form-control" placeholder="<spring:message code="lang.Title" />*" name="title" ng-model="title" required>
               <span ng-show="requestTicket.title.$dirty && requestTicket.title.$error.required" class="text-danger"><spring:message code="lang.required" /></span>
             </div>
