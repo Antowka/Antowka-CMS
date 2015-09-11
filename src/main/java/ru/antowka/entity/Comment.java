@@ -17,6 +17,10 @@ public class Comment implements Serializable {
     private String description;
     private String creationDate;
 
+    @JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="userId,firstName,lastName,login")
+    @JsonIdentityReference(alwaysAsId=true)
+    private User user;
+
     @JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="ticketId")
     @JsonIdentityReference(alwaysAsId=true)
     private Ticket ticket;
@@ -59,5 +63,13 @@ public class Comment implements Serializable {
 
     public void setTicket(Ticket ticket) {
         this.ticket = ticket;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

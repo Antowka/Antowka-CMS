@@ -1,13 +1,17 @@
 package ru.antowka.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.Entity;
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
 /**
  * Created by anton on 25.07.15.
  */
-
-public class User {
+@Entity
+public class User implements Serializable{
 
     private Integer userId;
     private String firstName;

@@ -32,7 +32,7 @@ public class CommentDaoImpl implements CommentDao{
 
         Integer commentId = (Integer)session.save(comment);
 
-         comment = (Comment)session.createCriteria(Comment.class, "comment")
+        comment = (Comment)session.createCriteria(Comment.class, "comment")
                                 .add(Restrictions.eq("comment.commentId", commentId))
                                 .setProjection(Projections.projectionList()
                                                 .add(Projections.property("comment.commentId"), "commentId")

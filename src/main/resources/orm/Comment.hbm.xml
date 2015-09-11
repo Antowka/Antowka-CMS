@@ -13,6 +13,7 @@
         <property name="description" column="description" type="java.lang.String" lazy="true" />
         <property name="creationDate" column="creation_date" insert="false" update="false" />
 
+        <many-to-one name="user" column="user_owner_id" class="ru.antowka.entity.User" />
 
         <join table="tickets_comment" fetch="select" inverse="false">
             <key column="comment_id" />
