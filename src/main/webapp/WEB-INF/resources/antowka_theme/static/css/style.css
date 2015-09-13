@@ -395,10 +395,13 @@ body {
   font-size: 15px;
   margin: 0;
   text-transform: uppercase;
+  height: 2.2em;
+  overflow: hidden;
 }
 .index-questions .caption h4 {
   color:#8c8c8c;
   font-size: 15px;
+  margin-top:0.5em;
 }
 .index-questions .ticket-preview .btn {
   width: 100%;

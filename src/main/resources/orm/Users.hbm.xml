@@ -1,30 +1,26 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
 <hibernate-mapping>
 
-    <class name="ru.antowka.entity.User" table="users">
+    <class name="ru.antowka.entity.User" table="users" lazy="true">
 
-        <id name="login" type="string">
-            <column name="login" length="45" />
-            <generator class="assigned" />
+        <id name="userId" column="user_id" type="java.lang.Integer">
+            <generator class="identity" />
         </id>
 
-        <property name="userId" type="integer" column="user_id" />
-
-        <property name="password" type="string">
-            <column name="password" length="60" not-null="true" />
-        </property>
-
-        <property name="enable" type="boolean">
-            <column name="enable" not-null="true" />
-        </property>
+        <property name="login" column="login" type="java.lang.String" length="45" />
+        <property name="password" column="password" length="60" not-null="true" type="string" />
+        <property name="email" column="email" type="java.lang.String" />
+        <property name="firstName" column="first_name" type="java.lang.String" />
+        <property name="lastName" column="last_name" type="java.lang.String" />
+        <property name="enable" type="boolean" column="enable" not-null="true" />
 
         <set name="userRoles" table="user_role" cascade="all" inverse="true" lazy="false" fetch="select">
-            <key column="user_id" property-ref="userId" />
+            <key column="user_id" />
             <one-to-many class="ru.antowka.entity.UserRole" />
         </set>
-
     </class>
 
 </hibernate-mapping>

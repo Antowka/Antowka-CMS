@@ -1,6 +1,7 @@
 package ru.antowka.dao.Impl;
 
 import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import ru.antowka.dao.HibernateSessionFactory;
@@ -24,7 +25,8 @@ public class UserDaoImpl implements UserDao{
     public User findByUserName(String login) {
 
         Session session = hibernateSessionFactory.getSession();
-        User user = (User) session.get(User.class, login);
-        return user;
+        return (User) session.createCriteria(User.class)
+                                    .add(Restrictions.eq("login", login))
+                                    .uniqueResult();
     }
 }

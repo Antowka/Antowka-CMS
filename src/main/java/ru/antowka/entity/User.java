@@ -1,6 +1,9 @@
 package ru.antowka.entity;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.Entity;
 import java.io.Serializable;
@@ -13,21 +16,24 @@ import java.util.Set;
 @Entity
 public class User implements Serializable{
 
-    private Integer userId;
+    private int userId;
     private String firstName;
     private String lastName;
     private String login;
+
+    @JsonIgnore
     private String password;
+
     private String email;
     private Set<UserRole> userRoles = new HashSet<UserRole>(0);
     private boolean enable;
 
 
-    public Integer getUserId() {
+    public int getUserId() {
         return userId;
     }
 
-    public void setUserId(Integer userId) {
+    public void setUserId(int userId) {
         this.userId = userId;
     }
 
