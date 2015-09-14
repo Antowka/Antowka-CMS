@@ -59,9 +59,10 @@ adminApp.controller('ticketsCtrl', function ($scope, dataService){
  * Open ticket modal
  */
 adminApp.controller('ticketViewCtrl', function ($scope, $modal, dataService, $filter){
-    $scope.mainAttachment = null;
 
     $scope.openTicket = function (ticketId) {
+
+        $scope.mainAttachment = null;
 
         dataService.getTicketsById(ticketId, function(ticket){
 
