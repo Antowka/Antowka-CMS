@@ -58,7 +58,7 @@
                 <h4>{{comment.title}}</h4>
                 <span>{{comment.creationDate}}</span>
                 <span>{{comment.description}}</span>
-                <span>Прокоментировал: {{comment.user.firstName}} {{comment.user.lastName}}</span>
+                <span>{{comment.user.firstName}} {{comment.user.lastName}}</span>
               </li>
             </ul>
       </div>

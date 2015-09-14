@@ -61,16 +61,25 @@ public class CommentDaoImpl implements CommentDao{
 
         Session session = hibernateSessionFactory.getSession();
 
-        return null;
+        Comment comment = getCommentById(commentId);
+        session.delete(comment);
+        comment.setIsDeleted(true);
+
+        return comment;
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     @Transactional
     public List<Comment> getCommentsByTicketId(int ticketId) {
 
         Session session = hibernateSessionFactory.getSession();
 
-        return null;
+        return (List<Comment>)session.createSQLQuery("SELECT cmts.*, t_cmt.ticket_id FROM comments cmts " +
+                "INNER JOIN tickets_comment t_cmt ON cmts.comment_id = t_cmt.comment_id " +
+                "WHERE t_cmt.ticket_id="+ticketId)
+                .addEntity(Comment.class)
+                .list();
     }
 
     @Override
@@ -78,7 +87,6 @@ public class CommentDaoImpl implements CommentDao{
     public Comment getCommentById(int commentId) {
 
         Session session = hibernateSessionFactory.getSession();
-
-        return null;
+        return (Comment)session.get(Comment.class, commentId);
     }
 }

@@ -20,6 +20,7 @@ public class Comment implements Serializable {
     private String description;
     private String creationDate;
     private User user;
+    private boolean isDeleted;
 
     @JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="ticketId")
     @JsonIdentityReference(alwaysAsId=true)
@@ -71,5 +72,13 @@ public class Comment implements Serializable {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public boolean isDeleted() {
+        return isDeleted;
+    }
+
+    public void setIsDeleted(boolean isDeleted) {
+        this.isDeleted = isDeleted;
     }
 }

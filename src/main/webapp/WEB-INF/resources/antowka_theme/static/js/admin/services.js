@@ -71,4 +71,30 @@ adminApp.service('dataService', function($http) {
             console.log("ERROR IN CREATE COMMENT");
         });
     };
+
+    this.removeCommentById = function(commentId, callbackFunc) {
+
+        $http({
+            method: 'GET',
+            url: 'panel/comments/remove/' + commentId
+        }).success(function(data){
+            // With the data succesfully returned, call our callback
+            callbackFunc(data);
+        }).error(function(){
+            console.log("error, you can't remove commentID #" + commentId);
+        });
+    };
+
+    this.getCommentsByTaskId = function(ticketId, callbackFunc) {
+
+        $http({
+            method: 'GET',
+            url: 'panel/comments/getByTask/' + ticketId
+        }).success(function(data){
+            // With the data succesfully returned, call our callback
+            callbackFunc(data);
+        }).error(function(){
+            console.log("error, you can't get comments for Ticket #" + ticketId);
+        });
+    };
 });

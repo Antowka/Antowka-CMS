@@ -115,7 +115,15 @@ adminApp.controller('CloseTicketViewCtrl', function ($scope, $modalInstance) {
  */
 
 // Save form to the data
-adminApp.controller('comments', ['$scope','dataService', '$http', '$modal', function($scope, dataService){
+adminApp.controller('commentsCtrl', ['$scope','dataService', '$http', '$modal', function($scope, dataService){
+
+    $scope.updateCommentslist = function(ticketId) {
+        dataService.getCommentsByTaskId(ticketId, function (comments) {
+            $scope.comments = comments;
+        });
+    };
+
+    $scope.updateCommentslist($scope.$parent.$parent.ticket.ticketId);
 
     //Create new comment for ticket
     $scope.createComment = function(ticketId) {
@@ -128,11 +136,16 @@ adminApp.controller('comments', ['$scope','dataService', '$http', '$modal', func
             }
         };
 
-        console.log(dataForComment);
-
         dataService.createComment(dataForComment, function(newComment){
-            console.log(newComment);
+            $scope.updateCommentslist(ticketId);
         });
     };
 
+    //Remove Comment
+    $scope.removeComment = function(ticketId, commentId){
+
+        dataService.removeCommentById(commentId, function(data){
+            $scope.updateCommentslist(ticketId);
+        });
+    }
 }]);

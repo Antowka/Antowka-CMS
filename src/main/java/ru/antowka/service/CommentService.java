@@ -9,6 +9,8 @@ import ru.antowka.entity.Comment;
 import ru.antowka.entity.MessageResponse;
 import ru.antowka.entity.User;
 
+import java.util.List;
+
 /**
  * Created by Anton Nik on 09.09.15.
  */
@@ -20,6 +22,9 @@ public class CommentService {
 
     @Autowired
     private UserDao userDao;
+
+    @Autowired
+    private MessageResponse messageResponse;
 
     public Comment createComment(Comment comment){
 
@@ -35,12 +40,28 @@ public class CommentService {
 
     public MessageResponse removeComment(int commentId){
 
-        commentDao.removeComment(commentId);
+        Comment comment = commentDao.removeComment(commentId);
 
-        return null;
+        if(comment.isDeleted()){
+
+            messageResponse.setCode(1);
+            messageResponse.setTitle("Successful");
+            messageResponse.setMessage("Your ticket #" + comment.getCommentId() + " updated in system");
+        }else{
+
+            messageResponse.setCode(0);
+            messageResponse.setTitle("Comment has not been updated");
+            messageResponse.setMessage("Your comment #" + comment.getCommentId() + " removed from system");
+        }
+
+        return messageResponse;
     }
 
     public Comment updateComment(Comment comment){
         return commentDao.updateComment(comment);
+    }
+
+    public List<Comment> getCommentsByTicketId(int ticketId){
+        return commentDao.getCommentsByTicketId(ticketId);
     }
 }
