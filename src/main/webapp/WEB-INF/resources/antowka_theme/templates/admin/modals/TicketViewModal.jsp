@@ -62,6 +62,16 @@
                 </ul>
 
                 <!-- COMMENTS -->
+                <ul>
+                    <li ng-repeat="comment in ticket.comments">
+                        <h4>{{comment.title}}</h4>
+                        <span>{{comment.creationDate | date:'dd/MM/yyyy'}}</span>
+                        <span>{{comment.description}}</span>
+                        <span>Прокоментировал: {{comment.user.firstName}} {{comment.user.lastName}}</span>
+                    </li>
+                </ul>
+
+                <!-- COMMENTS FORM -->
                 <div class="comments" ng-controller="comments">
                     <form class="request-form"  role="form" name="requestTicket">
                         <input type="text" placeholder="Title" ng-model="title">

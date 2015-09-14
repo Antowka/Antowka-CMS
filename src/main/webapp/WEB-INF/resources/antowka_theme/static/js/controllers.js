@@ -33,8 +33,6 @@ CommissionApp.controller('ShowTicketsCtrl', function ($scope, dataService){
 
 });
 
-// MODALS
-
 // Controllers for Request Form Modal
 CommissionApp.controller('TicketFormCtrl', function ($scope, $modal) {
     $scope.open = function (size) {
@@ -45,6 +43,7 @@ CommissionApp.controller('TicketFormCtrl', function ($scope, $modal) {
         });
     };
 });
+
 CommissionApp.controller('CloseTicketFormCtrl', function ($scope, $modalInstance, dataService) {
 
     $scope.attachments = [];
@@ -80,6 +79,7 @@ CommissionApp.controller('AboutUsCtrl', function ($scope, $modal) {
         });
     };
 });
+
 CommissionApp.controller('CloseAboutUsCtrl', function ($scope, $modalInstance) {
     $scope.cancel = function () {
         $modalInstance.dismiss('cancel');
@@ -87,7 +87,7 @@ CommissionApp.controller('CloseAboutUsCtrl', function ($scope, $modalInstance) {
 });
 
 // Controllers for Request View Modal
-CommissionApp.controller('TicketViewCtrl', function ($scope, $modal, dataService) {
+CommissionApp.controller('TicketViewCtrl', function ($scope, $modal, dataService, $filter) {
 
     $scope.mainAttachment = null;
 
@@ -118,6 +118,11 @@ CommissionApp.controller('TicketViewCtrl', function ($scope, $modal, dataService
                             }
                         });
 
+                        //change date and time format
+                        ticket.comments.forEach(function(comment){
+                            comment.creationDate = $filter('date')(new Date(comment.creationDate), 'dd-MM-yyyy H:m:s');
+                        });
+
                         $scope.ticket = ticket;
                         console.log($scope.ticket);
 
@@ -128,12 +133,12 @@ CommissionApp.controller('TicketViewCtrl', function ($scope, $modal, dataService
         });
     };
 });
+
 CommissionApp.controller('CloseTicketViewCtrl', function ($scope, $modalInstance) {
     $scope.cancel = function () {
         $modalInstance.dismiss('cancel');
     };
 });
-
 
 // Save form to the data
 CommissionApp.controller('sendFormCtrl', ['$scope','dataService', '$http', 'FileUploader', '$modal', function($scope, dataService, $http, FileUploader, $modal){
@@ -301,7 +306,6 @@ CommissionApp.controller('sendFormCtrl', ['$scope','dataService', '$http', 'File
             };
     //******************************* End Upload Files ****************************************
 }]);
-
 
 CommissionApp.controller('CloseSuccessCtrl', function ($scope, $modalInstance) {
     $scope.cancel = function () {

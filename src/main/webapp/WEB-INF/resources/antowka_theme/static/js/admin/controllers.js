@@ -58,7 +58,7 @@ adminApp.controller('ticketsCtrl', function ($scope, dataService){
 /**
  * Open ticket modal
  */
-adminApp.controller('ticketViewCtrl', function ($scope, $modal, dataService){
+adminApp.controller('ticketViewCtrl', function ($scope, $modal, dataService, $filter){
     $scope.mainAttachment = null;
 
     $scope.openTicket = function (ticketId) {
@@ -86,6 +86,11 @@ adminApp.controller('ticketViewCtrl', function ($scope, $modal, dataService){
                             }else{
                                 attachment.isImage = false;
                             }
+                        });
+
+                        //change date and time format
+                        ticket.comments.forEach(function(comment){
+                            comment.creationDate = $filter('date')(new Date(comment.creationDate), 'dd-MM-yyyy H:m:s');
                         });
 
                         $scope.ticket = ticket;

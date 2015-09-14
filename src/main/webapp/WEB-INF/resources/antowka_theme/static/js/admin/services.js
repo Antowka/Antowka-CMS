@@ -23,7 +23,6 @@ adminApp.service('dataService', function($http) {
             method: 'GET',
             url: 'panel/tickets/ticket/' + ticketId
         }).success(function(data){
-            console.log(data);
             // With the data succesfully returned, call our callback
             callbackFunc(data);
         }).error(function(){

@@ -1,10 +1,13 @@
 package ru.antowka.entity;
 
 import com.fasterxml.jackson.annotation.*;
-import org.hibernate.annotations.BatchSize;
 
 import javax.persistence.Entity;
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 /**
  * Created by Anton Nik on 09.09.15.

@@ -94,9 +94,11 @@ public class TicketDaoImpl implements TicketDao{
                                                                             .add(Restrictions.eq("tickets.ticketId", ticketId))
                                                                             .list();
 
-        List<Comment> comments = (List<Comment>)session.createSQLQuery("SELECT cmts.* FROM comments cmts " +
+        List<Comment> comments = (List<Comment>)session.createSQLQuery("SELECT cmts.*, t_cmt.ticket_id FROM comments cmts " +
                                                                        "INNER JOIN tickets_comment t_cmt ON cmts.comment_id = t_cmt.comment_id " +
-                                                                       "WHERE t_cmt.ticket_id="+ticketId).list();
+                                                                       "WHERE t_cmt.ticket_id="+ticketId)
+                                                                        .addEntity(Comment.class)
+                                                                        .list();
 
         ticket.setCategories(new HashSet<TicketCategory>(ticketCategories));
         ticket.setAttachments(new HashSet<Attachment>(ticketAttachments));

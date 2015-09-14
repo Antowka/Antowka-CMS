@@ -51,6 +51,16 @@
 
               </li>
             </ul>
+
+            <!-- COMMENTS -->
+            <ul>
+              <li ng-repeat="comment in ticket.comments">
+                <h4>{{comment.title}}</h4>
+                <span>{{comment.creationDate}}</span>
+                <span>{{comment.description}}</span>
+                <span>Прокоментировал: {{comment.user.firstName}} {{comment.user.lastName}}</span>
+              </li>
+            </ul>
       </div>
 
     </article>
