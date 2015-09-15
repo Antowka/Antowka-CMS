@@ -13,7 +13,7 @@
 
        <security:http auto-config="true" use-expressions="true">
            <security:intercept-url pattern="/login"      access="isAnonymous()" />
-           <security:intercept-url pattern="/panel/**"    access="hasRole('ROLE_ADMIN')" />
+           <security:intercept-url pattern="/panel/**"   access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')" />
 
            <!-- access denied page -->
            <security:access-denied-handler error-page="/403" />

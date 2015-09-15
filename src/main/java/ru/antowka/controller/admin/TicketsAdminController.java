@@ -1,6 +1,7 @@
 package ru.antowka.controller.admin;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 import ru.antowka.entity.MessageResponse;
 import ru.antowka.entity.Ticket;
@@ -58,6 +59,7 @@ public class TicketsAdminController {
      * @param ticketId
      * @return
      */
+    @Secured("ROLE_ADMIN")
     @RequestMapping(value="remove/{ticketId}", method=RequestMethod.GET)
     public @ResponseBody MessageResponse removeTicket(@PathVariable("ticketId") int ticketId) {
         return ticketService.removeTicket(ticketId);
