@@ -1,0 +1,10 @@
+.comments {
+    text-align: left;
+    margin-top: 2em;
+}
+.comment__info-avatar {
+    max-width: 100%;
+}
+.comment__description {
+    margin-top: 1em;
+}

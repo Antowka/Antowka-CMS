@@ -53,12 +53,19 @@
             </ul>
 
             <!-- COMMENTS -->
-            <ul>
-              <li ng-repeat="comment in ticket.comments">
-                <h4>{{comment.title}}</h4>
-                <span>{{comment.creationDate}}</span>
-                <span>{{comment.description}}</span>
-                <span>{{comment.user.firstName}} {{comment.user.lastName}}</span>
+            <ul class="list-unstyled comments">
+              <li ng-repeat="comment in ticket.comments" class="comment well">
+                <h3 class="comment__title">{{comment.title}}</h3>
+                <div class="row">
+                  <div class="comment__info col-xs-12 col-sm-3">
+                    <div class="comment__info-avatar">
+                      <span class="glyphicon glyphicon-user default-avatar"></span>
+                    </div>
+                    <div class="comment__info-author"><strong>{{comment.user.firstName}} {{comment.user.lastName}}</strong></div>
+                    <div class="comment__info-date">{{comment.creationDate}}</div>
+                  </div>
+                  <div class="comment__description col-xs-12 col-sm-9">{{comment.description}}</div>
+                </div>
               </li>
             </ul>
       </div>

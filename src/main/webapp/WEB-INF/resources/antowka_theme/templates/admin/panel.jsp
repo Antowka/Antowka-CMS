@@ -7,6 +7,8 @@
   Time: 2:30
   To change this template use File | Settings | File Templates.
 --%>
+
+<div class="container-fluid">
 <h1>Wellcome to Admin Panel</h1>
 
 <sec:authorize access="isAuthenticated()">
@@ -51,3 +53,4 @@
     </table>
 
 </sec:authorize>
+</div>

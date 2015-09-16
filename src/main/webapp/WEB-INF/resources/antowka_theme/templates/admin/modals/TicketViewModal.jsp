@@ -63,22 +63,36 @@
 
                 <!-- COMMENTS -->
                 <div ng-controller="commentsCtrl">
-                    <ul>
-                        <li ng-repeat="comment in comments">
-                            <h4>{{comment.title}}</h4>
-                            <span>{{comment.creationDate | date:'dd/MM/yyyy'}}</span>
-                            <span>{{comment.description}}</span>
-                            <span>{{comment.user.firstName}} {{comment.user.lastName}}</span>
-                            <span class="glyphicon glyphicon-remove" aria-hidden="true" ng-click="removeComment(ticket.ticketId, comment.commentId)"></span>
+
+                    <!-- COMMENTS -->
+                    <ul class="list-unstyled comments">
+                        <li ng-repeat="comment in comments" class="comment well">
+                            <h3 class="comment__title">{{comment.title}}
+                                <span class="glyphicon glyphicon-remove pull-right" aria-hidden="true" ng-click="removeComment(ticket.ticketId, comment.commentId)"></span>
+                            </h3>
+                            <div class="row">
+                                <div class="comment__info col-xs-12 col-sm-3">
+                                    <div class="comment__info-avatar">
+                                        <span class="glyphicon glyphicon-user default-avatar"></span>
+                                    </div>
+                                    <div class="comment__info-author"><strong>{{comment.user.firstName}} {{comment.user.lastName}}</strong></div>
+                                    <div class="comment__info-date">{{comment.creationDate}}</div>
+                                </div>
+                                <div class="comment__description col-xs-12 col-sm-9">{{comment.description}}</div>
+                            </div>
                         </li>
                     </ul>
 
                     <!-- COMMENTS FORM -->
                     <div class="comments-form">
                         <form class="request-form"  role="form" name="requestTicket">
-                            <input type="text" placeholder="Title" ng-model="title">
-                            <textarea placeholder="Comment" ng-model="description"></textarea>
-                            <button ng-click="createComment(ticket.ticketId)">Send Comment</button>
+                            <div class="form-group">
+                                <input  class="form-control" type="text" placeholder="Title" ng-model="title">
+                            </div>
+                            <div class="form-group">
+                                <textarea class="form-control" rows="3" placeholder="Comment" ng-model="description"></textarea>
+                            </div>
+                            <button class="btn btn-primary" ng-click="createComment(ticket.ticketId)">Send Comment</button>
                         </form>
                     </div>
                 </div>
