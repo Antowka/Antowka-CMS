@@ -8,6 +8,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Set;
 
 /**
  * Created by Anton Nik on 09.09.15.
@@ -21,6 +22,7 @@ public class Comment implements Serializable {
     private String creationDate;
     private User user;
     private boolean isDeleted;
+    private Set<Attachment> attachments;
 
     @JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="ticketId")
     @JsonIdentityReference(alwaysAsId=true)
@@ -64,6 +66,14 @@ public class Comment implements Serializable {
 
     public void setTicket(Ticket ticket) {
         this.ticket = ticket;
+    }
+
+    public Set<Attachment> getAttachments() {
+        return attachments;
+    }
+
+    public void setAttachments(Set<Attachment> attachments) {
+        this.attachments = attachments;
     }
 
     public User getUser() {

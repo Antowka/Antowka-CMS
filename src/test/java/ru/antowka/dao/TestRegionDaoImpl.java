@@ -7,16 +7,13 @@ import org.junit.Assert;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import ru.antowka.entity.MessageResponse;
 import ru.antowka.entity.Region;
+import ru.antowka.service.RegionService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@TestPropertySource(locations = {
-        "file:src/main/webapp/WEB-INF/properties/main.properties",
-        "file:src/main/webapp/WEB-INF/properties/db.properties"
-})
 @ContextConfiguration(locations = {
         "file:src/main/webapp/WEB-INF/config/main-config.xml",
         "file:src/main/webapp/WEB-INF/config/database-config.xml",
@@ -28,7 +25,7 @@ import ru.antowka.entity.Region;
 public class TestRegionDaoImpl {
 
     @Autowired
-    private RegionDao regionDao;
+    private RegionService regionService;
 
     @Test
     public void testCreateRegion(){
@@ -36,9 +33,7 @@ public class TestRegionDaoImpl {
         Region region = new Region();
         region.setTitle("test title");
         region.setDescription("Test description");
-
-        int regionId = regionDao.createRegion(region).getRegionId();
-
-        Assert.assertTrue(regionId > 0);
+        MessageResponse resalt = regionService.createRegion(region);
+        Assert.assertTrue(resalt.getCode() == 0);
     }
 }

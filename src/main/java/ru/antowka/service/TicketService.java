@@ -60,7 +60,7 @@ public class TicketService {
         //todo - set 45 to properties
         tickets.stream().forEach(ticket->{
             if(ticket.getTitle().length() > 45) {
-                ticket.setTitle(trimString(ticket.getTitle(), 45, true));
+                ticket.setTitle(trimString(ticket.getTitle(), 45, false));
             }
         });
 
@@ -173,8 +173,7 @@ public class TicketService {
     }
 
     public Ticket getTicketByIdAdmin(int ticketId) {
-        Ticket ticket = ticketDao.findTicketByIdAdmin(ticketId);
-        return ticket;
+        return ticketDao.findTicketByIdAdmin(ticketId);
     }
 
 
