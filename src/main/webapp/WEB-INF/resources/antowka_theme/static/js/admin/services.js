@@ -97,4 +97,16 @@ adminApp.service('dataService', function($http) {
             console.log("error, you can't get comments for Ticket #" + ticketId);
         });
     };
+
+    this.removeAttachment = function(attachmentId, callbackFunc){
+        $http({
+            method: 'GET',
+            url: 'attachments/remove/?attachmentId='+attachmentId
+        }).success(function(data){
+            // With the data succesfully returned, call our callback
+            callbackFunc(data);
+        }).error(function(){
+            console.log("error, you can't get ticket");
+        });
+    }
 });

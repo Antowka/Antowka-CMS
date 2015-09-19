@@ -15,7 +15,7 @@
 
         <many-to-one name="user" column="user_owner_id" class="ru.antowka.entity.User" lazy="false" />
 
-        <set name="attachments" table="comments_attachment" inverse="true" lazy="true" fetch="select" cascade="all">
+        <set name="attachments" table="comments_attachment" inverse="false" lazy="true" fetch="select" cascade="all">
             <key column="comment_id" not-null="true" />
             <many-to-many column="attachment_id" class="ru.antowka.entity.Attachment" />
         </set>

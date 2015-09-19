@@ -89,12 +89,21 @@ adminApp.controller('ticketViewCtrl', function ($scope, $modal, dataService, $fi
                             }
                         });
 
+                        //set status IMAGE OR NOT on comment attachment
+                        ticket.comments.forEach(function(comment){
+                            comment.attachments.forEach(function(attachment){
+                                attachment.isImage = attachment.mimeType.indexOf("image/") > -1;
+                            });
+                        });
+
                         //change date and time format
                         ticket.comments.forEach(function(comment){
                             comment.creationDate = $filter('date')(new Date(comment.creationDate), 'dd-MM-yyyy H:m:s');
                         });
 
                         $scope.ticket = ticket;
+
+                        console.log($scope.ticket);
 
                         return ticket;
                     }
@@ -104,8 +113,23 @@ adminApp.controller('ticketViewCtrl', function ($scope, $modal, dataService, $fi
     };
 });
 
-adminApp.controller('CloseTicketViewCtrl', function ($scope, $modalInstance) {
+adminApp.controller('CloseTicketViewCtrl', function ($scope, $modalInstance, dataService) {
+
+    $scope.attachments = [];
+
     $scope.cancel = function () {
+
+        $scope.attachments.forEach(function(attachment){
+
+            dataService.removeAttachment(attachment.attachmentId, function(data){
+
+                //remove no save attachment from server
+                if(data.code != 1) {
+                    console.log("Wrong remove file");
+                }
+            });
+        });
+
         $modalInstance.dismiss('cancel');
     };
 });
@@ -116,7 +140,11 @@ adminApp.controller('CloseTicketViewCtrl', function ($scope, $modalInstance) {
  */
 
 // Save form to the data
-adminApp.controller('commentsCtrl', ['$scope','dataService', '$http', '$modal', 'FileUploader', function($scope, dataService, FileUploader){
+adminApp.controller('commentsCtrl', ['$scope','dataService', '$http', 'FileUploader', function($scope, dataService, $http, FileUploader){
+
+
+    $scope.attachments = [];
+
 
     $scope.updateCommentslist = function(ticketId) {
         dataService.getCommentsByTaskId(ticketId, function (comments) {
@@ -130,8 +158,9 @@ adminApp.controller('commentsCtrl', ['$scope','dataService', '$http', '$modal', 
     $scope.createComment = function(ticketId) {
 
         var dataForComment = {
-            "title":            $scope.title,
-            "description":      $scope.description,
+            "title":       $scope.title,
+            "description": $scope.description,
+            "attachments": $scope.attachments,
             "ticket": {
                 "ticketId": ticketId
             }
@@ -217,6 +246,7 @@ adminApp.controller('commentsCtrl', ['$scope','dataService', '$http', '$modal', 
             fileItem.attachmentId = response.params[0].attachmentId;
             $scope.$parent.attachments = $scope.attachments;
         }
+
     };
     uploader.onErrorItem = function(fileItem, response, status, headers) {
         console.info('onErrorItem', fileItem, response, status, headers);

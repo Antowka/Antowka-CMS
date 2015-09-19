@@ -118,6 +118,14 @@ CommissionApp.controller('TicketViewCtrl', function ($scope, $modal, dataService
                             }
                         });
 
+                        //set status IMAGE OR NOT on comment attachment
+                        ticket.comments.forEach(function(comment){
+                            comment.attachments.forEach(function(attachment){
+                                attachment.isImage = attachment.mimeType.indexOf("image/") > -1;
+                            });
+                        });
+
+
                         //change date and time format
                         ticket.comments.forEach(function(comment){
                             comment.creationDate = $filter('date')(new Date(comment.creationDate), 'dd-MM-yyyy H:m:s');
@@ -141,7 +149,7 @@ CommissionApp.controller('CloseTicketViewCtrl', function ($scope, $modalInstance
 });
 
 // Save form to the data
-CommissionApp.controller('sendFormCtrl', ['$scope','dataService', '$http', 'FileUploader', '$modal', function($scope, dataService, $http, FileUploader, $modal){
+CommissionApp.controller('sendFormCtrl', ['$scope','dataService', '$http', '$modal', 'FileUploader', function($scope, dataService, $http, $modal, FileUploader){
 
     $scope.data = null;
     $scope.attachments = [];

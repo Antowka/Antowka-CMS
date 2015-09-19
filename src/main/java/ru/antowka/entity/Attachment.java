@@ -28,6 +28,9 @@ public class Attachment implements Serializable{
     @JsonIgnore
     private Set<Article> articles;
 
+    @JsonIgnore
+    private Set<Comment> comments;
+
 
     /**
      * ****************************** Getters and Setters ***************************************
@@ -103,5 +106,13 @@ public class Attachment implements Serializable{
 
     public void setArticles(Set<Article> articles) {
         this.articles = articles;
+    }
+
+    public Set<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(Set<Comment> comments) {
+        this.comments = comments;
     }
 }
