@@ -26,7 +26,7 @@
             <many-to-many column="article_id" class="ru.antowka.entity.Article" />
         </set>
 
-        <set name="comments" table="comments_attachment" inverse="true" lazy="true" fetch="select">
+        <set name="comments" table="comments_attachment" lazy="true" fetch="select">
             <key column="attachment_id" not-null="true" />
             <many-to-many column="comment_id" class="ru.antowka.entity.Comment" />
         </set>

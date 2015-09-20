@@ -48,10 +48,12 @@ adminApp.controller('ticketsCtrl', function ($scope, dataService){
     };
 
     $scope.removeTicket = function(ticketId){
-        dataService.removeTicketById(ticketId, function($result){
-            console.log($result);
-            $scope.updateTicketlist($scope.params);
-        });
+        if(confirm("!!!ВНИМАНИЕ!!! Удалить жалобу?")) {
+            dataService.removeTicketById(ticketId, function ($result) {
+                console.log($result);
+                $scope.updateTicketlist($scope.params);
+            });
+        }
     };
 });
 
@@ -89,21 +91,7 @@ adminApp.controller('ticketViewCtrl', function ($scope, $modal, dataService, $fi
                             }
                         });
 
-                        //set status IMAGE OR NOT on comment attachment
-                        ticket.comments.forEach(function(comment){
-                            comment.attachments.forEach(function(attachment){
-                                attachment.isImage = attachment.mimeType.indexOf("image/") > -1;
-                            });
-                        });
-
-                        //change date and time format
-                        ticket.comments.forEach(function(comment){
-                            comment.creationDate = $filter('date')(new Date(comment.creationDate), 'dd-MM-yyyy H:m:s');
-                        });
-
                         $scope.ticket = ticket;
-
-                        console.log($scope.ticket);
 
                         return ticket;
                     }
@@ -119,16 +107,19 @@ adminApp.controller('CloseTicketViewCtrl', function ($scope, $modalInstance, dat
 
     $scope.cancel = function () {
 
-        $scope.attachments.forEach(function(attachment){
+        if($scope.attachments.length > 0) {
 
-            dataService.removeAttachment(attachment.attachmentId, function(data){
+            $scope.attachments.forEach(function (attachment) {
 
-                //remove no save attachment from server
-                if(data.code != 1) {
-                    console.log("Wrong remove file");
-                }
+                dataService.removeAttachment(attachment.attachmentId, function (data) {
+
+                    //remove no save attachment from server
+                    if (data.code != 1) {
+                        console.log("Wrong remove file");
+                    }
+                });
             });
-        });
+        }
 
         $modalInstance.dismiss('cancel');
     };
@@ -148,6 +139,19 @@ adminApp.controller('commentsCtrl', ['$scope','dataService', '$http', 'FileUploa
 
     $scope.updateCommentslist = function(ticketId) {
         dataService.getCommentsByTaskId(ticketId, function (comments) {
+
+            //set status IMAGE OR NOT on comment attachment
+            comments.forEach(function(comment){
+                comment.attachments.forEach(function(attachment){
+                    attachment.isImage = attachment.mimeType.indexOf("image/") > -1;
+                });
+            });
+
+            //change date and time format
+            comments.forEach(function(comment){
+                comment.creationDate = $filter('date')(new Date(comment.creationDate), 'dd-MM-yyyy H:m:s');
+            });
+
             $scope.comments = comments;
         });
     };
@@ -168,16 +172,27 @@ adminApp.controller('commentsCtrl', ['$scope','dataService', '$http', 'FileUploa
 
         dataService.createComment(dataForComment, function(newComment){
             $scope.updateCommentslist(ticketId);
+            $scope.$parent.attachments = [];
         });
     };
 
     //Remove Comment
     $scope.removeComment = function(ticketId, commentId){
-
-        dataService.removeCommentById(commentId, function(data){
-            $scope.updateCommentslist(ticketId);
-        });
+        if(confirm("!!!ВНИМАНИЕ!!! Удалить коментарий?")) {
+            dataService.removeCommentById(commentId, function (data) {
+                $scope.updateCommentslist(ticketId);
+            });
+        }
     }
+
+    //remove commentAttachment
+    $scope.removeCommentAttachment = function(attachmentId){
+        if(confirm("!!!ВНИМАНИЕ!!! Удалить файл?")) {
+            dataService.removeAttachment(attachmentId, function (result) {
+                $scope.updateCommentslist($scope.$parent.$parent.ticket.ticketId);
+            });
+        }
+    };
 
 
 

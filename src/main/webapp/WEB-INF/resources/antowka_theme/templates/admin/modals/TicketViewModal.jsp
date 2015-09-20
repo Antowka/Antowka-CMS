@@ -84,7 +84,7 @@
                             <div class="row">
                                 <!-- Attachment for comment -->
                                 <ul class="row list-unstyled text-center">
-                                    <li ng-repeat="cmtAttachment in comment.attachments" class="col-xs-6 col-sm-3">{{cmtAttachment.isImage+5}}
+                                    <li ng-repeat="cmtAttachment in comment.attachments" class="col-xs-6 col-sm-3">
 
                                         <!-- IF IMAGE -->
                                         <a ng-if="cmtAttachment.isImage" href="/files/uploads/{{cmtAttachment.filePathInStorage}}" target="_blank" data-lightbox="roadtrip">
@@ -96,7 +96,7 @@
                                             <img src="/files/uploads/{{cmtAttachment.previewPath}}">
                                         </a>
 
-                                        <!-- <span class="glyphicon glyphicon-remove pull-right" aria-hidden="true" ng-click="removeCommentAttachment(cmtAttachment.attachmentId)"></span> -->
+                                        <span class="glyphicon glyphicon-remove pull-right" aria-hidden="true" ng-click="removeCommentAttachment(cmtAttachment.attachmentId)"></span>
                                     </li>
                                 </ul>
                                 <!-- END Attachment for comment -->
