@@ -11,6 +11,7 @@ compileJava.options.encoding = 'UTF-8'
 repositories {
     mavenLocal()
     mavenCentral()
+    jcenter()
 }
 
  
@@ -39,5 +40,6 @@ dependencies {
     compile 'org.springframework:spring-support:2.0.8'
 
     testCompile 'org.springframework:spring-test:4.2.0.RELEASE'
+    testCompile 'org.mockito:mockito-core:1.+'
     testCompile 'junit:junit:4.12'
 }
