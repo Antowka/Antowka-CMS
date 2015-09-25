@@ -20,4 +20,5 @@ public interface TicketDao {
 
     void updateTicketAdmin(Ticket ticket);
     Ticket findTicketByIdAdmin(int ticketId);
+    Long countPublicTickets();
 }

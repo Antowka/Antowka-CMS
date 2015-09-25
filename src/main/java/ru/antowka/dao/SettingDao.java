@@ -11,4 +11,5 @@ public interface SettingDao {
 
     Setting findSettingByName(String settingName);
     List<Setting> findSettingsByName(String[] settingsName);
+    Setting updateSetting(Setting setting);
 }

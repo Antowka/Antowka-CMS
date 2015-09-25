@@ -1,8 +1,11 @@
 package ru.antowka.entity;
 
+import javax.persistence.Entity;
+
 /**
  * Created by anton on 03.08.15.
  */
+@Entity
 public class Setting {
 
     private String settingName;

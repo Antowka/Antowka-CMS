@@ -42,4 +42,8 @@ public class SettingsService {
 
         return settings;
     }
+
+    public Setting updateSetting(Setting setting){
+        return settingDao.updateSetting(setting);
+    }
 }

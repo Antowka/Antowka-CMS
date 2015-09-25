@@ -131,7 +131,7 @@ adminApp.controller('CloseTicketViewCtrl', function ($scope, $modalInstance, dat
  */
 
 // Save form to the data
-adminApp.controller('commentsCtrl', ['$scope','dataService', '$http', 'FileUploader', function($scope, dataService, $http, FileUploader){
+adminApp.controller('commentsCtrl', ['$scope','dataService', '$http', 'FileUploader', '$filter', function($scope, dataService, $http, FileUploader, $filter){
 
 
     $scope.attachments = [];

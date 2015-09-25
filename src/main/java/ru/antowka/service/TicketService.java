@@ -176,6 +176,15 @@ public class TicketService {
         return ticketDao.findTicketByIdAdmin(ticketId);
     }
 
+    /**
+     * Response count public tickets
+     *
+     * @return
+     */
+    public Long countPublicTickets(){
+        return ticketDao.countPublicTickets();
+    }
+
 
     /**
      * *************************** PRIVATE METHODS **************************************

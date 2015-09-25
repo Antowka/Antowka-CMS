@@ -189,4 +189,18 @@ public class TicketDaoImpl implements TicketDao{
         Session session = hibernateSessionFactory.getSession();
         return (Ticket)session.get(Ticket.class, ticketId);
     }
+
+    @Override
+    @Transactional
+    public Long countPublicTickets(){
+
+        Session session = hibernateSessionFactory.getSession();
+
+        return (Long) session.createCriteria(Ticket.class, "ticket")
+                                .createAlias("ticket.status", "status")
+                                .add(Restrictions.eq("status.publicStatus", true))
+                                .setProjection(Projections.rowCount())
+                                .uniqueResult();
+
+    }
 }

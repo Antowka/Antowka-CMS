@@ -29,6 +29,7 @@
                 /WEB-INF/config/services-config.xml
                 /WEB-INF/config/entity-config.xml
                 /WEB-INF/config/quartz-config.xml
+                /WEB-INF/config/setting-config.xml
             </param-value>
 
         </context-param>

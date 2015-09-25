@@ -3,9 +3,6 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-       <!-- MainController -->
-       <bean id="mainController" class="ru.antowka.controller.MainController">
-              <property name="settingsList" value="site_title, site_description, site_ticket_counter" />
-       </bean>
+       <bean id="setting" class="ru.antowka.entity.Setting" />
 
 </beans>

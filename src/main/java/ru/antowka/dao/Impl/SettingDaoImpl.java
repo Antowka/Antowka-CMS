@@ -46,4 +46,16 @@ public class SettingDaoImpl implements SettingDao {
 
         return settings;
     }
+
+    @Override
+    @Transactional
+    public Setting updateSetting(Setting setting){
+
+        Session session = hibernateSessionFactory.getSession();
+        session.update(setting);
+
+        return (Setting)session.createCriteria(Setting.class)
+                               .add(Restrictions.eq("settingName", setting.getSettingName()))
+                               .uniqueResult();
+    }
 }

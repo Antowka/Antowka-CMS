@@ -35,6 +35,6 @@
 
        <bean id="countTicketsAndSetToSettingsCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
               <property name="jobDetail" ref="countTicketsAndSetToSettingsJob" />
-              <property name="cronExpression" value="* * 6 * * ?"/>
+              <property name="cronExpression" value="0 0 * * * ?"/>
        </bean>
 </beans>
