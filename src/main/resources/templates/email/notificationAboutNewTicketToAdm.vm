@@ -1,0 +1,20 @@
+<html>
+    <head>
+        <meta charset="utf-8" />
+    </head>
+
+    <body>
+        <table>
+            <tr>
+                <td style="font-size: 28px;">
+                    Появилась новая жалоба в ЖКХ.НАШ-ПОЛУОСТРОВ.РФ!
+                </td>
+            </tr>
+            <tr>
+                <td style="font-size: 20px;">
+                    Зайти для проверки <a href="http://наш-полуостров.рф/login">Админка</a>
+                </td>
+            </tr>
+        </table>
+    </body>
+</html>

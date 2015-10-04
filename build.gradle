@@ -39,6 +39,7 @@ dependencies {
     compile 'org.quartz-scheduler:quartz:1.8.6'
     compile 'org.springframework:spring-support:2.0.8'
     compile 'javax.mail:mail:1.5.0-b01'
+    compile 'org.apache.velocity:velocity:1.7'
 
     testCompile 'org.springframework:spring-test:4.2.0.RELEASE'
     testCompile 'org.mockito:mockito-core:1.+'

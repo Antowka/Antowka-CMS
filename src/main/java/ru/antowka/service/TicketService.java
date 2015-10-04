@@ -3,6 +3,7 @@ package ru.antowka.service;
 import org.hibernate.criterion.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ru.antowka.common.EmailSender;
 import ru.antowka.dao.TicketDao;
 import ru.antowka.dao.TicketStatusDao;
 import ru.antowka.entity.MessageResponse;
@@ -29,6 +30,9 @@ public class TicketService {
 
     @Autowired
     private MessageResponse messageResponse;
+
+    @Autowired
+    EmailSender emailSender;
 
     public List<Ticket> getAllTickets(int limit, int offset, String order, String orderField){
 
@@ -90,6 +94,8 @@ public class TicketService {
             messageResponse.setTitle("Ticket has not been saved");
             messageResponse.setMessage("You ticket added to system with #"+ticketId);
         }
+
+        emailSender.newTicketCreated(ticket.getEmail());
 
         return messageResponse;
     }
