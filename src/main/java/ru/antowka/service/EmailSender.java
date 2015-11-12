@@ -1,4 +1,4 @@
-package ru.antowka.common;
+package ru.antowka.service;
 
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
@@ -9,19 +9,15 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.scheduling.annotation.Async;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.ui.velocity.VelocityEngineUtils;
-
-import javax.mail.MessagingException;
-import javax.mail.internet.MimeMessage;
-import java.io.StringWriter;
 import java.util.HashMap;
 import java.util.Map;
 
 /**
  * Created by Anton Nik on 02.10.15.
  */
-@Component
+@Service
 public class EmailSender {
 
     @Autowired
@@ -82,7 +78,6 @@ public class EmailSender {
      *
      * @param preparator
      */
-    @Async
     private void sendMail(MimeMessagePreparator preparator) {
 
         try {

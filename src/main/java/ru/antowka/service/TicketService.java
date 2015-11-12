@@ -3,7 +3,6 @@ package ru.antowka.service;
 import org.hibernate.criterion.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.antowka.common.EmailSender;
 import ru.antowka.dao.TicketDao;
 import ru.antowka.dao.TicketStatusDao;
 import ru.antowka.entity.MessageResponse;

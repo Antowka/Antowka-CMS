@@ -1,6 +1,7 @@
 package ru.antowka.job;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import ru.antowka.entity.Setting;
 import ru.antowka.service.SettingsService;
 import ru.antowka.service.TicketService;
@@ -19,6 +20,7 @@ public class Tickets {
     @Autowired
     private Setting setting;
 
+    @Async
     public void updateCounterInSettings(){
 
         //update counter public tickets
