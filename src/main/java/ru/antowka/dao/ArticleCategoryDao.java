@@ -11,6 +11,16 @@ import java.util.Set;
  */
 public interface ArticleCategoryDao {
 
-    ArticleCategory findCategoryById(int categoryId);
-    List<ArticleCategory> findAllCategories();
+    ArticleCategory getCategoryById(int categoryId);
+    List<ArticleCategory> getAllCategories();
+
+    /**
+     ********************************************** Admin Panel ******************************************************
+     */
+
+    ArticleCategory createArticleCategory(ArticleCategory articleCategory);
+
+    ArticleCategory updateArticleCategory(ArticleCategory articleCategory);
+
+    void removeArticleCategory(ArticleCategory articleCategory);
 }

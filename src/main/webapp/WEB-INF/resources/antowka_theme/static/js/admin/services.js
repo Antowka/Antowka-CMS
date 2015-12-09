@@ -109,4 +109,17 @@ adminApp.service('dataService', function($http) {
             console.log("error, you can't get ticket");
         });
     }
+
+    this.getAllArticleCategories = function(callbackFunc){
+
+        $http({
+            method: 'GET',
+            url: 'panel/article-category/get-article-categories'
+        }).success(function(data){
+            // With the data succesfully returned, call our callback
+            callbackFunc(data);
+        }).error(function(){
+            console.log("error, you can't get article categories");
+        });
+    }
 });

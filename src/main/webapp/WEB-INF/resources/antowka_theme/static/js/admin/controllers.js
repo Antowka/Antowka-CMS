@@ -278,3 +278,15 @@ adminApp.controller('commentsCtrl', ['$scope','dataService', '$http', 'FileUploa
     //******************************* End Upload Files ****************************************
 
 }]);
+
+//Main tabs in admin-panel
+adminApp.controller('mainTabsCtrl', function ($scope, $window) {
+
+});
+
+//ArticleCategories controller
+adminApp.controller('articleCategoryCtrl', function($scope, dataService){
+    dataService.getAllArticleCategories(function(data){
+        $scope.articleCategories = data;
+    });
+})

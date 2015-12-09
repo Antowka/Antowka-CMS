@@ -28,7 +28,7 @@ public class ArticleDaoImpl implements ArticleDao {
     @Override
     @Transactional
     @SuppressWarnings("unchecked")
-    public List<Article> getAllArticles(int limit, String order, String orderField) {
+    public List<Article> getAllArticles(int limit, int offset, String order, String orderField) {
 
         Order orderObj = null;
 
@@ -57,6 +57,7 @@ public class ArticleDaoImpl implements ArticleDao {
         articles = (List<Article>)session.createCriteria(Article.class)
                                          .addOrder(orderObj)
                                          .setMaxResults(limit)
+                                         .setFirstResult(offset)
                                          .list();
 
         return articles;
@@ -65,20 +66,18 @@ public class ArticleDaoImpl implements ArticleDao {
 
     @Override
     @Transactional
-    public Article findArticleById(int articleId) {
+    public Article getArticle(Article article) {
 
-        Article article = null;
-        Session session = hibernateSessionFactory.getSession();
-        article = (Article) session.get(Article.class, articleId);
-
-        return article;
+        return (Article)hibernateSessionFactory
+                .getSession()
+                .get(Article.class, article.getArticleId());
     }
 
 
     @Override
     @Transactional
     @SuppressWarnings("unchecked")
-    public List<Article> findArticlesByUserOwner(User user) {
+    public List<Article> getArticlesByUserOwner(User user) {
 
         List<Article> articles = null;
         Session session = hibernateSessionFactory.getSession();
@@ -87,6 +86,40 @@ public class ArticleDaoImpl implements ArticleDao {
                 .list();
 
         return articles;
+    }
+
+    /**
+     ********************************************** Admin Panel ******************************************************
+     */
+
+    @Override
+    @Transactional
+    public Article createArticle(Article article) {
+
+        hibernateSessionFactory
+                .getSession()
+                .save(article);
+
+        return article;
+    }
+
+    @Override
+    @Transactional
+    public Article updateArticle(Article article) {
+
+        hibernateSessionFactory
+                .getSession()
+                .saveOrUpdate(article);
+
+        return article;
+    }
+
+    @Override
+    @Transactional
+    public void removeArticle(Article article) {
+        hibernateSessionFactory
+                .getSession()
+                .delete(article);
     }
 }
 

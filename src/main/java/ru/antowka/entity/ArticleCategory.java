@@ -1,16 +1,22 @@
 package ru.antowka.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.Entity;
 import java.util.Set;
 
 /**
- * Created by anton on 03.08.15.
+ * Created by Anton Nik on 03.08.15.
  */
+@Entity
 public class ArticleCategory {
 
     private int articleCategoryId;
     private int parentCategoryId;
     private String title;
     private String description;
+
+    @JsonIgnore
     private Set<Article> articles;
 
     public String getDescription() {

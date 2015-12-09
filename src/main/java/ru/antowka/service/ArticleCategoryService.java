@@ -3,10 +3,9 @@ package ru.antowka.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.antowka.dao.ArticleCategoryDao;
-import ru.antowka.entity.Article;
 import ru.antowka.entity.ArticleCategory;
 
-import java.util.Set;
+import java.util.List;
 
 /**
  * Created by anton on 06.08.15.
@@ -17,10 +16,15 @@ public class ArticleCategoryService {
     @Autowired
     ArticleCategoryDao categoryArticleDao;
 
-    public Set<Article> getArticlesByCategoryId(int categoryId){
+    public List<ArticleCategory> getAllCategories(){
+
+         return categoryArticleDao.getAllCategories();
+    }
+
+    public ArticleCategory getArticlesByCategoryId(int categoryId){
 
         ArticleCategory category = null;
-        category = categoryArticleDao.findCategoryById(categoryId);
-        return category.getArticles();
+        category = categoryArticleDao.getCategoryById(categoryId);
+        return category;
     }
 }

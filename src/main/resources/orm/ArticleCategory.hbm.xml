@@ -4,7 +4,7 @@
 
 <hibernate-mapping>
     <class name="ru.antowka.entity.ArticleCategory" table="articles_category" lazy="true">
-        <id name="ArticleCategoryId" column="article_category_id" type="java.lang.Integer">
+        <id name="articleCategoryId" column="article_category_id" type="java.lang.Integer">
             <generator class="identity" />
         </id>
         <property name="parentCategoryId" column="parent_category_id" type="java.lang.Integer" />

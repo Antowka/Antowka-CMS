@@ -10,7 +10,17 @@ import java.util.List;
  */
 public interface ArticleDao {
 
-    List<Article> getAllArticles(int limit, String order, String orderField);
-    Article findArticleById(int articleId);
-    List<Article> findArticlesByUserOwner(User user);
+    List<Article> getAllArticles(int limit, int offset, String order, String orderField);
+    Article getArticle(Article articleId);
+    List<Article> getArticlesByUserOwner(User user);
+
+    /**
+     ********************************************** Admin Panel ******************************************************
+     */
+
+    Article createArticle(Article article);
+
+    Article updateArticle(Article article);
+
+    void removeArticle(Article article);
 }
