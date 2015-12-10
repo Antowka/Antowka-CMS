@@ -117,6 +117,7 @@ adminApp.service('dataService', function($http) {
             url: 'panel/article-category/get-article-categories'
         }).success(function(data){
             // With the data succesfully returned, call our callback
+            console.log(data);
             callbackFunc(data);
         }).error(function(){
             console.log("error, you can't get article categories");

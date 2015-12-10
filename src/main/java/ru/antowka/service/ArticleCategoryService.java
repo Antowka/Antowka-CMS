@@ -18,7 +18,21 @@ public class ArticleCategoryService {
 
     public List<ArticleCategory> getAllCategories(){
 
-         return categoryArticleDao.getAllCategories();
+        List<ArticleCategory> categories = categoryArticleDao.getAllCategories();
+
+        categories.stream().forEach(category -> {
+            if(category.getParentCategoryId() != 0) {
+                categories.stream().forEach(categoryParent -> {
+                    if (category.getParentCategoryId() == categoryParent.getArticleCategoryId()) {
+                        categoryParent.addChildArticleCategories(category);
+                    }
+                });
+            }
+        });
+
+        categories.removeIf(regionRemove -> regionRemove.getLevel() != 0);
+
+        return categories;
     }
 
     public ArticleCategory getArticlesByCategoryId(int categoryId){

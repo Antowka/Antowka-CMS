@@ -49,6 +49,7 @@ public class ArticleCategoryDaoImpl implements ArticleCategoryDao {
                                     .add(Projections.property("articleCategory.parentCategoryId"), "parentCategoryId")
                                     .add(Projections.property("articleCategory.title"), "title")
                                     .add(Projections.property("articleCategory.description"), "description")
+                                    .add(Projections.property("articleCategory.level"), "level")
                     ).setResultTransformer(Transformers.aliasToBean(ArticleCategory.class))
                     .list();
     }

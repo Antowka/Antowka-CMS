@@ -287,6 +287,34 @@ adminApp.controller('mainTabsCtrl', function ($scope, $window) {
 //ArticleCategories controller
 adminApp.controller('articleCategoryCtrl', function($scope, dataService){
     dataService.getAllArticleCategories(function(data){
-        $scope.articleCategories = data;
+
+
+        var articleCategories = [];
+
+        //recursive
+        var getChildCategories = function(childCategories, pointer, space) {
+
+            childCategories.forEach(function (categoryServer) {
+
+                if(categoryServer.level != 0) {
+                    categoryServer.pretitle = space + "|" + pointer;
+                }
+
+                articleCategories.push(categoryServer);
+
+                var childCategories = categoryServer.childArticleCategories;
+
+                if(childCategories.length > 0) {
+                    getChildCategories(childCategories, pointer+pointer, space+space);
+                }
+            });
+
+
+        };
+
+        //start recursion
+        getChildCategories(data, "_", "  ");
+
+        $scope.articleCategories = articleCategories;
     });
 })

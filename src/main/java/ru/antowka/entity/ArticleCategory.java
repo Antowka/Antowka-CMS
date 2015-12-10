@@ -3,6 +3,8 @@ package ru.antowka.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.Entity;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -15,6 +17,8 @@ public class ArticleCategory {
     private int parentCategoryId;
     private String title;
     private String description;
+    private int level;
+    private List<ArticleCategory> childArticleCategories = new ArrayList<ArticleCategory>();
 
     @JsonIgnore
     private Set<Article> articles;
@@ -57,5 +61,30 @@ public class ArticleCategory {
 
     public void setArticles(Set<Article> articles) {
         this.articles = articles;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
+    public List<ArticleCategory> getChildArticleCategories() {
+        return childArticleCategories;
+    }
+
+    public void setChildArticleCategories(List<ArticleCategory> childArticleCategories) {
+        this.childArticleCategories = childArticleCategories;
+    }
+
+    /**
+     * Method for create tree with child elements
+     *
+     * @param articleCategory
+     */
+    public void addChildArticleCategories(ArticleCategory articleCategory){
+        childArticleCategories.add(articleCategory);
     }
 }

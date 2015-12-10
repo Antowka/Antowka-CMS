@@ -29,7 +29,10 @@
          <div>
             <div class="article-categories" ng-controller="articleCategoryCtrl">
                 <ul>
-                  <li ng-repeat="articleCategory in articleCategories">{{articleCategory.title}}</li>
+                  <li ng-repeat="articleCategory in articleCategories">
+                      {{articleCategory.pretitle}}<a href="#" alt="{{articleCategory.description}}">{{articleCategory.title}}</a>
+                      <span class="glyphicon glyphicon-plus-sign" aria-hidden="true" alt="Create new category inside it"></span>
+                  </li>
                 </ul>
             </div>
 
