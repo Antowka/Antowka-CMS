@@ -31,7 +31,12 @@
                 <ul>
                   <li ng-repeat="articleCategory in articleCategories">
                       {{articleCategory.pretitle}}<a href="#" alt="{{articleCategory.description}}">{{articleCategory.title}}</a>
-                      <span class="glyphicon glyphicon-plus-sign" aria-hidden="true" alt="Create new category inside it"></span>
+
+                      <span class="glyphicon glyphicon-plus-sign"
+                            aria-hidden="true"
+                            alt="Create new category inside it"
+                            ng-click="crateCategory(articleCategory.articleCategoryId)">
+                      </span>
                   </li>
                 </ul>
             </div>

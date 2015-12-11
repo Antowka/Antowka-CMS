@@ -41,4 +41,15 @@ public class ArticleCategoryService {
         category = categoryArticleDao.getCategoryById(categoryId);
         return category;
     }
+
+    /**
+     * Method create new ArticleCategory
+     *
+     * @param articleCategory
+     * @return
+     */
+    public ArticleCategory createArticleCategory(ArticleCategory articleCategory){
+        articleCategory.setLevel(0);
+        return categoryArticleDao.createArticleCategory(articleCategory);
+    }
 }

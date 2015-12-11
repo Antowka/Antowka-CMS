@@ -284,7 +284,9 @@ adminApp.controller('mainTabsCtrl', function ($scope, $window) {
 
 });
 
-//ArticleCategories controller
+/**
+ *ArticleCategories controller
+ */
 adminApp.controller('articleCategoryCtrl', function($scope, dataService){
     dataService.getAllArticleCategories(function(data){
 
@@ -317,4 +319,16 @@ adminApp.controller('articleCategoryCtrl', function($scope, dataService){
 
         $scope.articleCategories = articleCategories;
     });
+
+    $scope.crateCategory = function(parentCategory){
+        var newArticleCategory = {
+            title: "New Category",
+            parentCategoryId: parentCategory,
+            description: "New Category, New Category, New Category, New Category"
+        };
+
+        dataService.createNewCategory(newArticleCategory, function(response){
+            console.log(response);
+        });
+    };
 })

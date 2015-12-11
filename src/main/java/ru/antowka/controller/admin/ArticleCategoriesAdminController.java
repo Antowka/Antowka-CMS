@@ -2,6 +2,7 @@ package ru.antowka.controller.admin;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -31,5 +32,17 @@ public class ArticleCategoriesAdminController {
     public @ResponseBody List<ArticleCategory> getAllArticleCategories(){
 
         return articleCategoryService.getAllCategories();
+    }
+
+    /**
+     * Method create new ArticleCategory with parentCategory param
+     *
+     * @param articleCategory
+     * @return
+     */
+    @RequestMapping(value = "create", method = RequestMethod.POST)
+    public @ResponseBody ArticleCategory createArticleCategory(@RequestBody ArticleCategory articleCategory){
+        String test = "";
+        return articleCategoryService.createArticleCategory(articleCategory);
     }
 }
