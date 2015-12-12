@@ -28,14 +28,14 @@
       <uib-tab heading="Articles">
          <div>
             <div class="article-categories" ng-controller="articleCategoryCtrl">
-                <ul>
+                <ul ng-controller="createArticleCategoryViewCtrl">
                   <li ng-repeat="articleCategory in articleCategories">
                       {{articleCategory.pretitle}}<a href="#" alt="{{articleCategory.description}}">{{articleCategory.title}}</a>
 
                       <span class="glyphicon glyphicon-plus-sign"
                             aria-hidden="true"
                             alt="Create new category inside it"
-                            ng-click="crateCategory(articleCategory.articleCategoryId)">
+                            ng-click="openCreateCategoryModal(articleCategory.articleCategoryId)">
                       </span>
                   </li>
                 </ul>

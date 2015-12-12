@@ -331,4 +331,32 @@ adminApp.controller('articleCategoryCtrl', function($scope, dataService){
             console.log(response);
         });
     };
-})
+});
+
+/**
+ * Open ArticleCategories modal for create category
+ */
+adminApp.controller('createArticleCategoryViewCtrl', function ($scope, $modal, dataService, $filter){
+
+    $scope.openCreateCategoryModal = function (parentId) {
+
+        var modalInstance = $modal.open({
+            templateUrl: 'createArticleCategoryModal.html',
+            controller: 'CloseArticleCategoryCtrl',
+            scope: $scope,
+            resolve: {
+                //todo - methods for inside controller access
+            }
+        });
+    };
+});
+
+/**
+ * Close create article
+ */
+adminApp.controller('CloseArticleCategoryCtrl', function ($scope, $modalInstance, dataService) {
+
+    $scope.cancel = function () {
+        $modalInstance.dismiss('cancel');
+    };
+});
