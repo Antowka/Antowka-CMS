@@ -132,7 +132,6 @@ CommissionApp.controller('TicketViewCtrl', function ($scope, $modal, dataService
                         });
 
                         $scope.ticket = ticket;
-                        console.log($scope.ticket);
 
                         return ticket;
                     }

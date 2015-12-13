@@ -32,6 +32,7 @@
 
 <!-- MODALS -->
 <tiles:insertAttribute name="TicketViewModal" />
+<tiles:insertAttribute name="CreateArticleCategoryModal" />
 
 
 <!-- JS FILES -->

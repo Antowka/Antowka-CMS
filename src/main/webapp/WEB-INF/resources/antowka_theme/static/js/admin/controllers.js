@@ -287,76 +287,82 @@ adminApp.controller('mainTabsCtrl', function ($scope, $window) {
 /**
  *ArticleCategories controller
  */
-adminApp.controller('articleCategoryCtrl', function($scope, dataService){
-    dataService.getAllArticleCategories(function(data){
+adminApp.controller('articleCategoryCtrl', function($scope, $uibModal, dataService){
+
+    //Methods
+    $scope.updateArticleCategoryList = function() {
+        dataService.getAllArticleCategories(function (data) {
 
 
-        var articleCategories = [];
+            var articleCategories = [];
 
-        //recursive
-        var getChildCategories = function(childCategories, pointer, space) {
+            //recursive
+            var getChildCategories = function (childCategories, pointer, space) {
 
-            childCategories.forEach(function (categoryServer) {
+                childCategories.forEach(function (categoryServer) {
 
-                if(categoryServer.level != 0) {
-                    categoryServer.pretitle = space + "|" + pointer;
-                }
+                    if (categoryServer.level != 0) {
+                        categoryServer.pretitle = space + "|" + pointer;
+                    }
 
-                articleCategories.push(categoryServer);
+                    articleCategories.push(categoryServer);
 
-                var childCategories = categoryServer.childArticleCategories;
+                    var childCategories = categoryServer.childArticleCategories;
 
-                if(childCategories.length > 0) {
-                    getChildCategories(childCategories, pointer+pointer, space+space);
-                }
-            });
+                    if (childCategories.length > 0) {
+                        getChildCategories(childCategories, pointer + pointer, space + space);
+                    }
+                });
 
 
-        };
+            };
 
-        //start recursion
-        getChildCategories(data, "_", "  ");
+            //start recursion
+            getChildCategories(data, "_", "  ");
 
-        $scope.articleCategories = articleCategories;
-    });
-
-    $scope.crateCategory = function(parentCategory){
-        var newArticleCategory = {
-            title: "New Category",
-            parentCategoryId: parentCategory,
-            description: "New Category, New Category, New Category, New Category"
-        };
-
-        dataService.createNewCategory(newArticleCategory, function(response){
-            console.log(response);
+            $scope.articleCategories = articleCategories;
         });
     };
+
+    $scope.openCreateCategoryModal = function (parentCategoryId) {
+        $scope.uibModalInstance = $uibModal.open({
+            templateUrl: 'createArticleCategoryModal.html',
+            controller: 'createArticleCategoryViewCtrl',
+            scope: $scope,
+            resolve: {
+                ticket: function () {
+                    console.log($scope);
+                    $scope.parentCategoryId = parentCategoryId;
+                }
+            }
+        });
+    };
+
+    //Start
+    $scope.updateArticleCategoryList();
 });
 
 /**
  * Open ArticleCategories modal for create category
  */
-adminApp.controller('createArticleCategoryViewCtrl', function ($scope, $modal, dataService, $filter){
+adminApp.controller('createArticleCategoryViewCtrl', function ($scope, $uibModal, dataService, $filter){
 
-    $scope.openCreateCategoryModal = function (parentId) {
+    $scope.crateCategory = function() {
+        console.log($scope);
 
-        var modalInstance = $modal.open({
-            templateUrl: 'createArticleCategoryModal.html',
-            controller: 'CloseArticleCategoryCtrl',
-            scope: $scope,
-            resolve: {
-                //todo - methods for inside controller access
-            }
+        var newArticleCategory = {
+            parentCategoryId: $scope.$parent.parentCategoryId,
+            title: $scope.title,
+            description: $scope.description,
+        };
+
+        dataService.createNewCategory(newArticleCategory, function (response) {
+            $scope.$parent.updateArticleCategoryList()
+            $scope.$parent.uibModalInstance.dismiss('cancel');
         });
     };
-});
-
-/**
- * Close create article
- */
-adminApp.controller('CloseArticleCategoryCtrl', function ($scope, $modalInstance, dataService) {
 
     $scope.cancel = function () {
-        $modalInstance.dismiss('cancel');
+        $scope.$parent.uibModalInstance.dismiss('cancel');
     };
 });

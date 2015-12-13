@@ -24,8 +24,9 @@
             <!-- Modal body -->
             <div class="modal-body">
                 <form>
-                    <input type="text" ng-model="title">
-                    <textarea ng-model="description"></textarea>
+                    <input type="text" ng-model="title" placeholder="Category Name" value="123">
+                    <textarea ng-model="description" placeholder="Category Description"></textarea>
+                    <button ng-click="crateCategory()">Create Category</button>
                 </form>
             </div>
 

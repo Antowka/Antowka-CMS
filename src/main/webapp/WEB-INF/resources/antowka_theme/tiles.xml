@@ -33,6 +33,7 @@
               <put-attribute name="footer" value="/WEB-INF/resources/antowka_theme/templates/footer.jsp" />
 
               <put-attribute name="TicketViewModal" value="/WEB-INF/resources/antowka_theme/templates/admin/modals/TicketViewModal.jsp" />
+              <put-attribute name="CreateArticleCategoryModal" value="/WEB-INF/resources/antowka_theme/templates/admin/modals/CreateArticleCategoryModal.jsp" />
        </definition>
 
 
