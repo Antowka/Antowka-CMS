@@ -22,5 +22,5 @@ public interface ArticleCategoryDao {
 
     ArticleCategory updateArticleCategory(ArticleCategory articleCategory);
 
-    void removeArticleCategory(ArticleCategory articleCategory);
+    ArticleCategory removeArticleCategory(ArticleCategory articleCategory);
 }

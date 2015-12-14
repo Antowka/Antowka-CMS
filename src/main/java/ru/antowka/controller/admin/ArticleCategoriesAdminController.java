@@ -2,11 +2,10 @@ package ru.antowka.controller.admin;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import ru.antowka.entity.ArticleCategory;
+import ru.antowka.entity.MessageResponse;
+import ru.antowka.entity.Ticket;
 import ru.antowka.service.ArticleCategoryService;
 
 import java.util.List;
@@ -42,7 +41,19 @@ public class ArticleCategoriesAdminController {
      */
     @RequestMapping(value = "create", method = RequestMethod.POST)
     public @ResponseBody ArticleCategory createArticleCategory(@RequestBody ArticleCategory articleCategory){
-        String test = "";
         return articleCategoryService.createArticleCategory(articleCategory);
+    }
+
+    /**
+     * Remove category
+     *
+     * Link:  http://localhost:8080/panel/article-category/remove?articleCategoryId=1
+     *
+     * @param articleCategory
+     * @return
+     */
+    @RequestMapping(value = "remove", method = RequestMethod.GET)
+    public @ResponseBody MessageResponse removeArticleCategory(@ModelAttribute ArticleCategory articleCategory){
+        return articleCategoryService.removeArticleCategory(articleCategory);
     }
 }

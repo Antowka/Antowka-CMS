@@ -23,6 +23,8 @@ public class ArticleCategory {
     @JsonIgnore
     private Set<Article> articles;
 
+    private boolean isDeleted = false;
+
     public String getDescription() {
         return description;
     }
@@ -77,6 +79,14 @@ public class ArticleCategory {
 
     public void setChildArticleCategories(List<ArticleCategory> childArticleCategories) {
         this.childArticleCategories = childArticleCategories;
+    }
+
+    public boolean isDeleted() {
+        return isDeleted;
+    }
+
+    public void setIsDeleted(boolean isDeleted) {
+        this.isDeleted = isDeleted;
     }
 
     /**

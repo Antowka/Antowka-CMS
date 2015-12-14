@@ -108,7 +108,7 @@ adminApp.service('dataService', function($http) {
         }).error(function(){
             console.log("error, you can't get ticket");
         });
-    }
+    };
 
     this.getAllArticleCategories = function(callbackFunc){
 
@@ -122,7 +122,7 @@ adminApp.service('dataService', function($http) {
         }).error(function(){
             console.log("error, you can't get article categories");
         });
-    }
+    };
 
     this.createNewCategory = function(formData, callbackFunc){
 
@@ -137,6 +137,18 @@ adminApp.service('dataService', function($http) {
             console.log("CREATED NEW CATEGORY");
         }).error(function(){
             console.log("ERROR IN CREATE CATEGORY");
+        });
+    };
+
+    this.removeCategory = function(categoryId, callbackFunc){
+
+        $http({
+            method: 'GET',
+            url: 'panel/article-category/remove?articleCategoryId=' + categoryId
+        }).success(function(data){
+            callbackFunc(data);
+        }).error(function(){
+            console.log("error, you can't get article categories");
         });
     };
 });

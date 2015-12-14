@@ -32,11 +32,28 @@
                   <li ng-repeat="articleCategory in articleCategories">
                       {{articleCategory.pretitle}}<a href="#" alt="{{articleCategory.description}}">{{articleCategory.title}}</a>
 
+                      <!-- Create child category -->
+                                    |
                       <span class="glyphicon glyphicon-plus-sign"
                             aria-hidden="true"
-                            alt="Create new category inside it"
                             ng-click="openCreateCategoryModal(articleCategory.articleCategoryId)">
                       </span>
+
+                      <!-- Edit category -->
+                                    |
+                      <span class="glyphicon glyphicon-edit"
+                            aria-hidden="true"
+                            ng-click="openEditCategoryModal(articleCategory.articleCategoryId)">
+                      </span>
+
+                      <!-- Remove Category -->
+                                    |
+                      <span class="glyphicon glyphicon-trash"
+                            aria-hidden="true"
+                            ng-click="removeCategory(articleCategory.articleCategoryId)">
+                      </span>
+                                    |
+
                   </li>
                 </ul>
             </div>

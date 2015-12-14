@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.antowka.dao.ArticleCategoryDao;
 import ru.antowka.entity.ArticleCategory;
+import ru.antowka.entity.MessageResponse;
 
 import java.util.List;
 
@@ -15,6 +16,9 @@ public class ArticleCategoryService {
 
     @Autowired
     ArticleCategoryDao categoryArticleDao;
+
+    @Autowired
+    private MessageResponse messageResponse;
 
     public List<ArticleCategory> getAllCategories(){
 
@@ -51,5 +55,29 @@ public class ArticleCategoryService {
     public ArticleCategory createArticleCategory(ArticleCategory articleCategory){
         articleCategory.setLevel(0);
         return categoryArticleDao.createArticleCategory(articleCategory);
+    }
+
+    /**
+     * Remove ArticleCategory
+     *
+     * @param articleCategory
+     * @return
+     */
+    public MessageResponse removeArticleCategory(ArticleCategory articleCategory){
+
+        articleCategory = categoryArticleDao.removeArticleCategory(articleCategory);
+
+        if(articleCategory.isDeleted()){
+            messageResponse.setCode(1);
+            messageResponse.setTitle("Successful");
+            messageResponse.setMessage("Your category #" + articleCategory.getArticleCategoryId() + " removed from system");
+        } else{
+
+            messageResponse.setCode(0);
+            messageResponse.setTitle("Category has not been removed");
+            messageResponse.setMessage("Your category #" + articleCategory.getArticleCategoryId() + " removed to system");
+        }
+
+        return messageResponse;
     }
 }

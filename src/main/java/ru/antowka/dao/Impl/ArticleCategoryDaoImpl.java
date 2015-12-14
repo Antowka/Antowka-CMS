@@ -83,10 +83,14 @@ public class ArticleCategoryDaoImpl implements ArticleCategoryDao {
 
     @Override
     @Transactional
-    public void removeArticleCategory(ArticleCategory articleCategory) {
+    public ArticleCategory removeArticleCategory(ArticleCategory articleCategory) {
 
         hibernateSessionFactory
                 .getSession()
                 .delete(articleCategory);
+
+        articleCategory.setIsDeleted(true);
+
+        return articleCategory;
     }
 }

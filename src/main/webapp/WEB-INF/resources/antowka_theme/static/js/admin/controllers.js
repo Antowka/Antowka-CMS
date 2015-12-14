@@ -324,6 +324,11 @@ adminApp.controller('articleCategoryCtrl', function($scope, $uibModal, dataServi
         });
     };
 
+
+    //Start
+    $scope.updateArticleCategoryList();
+
+    //Open creation modal
     $scope.openCreateCategoryModal = function (parentCategoryId) {
         $scope.uibModalInstance = $uibModal.open({
             templateUrl: 'createArticleCategoryModal.html',
@@ -338,8 +343,29 @@ adminApp.controller('articleCategoryCtrl', function($scope, $uibModal, dataServi
         });
     };
 
-    //Start
-    $scope.updateArticleCategoryList();
+    //Open edit modal
+    $scope.openEditCategoryModal = function (categoryId) {
+        $scope.uibModalInstance = $uibModal.open({
+            templateUrl: 'createArticleCategoryModal.html',
+            controller: 'createArticleCategoryViewCtrl',
+            scope: $scope,
+            resolve: {
+                ticket: function () {
+                    console.log($scope);
+                    $scope.parentCategoryId = categoryId;
+                }
+            }
+        });
+    };
+
+    //Remove category
+    $scope.removeCategory = function(categoryId){
+        dataService.removeCategory(categoryId, function(data){
+            console.log(data);
+            //update category list
+            $scope.updateArticleCategoryList();
+        });
+    }
 });
 
 /**
