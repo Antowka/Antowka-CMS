@@ -14,7 +14,7 @@ import java.util.Set;
 public class ArticleCategory {
 
     private int articleCategoryId;
-    private int parentCategoryId;
+    private Integer parentCategoryId;
     private String title;
     private String description;
     private int level;
@@ -41,11 +41,17 @@ public class ArticleCategory {
         this.articleCategoryId = articleCategoryId;
     }
 
-    public int getParentCategoryId() {
+    public Integer getParentCategoryId() {
         return parentCategoryId;
     }
 
-    public void setParentCategoryId(int parentCategoryId) {
+    public void setParentCategoryId(Integer parentCategoryId) {
+
+        //change null to 0 for main category
+        if(parentCategoryId == null) {
+            parentCategoryId = 0;
+        }
+
         this.parentCategoryId = parentCategoryId;
     }
 

@@ -7,7 +7,7 @@
         <id name="articleCategoryId" column="article_category_id" type="java.lang.Integer">
             <generator class="identity" />
         </id>
-        <property name="parentCategoryId" column="parent_category_id" type="java.lang.Integer" />
+        <property name="parentCategoryId" column="parent_category_id" type="java.lang.Integer" update="false" />
         <property name="title" column="title" type="java.lang.String" />
         <property name="description" column="description" type="java.lang.String" />
         <property name="level" column="level" type="java.lang.Integer" />

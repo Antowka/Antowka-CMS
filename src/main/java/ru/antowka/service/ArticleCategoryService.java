@@ -52,8 +52,15 @@ public class ArticleCategoryService {
      * @param articleCategory
      * @return
      */
-    public ArticleCategory createArticleCategory(ArticleCategory articleCategory){
-        articleCategory.setLevel(0);
+    public ArticleCategory createArticleCategory(ArticleCategory articleCategory) {
+
+        try {
+            ArticleCategory parentCategory = categoryArticleDao.getCategoryById(articleCategory.getParentCategoryId());
+            articleCategory.setLevel(parentCategory.getLevel()+1);
+        }catch(Exception e){
+            e.getStackTrace();
+        }
+
         return categoryArticleDao.createArticleCategory(articleCategory);
     }
 
@@ -67,7 +74,8 @@ public class ArticleCategoryService {
 
         articleCategory = categoryArticleDao.removeArticleCategory(articleCategory);
 
-        if(articleCategory.isDeleted()){
+        if(articleCategory.isDeleted()) {
+
             messageResponse.setCode(1);
             messageResponse.setTitle("Successful");
             messageResponse.setMessage("Your category #" + articleCategory.getArticleCategoryId() + " removed from system");

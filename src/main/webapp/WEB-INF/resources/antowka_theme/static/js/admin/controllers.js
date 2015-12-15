@@ -360,6 +360,7 @@ adminApp.controller('articleCategoryCtrl', function($scope, $uibModal, dataServi
 
     //Remove category
     $scope.removeCategory = function(categoryId){
+        console.log("REMOVE CATEGORY: " + categoryId);
         dataService.removeCategory(categoryId, function(data){
             console.log(data);
             //update category list

@@ -53,7 +53,6 @@
                             ng-click="removeCategory(articleCategory.articleCategoryId)">
                       </span>
                                     |
-
                   </li>
                 </ul>
             </div>

@@ -28,11 +28,11 @@ public class ArticleCategoryDaoImpl implements ArticleCategoryDao {
     @Transactional
     public ArticleCategory getCategoryById(int categoryId) {
 
-        ArticleCategory category = null;
-        Session session = hibernateSessionFactory.getSession();
-        category = (ArticleCategory) session.get(ArticleCategory.class, categoryId);
+        ArticleCategory articleCategory =  (ArticleCategory) hibernateSessionFactory
+                .getSession()
+                .get(ArticleCategory.class, categoryId);
 
-        return category;
+        return articleCategory;
     }
 
 
