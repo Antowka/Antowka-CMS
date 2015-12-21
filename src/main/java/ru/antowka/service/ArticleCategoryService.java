@@ -25,7 +25,7 @@ public class ArticleCategoryService {
         List<ArticleCategory> categories = categoryArticleDao.getAllCategories();
 
         categories.stream().forEach(category -> {
-            if(category.getParentCategoryId() != 0) {
+            if(category.getParentCategoryId() != null) {
                 categories.stream().forEach(categoryParent -> {
                     if (category.getParentCategoryId() == categoryParent.getArticleCategoryId()) {
                         categoryParent.addChildArticleCategories(category);
@@ -55,8 +55,10 @@ public class ArticleCategoryService {
     public ArticleCategory createArticleCategory(ArticleCategory articleCategory) {
 
         try {
-            ArticleCategory parentCategory = categoryArticleDao.getCategoryById(articleCategory.getParentCategoryId());
-            articleCategory.setLevel(parentCategory.getLevel()+1);
+            if(articleCategory.getParentCategoryId() != null) {
+                ArticleCategory parentCategory = categoryArticleDao.getCategoryById(articleCategory.getParentCategoryId());
+                articleCategory.setLevel(parentCategory.getLevel() + 1);
+            }
         }catch(Exception e){
             e.getStackTrace();
         }

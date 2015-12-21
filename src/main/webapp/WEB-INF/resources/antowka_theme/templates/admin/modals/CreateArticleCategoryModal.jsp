@@ -18,18 +18,30 @@
                     <span class="sr-only">Close</span>
                 </button>
 
-                <h2>Create new category</h2>
+                <h2>{{titleModal}}</h2>
             </div>
 
             <!-- Modal body -->
-            <div class="modal-body">
+            <div class="modal-body" ng-if="isCreateModal()">
                 <form>
-                    <input type="text" ng-model="title" placeholder="Category Name" value="123">
-                    <textarea ng-model="description" placeholder="Category Description"></textarea>
-                    <button ng-click="crateCategory()">Create Category</button>
+                    <input type="text" ng-model="$parent.title" placeholder="Category Name">
+                    <textarea ng-model="$parent.description" placeholder="Category Description"></textarea>
+                    <button ng-click="createCategory()">Create</button>
                 </form>
             </div>
 
+            <div class="modal-body" ng-if="isUpdateModal()">
+                <form>
+
+                    <select ng-model="parentCategory">
+                        <option></option>
+                    </select>
+
+                    <input type="text" ng-model="$parent.title">
+                    <textarea ng-model="$parent.description"></textarea>
+                    <button ng-click="saveCategory()">Save</button>
+                </form>
+            </div>
         </article>
     </script>
 </div>

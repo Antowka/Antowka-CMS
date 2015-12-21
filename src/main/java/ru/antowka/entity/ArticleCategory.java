@@ -42,6 +42,10 @@ public class ArticleCategory {
     }
 
     public Integer getParentCategoryId() {
+
+        if(parentCategoryId != null && parentCategoryId == 0){
+            return null;
+        }
         return parentCategoryId;
     }
 

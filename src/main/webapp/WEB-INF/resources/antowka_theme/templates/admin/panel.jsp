@@ -28,6 +28,7 @@
       <uib-tab heading="Articles">
          <div>
             <div class="article-categories" ng-controller="articleCategoryCtrl">
+                <button ng-click="openCreateCategoryModal(null)">Create main category</button>
                 <ul ng-controller="createArticleCategoryViewCtrl">
                   <li ng-repeat="articleCategory in articleCategories">
                       {{articleCategory.pretitle}}<a href="#" alt="{{articleCategory.description}}">{{articleCategory.title}}</a>

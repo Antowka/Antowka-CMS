@@ -324,7 +324,6 @@ adminApp.controller('articleCategoryCtrl', function($scope, $uibModal, dataServi
         });
     };
 
-
     //Start
     $scope.updateArticleCategoryList();
 
@@ -335,9 +334,14 @@ adminApp.controller('articleCategoryCtrl', function($scope, $uibModal, dataServi
             controller: 'createArticleCategoryViewCtrl',
             scope: $scope,
             resolve: {
-                ticket: function () {
-                    console.log($scope);
+                category: function () {
                     $scope.parentCategoryId = parentCategoryId;
+                    $scope.operationType = "create";
+                    $scope.titleModal = "Create category";
+
+                    if(typeof $scope.updateCategory != "undefined"){
+                        delete $scope.updateCategory;
+                    }
                 }
             }
         });
@@ -350,9 +354,22 @@ adminApp.controller('articleCategoryCtrl', function($scope, $uibModal, dataServi
             controller: 'createArticleCategoryViewCtrl',
             scope: $scope,
             resolve: {
-                ticket: function () {
-                    console.log($scope);
-                    $scope.parentCategoryId = categoryId;
+                category: function () {
+
+                    for(var i = 0; $scope.articleCategories.length > i; i++){
+
+                        var category = $scope.articleCategories[i];
+
+                        console.log("%s == %s", category.articleCategoryId, categoryId);
+
+                        if(category.articleCategoryId == categoryId){
+
+                            $scope.updateCategory = category;
+                            $scope.operationType = "update";
+                            $scope.titleModal = "Edit category";
+                            break;
+                        }
+                    }
                 }
             }
         });
@@ -374,13 +391,23 @@ adminApp.controller('articleCategoryCtrl', function($scope, $uibModal, dataServi
  */
 adminApp.controller('createArticleCategoryViewCtrl', function ($scope, $uibModal, dataService, $filter){
 
-    $scope.crateCategory = function() {
+    if(typeof $scope.$parent.updateCategory != "undefined") {
+        $scope.title = $scope.$parent.updateCategory.title;
+        $scope.description = $scope.$parent.updateCategory.description;
+        $scope.articleCategoryId = $scope.$parent.updateCategory.articleCategoryId;
+    }
+
+    $scope.titleModal = $scope.$parent.titleModal;
+
+    //create category
+    $scope.createCategory = function() {
+
         console.log($scope);
 
         var newArticleCategory = {
             parentCategoryId: $scope.$parent.parentCategoryId,
             title: $scope.title,
-            description: $scope.description,
+            description: $scope.description
         };
 
         dataService.createNewCategory(newArticleCategory, function (response) {
@@ -389,6 +416,20 @@ adminApp.controller('createArticleCategoryViewCtrl', function ($scope, $uibModal
         });
     };
 
+    //update category
+    $scope.saveCategory = function(){
+        console.log("UPDATE CATEGORY");
+    };
+
+    //check on type Modal
+    $scope.isCreateModal = function(){
+        return $scope.$parent.operationType == "create";
+    };
+    $scope.isUpdateModal = function(){
+        return $scope.$parent.operationType == "update";
+    };
+
+    //close modal
     $scope.cancel = function () {
         $scope.$parent.uibModalInstance.dismiss('cancel');
     };
