@@ -391,18 +391,26 @@ adminApp.controller('articleCategoryCtrl', function($scope, $uibModal, dataServi
  */
 adminApp.controller('createArticleCategoryViewCtrl', function ($scope, $uibModal, dataService, $filter){
 
+    //add data to local scope for update modal
     if(typeof $scope.$parent.updateCategory != "undefined") {
+
         $scope.title = $scope.$parent.updateCategory.title;
         $scope.description = $scope.$parent.updateCategory.description;
         $scope.articleCategoryId = $scope.$parent.updateCategory.articleCategoryId;
+
+        $scope.parentCategories = [];
+        for(var i = 0; $scope.$parent.articleCategories.length > i; i++){
+            //delete current category from list-selectors
+            if($scope.$parent.articleCategories[i].articleCategoryId != $scope.$parent.updateCategory.articleCategoryId){
+                $scope.parentCategories.push($scope.$parent.articleCategories[i]);
+            }
+        }
     }
 
     $scope.titleModal = $scope.$parent.titleModal;
 
     //create category
     $scope.createCategory = function() {
-
-        console.log($scope);
 
         var newArticleCategory = {
             parentCategoryId: $scope.$parent.parentCategoryId,
@@ -411,14 +419,30 @@ adminApp.controller('createArticleCategoryViewCtrl', function ($scope, $uibModal
         };
 
         dataService.createNewCategory(newArticleCategory, function (response) {
-            $scope.$parent.updateArticleCategoryList()
+            $scope.$parent.updateArticleCategoryList();
             $scope.$parent.uibModalInstance.dismiss('cancel');
         });
     };
 
     //update category
     $scope.saveCategory = function(){
-        console.log("UPDATE CATEGORY");
+
+        var updateData = {
+            articleCategoryId:$scope.articleCategoryId,
+            parentCategoryId:$scope.parentCategory,
+            title: $scope.title,
+            description: $scope.description
+        };
+
+        console.log(updateData);
+        console.log($scope);
+
+        //send data for update category
+        dataService.updateCategory(updateData, function(response){
+
+            $scope.$parent.updateArticleCategoryList();
+            $scope.$parent.uibModalInstance.dismiss('cancel');
+        });
     };
 
     //check on type Modal

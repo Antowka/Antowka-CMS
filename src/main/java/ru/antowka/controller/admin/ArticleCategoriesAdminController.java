@@ -5,7 +5,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import ru.antowka.entity.ArticleCategory;
 import ru.antowka.entity.MessageResponse;
-import ru.antowka.entity.Ticket;
 import ru.antowka.service.ArticleCategoryService;
 
 import java.util.List;
@@ -42,6 +41,17 @@ public class ArticleCategoriesAdminController {
     @RequestMapping(value = "create", method = RequestMethod.POST)
     public @ResponseBody ArticleCategory createArticleCategory(@RequestBody ArticleCategory articleCategory){
         return articleCategoryService.createArticleCategory(articleCategory);
+    }
+
+    /**
+     * Method create new ArticleCategory with parentCategory param
+     *
+     * @param articleCategory
+     * @return
+     */
+    @RequestMapping(value = "update", method = RequestMethod.POST)
+    public @ResponseBody ArticleCategory updateArticleCategory(@RequestBody ArticleCategory articleCategory){
+        return articleCategoryService.updateArticleCategory(articleCategory);
     }
 
     /**

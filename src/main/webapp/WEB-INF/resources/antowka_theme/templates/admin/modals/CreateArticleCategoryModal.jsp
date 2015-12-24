@@ -33,9 +33,7 @@
             <div class="modal-body" ng-if="isUpdateModal()">
                 <form>
 
-                    <select ng-model="parentCategory">
-                        <option></option>
-                    </select>
+                    <select ng-model="$parent.parentCategory" ng-options="category.articleCategoryId as category.title for category in parentCategories"></select>
 
                     <input type="text" ng-model="$parent.title">
                     <textarea ng-model="$parent.description"></textarea>

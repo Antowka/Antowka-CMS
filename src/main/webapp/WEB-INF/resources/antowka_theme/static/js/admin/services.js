@@ -110,6 +110,12 @@ adminApp.service('dataService', function($http) {
         });
     };
 
+
+    /**
+     *
+     * ******************* Article Category *********************
+     *
+     */
     this.getAllArticleCategories = function(callbackFunc){
 
         $http({
@@ -137,6 +143,22 @@ adminApp.service('dataService', function($http) {
             console.log("CREATED NEW CATEGORY");
         }).error(function(){
             console.log("ERROR IN CREATE CATEGORY");
+        });
+    };
+
+    this.updateCategory = function(formData, callbackFunc){
+
+        $http({
+            url: 'panel/article-category/update',
+            headers: {'Content-Type': 'application/json; charset=utf-8', 'X-CSRF-TOKEN': document.getElementById("csrf").value},
+            data: JSON.stringify(formData),
+            transformRequest: false,
+            method: 'POST'
+        }).success(function(newCategory){
+            callbackFunc(newCategory);
+            console.log("UPDATE CATEGORY");
+        }).error(function(){
+            console.log("ERROR IN UPDATE CATEGORY");
         });
     };
 
