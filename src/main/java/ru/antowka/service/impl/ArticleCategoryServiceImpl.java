@@ -58,14 +58,7 @@ public class ArticleCategoryServiceImpl implements ArticleCategoryService {
     @Override
     public ArticleCategory createArticleCategory(ArticleCategory articleCategory) {
 
-        try {
-            if(articleCategory.getParentCategoryId() != null) {
-                ArticleCategory parentCategory = categoryArticleDao.getCategoryById(articleCategory.getParentCategoryId());
-                articleCategory.setLevel(parentCategory.getLevel() + 1);
-            }
-        }catch(Exception e){
-            e.getStackTrace();
-        }
+        articleCategory = getLevelForArticleCategory(articleCategory);
 
         return categoryArticleDao.createArticleCategory(articleCategory);
     }
@@ -79,14 +72,7 @@ public class ArticleCategoryServiceImpl implements ArticleCategoryService {
     @Override
     public ArticleCategory updateArticleCategory(ArticleCategory articleCategory) {
 
-        try {
-            if(articleCategory.getParentCategoryId() != null) {
-                ArticleCategory parentCategory = categoryArticleDao.getCategoryById(articleCategory.getParentCategoryId());
-                articleCategory.setLevel(parentCategory.getLevel() + 1);
-            }
-        }catch(Exception e){
-            e.getStackTrace();
-        }
+        articleCategory = getLevelForArticleCategory(articleCategory);
 
         return categoryArticleDao.updateArticleCategory(articleCategory);
     }
@@ -115,5 +101,26 @@ public class ArticleCategoryServiceImpl implements ArticleCategoryService {
         }
 
         return messageResponse;
+    }
+
+    /**
+     * Method get level for ArticleCategory
+     *
+     * @param articleCategory
+     * @return
+     */
+    private ArticleCategory getLevelForArticleCategory(ArticleCategory articleCategory){
+
+        try {
+
+            if(articleCategory.getParentCategoryId() != null) {
+                ArticleCategory parentCategory = categoryArticleDao.getCategoryById(articleCategory.getParentCategoryId());
+                articleCategory.setLevel(parentCategory.getLevel() + 1);
+            }
+        }catch(Exception e){
+            e.getStackTrace();
+        }
+
+        return articleCategory;
     }
 }

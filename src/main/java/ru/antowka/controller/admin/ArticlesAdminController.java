@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.WebRequest;
 import ru.antowka.entity.Article;
 import ru.antowka.service.ArticleService;
+import ru.antowka.service.impl.ArticleServiceImpl;
 
 import java.util.List;
 

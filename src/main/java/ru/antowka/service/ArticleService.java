@@ -1,67 +1,64 @@
 package ru.antowka.service;
 
-import org.hibernate.criterion.Order;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import ru.antowka.dao.ArticleDao;
 import ru.antowka.entity.Article;
 import ru.antowka.entity.User;
 
 import java.util.List;
 
 /**
- * Created by anton on 06.08.15.
+ * Created by Anton Nik on 25.12.15.
  */
-@Service
-public class ArticleService {
-
-    @Autowired
-    private ArticleDao articleDao;
+public interface ArticleService {
 
     /**
-     * Method create new article
+     * Create new article
      *
      * @param article
      * @return
      */
-    public Article createArticle(Article article){
-
-        return articleDao.createArticle(article);
-    }
+    Article createArticle(Article article);
 
     /**
-     * Method get articles by pages
-     *
-     * @return
-     */
-    public List<Article> getArticles(int limit, int offset, String order, String orderField){
-
-        return articleDao.getAllArticles(limit, offset, order, orderField);
-    }
-
-    /**
-     * Method for get full article by simple articleId
+     * Update / edit article
      *
      * @param article
      * @return
      */
-    public Article getArticle(Article article){
-
-        return articleDao.getArticle(article);
-    }
+    Article updateArticle(Article article);
 
     /**
-     * Methd get list articles by user owner
+     * Remove article from db
+     *
+     * @param article
+     * @return
+     */
+    Article removeArticle(Article article);
+
+    /**
+     * Get articles by params and sort
+     *
+     * @param limit
+     * @param offset
+     * @param order
+     * @param orderField
+     * @return
+     */
+    List<Article> getArticles(int limit, int offset, String order, String orderField);
+
+    /**
+     * Get full Article Object
+     *
+     * @param article
+     * @return
+     */
+    Article getArticle(Article article);
+
+
+    /**
+     * Get articles by User
      *
      * @param user
      * @return
      */
-    public List<Article> getArticlesByUser(User user){
-
-        List<Article> articles = null;
-
-        articles = articleDao.getArticlesByUserOwner(user);
-
-        return articles;
-    }
+    List<Article> getArticlesByUser(User user);
 }
