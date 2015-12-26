@@ -85,7 +85,7 @@ public class ArticleCategoryServiceImpl implements ArticleCategoryService {
      * @return
      */
     @Override
-    public MessageResponse removeArticleCategory(ArticleCategory articleCategory){
+    public MessageResponse removeArticleCategory(ArticleCategory articleCategory) {
 
         articleCategory = categoryArticleDao.removeArticleCategory(articleCategory);
 
@@ -102,7 +102,7 @@ public class ArticleCategoryServiceImpl implements ArticleCategoryService {
      * @param articleCategory
      * @return
      */
-    private ArticleCategory getLevelForArticleCategory(ArticleCategory articleCategory){
+    private ArticleCategory getLevelForArticleCategory(ArticleCategory articleCategory) {
 
         try {
 
