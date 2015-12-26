@@ -28,34 +28,12 @@ public class ArticleDaoImpl implements ArticleDao {
     @Override
     @Transactional
     @SuppressWarnings("unchecked")
-    public List<Article> getAllArticles(int limit, int offset, String order, String orderField) {
-
-        Order orderObj = null;
-
-        switch (order){
-            case "asc":
-
-                orderObj = Order.asc(orderField);
-
-                break;
-
-            case "desc":
-
-                orderObj = Order.desc(orderField);
-
-                break;
-
-            default:
-
-                orderObj = Order.desc(orderField);
-
-                break;
-        }
+    public List<Article> getAllArticles(int limit, int offset, Order order, String orderField) {
 
         List<Article> articles = null;
         Session session = hibernateSessionFactory.getSession();
         articles = (List<Article>)session.createCriteria(Article.class)
-                                         .addOrder(orderObj)
+                                         .addOrder(order)
                                          .setMaxResults(limit)
                                          .setFirstResult(offset)
                                          .list();
@@ -116,10 +94,14 @@ public class ArticleDaoImpl implements ArticleDao {
 
     @Override
     @Transactional
-    public void removeArticle(Article article) {
+    public Article removeArticle(Article article) {
         hibernateSessionFactory
                 .getSession()
                 .delete(article);
+
+        article.setDeleted(true);
+
+        return article;
     }
 }
 

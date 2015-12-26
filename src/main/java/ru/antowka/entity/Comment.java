@@ -28,6 +28,15 @@ public class Comment implements Serializable {
     @JsonIdentityReference(alwaysAsId=true)
     private Ticket ticket;
 
+    /**
+     * Method response entity name
+     *
+     * @return
+     */
+    public String getEntityName() {
+        return "Comment";
+    }
+
     public int getCommentId() {
         return commentId;
     }

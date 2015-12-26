@@ -19,6 +19,15 @@ public class ArticleStatus implements Serializable{
     @JsonIgnore
     private Set<Article> articles;
 
+    /**
+     * Method response entity name
+     *
+     * @return
+     */
+    public String getEntityName() {
+        return "ArticleStatus";
+    }
+
     public int getArticlesStatusId() {
         return articlesStatusId;
     }

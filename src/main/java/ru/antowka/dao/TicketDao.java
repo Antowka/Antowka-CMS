@@ -14,7 +14,7 @@ public interface TicketDao {
     List<Ticket> getAllTickets(int limit, int offset, Order order);
     Ticket findTicketById(int ticketId);
     List<Ticket> findTicketsByUserOwner(User user);
-    int createTicket(Ticket ticket);
+    Ticket createTicket(Ticket ticket);
     Ticket removeTicket(int ticketId);
     List<Ticket> getAllTicketsAdmin(int limit, int offset, Order order);
 

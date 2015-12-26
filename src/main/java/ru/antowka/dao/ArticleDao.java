@@ -1,5 +1,6 @@
 package ru.antowka.dao;
 
+import org.hibernate.criterion.Order;
 import ru.antowka.entity.Article;
 import ru.antowka.entity.User;
 
@@ -10,7 +11,7 @@ import java.util.List;
  */
 public interface ArticleDao {
 
-    List<Article> getAllArticles(int limit, int offset, String order, String orderField);
+    List<Article> getAllArticles(int limit, int offset, Order order, String orderField);
     Article getArticle(Article articleId);
     List<Article> getArticlesByUserOwner(User user);
 
@@ -22,5 +23,5 @@ public interface ArticleDao {
 
     Article updateArticle(Article article);
 
-    void removeArticle(Article article);
+    Article removeArticle(Article article);
 }

@@ -126,9 +126,10 @@ public class TicketDaoImpl implements TicketDao{
 
     @Override
     @Transactional
-    public int createTicket(Ticket ticket) {
+    public Ticket createTicket(Ticket ticket) {
         Session session = hibernateSessionFactory.getSession();
-        return (int)session.save(ticket);
+        session.save(ticket);
+        return ticket;
     }
 
 

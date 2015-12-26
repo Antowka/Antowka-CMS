@@ -1,12 +1,14 @@
 package ru.antowka.service.impl;
 
-import org.hibernate.criterion.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.antowka.dao.ArticleDao;
 import ru.antowka.entity.Article;
+import ru.antowka.entity.MessageResponse;
 import ru.antowka.entity.User;
 import ru.antowka.service.ArticleService;
+import ru.antowka.service.MessageResponseService;
+import ru.antowka.utils.UtilsHibernate;
 
 import java.util.List;
 
@@ -19,8 +21,11 @@ public class ArticleServiceImpl implements ArticleService{
     @Autowired
     private ArticleDao articleDao;
 
+    @Autowired
+    private MessageResponseService messageResponseService;
+
     /**
-     * Method create new article
+     * Service for create new article
      *
      * @param article
      * @return
@@ -31,14 +36,34 @@ public class ArticleServiceImpl implements ArticleService{
         return articleDao.createArticle(article);
     }
 
+    /**
+     * Service for update article
+     *
+     * @param article
+     * @return
+     */
     @Override
     public Article updateArticle(Article article) {
-        return null;
+
+        return articleDao.updateArticle(article);
     }
 
+    /**
+     * Service for remove article
+     *
+     * @param article
+     * @return
+     */
     @Override
-    public Article removeArticle(Article article) {
-        return null;
+    public MessageResponse removeArticle(Article article) {
+
+        article = articleDao.removeArticle(article);
+
+        return messageResponseService.getResponseForRemoveEntity(
+                article.isDeleted(),
+                article.getEntityName(),
+                article.getArticleId()
+        );
     }
 
     /**
@@ -47,9 +72,14 @@ public class ArticleServiceImpl implements ArticleService{
      * @return
      */
     @Override
-    public List<Article> getArticles(int limit, int offset, String order, String orderField){
+    public List<Article> getArticles(int limit, int offset, String order, String orderField) {
 
-        return articleDao.getAllArticles(limit, offset, order, orderField);
+        return articleDao.getAllArticles(
+                limit,
+                offset,
+                UtilsHibernate.getOrderByString(order, orderField),
+                orderField
+        );
     }
 
     /**

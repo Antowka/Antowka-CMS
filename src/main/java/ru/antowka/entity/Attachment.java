@@ -36,6 +36,15 @@ public class Attachment implements Serializable{
      * ****************************** Getters and Setters ***************************************
      */
 
+    /**
+     * Method response entity name
+     *
+     * @return
+     */
+    public String getEntityName() {
+        return "Attachment";
+    }
+
     public int getAttachmentId() {
         return attachmentId;
     }

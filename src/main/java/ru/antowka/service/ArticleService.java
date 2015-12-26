@@ -1,6 +1,7 @@
 package ru.antowka.service;
 
 import ru.antowka.entity.Article;
+import ru.antowka.entity.MessageResponse;
 import ru.antowka.entity.User;
 
 import java.util.List;
@@ -32,7 +33,7 @@ public interface ArticleService {
      * @param article
      * @return
      */
-    Article removeArticle(Article article);
+    MessageResponse removeArticle(Article article);
 
     /**
      * Get articles by params and sort

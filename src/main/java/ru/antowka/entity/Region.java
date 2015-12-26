@@ -19,6 +19,14 @@ public class Region implements Serializable{
     private String description;
     private List<Region> childRegions = new ArrayList<Region>();
 
+    /**
+     * Method response entity name
+     *
+     * @return
+     */
+    public String getEntityName() {
+        return "Region";
+    }
 
     public int getRegionId() {
         return regionId;

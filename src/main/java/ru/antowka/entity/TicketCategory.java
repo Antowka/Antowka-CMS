@@ -21,6 +21,15 @@ public class TicketCategory implements Serializable{
     @JsonIgnore
     private Set<Ticket> tickets;
 
+    /**
+     * Method response entity name
+     *
+     * @return
+     */
+    public String getEntityName() {
+        return "TicketCategory";
+    }
+
     public int getTicketCategoryId() {
         return ticketCategoryId;
     }

@@ -19,6 +19,15 @@ public class TicketStatus implements Serializable{
     @JsonIgnore
     private Set<Ticket> tickets;
 
+    /**
+     * Method response entity name
+     *
+     * @return
+     */
+    public String getEntityName() {
+        return "TicketStatus";
+    }
+
     public int getTicketsStatusId() {
         return ticketsStatusId;
     }

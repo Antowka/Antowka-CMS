@@ -25,6 +25,15 @@ public class ArticleCategory {
 
     private boolean isDeleted = false;
 
+    /**
+     * Method response entity name
+     *
+     * @return
+     */
+    public String getEntityName() {
+        return "ArticleCategory";
+    }
+
     public String getDescription() {
         return description;
     }

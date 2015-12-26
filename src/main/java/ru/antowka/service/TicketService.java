@@ -9,6 +9,7 @@ import ru.antowka.entity.MessageResponse;
 import ru.antowka.entity.Ticket;
 import ru.antowka.entity.TicketStatus;
 import ru.antowka.entity.User;
+import ru.antowka.utils.UtilsHibernate;
 
 import java.util.List;
 
@@ -28,36 +29,18 @@ public class TicketService {
     private TicketStatusDao ticketStatusDao;
 
     @Autowired
-    private MessageResponse messageResponse;
+    private MessageResponseService messageResponseService;
 
     @Autowired
     EmailSender emailSender;
 
     public List<Ticket> getAllTickets(int limit, int offset, String order, String orderField){
 
-        Order orderObj = null;
-
-        switch (order){
-            case "asc":
-
-                orderObj = Order.asc(orderField);
-
-                break;
-
-            case "desc":
-
-                orderObj = Order.desc(orderField);
-
-                break;
-
-            default:
-
-                orderObj = Order.desc(orderField);
-
-                break;
-        }
-
-        List<Ticket> tickets = ticketDao.getAllTickets(limit, offset, orderObj);
+        List<Ticket> tickets = ticketDao.getAllTickets(
+                limit,
+                offset,
+                UtilsHibernate.getOrderByString(order, orderField)
+        );
 
         //cut long title
         //todo - set 45 to properties
@@ -80,47 +63,37 @@ public class TicketService {
 
     public MessageResponse createTicket(Ticket ticket){
 
-        Integer ticketId = ticketDao.createTicket(ticket);
+        ticket = ticketDao.createTicket(ticket);
 
-        if(!ticketId.equals(0)){
-
-            messageResponse.setCode(1);
-            messageResponse.setTitle("Successful");
-            messageResponse.setMessage("You ticket added to system with #"+ticketId);
-        } else{
-
-            messageResponse.setCode(0);
-            messageResponse.setTitle("Ticket has not been saved");
-            messageResponse.setMessage("You ticket added to system with #"+ticketId);
+        //send email about create ticket
+        if(ticket.getTicketId() != 0) {
+            emailSender.newTicketCreated(ticket.getEmail());
         }
 
-        emailSender.newTicketCreated(ticket.getEmail());
-
-        return messageResponse;
+        return messageResponseService.getResponseForCreateEntity(
+                ticket.getTicketId() != 0,
+                ticket.getEntityName(),
+                ticket.getTicketId()
+        );
     }
 
     public MessageResponse removeTicket(int ticketId){
 
         Ticket ticket = ticketDao.removeTicket(ticketId);
 
+        //remove attachments
         if(ticket.isDeleted()){
 
-            //remove attachments
             ticket.getAttachments().stream().forEach(attachment -> {
                 attachmentService.removeAttachment(attachment.getAttachmentId());
             });
-
-            messageResponse.setCode(1);
-            messageResponse.setTitle("Successful");
-            messageResponse.setMessage("Your ticket #" + ticket.getTicketId() + " removed from system");
-        } else{
-
-            messageResponse.setCode(0);
-            messageResponse.setTitle("Ticket has not been removed");
-            messageResponse.setMessage("Your ticket #" + ticketId + " removed to system");
         }
 
-        return messageResponse;
+        return messageResponseService.getResponseForRemoveEntity(
+                    ticket.isDeleted(),
+                    ticket.getEntityName(),
+                    ticket.getTicketId()
+        );
     }
 
     /**
@@ -128,29 +101,8 @@ public class TicketService {
      */
     public List<Ticket> getAllTicketsAdmin(int limit, int offset, String order, String orderField){
 
-        Order orderObj = null;
 
-        switch (order){
-            case "asc":
-
-                orderObj = Order.asc(orderField);
-
-                break;
-
-            case "desc":
-
-                orderObj = Order.desc(orderField);
-
-                break;
-
-            default:
-
-                orderObj = Order.desc(orderField);
-
-                break;
-        }
-
-        return ticketDao.getAllTicketsAdmin(limit, offset, orderObj);
+        return ticketDao.getAllTicketsAdmin(limit, offset, UtilsHibernate.getOrderByString(order, orderField));
     }
 
     public MessageResponse updateStatusOnTicketAdmin(int ticketId, int statusId){
@@ -160,21 +112,11 @@ public class TicketService {
         ticket.setStatus(status);
         ticketDao.updateTicketAdmin(ticket);
 
-
-
-        if(ticket.getTicketId() == ticketId) {
-
-            messageResponse.setCode(1);
-            messageResponse.setTitle("Successful");
-            messageResponse.setMessage("Your ticket #" + ticket.getTicketId() + " updated in system");
-        }else{
-
-            messageResponse.setCode(0);
-            messageResponse.setTitle("Ticket has not been updated");
-            messageResponse.setMessage("Your ticket #" + ticketId + " has not updated in system");
-        }
-
-        return messageResponse;
+        return messageResponseService.getResponseForRemoveEntity(
+                ticket.getTicketId() == ticketId,
+                ticket.getEntityName(),
+                ticket.getTicketId()
+        );
     }
 
     public Ticket getTicketByIdAdmin(int ticketId) {

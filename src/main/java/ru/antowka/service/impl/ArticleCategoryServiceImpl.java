@@ -6,6 +6,7 @@ import ru.antowka.dao.ArticleCategoryDao;
 import ru.antowka.entity.ArticleCategory;
 import ru.antowka.entity.MessageResponse;
 import ru.antowka.service.ArticleCategoryService;
+import ru.antowka.service.MessageResponseService;
 
 import java.util.List;
 
@@ -19,7 +20,7 @@ public class ArticleCategoryServiceImpl implements ArticleCategoryService {
     ArticleCategoryDao categoryArticleDao;
 
     @Autowired
-    private MessageResponse messageResponse;
+    private MessageResponseService messageResponseService;
 
     @Override
     public List<ArticleCategory> getAllCategories(){
@@ -88,19 +89,11 @@ public class ArticleCategoryServiceImpl implements ArticleCategoryService {
 
         articleCategory = categoryArticleDao.removeArticleCategory(articleCategory);
 
-        if(articleCategory.isDeleted()) {
-
-            messageResponse.setCode(1);
-            messageResponse.setTitle("Successful");
-            messageResponse.setMessage("Your category #" + articleCategory.getArticleCategoryId() + " removed from system");
-        } else{
-
-            messageResponse.setCode(0);
-            messageResponse.setTitle("Category has not been removed");
-            messageResponse.setMessage("Your category #" + articleCategory.getArticleCategoryId() + " removed to system");
-        }
-
-        return messageResponse;
+        return messageResponseService.getResponseForRemoveEntity(
+                articleCategory.isDeleted(),
+                articleCategory.getEntityName(),
+                articleCategory.getArticleCategoryId()
+        );
     }
 
     /**

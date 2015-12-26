@@ -29,6 +29,15 @@ public class Ticket implements Serializable {
     private Set<Attachment> attachments;
     private Set<Comment> comments;
 
+    /**
+     * Method response entity name
+     *
+     * @return
+     */
+    public String getEntityName() {
+        return "Ticket";
+    }
+
     public int getTicketId() {
         return ticketId;
     }
