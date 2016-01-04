@@ -1,5 +1,6 @@
 package ru.antowka.service;
 
+import org.springframework.web.context.request.WebRequest;
 import ru.antowka.entity.Article;
 import ru.antowka.entity.MessageResponse;
 import ru.antowka.entity.User;
@@ -44,7 +45,7 @@ public interface ArticleService {
      * @param orderField
      * @return
      */
-    List<Article> getArticles(int limit, int offset, String order, String orderField);
+    List<Article> getArticles(WebRequest request);
 
     /**
      * Get full Article Object

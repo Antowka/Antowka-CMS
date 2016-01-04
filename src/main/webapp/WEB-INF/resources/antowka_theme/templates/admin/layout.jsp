@@ -33,6 +33,7 @@
 <!-- MODALS -->
 <tiles:insertAttribute name="TicketViewModal" />
 <tiles:insertAttribute name="CreateArticleCategoryModal" />
+<tiles:insertAttribute name="CreateArticleModal" />
 
 
 <!-- JS FILES -->
@@ -45,6 +46,10 @@
 <script src="${resourceUrl}/js/admin/services.js"></script>
 <script src="${resourceUrl}/js/admin/controllers.js"></script>
 <script src="${resourceUrl}/js/admin/directives.js"></script>
+
+<script src="${resourceUrl}/js/admin/services/articleService.js"></script>
+<script src="${resourceUrl}/js/admin/controllers/modals/createArticleViewCtrl.js"></script>
+<script src="${resourceUrl}/js/admin/controllers/articleCtrl.js"></script>
 
 </body>
 

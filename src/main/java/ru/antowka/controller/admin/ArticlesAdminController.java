@@ -47,10 +47,7 @@ public class ArticlesAdminController {
     public @ResponseBody
     List<Article> getArticles(WebRequest request){
 
-        return articleService.getArticles(Integer.parseInt(request.getParameter("limit")),
-                Integer.parseInt(request.getParameter("offset")),
-                request.getParameter("order"),
-                request.getParameter("orderField"));
+        return articleService.getArticles(request);
     }
 
     /**

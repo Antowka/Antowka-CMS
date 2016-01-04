@@ -27,6 +27,8 @@
 
       <uib-tab heading="Articles">
          <div>
+
+            <!-- ArticleCategory Block -->
             <div class="article-categories" ng-controller="articleCategoryCtrl">
                 <button ng-click="openCreateCategoryModal(null)">Create main category</button>
                 <ul ng-controller="createArticleCategoryViewCtrl">
@@ -58,9 +60,15 @@
                 </ul>
             </div>
 
-            <div class="artticles">
+            <!-- Articles Block -->
+            <div class="articles" ng-controller="articleCtrl">
+                <ul ng-controller="createArticleViewCtrl">
+                    <li ng-repeat="article in articles">
 
+                    </li>
+                </ul>
             </div>
+
          </div>
       </uib-tab>
 

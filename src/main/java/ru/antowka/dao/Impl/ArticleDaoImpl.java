@@ -28,7 +28,10 @@ public class ArticleDaoImpl implements ArticleDao {
     @Override
     @Transactional
     @SuppressWarnings("unchecked")
-    public List<Article> getAllArticles(int limit, int offset, Order order, String orderField) {
+    public List<Article> getAllArticles(int limit, int offset, Order order, String orderField, int articleCategoryId) {
+
+
+        //todo - add filter by category and without filter if articleCategoryId = 0
 
         List<Article> articles = null;
         Session session = hibernateSessionFactory.getSession();

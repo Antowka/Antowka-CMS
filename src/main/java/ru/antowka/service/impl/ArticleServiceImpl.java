@@ -2,6 +2,7 @@ package ru.antowka.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.request.WebRequest;
 import ru.antowka.dao.ArticleDao;
 import ru.antowka.entity.Article;
 import ru.antowka.entity.MessageResponse;
@@ -72,13 +73,42 @@ public class ArticleServiceImpl implements ArticleService{
      * @return
      */
     @Override
-    public List<Article> getArticles(int limit, int offset, String order, String orderField) {
+    public List<Article> getArticles(WebRequest request) {
+
+        //Make default params if this params isn't exist
+        int limit = 10;
+        if(request.getParameterMap().containsKey("limit")) {
+            limit = Integer.parseInt(request.getParameter("limit"));
+        }
+
+        int offset = 0;
+        if(request.getParameterMap().containsKey("offset")) {
+            offset = Integer.parseInt(request.getParameter("offset"));
+        }
+
+        String order = "ASC";
+        if(request.getParameterMap().containsKey("order")) {
+            order = request.getParameter("order");
+        }
+
+        String orderField = "title";
+        if(request.getParameterMap().containsKey("orderField")) {
+            orderField = request.getParameter("orderField");
+        }
+
+        int articleCategoryId = 0;
+        if(request.getParameterMap().containsKey("categoryId")) {
+            articleCategoryId = Integer.parseInt(request.getParameter("categoryId"));
+        }
+
+
 
         return articleDao.getAllArticles(
                 limit,
                 offset,
                 UtilsHibernate.getOrderByString(order, orderField),
-                orderField
+                orderField,
+                articleCategoryId
         );
     }
 

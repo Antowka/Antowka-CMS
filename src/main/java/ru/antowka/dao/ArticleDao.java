@@ -11,7 +11,7 @@ import java.util.List;
  */
 public interface ArticleDao {
 
-    List<Article> getAllArticles(int limit, int offset, Order order, String orderField);
+    List<Article> getAllArticles(int limit, int offset, Order order, String orderField, int articleCategoryId);
     Article getArticle(Article articleId);
     List<Article> getArticlesByUserOwner(User user);
 
