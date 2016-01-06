@@ -3,11 +3,17 @@
  */
 
 /**
- *ArticleCategories controller
+ *Article controller
  */
 adminApp.controller('articleCtrl', function($scope, $uibModal, articleService){
 
-    $scope.getAllArticles = function(){
+    //Get articles by params
+    $scope.getAllArticles = function(params) {
+        articleService.getArticlesByParams(params, function($articles){
+            $scope.articles = $articles;
+        });
+    };
 
-    }
+    //get default array with articles
+    $scope.getAllArticles([]);
 });

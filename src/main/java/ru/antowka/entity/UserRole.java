@@ -1,11 +1,13 @@
 package ru.antowka.entity;
 
 
+import java.io.Serializable;
+
 /**
- * Created by anton on 30.07.15.
+ * Created by Anton Nik on 30.07.15.
  */
 
-public class UserRole {
+public class UserRole implements Serializable {
 
     private int roleId;
     private String userRole;

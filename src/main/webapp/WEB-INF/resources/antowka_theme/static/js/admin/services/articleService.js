@@ -6,9 +6,32 @@ adminApp.service('articleService', function($http) {
 
     this.getArticlesByParams = function(params, callbackFunc) {
 
+        var requestUrl = 'panel/articles/get-articles/?';
+
+        //add params to url if exist in array
+        if(typeof params['limit'] !== "undefined"){
+            requestUrl += "&limit=" + params['limit'];
+        }
+
+        if(typeof params['offset'] !== "undefined"){
+            requestUrl += "&offset=" + params['offset'];
+        }
+
+        if(typeof params['orderField'] !== "undefined"){
+            requestUrl += "&orderField=" + params['orderField'];
+        }
+
+        if(typeof params['order'] !== "undefined"){
+            requestUrl += "&order=" + params['order'];
+        }
+
+        if(typeof params['categoryId'] !== "undefined"){
+            requestUrl += "&categoryId=" + params['categoryId'];
+        }
+
         $http({
             method: 'GET',
-            url: 'panel/articles/get-articles/?limit=' + params['limit'] + '&offset='+ params['offset'] +'&orderField=' + params['orderField'] + '&order=' + params['order']
+            url: requestUrl
         }).success(function(data){
             // With the data succesfully returned, call our callback
             callbackFunc(data);

@@ -8,10 +8,11 @@
             <generator class="identity" />
         </id>
 
-        <property name="userOwnerId" column="user_owner_id" type="java.lang.Integer" />
+        <many-to-one name="userOwner" column="user_owner_id" class="ru.antowka.entity.User" lazy="false" />
         <property name="title" column="title" type="java.lang.String" />
         <property name="shortDescription" column="short_description" type="java.lang.String" />
         <property name="description" column="description" type="java.lang.String" />
+        <property name="creationDate" column="creation_date" type="java.lang.String" />
 
         <set name="categories" table="articles_categories_rel" inverse="true" lazy="true" fetch="select">
             <key column="article_id" />

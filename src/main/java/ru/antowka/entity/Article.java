@@ -8,10 +8,11 @@ import java.util.Set;
 public class Article {
 
     private int articleId;
-    private int userOwnerId;
+    private User userOwner;
     private String title;
     private String shortDescription;
     private String description;
+    private String creationDate;
     private Set<ArticleCategory> categories;
     private boolean isDeleted = false;
 
@@ -32,12 +33,12 @@ public class Article {
         this.articleId = articleId;
     }
 
-    public int getUserOwnerId() {
-        return userOwnerId;
+    public User getUserOwner() {
+        return userOwner;
     }
 
-    public void setUserOwnerId(int userOwnerId) {
-        this.userOwnerId = userOwnerId;
+    public void setUserOwner(User userOwner) {
+        this.userOwner = userOwner;
     }
 
     public String getTitle() {
@@ -78,5 +79,13 @@ public class Article {
 
     public void setDeleted(boolean deleted) {
         isDeleted = deleted;
+    }
+
+    public String getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(String creationDate) {
+        this.creationDate = creationDate;
     }
 }
