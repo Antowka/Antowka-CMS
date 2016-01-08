@@ -16,4 +16,33 @@ adminApp.controller('articleCtrl', function($scope, $uibModal, articleService){
 
     //get default array with articles
     $scope.getAllArticles([]);
+
+
+    //************ FUNCTIONALITY ************
+
+    //Open modal for create article
+    $scope.openCreateArticleModal = function() {
+
+        $scope.uibModalInstance = $uibModal.open({
+            templateUrl: 'createArticleModal.html',
+            controller: 'createArticleViewCtrl',
+            scope: $scope,
+            resolve: {
+                category: function () {
+                    $scope.operationType = "create";
+                    $scope.titleModal = "Create article";
+
+                    if(typeof $scope.updateCategory != "undefined"){
+                        delete $scope.updateCategory;
+                    }
+                }
+            }
+        });
+    }
+
+    //create new Article
+    $scope.createArticle = function(){
+        //todo - заполнить сохранение
+        console.log("Created Article");
+    };
 });

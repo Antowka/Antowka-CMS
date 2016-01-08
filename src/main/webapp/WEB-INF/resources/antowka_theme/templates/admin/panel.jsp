@@ -60,14 +60,19 @@
             </div>
 
             <!-- Articles Block -->
-            <div class="col-xs-10">
-                <table class="articles table table-striped" ng-controller="articleCtrl">
+            <div class="col-xs-10" ng-controller="articleCtrl">
+
+                <button ng-click="openCreateArticleModal()" >Create New Category</button>
+
+                <!-- Articles List -->
+                <table class="articles table table-striped">
                 <thead>
                     <tr>
                         <th ng-click="sortingListArticle('ticketId', true, 0)">#</th>
                         <th ng-click="sortingListArticle('creationDate', true, 0)">Date</th>
                         <th ng-click="sortingListArticle('author', true, 0)">Author</th>
                         <th ng-click="sortingListArticle('title', true, 0)">Title</th>
+                        <th ng-click="sortingListArticle('title', true, 0)">Categories</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -78,6 +83,9 @@
                         <td>{{article.creationDate}}</td>
                         <td>{{article.userOwner.login}}</td>
                         <td>{{article.title}}</td>
+                        <td>
+                            <a ng-repeat="category in article.categories" href="#">{{category.title}}</a>
+                        </td>
                         <td>
                             <span ng-click="publicTicket(ticket.ticketId)" class="glyphicon glyphicon-ok" aria-hidden="true"></span>
                             |

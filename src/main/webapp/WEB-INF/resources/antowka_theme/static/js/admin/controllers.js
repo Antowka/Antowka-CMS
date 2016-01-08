@@ -434,9 +434,6 @@ adminApp.controller('createArticleCategoryViewCtrl', function ($scope, $uibModal
             description: $scope.description
         };
 
-        console.log(updateData);
-        console.log($scope);
-
         //send data for update category
         dataService.updateCategory(updateData, function(response){
 
