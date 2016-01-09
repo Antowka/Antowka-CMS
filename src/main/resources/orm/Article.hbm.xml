@@ -12,10 +12,10 @@
         <property name="title" column="title" type="java.lang.String" />
         <property name="shortDescription" column="short_description" type="java.lang.String" />
         <property name="description" column="description" type="java.lang.String" />
-        <property name="creationDate" column="creation_date" type="java.lang.String" />
+        <property name="creationDate" column="creation_date" type="java.lang.String" insert="false" update="false" />
 
-        <set name="categories" table="articles_categories_rel" inverse="true" lazy="true" fetch="select">
-            <key column="article_id" />
+        <set name="categories" table="articles_categories_rel" inverse="false" lazy="true" fetch="select" cascade="persist">
+            <key column="article_id" not-null="true"/>
             <many-to-many column="article_category_id" class="ru.antowka.entity.ArticleCategory" />
         </set>
 

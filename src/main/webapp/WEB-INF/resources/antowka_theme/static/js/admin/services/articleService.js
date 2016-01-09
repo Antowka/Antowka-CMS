@@ -3,7 +3,12 @@
  */
 adminApp.service('articleService', function($http) {
 
-
+    /**
+     * Method get articles list by params
+     *
+     * @param params
+     * @param callbackFunc
+     */
     this.getArticlesByParams = function(params, callbackFunc) {
 
         var requestUrl = 'panel/articles/get-articles/?';
@@ -39,4 +44,28 @@ adminApp.service('articleService', function($http) {
             console.log("error, you can't get article preview");
         });
     };
+
+    /**
+     * Method for create article
+     *
+     * @param formData - article object
+     * @param callbackFunc
+     */
+    this.createArticle = function(formData, callbackFunc){
+
+        $http({
+            url: 'panel/articles/create',
+            headers: {'Content-Type': 'application/json; charset=utf-8', 'X-CSRF-TOKEN': document.getElementById("csrf").value},
+            data: JSON.stringify(formData),
+            transformRequest: false,
+            method: 'POST'
+        })
+        .success(function(newComment){
+            callbackFunc(newComment);
+            console.log("CREATED ARTICLE");
+        })
+        .error(function(){
+            console.log("ERROR IN CREATE ARTICLE");
+        });
+    }
 });

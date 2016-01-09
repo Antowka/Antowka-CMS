@@ -32,17 +32,31 @@ adminApp.controller('articleCtrl', function($scope, $uibModal, articleService){
                     $scope.operationType = "create";
                     $scope.titleModal = "Create article";
 
-                    if(typeof $scope.updateCategory != "undefined"){
-                        delete $scope.updateCategory;
+                    if(typeof $scope.updateArticle != "undefined"){
+                        delete $scope.updateArticle;
                     }
                 }
             }
         });
-    }
+    };
 
     //create new Article
     $scope.createArticle = function(){
-        //todo - заполнить сохранение
-        console.log("Created Article");
+
+        var categories = [];
+
+        //todo - insert category array
+        categories.push({articleCategoryId:$scope.articleCategory});
+
+        var newArtticle = {
+            title: $scope.title,
+            shortDescription: $scope.shortDescription,
+            description: $scope.description,
+            categories:categories
+        };
+
+        articleService.createArticle(newArtticle, function(result){
+            $scope.getAllArticles([]);
+        });
     };
 });

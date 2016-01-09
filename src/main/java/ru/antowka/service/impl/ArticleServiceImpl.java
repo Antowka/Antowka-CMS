@@ -1,9 +1,11 @@
 package ru.antowka.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.WebRequest;
 import ru.antowka.dao.ArticleDao;
+import ru.antowka.dao.UserDao;
 import ru.antowka.entity.Article;
 import ru.antowka.entity.MessageResponse;
 import ru.antowka.entity.User;
@@ -23,6 +25,9 @@ public class ArticleServiceImpl implements ArticleService{
     private ArticleDao articleDao;
 
     @Autowired
+    private UserDao userDao;
+
+    @Autowired
     private MessageResponseService messageResponseService;
 
     /**
@@ -33,6 +38,14 @@ public class ArticleServiceImpl implements ArticleService{
      */
     @Override
     public Article createArticle(Article article){
+
+        //Set current authorized user
+        org.springframework.security.core.userdetails.User userDetail =
+                (org.springframework.security.core.userdetails.User) SecurityContextHolder
+                        .getContext()
+                        .getAuthentication()
+                        .getPrincipal();
+        article.setUserOwner(userDao.findByUserName(userDetail.getUsername()));
 
         return articleDao.createArticle(article);
     }
