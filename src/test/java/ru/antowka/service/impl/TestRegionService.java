@@ -1,4 +1,4 @@
-package ru.antowka.dao;
+package ru.antowka.service.impl;
 
 
 import org.junit.Test;
@@ -10,6 +10,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.Spy;
 import org.mockito.runners.MockitoJUnitRunner;
+import ru.antowka.dao.RegionDao;
 import ru.antowka.entity.MessageResponse;
 import ru.antowka.entity.Region;
 import ru.antowka.service.RegionService;

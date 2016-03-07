@@ -17,7 +17,7 @@ import java.util.List;
 public class ArticleCategoryServiceImpl implements ArticleCategoryService {
 
     @Autowired
-    ArticleCategoryDao categoryArticleDao;
+    ArticleCategoryDao articleCategoryDao;
 
     @Autowired
     private MessageResponseService messageResponseService;
@@ -25,11 +25,15 @@ public class ArticleCategoryServiceImpl implements ArticleCategoryService {
     @Override
     public List<ArticleCategory> getAllCategories(){
 
-        List<ArticleCategory> categories = categoryArticleDao.getAllCategories();
+        List<ArticleCategory> categories = articleCategoryDao.getAllCategories();
 
+        //iterate categories for create tree structure by level
         categories.stream().forEach(category -> {
+
             if(category.getParentCategoryId() != null) {
+
                 categories.stream().forEach(categoryParent -> {
+
                     if (category.getParentCategoryId() == categoryParent.getArticleCategoryId()) {
                         categoryParent.addChildArticleCategories(category);
                     }
@@ -37,6 +41,7 @@ public class ArticleCategoryServiceImpl implements ArticleCategoryService {
             }
         });
 
+        //remove all categories from main level except level == 0
         categories.removeIf(regionRemove -> regionRemove.getLevel() != 0);
 
         return categories;
@@ -46,7 +51,7 @@ public class ArticleCategoryServiceImpl implements ArticleCategoryService {
     public ArticleCategory getArticlesByCategoryId(int categoryId){
 
         ArticleCategory category = null;
-        category = categoryArticleDao.getCategoryById(categoryId);
+        category = articleCategoryDao.getCategoryById(categoryId);
         return category;
     }
 
@@ -61,7 +66,7 @@ public class ArticleCategoryServiceImpl implements ArticleCategoryService {
 
         articleCategory = getLevelForArticleCategory(articleCategory);
 
-        return categoryArticleDao.createArticleCategory(articleCategory);
+        return articleCategoryDao.createArticleCategory(articleCategory);
     }
 
     /**
@@ -75,7 +80,7 @@ public class ArticleCategoryServiceImpl implements ArticleCategoryService {
 
         articleCategory = getLevelForArticleCategory(articleCategory);
 
-        return categoryArticleDao.updateArticleCategory(articleCategory);
+        return articleCategoryDao.updateArticleCategory(articleCategory);
     }
 
     /**
@@ -87,7 +92,7 @@ public class ArticleCategoryServiceImpl implements ArticleCategoryService {
     @Override
     public MessageResponse removeArticleCategory(ArticleCategory articleCategory) {
 
-        articleCategory = categoryArticleDao.removeArticleCategory(articleCategory);
+        articleCategory = articleCategoryDao.removeArticleCategory(articleCategory);
 
         return messageResponseService.getResponseForRemoveEntity(
                 articleCategory.isDeleted(),
@@ -107,7 +112,7 @@ public class ArticleCategoryServiceImpl implements ArticleCategoryService {
         try {
 
             if(articleCategory.getParentCategoryId() != null) {
-                ArticleCategory parentCategory = categoryArticleDao.getCategoryById(articleCategory.getParentCategoryId());
+                ArticleCategory parentCategory = articleCategoryDao.getCategoryById(articleCategory.getParentCategoryId());
                 articleCategory.setLevel(parentCategory.getLevel() + 1);
             }
         }catch(Exception e){
