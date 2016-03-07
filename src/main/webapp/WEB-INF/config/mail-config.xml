@@ -7,7 +7,7 @@
               <property name="host" value="smtp.yandex.ru" />
               <property name="port" value="587" />
               <property name="username" value="anton@antowka.ru" />
-              <property name="password" value="dtctkstcjhltkmrb1987" />
+              <property name="password" value="testtesttest" />
 
               <property name="javaMailProperties">
                      <props>
