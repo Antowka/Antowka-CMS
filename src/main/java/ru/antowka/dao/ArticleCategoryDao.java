@@ -12,6 +12,7 @@ import java.util.Set;
 public interface ArticleCategoryDao {
 
     ArticleCategory getCategoryById(int categoryId);
+
     List<ArticleCategory> getAllCategories();
 
     /**
