@@ -11,17 +11,28 @@ import ru.antowka.service.MessageResponseService;
 import java.util.List;
 
 /**
- * Created by anton on 06.08.15.
+ * Created by Anton Nikanorov on 06.08.15.
  */
 @Service
 public class ArticleCategoryServiceImpl implements ArticleCategoryService {
 
+    /**
+     * Link on ArticleCategoryDao use for working with DB
+     */
     @Autowired
     ArticleCategoryDao articleCategoryDao;
 
+    /**
+     * Link on MessageResponseService use for create response messages
+     */
     @Autowired
     private MessageResponseService messageResponseService;
 
+    /**
+     * Method - response all categories in tree structure
+     *
+     * @return List<ArticleCategory>
+     */
     @Override
     public List<ArticleCategory> getAllCategories(){
 
@@ -47,19 +58,24 @@ public class ArticleCategoryServiceImpl implements ArticleCategoryService {
         return categories;
     }
 
+    /**
+     * Method - response one category by his articleCategoryId
+     *
+     * @param articleCategoryId
+     * @return ArticleCategory
+     */
     @Override
-    public ArticleCategory getArticlesByCategoryId(int categoryId){
+    public ArticleCategory getArticlesByCategoryId(int articleCategoryId){
 
-        ArticleCategory category = null;
-        category = articleCategoryDao.getCategoryById(categoryId);
-        return category;
+        return articleCategoryDao.getCategoryById(articleCategoryId);
     }
 
     /**
-     * Method create new ArticleCategory
+     * Method create new ArticleCategory by object ArticleCategory
      *
      * @param articleCategory
-     * @return
+     *
+     * @return ArticleCategory
      */
     @Override
     public ArticleCategory createArticleCategory(ArticleCategory articleCategory) {
@@ -70,10 +86,11 @@ public class ArticleCategoryServiceImpl implements ArticleCategoryService {
     }
 
     /**
-     * Method update category
+     * Method update category by object ArticleCategory
      *
      * @param articleCategory
-     * @return
+     *
+     * @return ArticleCategory
      */
     @Override
     public ArticleCategory updateArticleCategory(ArticleCategory articleCategory) {
@@ -84,10 +101,11 @@ public class ArticleCategoryServiceImpl implements ArticleCategoryService {
     }
 
     /**
-     * Remove ArticleCategory
+     * Remove ArticleCategory by object ArticleCategory, method response MessageResponse with status success/fail
      *
      * @param articleCategory
-     * @return
+     *
+     * @return MessageResponse
      */
     @Override
     public MessageResponse removeArticleCategory(ArticleCategory articleCategory) {
@@ -102,7 +120,7 @@ public class ArticleCategoryServiceImpl implements ArticleCategoryService {
     }
 
     /**
-     * Method get level for ArticleCategory
+     * Method get level for ArticleCategory by found parentCategory
      *
      * @param articleCategory
      * @return

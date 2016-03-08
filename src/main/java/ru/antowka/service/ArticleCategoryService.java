@@ -10,13 +10,45 @@ import java.util.List;
  */
 public interface ArticleCategoryService {
 
+    /**
+     * Method - response all categories in tree structure
+     *
+     * @return List<ArticleCategory>
+     */
     List<ArticleCategory> getAllCategories();
 
-    ArticleCategory getArticlesByCategoryId(int categoryId);
+    /**
+     * Method - response one category by his articleCategoryId
+     *
+     * @param articleCategoryId
+     * @return ArticleCategory
+     */
+    ArticleCategory getArticlesByCategoryId(int articleCategoryId);
 
+    /**
+     * Method create new ArticleCategory by object ArticleCategory
+     *
+     * @param articleCategory
+     *
+     * @return ArticleCategory
+     */
     ArticleCategory createArticleCategory(ArticleCategory articleCategory);
 
+    /**
+     * Method update category by object ArticleCategory
+     *
+     * @param articleCategory
+     *
+     * @return ArticleCategory
+     */
     ArticleCategory updateArticleCategory(ArticleCategory articleCategory);
 
+    /**
+     * Remove ArticleCategory by object ArticleCategory, method response MessageResponse with status success/fail
+     *
+     * @param articleCategory
+     *
+     * @return MessageResponse
+     */
     MessageResponse removeArticleCategory(ArticleCategory articleCategory);
 }

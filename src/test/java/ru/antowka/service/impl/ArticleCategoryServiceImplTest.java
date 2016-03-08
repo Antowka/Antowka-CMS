@@ -3,11 +3,13 @@ package ru.antowka.service.impl;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 import ru.antowka.dao.ArticleCategoryDao;
+import ru.antowka.dao.Impl.ArticleCategoryDaoImpl;
 import ru.antowka.entity.ArticleCategory;
 
 import java.util.ArrayList;
@@ -23,7 +25,7 @@ public class ArticleCategoryServiceImplTest {
     private ArticleCategoryServiceImpl articleCategoryService;
 
     @Mock
-    private ArticleCategoryDao articleCategoryDao;
+    private ArticleCategoryDaoImpl articleCategoryDao;
 
     /**
      * Check build tree by level field from entity
@@ -65,11 +67,28 @@ public class ArticleCategoryServiceImplTest {
     @Test
     public void testGetArticlesByCategoryId() throws Exception {
 
+        Mockito.when(articleCategoryDao.getCategoryById(1)).thenReturn(builderArticleCategory(1, 0, 0, "Main Category"));
+
+        ArticleCategory articleCategory = articleCategoryService.getArticlesByCategoryId(1);
+
+        Assert.assertTrue(articleCategory.getArticleCategoryId() == 1);
     }
 
     @Test
     public void testCreateArticleCategory() throws Exception {
 
+        ArticleCategory articleCategoryParent   = builderArticleCategory(1, 2, 1, "Parent Category");
+        ArticleCategory articleCategoryNew      = builderArticleCategory(0, 1, 0, "New Category");
+
+        Mockito.when(articleCategoryDao.getCategoryById(1)).thenReturn(articleCategoryParent);
+        Mockito.when(articleCategoryDao.createArticleCategory(articleCategoryNew)).thenReturn(articleCategoryNew);
+
+        articleCategoryService.createArticleCategory(articleCategoryNew);
+
+        ArgumentCaptor<ArticleCategory> argument = ArgumentCaptor.forClass(ArticleCategory.class);
+        Mockito.verify(articleCategoryDao, Mockito.times(1)).createArticleCategory(argument.capture());
+
+        Assert.assertEquals(2, argument.getValue().getLevel());
     }
 
     @Test
@@ -82,10 +101,22 @@ public class ArticleCategoryServiceImplTest {
 
     }
 
+    /**
+     * Build object ArticleCategory by demo params
+     *
+     * @param articleCategoryId
+     * @param parentArticleCategoryId
+     * @param level
+     * @param title
+     * @return
+     */
     private ArticleCategory builderArticleCategory(int articleCategoryId, int parentArticleCategoryId, int level, String title){
 
         ArticleCategory articleCategory = new ArticleCategory();
-        articleCategory.setArticleCategoryId(articleCategoryId);
+
+        if(articleCategoryId != 0) {
+            articleCategory.setArticleCategoryId(articleCategoryId);
+        }
 
         if(parentArticleCategoryId != 0) {
             articleCategory.setParentCategoryId(parentArticleCategoryId);

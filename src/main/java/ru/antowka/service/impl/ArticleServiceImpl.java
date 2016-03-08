@@ -45,6 +45,7 @@ public class ArticleServiceImpl implements ArticleService{
                         .getContext()
                         .getAuthentication()
                         .getPrincipal();
+
         article.setUserOwner(userDao.findByUserName(userDetail.getUsername()));
 
         return articleDao.createArticle(article);
