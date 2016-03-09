@@ -8,15 +8,15 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
-import ru.antowka.dao.ArticleCategoryDao;
 import ru.antowka.dao.Impl.ArticleCategoryDaoImpl;
 import ru.antowka.entity.ArticleCategory;
+import ru.antowka.entity.MessageResponse;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Anton Nikanorov on 07.03.16.
+ * Tests for ArticleCategoryService
  */
 @RunWith(MockitoJUnitRunner.class)
 public class ArticleCategoryServiceImplTest {
@@ -64,6 +64,11 @@ public class ArticleCategoryServiceImplTest {
         Assert.assertTrue(articleCategoryThirdId == 3 && articleCategorySecondMainId == 4);
     }
 
+    /**
+     * Check response after create ArticleCategory
+     *
+     * @throws Exception
+     */
     @Test
     public void testGetArticlesByCategoryId() throws Exception {
 
@@ -74,6 +79,11 @@ public class ArticleCategoryServiceImplTest {
         Assert.assertTrue(articleCategory.getArticleCategoryId() == 1);
     }
 
+    /**
+     * Check logic for get level category by parent
+     *
+     * @throws Exception
+     */
     @Test
     public void testCreateArticleCategory() throws Exception {
 
@@ -91,14 +101,61 @@ public class ArticleCategoryServiceImplTest {
         Assert.assertEquals(2, argument.getValue().getLevel());
     }
 
+    /**
+     * Check logic for get level category after update parent
+     *
+     * @throws Exception
+     */
     @Test
     public void testUpdateArticleCategory() throws Exception {
 
+        ArticleCategory articleCategoryParent   = builderArticleCategory(1, 2, 1, "Parent Category");
+        ArticleCategory articleCategoryNew      = builderArticleCategory(5, 0, 1, "New Category");
+
+        Mockito.when(articleCategoryDao.getCategoryById(1)).thenReturn(articleCategoryParent);
+        Mockito.when(articleCategoryDao.updateArticleCategory(articleCategoryNew)).thenReturn(articleCategoryNew);
+
+        articleCategoryService.updateArticleCategory(articleCategoryNew);
+
+        ArgumentCaptor<ArticleCategory> argument = ArgumentCaptor.forClass(ArticleCategory.class);
+        Mockito.verify(articleCategoryDao, Mockito.times(1)).updateArticleCategory(argument.capture());
+
+        Assert.assertEquals(0, argument.getValue().getLevel());
     }
 
+    /**
+     * Check remove ArticleCategory if all successful and fail
+     *
+     * @throws Exception
+     */
     @Test
     public void testRemoveArticleCategory() throws Exception {
 
+
+        MessageResponseServiceImpl mrs = new MessageResponseServiceImpl();
+
+        //Successful case
+        mrs.setMessageResponse(new MessageResponse());
+        articleCategoryService.setMessageResponseService(mrs);
+
+        ArticleCategory articleCategoryForRemoveSuccess = builderArticleCategory(1, 0, 1, "Category for remove success");
+        articleCategoryForRemoveSuccess.setIsDeleted(true);
+        Mockito.when(articleCategoryDao.removeArticleCategory(articleCategoryForRemoveSuccess)).thenReturn(articleCategoryForRemoveSuccess);
+
+        MessageResponse messageSuccess = articleCategoryService.removeArticleCategory(articleCategoryForRemoveSuccess);
+
+
+        //Fail case
+        mrs.setMessageResponse(new MessageResponse());
+        articleCategoryService.setMessageResponseService(mrs);
+
+        ArticleCategory articleCategoryForRemoveFail = builderArticleCategory(2, 0, 1, "Category for remove fail");
+        articleCategoryForRemoveFail.setIsDeleted(false);
+        Mockito.when(articleCategoryDao.removeArticleCategory(articleCategoryForRemoveFail)).thenReturn(articleCategoryForRemoveFail);
+
+        MessageResponse messageFail = articleCategoryService.removeArticleCategory(articleCategoryForRemoveFail);
+
+        Assert.assertTrue(messageSuccess.getCode() == 1 && messageFail.getCode() == 0);
     }
 
     /**

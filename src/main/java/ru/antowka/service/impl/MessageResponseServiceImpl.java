@@ -88,4 +88,17 @@ public class MessageResponseServiceImpl implements MessageResponseService{
 
         return messageResponse;
     }
+
+
+    /**
+     *  ******************************* Getters and Setters ***********************************
+     */
+
+    public MessageResponse getMessageResponse() {
+        return messageResponse;
+    }
+
+    public void setMessageResponse(MessageResponse messageResponse) {
+        this.messageResponse = messageResponse;
+    }
 }

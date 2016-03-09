@@ -130,13 +130,40 @@ public class ArticleCategoryServiceImpl implements ArticleCategoryService {
         try {
 
             if(articleCategory.getParentCategoryId() != null) {
+
                 ArticleCategory parentCategory = articleCategoryDao.getCategoryById(articleCategory.getParentCategoryId());
                 articleCategory.setLevel(parentCategory.getLevel() + 1);
+
+            } else {
+
+                articleCategory.setLevel(0);
             }
+
         }catch(Exception e){
             e.getStackTrace();
         }
 
         return articleCategory;
+    }
+
+
+    /**
+     *  ******************************* Getters and Setters ***********************************
+     */
+
+    public ArticleCategoryDao getArticleCategoryDao() {
+        return articleCategoryDao;
+    }
+
+    public void setArticleCategoryDao(ArticleCategoryDao articleCategoryDao) {
+        this.articleCategoryDao = articleCategoryDao;
+    }
+
+    public MessageResponseService getMessageResponseService() {
+        return messageResponseService;
+    }
+
+    public void setMessageResponseService(MessageResponseService messageResponseService) {
+        this.messageResponseService = messageResponseService;
     }
 }
