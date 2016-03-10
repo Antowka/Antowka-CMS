@@ -153,4 +153,35 @@ public class ArticleServiceImpl implements ArticleService{
 
         return articles;
     }
+
+
+
+
+    /**
+     *  ******************************* Getters and Setters ***********************************
+     */
+
+    public ArticleDao getArticleDao() {
+        return articleDao;
+    }
+
+    public void setArticleDao(ArticleDao articleDao) {
+        this.articleDao = articleDao;
+    }
+
+    public UserDao getUserDao() {
+        return userDao;
+    }
+
+    public void setUserDao(UserDao userDao) {
+        this.userDao = userDao;
+    }
+
+    public MessageResponseService getMessageResponseService() {
+        return messageResponseService;
+    }
+
+    public void setMessageResponseService(MessageResponseService messageResponseService) {
+        this.messageResponseService = messageResponseService;
+    }
 }
