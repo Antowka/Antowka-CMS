@@ -1,6 +1,5 @@
 package ru.antowka.service;
 
-import org.hibernate.criterion.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.antowka.dao.TicketDao;
@@ -9,6 +8,7 @@ import ru.antowka.entity.MessageResponse;
 import ru.antowka.entity.Ticket;
 import ru.antowka.entity.TicketStatus;
 import ru.antowka.entity.User;
+import ru.antowka.service.impl.AttachmentServiceImpl;
 import ru.antowka.utils.UtilsHibernate;
 
 import java.util.List;
@@ -23,7 +23,7 @@ public class TicketService {
     private TicketDao ticketDao;
 
     @Autowired
-    private AttachmentService attachmentService;
+    private AttachmentServiceImpl attachmentServiceImpl;
 
     @Autowired
     private TicketStatusDao ticketStatusDao;
@@ -85,7 +85,7 @@ public class TicketService {
         if(ticket.isDeleted()){
 
             ticket.getAttachments().stream().forEach(attachment -> {
-                attachmentService.removeAttachment(attachment.getAttachmentId());
+                attachmentServiceImpl.removeAttachment(attachment.getAttachmentId());
             });
         }
 

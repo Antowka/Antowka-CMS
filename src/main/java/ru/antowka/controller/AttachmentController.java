@@ -14,7 +14,7 @@ import java.security.NoSuchAlgorithmException;
 
 
 /**
- * Created by Anton Nik on 12.08.15.
+ * Controller for attachment
  */
 @Controller
 @RequestMapping("attachments")
@@ -22,8 +22,6 @@ public class AttachmentController {
 
     @Autowired
     private AttachmentService attachmentService;
-
-
 
 
     /**

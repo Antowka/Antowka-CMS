@@ -4,7 +4,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
        <!-- AttachmentService -->
-       <bean id="attachmentService" class="ru.antowka.service.AttachmentService">
+       <bean id="attachmentService" class="ru.antowka.service.impl.AttachmentServiceImpl">
               <property name="storagePath" value="${file.storagePath}" />
               <property name="pathDefaultPreview" value="${file.pathDefaultPreview}" />
        </bean>
