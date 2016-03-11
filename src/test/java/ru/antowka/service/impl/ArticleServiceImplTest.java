@@ -15,6 +15,10 @@ import ru.antowka.dao.UserDao;
 import ru.antowka.entity.Article;
 import ru.antowka.entity.MessageResponse;
 import ru.antowka.entity.User;
+import ru.antowka.utils.UtilsHibernate;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Tests for ArticleService
@@ -118,17 +122,56 @@ public class ArticleServiceImplTest {
     }
 
     @Test
+    @PrepareForTest({UtilsHibernate.class})
     public void testGetArticles() throws Exception {
 
+        PowerMockito.mockStatic(UtilsHibernate.class);
+
+        List<Article> articleList = new ArrayList<>();
+
+        Article article1 = new Article();
+        article1.setTitle("article1");
+        articleList.add(article1);
+
+        Article article2 = new Article();
+        article2.setTitle("article2");
+        articleList.add(article2);
+
+        Mockito.when(articleDao.getAllArticles(2, 1, UtilsHibernate.getOrderByString("asc", "title"), "title", 1)).thenReturn(articleList);
+
+        List<Article> articles = articleService.getArticles(2, 1, "asc", "title", 1);
+
+        Assert.assertTrue(articles.get(0).getTitle().equals("article1") && articles.get(1).getTitle().equals("article2"));
     }
 
     @Test
     public void testGetArticle() throws Exception {
 
+        Article article = new Article();
+        article.setArticleId(1);
+        article.setTitle("test title");
+
+        Mockito.when(articleDao.getArticle(article)).thenReturn(article);
+
+        Article responseArticle = articleService.getArticle(article);
+
+        Assert.assertEquals(article.getArticleId(), responseArticle.getArticleId());
     }
 
     @Test
     public void testGetArticlesByUser() throws Exception {
 
+        Article article = new Article();
+        article.setArticleId(1);
+        article.setTitle("test title");
+
+        List<Article> articles = new ArrayList<>();
+        articles.add(article);
+
+        Mockito.when(articleDao.getArticlesByUserOwner(user)).thenReturn(articles);
+
+        List<Article> responseArticles = articleService.getArticlesByUser(user);
+
+        Assert.assertEquals(responseArticles.get(0).getArticleId(), 1);
     }
 }

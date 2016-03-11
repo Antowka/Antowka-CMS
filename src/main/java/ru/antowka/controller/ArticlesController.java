@@ -13,7 +13,7 @@ import ru.antowka.service.impl.ArticleServiceImpl;
 import java.util.List;
 
 /**
- * Created by anton on 06.08.15.
+ * Controller for Articles on client side
  */
 @Controller
 @RequestMapping("articles")
@@ -33,6 +33,32 @@ public class ArticlesController {
     @RequestMapping(value = "get-articles", method = RequestMethod.GET)
     public @ResponseBody List<Article> getArticles(WebRequest request){
 
-        return articleService.getArticles(request);
+        //Make default params if this params isn't exist
+        int limit = 10;
+        if(request.getParameterMap().containsKey("limit")) {
+            limit = Integer.parseInt(request.getParameter("limit"));
+        }
+
+        int offset = 0;
+        if(request.getParameterMap().containsKey("offset")) {
+            offset = Integer.parseInt(request.getParameter("offset"));
+        }
+
+        String order = "ASC";
+        if(request.getParameterMap().containsKey("order")) {
+            order = request.getParameter("order");
+        }
+
+        String orderField = "title";
+        if(request.getParameterMap().containsKey("orderField")) {
+            orderField = request.getParameter("orderField");
+        }
+
+        int articleCategoryId = 0;
+        if(request.getParameterMap().containsKey("categoryId")) {
+            articleCategoryId = Integer.parseInt(request.getParameter("categoryId"));
+        }
+
+        return articleService.getArticles(limit, offset, order, orderField, articleCategoryId);
     }
 }

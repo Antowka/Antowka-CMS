@@ -87,35 +87,7 @@ public class ArticleServiceImpl implements ArticleService{
      * @return
      */
     @Override
-    public List<Article> getArticles(WebRequest request) {
-
-        //Make default params if this params isn't exist
-        int limit = 10;
-        if(request.getParameterMap().containsKey("limit")) {
-            limit = Integer.parseInt(request.getParameter("limit"));
-        }
-
-        int offset = 0;
-        if(request.getParameterMap().containsKey("offset")) {
-            offset = Integer.parseInt(request.getParameter("offset"));
-        }
-
-        String order = "ASC";
-        if(request.getParameterMap().containsKey("order")) {
-            order = request.getParameter("order");
-        }
-
-        String orderField = "title";
-        if(request.getParameterMap().containsKey("orderField")) {
-            orderField = request.getParameter("orderField");
-        }
-
-        int articleCategoryId = 0;
-        if(request.getParameterMap().containsKey("categoryId")) {
-            articleCategoryId = Integer.parseInt(request.getParameter("categoryId"));
-        }
-
-
+    public List<Article> getArticles(int limit, int offset, String order, String orderField, int articleCategoryId) {
 
         return articleDao.getAllArticles(
                 limit,
@@ -147,11 +119,7 @@ public class ArticleServiceImpl implements ArticleService{
     @Override
     public List<Article> getArticlesByUser(User user){
 
-        List<Article> articles = null;
-
-        articles = articleDao.getArticlesByUserOwner(user);
-
-        return articles;
+        return articleDao.getArticlesByUserOwner(user);
     }
 
 

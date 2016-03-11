@@ -13,7 +13,7 @@ import ru.antowka.service.impl.ArticleServiceImpl;
 import java.util.List;
 
 /**
- * Created by Anton Nik on 09.12.15.
+ * Controller for Articles on admin side
  */
 @Controller
 @RequestMapping("panel/articles")
@@ -47,7 +47,33 @@ public class ArticlesAdminController {
     public @ResponseBody
     List<Article> getArticles(WebRequest request){
 
-        return articleService.getArticles(request);
+        //Make default params if this params isn't exist
+        int limit = 10;
+        if(request.getParameterMap().containsKey("limit")) {
+            limit = Integer.parseInt(request.getParameter("limit"));
+        }
+
+        int offset = 0;
+        if(request.getParameterMap().containsKey("offset")) {
+            offset = Integer.parseInt(request.getParameter("offset"));
+        }
+
+        String orderField = "title";
+        if(request.getParameterMap().containsKey("orderField")) {
+            orderField = request.getParameter("orderField");
+        }
+
+        String order = "ASC";
+        if(request.getParameterMap().containsKey("order")) {
+            order = request.getParameter("order");
+        }
+
+        int articleCategoryId = 0;
+        if(request.getParameterMap().containsKey("categoryId")) {
+            articleCategoryId = Integer.parseInt(request.getParameter("categoryId"));
+        }
+
+        return articleService.getArticles(limit, offset, order, orderField, articleCategoryId);
     }
 
     /**

@@ -43,9 +43,10 @@ public interface ArticleService {
      * @param offset
      * @param order
      * @param orderField
+     *
      * @return
      */
-    List<Article> getArticles(WebRequest request);
+    List<Article> getArticles(int limit, int offset, String order, String orderField, int articleCategoryId);
 
     /**
      * Get full Article Object
