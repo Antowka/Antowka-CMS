@@ -54,6 +54,14 @@ public class AttachmentServiceImpl implements AttachmentService{
         this.pathDefaultPreview = pathDefaultPreview;
     }
 
+    public void setAttachment(Attachment attachment) {
+        this.attachment = attachment;
+    }
+
+    public void setMessageResponse(MessageResponse messageResponse) {
+        this.messageResponse = messageResponse;
+    }
+
     /**
      * ***************************** Functionality methods **********************************
      */

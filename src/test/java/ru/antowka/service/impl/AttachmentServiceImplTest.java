@@ -2,12 +2,20 @@ package ru.antowka.service.impl;
 
 import org.apache.commons.io.IOUtils;
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.InjectMocks;
+import org.junit.runner.RunWith;
+import org.mockito.*;
+import org.powermock.api.mockito.PowerMockito;
+import org.powermock.modules.junit4.PowerMockRunner;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.web.multipart.MultipartFile;
+import ru.antowka.dao.AttachmentDao;
+import ru.antowka.entity.ArticleCategory;
+import ru.antowka.entity.Attachment;
 import ru.antowka.entity.MessageResponse;
+import ru.antowka.entity.factory.AttachmentFactory;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -18,18 +26,34 @@ import java.nio.channels.ReadableByteChannel;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Test for AttachmentService
  */
+@RunWith(PowerMockRunner.class)
 public class AttachmentServiceImplTest {
 
     @InjectMocks
     private AttachmentServiceImpl attachmentService;
 
+    @Mock
+    private AttachmentDao attachmentDao;
+
+    @Mock
+    private AttachmentFactory attachmentFactory;
+
+    @Captor
+    private ArgumentCaptor<List<Attachment>> argumentCaptor;
+
     private MultipartFile multipartFile;
 
     private String pathTempFile = System.getProperty("java.io.tmpdir") + "/test_" + Math.random() +  ".png";
+
+    private String storagePath = System.getProperty("java.io.tmpdir") + "/STORAGE/";
+
+    private String pathDefaultPreview = storagePath + "preview/";
 
     @Before
     public void setUp() throws Exception {
@@ -51,6 +75,10 @@ public class AttachmentServiceImplTest {
 
         fos.close();
         input.close();
+
+        //Set paths
+        attachmentService.setStoragePath(storagePath);
+        attachmentService.setPathDefaultPreview(pathDefaultPreview);
     }
 
     @After
@@ -58,10 +86,37 @@ public class AttachmentServiceImplTest {
 
     }
 
-
+    /**
+     * Check uploading files and create attachments
+     *
+     * @throws Exception
+     */
     @Test
     public void testCreateAttachment() throws Exception {
-        String test123 = "";
+
+        List<MultipartFile> files = new ArrayList<>();
+        files.add(multipartFile);
+
+        Mockito.when(attachmentFactory.newAttachment()).thenReturn(null);
+
+        attachmentService.setAttachment(new Attachment());
+        attachmentService.setMessageResponse(new MessageResponse());
+
+        MessageResponse messageResponse = attachmentService.createAttachment(files);
+
+        Mockito.verify(attachmentDao, Mockito.times(1)).createAttachments(argumentCaptor.capture());
+
+        Attachment resultAttachment = argumentCaptor.getValue().get(0);
+
+        boolean isExistPreview = Files.exists(Paths.get(storagePath + resultAttachment.getPreviewPath()));
+        boolean isExistImage   = Files.exists(Paths.get(storagePath + resultAttachment.getFilePathInStorage()));
+
+        Assert.assertTrue(
+                resultAttachment.getMimeType().equals("image/png") &&
+                messageResponse.getCode() == 0 &&
+                isExistPreview &&
+                isExistImage
+        );
     }
 
     @Test
