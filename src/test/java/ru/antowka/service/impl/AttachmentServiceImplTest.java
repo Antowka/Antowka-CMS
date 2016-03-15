@@ -7,6 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.*;
+import org.mockito.runners.MockitoJUnitRunner;
 import org.powermock.api.mockito.PowerMockito;
 import org.powermock.modules.junit4.PowerMockRunner;
 import org.springframework.mock.web.MockMultipartFile;
@@ -20,22 +21,23 @@ import ru.antowka.entity.factory.AttachmentFactory;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.net.URL;
 import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.nio.file.*;
+import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Test for AttachmentService
  */
-@RunWith(PowerMockRunner.class)
+@RunWith(MockitoJUnitRunner.class)
 public class AttachmentServiceImplTest {
 
     @InjectMocks
+    @Spy
     private AttachmentServiceImpl attachmentService;
 
     @Mock
@@ -84,6 +86,25 @@ public class AttachmentServiceImplTest {
     @After
     public void tearDown() throws Exception {
 
+        //Удаляем тестовый фаил
+        Files.delete(Paths.get(pathTempFile));
+
+        //Удаляем тестовые папки и файлы
+        Files.walkFileTree(Paths.get(storagePath), new SimpleFileVisitor<Path>() {
+
+            @Override
+            public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
+                Files.delete(file);
+                return FileVisitResult.CONTINUE;
+            }
+
+            @Override
+            public FileVisitResult postVisitDirectory(Path dir, IOException exc) throws IOException {
+                Files.delete(dir);
+                return FileVisitResult.CONTINUE;
+            }
+
+        });
     }
 
     /**
@@ -106,13 +127,16 @@ public class AttachmentServiceImplTest {
 
         Mockito.verify(attachmentDao, Mockito.times(1)).createAttachments(argumentCaptor.capture());
 
-        Attachment resultAttachment = argumentCaptor.getValue().get(0);
+        Attachment attachment = argumentCaptor.getValue().get(0);
 
-        boolean isExistPreview = Files.exists(Paths.get(storagePath + resultAttachment.getPreviewPath()));
-        boolean isExistImage   = Files.exists(Paths.get(storagePath + resultAttachment.getFilePathInStorage()));
+        boolean isExistPreview = Files.exists(Paths.get(storagePath + attachment.getPreviewPath()));
+        boolean isExistImage   = Files.exists(Paths.get(storagePath + attachment.getFilePathInStorage()));
+
+        Files.delete(Paths.get(storagePath + attachment.getPreviewPath()));
+        Files.delete(Paths.get(storagePath + attachment.getFilePathInStorage()));
 
         Assert.assertTrue(
-                resultAttachment.getMimeType().equals("image/png") &&
+                attachment.getMimeType().equals("image/png") &&
                 messageResponse.getCode() == 0 &&
                 isExistPreview &&
                 isExistImage
@@ -122,5 +146,30 @@ public class AttachmentServiceImplTest {
     @Test
     public void testRemoveAttachment() throws Exception {
 
+        //CREATING ATTACHMENT FOR REMOVE
+        List<MultipartFile> files = new ArrayList<>();
+        files.add(multipartFile);
+
+        Mockito.when(attachmentFactory.newAttachment()).thenReturn(null);
+
+        attachmentService.setAttachment(new Attachment());
+        attachmentService.setMessageResponse(new MessageResponse());
+
+        MessageResponse messageResponse1 = attachmentService.createAttachment(files);
+
+        Mockito.verify(attachmentDao, Mockito.times(1)).createAttachments(argumentCaptor.capture());
+
+        Attachment attachment = argumentCaptor.getValue().get(0);
+
+
+        //REMOVE ATTACHMENT
+        Mockito.when(attachmentDao.removeAttachment(attachment.getAttachmentId())).thenReturn(attachment);
+
+        MessageResponse messageResponse = attachmentService.removeAttachment(attachment.getAttachmentId());
+
+        boolean isExistPreview = Files.exists(Paths.get(storagePath + attachment.getPreviewPath()));
+        boolean isExistImage   = Files.exists(Paths.get(storagePath + attachment.getFilePathInStorage()));
+
+        Assert.assertTrue(!isExistPreview && !isExistImage && messageResponse.getCode() == 1);
     }
 }
