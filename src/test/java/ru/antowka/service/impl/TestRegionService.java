@@ -13,7 +13,6 @@ import org.mockito.runners.MockitoJUnitRunner;
 import ru.antowka.dao.RegionDao;
 import ru.antowka.entity.MessageResponse;
 import ru.antowka.entity.Region;
-import ru.antowka.service.RegionService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +22,7 @@ import java.util.List;
 public class TestRegionService {
 
     @InjectMocks
-    private RegionService testingObject;
+    private RegionServiceImpl testingObject;
 
     @Mock
     private RegionDao regionDao;
