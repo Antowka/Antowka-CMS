@@ -2,7 +2,6 @@ package ru.antowka.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.stereotype.Service;
 import ru.antowka.dao.CommentDao;
 import ru.antowka.dao.UserDao;
 import ru.antowka.entity.Comment;
@@ -12,26 +11,25 @@ import ru.antowka.entity.User;
 import java.util.List;
 
 /**
- * Created by Anton Nik on 09.09.15.
+ * Interface for work with Comments
  */
-@Service
-public class CommentService {
+public abstract class CommentService {
 
     @Autowired
-    private CommentDao commentDao;
+    protected CommentDao commentDao;
 
     @Autowired
-    private UserDao userDao;
+    protected UserDao userDao;
 
     @Autowired
-    private MessageResponse messageResponse;
+    protected MessageResponse messageResponse;
 
     public Comment createComment(Comment comment){
 
         org.springframework.security.core.userdetails.User userDetail =
-                (org.springframework.security.core.userdetails.User)SecurityContextHolder.getContext()
-                                                                                         .getAuthentication()
-                                                                                         .getPrincipal();
+                (org.springframework.security.core.userdetails.User) SecurityContextHolder.getContext()
+                        .getAuthentication()
+                        .getPrincipal();
         User user = userDao.findByUserName(userDetail.getUsername());
         comment.setUser(user);
 
@@ -61,7 +59,5 @@ public class CommentService {
         return commentDao.updateComment(comment);
     }
 
-    public List<Comment> getCommentsByTicketId(int ticketId){
-        return commentDao.getCommentsByTicketId(ticketId);
-    }
+    public abstract List<Comment> getCommentsByEntityId(int ticketId);
 }

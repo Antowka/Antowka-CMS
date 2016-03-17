@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import ru.antowka.entity.Comment;
 import ru.antowka.entity.MessageResponse;
-import ru.antowka.entity.Ticket;
 import ru.antowka.service.CommentService;
 
 import java.util.List;
@@ -55,6 +54,6 @@ public class CommentsAdminController {
     @RequestMapping(value="getByTask/{ticketId}", method=RequestMethod.GET)
     public @ResponseBody
     List<Comment> getCommentsByTicketsById(@PathVariable("ticketId") int ticketId){
-        return commentService.getCommentsByTicketId(ticketId);
+        return commentService.getCommentsByEntityId(ticketId);
     }
 }
