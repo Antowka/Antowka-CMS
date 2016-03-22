@@ -3,6 +3,7 @@ package ru.antowka.service.impl;
 import ru.antowka.entity.Comment;
 import ru.antowka.service.CommentService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -12,6 +13,6 @@ public class CommentArticleService extends CommentService {
 
     @Override
     public List<Comment> getCommentsByEntityId(int ticketId) {
-        return null;
+        return new ArrayList<Comment>();
     }
 }

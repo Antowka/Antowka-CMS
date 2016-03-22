@@ -15,6 +15,7 @@ import ru.antowka.dao.UserDao;
 import ru.antowka.entity.Article;
 import ru.antowka.entity.MessageResponse;
 import ru.antowka.entity.User;
+import ru.antowka.service.UserService;
 import ru.antowka.utils.UtilsHibernate;
 
 import java.util.ArrayList;
@@ -33,7 +34,7 @@ public class ArticleServiceImplTest {
     private ArticleDao articleDao;
 
     @Mock
-    private UserDao userDao;
+    private UserService userService;
 
     @Mock
     private org.springframework.security.core.userdetails.User userDetail;
@@ -65,7 +66,7 @@ public class ArticleServiceImplTest {
         Mockito.when(authentication.getPrincipal()).thenReturn(userDetail);
 
         Mockito.when(userDetail.getUsername()).thenReturn("userName");
-        Mockito.when(userDao.findByUserName("userName")).thenReturn(user);
+        Mockito.when(userService.getAuthorizedUser()).thenReturn(user);
 
         articleService.createArticle(article);
 

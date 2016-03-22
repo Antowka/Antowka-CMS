@@ -1,8 +1,9 @@
-package ru.antowka.service;
+package ru.antowka.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -10,6 +11,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import ru.antowka.dao.UserDao;
 import ru.antowka.entity.UserRole;
+import ru.antowka.service.UserService;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -20,14 +22,34 @@ import java.util.Set;
  * Created by anton on 25.07.15.
  */
 @Service("myUserDetailsService")
-public class UserDetailsServiceImpl implements UserDetailsService {
+public class UserDetailsServiceImpl implements UserDetailsService, UserService {
 
     @Autowired
     private UserDao userDao;
 
 
     /**
-     *  ***************************** Logic *************************************
+     *  ******************************** Simple methods ****************************************
+     */
+
+    /**
+     * Method response current authorized user
+     *
+     * @return User
+     */
+    public ru.antowka.entity.User getAuthorizedUser(){
+
+        String login = ((org.springframework.security.core.userdetails.User) SecurityContextHolder.getContext()
+                       .getAuthentication()
+                       .getPrincipal())
+                       .getUsername();
+
+        return userDao.findByUserName(login);
+    }
+
+
+    /**
+     *  ***************************** Methods for security *************************************
      */
 
 

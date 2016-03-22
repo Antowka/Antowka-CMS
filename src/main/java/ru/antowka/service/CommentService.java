@@ -1,9 +1,7 @@
 package ru.antowka.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import ru.antowka.dao.CommentDao;
-import ru.antowka.dao.UserDao;
 import ru.antowka.entity.Comment;
 import ru.antowka.entity.MessageResponse;
 import ru.antowka.entity.User;
@@ -19,18 +17,14 @@ public abstract class CommentService {
     protected CommentDao commentDao;
 
     @Autowired
-    protected UserDao userDao;
+    protected UserService userServices;
 
     @Autowired
     protected MessageResponse messageResponse;
 
     public Comment createComment(Comment comment){
 
-        org.springframework.security.core.userdetails.User userDetail =
-                (org.springframework.security.core.userdetails.User) SecurityContextHolder.getContext()
-                        .getAuthentication()
-                        .getPrincipal();
-        User user = userDao.findByUserName(userDetail.getUsername());
+        User user = userServices.getAuthorizedUser();
         comment.setUser(user);
 
         return commentDao.createComment(comment);
@@ -60,4 +54,16 @@ public abstract class CommentService {
     }
 
     public abstract List<Comment> getCommentsByEntityId(int ticketId);
+
+    /**
+     * ******************* Getters and Setters ***********************
+     */
+
+    public MessageResponse getMessageResponse() {
+        return messageResponse;
+    }
+
+    public void setMessageResponse(MessageResponse messageResponse) {
+        this.messageResponse = messageResponse;
+    }
 }

@@ -11,6 +11,7 @@ import ru.antowka.entity.MessageResponse;
 import ru.antowka.entity.User;
 import ru.antowka.service.ArticleService;
 import ru.antowka.service.MessageResponseService;
+import ru.antowka.service.UserService;
 import ru.antowka.utils.UtilsHibernate;
 
 import java.util.List;
@@ -25,7 +26,7 @@ public class ArticleServiceImpl implements ArticleService{
     private ArticleDao articleDao;
 
     @Autowired
-    private UserDao userDao;
+    private UserService userService;
 
     @Autowired
     private MessageResponseService messageResponseService;
@@ -40,13 +41,9 @@ public class ArticleServiceImpl implements ArticleService{
     public Article createArticle(Article article){
 
         //Set current authorized user
-        org.springframework.security.core.userdetails.User userDetail =
-                (org.springframework.security.core.userdetails.User) SecurityContextHolder
-                        .getContext()
-                        .getAuthentication()
-                        .getPrincipal();
+        User user = userService.getAuthorizedUser();
 
-        article.setUserOwner(userDao.findByUserName(userDetail.getUsername()));
+        article.setUserOwner(user);
 
         return articleDao.createArticle(article);
     }
@@ -137,12 +134,12 @@ public class ArticleServiceImpl implements ArticleService{
         this.articleDao = articleDao;
     }
 
-    public UserDao getUserDao() {
-        return userDao;
+    public UserService getUserService() {
+        return userService;
     }
 
-    public void setUserDao(UserDao userDao) {
-        this.userDao = userDao;
+    public void setUserService(UserService userService) {
+        this.userService = userService;
     }
 
     public MessageResponseService getMessageResponseService() {
