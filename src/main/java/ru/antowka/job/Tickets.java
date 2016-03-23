@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import ru.antowka.entity.Setting;
 import ru.antowka.service.SettingsService;
-import ru.antowka.service.TicketService;
+import ru.antowka.service.impl.TicketServiceImpl;
 
 /**
  * Created by Anton Nik on 06.09.15.
@@ -12,7 +12,7 @@ import ru.antowka.service.TicketService;
 public class Tickets {
 
     @Autowired
-    private TicketService ticketService;
+    private TicketServiceImpl ticketService;
 
     @Autowired
     private SettingsService settingsService;

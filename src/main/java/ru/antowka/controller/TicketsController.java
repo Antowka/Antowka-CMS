@@ -1,7 +1,6 @@
 package ru.antowka.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 import ru.antowka.entity.MessageResponse;
 import ru.antowka.entity.Ticket;
@@ -9,6 +8,7 @@ import ru.antowka.entity.TicketCategory;
 import ru.antowka.entity.User;
 import ru.antowka.service.TicketCategoryService;
 import ru.antowka.service.TicketService;
+import ru.antowka.service.impl.TicketServiceImpl;
 
 import java.util.List;
 
@@ -80,7 +80,7 @@ public class TicketsController {
      */
     @RequestMapping(value = "get-ticket", method = RequestMethod.GET)
     public @ResponseBody Ticket getTicket(@ModelAttribute Ticket ticket){
-        ticket = ticketService.getTicketById(ticket.getTicketId());
+        ticket = ticketService.getTicketById(ticket);
         return ticket;
     }
 
