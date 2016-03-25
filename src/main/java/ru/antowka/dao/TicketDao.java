@@ -18,7 +18,7 @@ public interface TicketDao {
     Ticket removeTicket(int ticketId);
     List<Ticket> getAllTicketsAdmin(int limit, int offset, Order order);
 
-    void updateTicketAdmin(Ticket ticket);
+    Ticket updateTicketAdmin(Ticket ticket);
     Ticket findTicketByIdAdmin(int ticketId);
     Long countPublicTickets();
 }

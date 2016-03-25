@@ -72,21 +72,20 @@ public interface TicketService {
      *
      * FOR ONLY ADMINS
      *
-     * @param ticketId
-     * @param statusId
+     * @param ticket
      * @return
      */
-    MessageResponse updateStatusOnTicketAdmin(int ticketId, int statusId);
+    Ticket updateTicketAdmin(Ticket ticket);
 
     /**
      * Method response any ticket by ticketId
      *
      * FOR ONLY ADMINS
      *
-     * @param ticketId
+     * @param ticket
      * @return
      */
-    Ticket getTicketByIdAdmin(int ticketId);
+    Ticket getTicketByIdAdmin(Ticket ticket);
 
 
     /**

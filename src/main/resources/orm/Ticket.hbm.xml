@@ -34,7 +34,7 @@
             <many-to-many column="comment_id" class="ru.antowka.entity.Comment" />
         </set>
 
-        <many-to-one name="status" column="ticket_status_id" class="ru.antowka.entity.TicketStatus" insert="false" update="true" />
+        <many-to-one name="status" column="ticket_status_id" class="ru.antowka.entity.TicketStatus" insert="false" update="true"/>
 
         <many-to-one name="region" column="ticket_region_id" class="ru.antowka.entity.Region" lazy="false" />
 

@@ -84,8 +84,8 @@ public class TicketServiceImpl implements TicketService{
 
         Ticket ticket = ticketDao.removeTicket(ticketId);
 
-        //remove attachments
-        if(ticket.isDeleted()){
+        //remove attachments if exist
+        if(ticket.isDeleted() && ticket.getAttachments() != null && !ticket.getAttachments().isEmpty()) {
 
             ticket.getAttachments().stream().forEach(attachment -> {
                 attachmentServiceImpl.removeAttachment(attachment.getAttachmentId());
@@ -108,22 +108,12 @@ public class TicketServiceImpl implements TicketService{
         return ticketDao.getAllTicketsAdmin(limit, offset, UtilsHibernate.getOrderByString(order, orderField));
     }
 
-    public MessageResponse updateStatusOnTicketAdmin(int ticketId, int statusId){
-
-        Ticket ticket = ticketDao.findTicketByIdAdmin(ticketId);
-        TicketStatus status = ticketStatusDao.getStatusById(statusId);
-        ticket.setStatus(status);
-        ticketDao.updateTicketAdmin(ticket);
-
-        return messageResponseService.getResponseForRemoveEntity(
-                ticket.getTicketId() == ticketId,
-                ticket.getEntityName(),
-                ticket.getTicketId()
-        );
+    public Ticket updateTicketAdmin(Ticket ticket){
+        return ticketDao.updateTicketAdmin(ticket);
     }
 
-    public Ticket getTicketByIdAdmin(int ticketId) {
-        return ticketDao.findTicketByIdAdmin(ticketId);
+    public Ticket getTicketByIdAdmin(Ticket ticket) {
+        return ticketDao.findTicketByIdAdmin(ticket.getTicketId());
     }
 
     /**

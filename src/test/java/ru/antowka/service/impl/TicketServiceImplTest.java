@@ -1,5 +1,6 @@
 package ru.antowka.service.impl;
 
+import org.junit.Assert;
 import org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
@@ -111,11 +112,29 @@ public class TicketServiceImplTest {
     @Test
     public void testRemoveTicket() throws Exception {
 
+        Ticket ticket = new Ticket();
+        ticket.setTicketId(1);
+        ticket.setIsDeleted(true);
+
+        Mockito.when(ticketDao.removeTicket(ticket.getTicketId())).thenReturn(ticket);
+
+        MessageResponse messageResponse = ticketService.removeTicket(1);
+
+        assertEquals(messageResponse.getCode(), 1);
     }
 
     @Test
+    @PrepareForTest({UtilsHibernate.class})
     public void testGetAllTicketsAdmin() throws Exception {
 
+        PowerMockito.mockStatic(UtilsHibernate.class);
+
+        Mockito.when(ticketDao.getAllTicketsAdmin(10, 0, UtilsHibernate.getOrderByString("ASC", "status")))
+               .thenReturn(ticketList);
+
+        List<Ticket> resultTicket = ticketService.getAllTicketsAdmin(10, 0, "ASC", "status");
+
+        assertEquals(resultTicket, ticketList);
     }
 
     @Test

@@ -5,6 +5,7 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 import ru.antowka.entity.MessageResponse;
 import ru.antowka.entity.Ticket;
+import ru.antowka.entity.TicketStatus;
 import ru.antowka.service.TicketService;
 import ru.antowka.service.impl.TicketServiceImpl;
 
@@ -31,12 +32,10 @@ public class TicketsAdminController {
     @RequestMapping(value="get-tickets", method=RequestMethod.GET)
     public @ResponseBody List<Ticket>getAllTickets(org.springframework.web.context.request.WebRequest request){
 
-        List<Ticket> tickets = ticketService.getAllTicketsAdmin(Integer.parseInt(request.getParameter("limit")),
-                Integer.parseInt(request.getParameter("offset")),
-                request.getParameter("order"),
-                request.getParameter("orderField"));
-
-        return tickets;
+        return ticketService.getAllTicketsAdmin(Integer.parseInt(request.getParameter("limit")),
+                    Integer.parseInt(request.getParameter("offset")),
+                    request.getParameter("order"),
+                    request.getParameter("orderField"));
     }
 
     /**
@@ -44,12 +43,12 @@ public class TicketsAdminController {
      *
      * link: http://localhost:8080/panel/tickets/ticket/55
      *
-     * @param ticketId
+     * @param ticket
      * @return
      */
     @RequestMapping(value="ticket/{ticketId}", method=RequestMethod.GET)
-    public @ResponseBody Ticket getTicket(@PathVariable("ticketId") int ticketId){
-        return ticketService.getTicketByIdAdmin(ticketId);
+    public @ResponseBody Ticket getTicket(@ModelAttribute Ticket ticket){
+        return ticketService.getTicketByIdAdmin(ticket);
     }
 
     /**
@@ -71,11 +70,17 @@ public class TicketsAdminController {
      *
      * link: http://localhost:8080/panel/tickets/public/5
      *
-     * @param ticketId
+     * @param ticket
      * @return
      */
     @RequestMapping(value="public/{ticketId}", method= RequestMethod.GET)
-    public @ResponseBody MessageResponse publicTicket(@PathVariable("ticketId") int ticketId) {
-        return ticketService.updateStatusOnTicketAdmin(ticketId, 2);
+    public @ResponseBody Ticket publicTicket(@ModelAttribute Ticket ticket) {
+
+        ticket = ticketService.getTicketByIdAdmin(ticket);
+
+        //TODO - fix problem with lazy load
+        ticket.getStatus().setTicketsStatusId(2);
+
+        return ticketService.updateTicketAdmin(ticket);
     }
 }

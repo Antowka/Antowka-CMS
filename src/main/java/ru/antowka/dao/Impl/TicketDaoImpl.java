@@ -1,5 +1,6 @@
 package ru.antowka.dao.Impl;
 
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
@@ -64,12 +65,13 @@ public class TicketDaoImpl implements TicketDao{
     @SuppressWarnings("unchecked")
     public Ticket findTicketById(int ticketId) {
 
+
         Session session = hibernateSessionFactory.getSession();
-        Ticket ticket = (Ticket)session.createCriteria(Ticket.class, "ticket")
+        Ticket ticket = (Ticket) session.createCriteria(Ticket.class, "ticket")
                                         .createAlias("ticket.status", "status")
                                         .createAlias("ticket.region", "region")
-                                        .add(Restrictions.eq("ticket.ticketId", ticketId))
                                         .add(Restrictions.eq("status.publicStatus", true))
+                                        .add(Restrictions.eq("ticket.ticketId", ticketId))
                                         .setProjection(Projections.projectionList()
                                                         .add(Projections.property("ticket.ticketId"), "ticketId")
                                                         .add(Projections.property("ticket.title"), "title")
@@ -82,6 +84,7 @@ public class TicketDaoImpl implements TicketDao{
                                         )
                                         .setResultTransformer(Transformers.aliasToBean(Ticket.class))
                                         .uniqueResult();
+
 
         //get categories for tickets
         List<TicketCategory> ticketCategories = (List<TicketCategory>)session.createCriteria(TicketCategory.class, "tc")
@@ -177,10 +180,12 @@ public class TicketDaoImpl implements TicketDao{
 
     @Override
     @Transactional
-    public void updateTicketAdmin(Ticket ticket){
+    public Ticket updateTicketAdmin(Ticket ticket){
 
         Session session = hibernateSessionFactory.getSession();
         session.update(ticket);
+
+        return findTicketByIdAdmin(ticket.getTicketId());
     }
 
     @Override
