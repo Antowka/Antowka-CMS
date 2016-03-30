@@ -13,10 +13,5 @@
 
         <property name="publicStatus" column="public_status" type="boolean" />
 
-        <set name="tickets" table="tickets" inverse="true" lazy="true" fetch="select">
-            <key column="ticket_status_id" />
-            <one-to-many class="ru.antowka.entity.Ticket" />
-        </set>
-
     </class>
 </hibernate-mapping>

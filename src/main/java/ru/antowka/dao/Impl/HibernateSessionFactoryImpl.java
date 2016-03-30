@@ -8,6 +8,7 @@ import ru.antowka.dao.HibernateSessionFactory;
 /**
  * Created by anton on 25.07.15.
  */
+@Component
 public class HibernateSessionFactoryImpl implements HibernateSessionFactory {
 
     private SessionFactory sessionFactory;

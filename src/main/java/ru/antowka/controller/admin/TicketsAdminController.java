@@ -7,6 +7,7 @@ import ru.antowka.entity.MessageResponse;
 import ru.antowka.entity.Ticket;
 import ru.antowka.entity.TicketStatus;
 import ru.antowka.service.TicketService;
+import ru.antowka.service.TicketStatusService;
 import ru.antowka.service.impl.TicketServiceImpl;
 
 import java.util.List;
@@ -21,6 +22,9 @@ public class TicketsAdminController {
 
     @Autowired
     private TicketService ticketService;
+
+    @Autowired
+    private TicketStatusService ticketStatusService;
 
     /**
      * Response all tickets
@@ -78,8 +82,8 @@ public class TicketsAdminController {
 
         ticket = ticketService.getTicketByIdAdmin(ticket);
 
-        //TODO - fix problem with lazy load
-        ticket.getStatus().setTicketsStatusId(2);
+        //SET PUBLIC STATUS
+        ticket.setStatus(ticketStatusService.getTicketStatus(2));
 
         return ticketService.updateTicketAdmin(ticket);
     }

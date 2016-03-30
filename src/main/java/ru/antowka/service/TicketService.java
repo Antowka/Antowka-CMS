@@ -1,5 +1,6 @@
 package ru.antowka.service;
 
+import org.springframework.stereotype.Service;
 import ru.antowka.entity.MessageResponse;
 import ru.antowka.entity.Ticket;
 import ru.antowka.entity.User;

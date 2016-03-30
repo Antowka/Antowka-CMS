@@ -1,23 +1,15 @@
 package ru.antowka.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import java.io.Serializable;
-import java.util.Set;
 
 /**
  * Created by anton on 09.08.15.
  */
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class TicketStatus implements Serializable{
 
     private int ticketsStatusId;
     private String status;
     private boolean publicStatus;
-
-    @JsonIgnore
-    private Set<Ticket> tickets;
 
     /**
      * Method response entity name
@@ -42,14 +34,6 @@ public class TicketStatus implements Serializable{
 
     public void setStatus(String status) {
         this.status = status;
-    }
-
-    public Set<Ticket> getTickets() {
-        return tickets;
-    }
-
-    public void setTickets(Set<Ticket> tickets) {
-        this.tickets = tickets;
     }
 
     public boolean isPublicStatus() {
