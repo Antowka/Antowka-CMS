@@ -40,7 +40,7 @@ public class SettingDaoImpl implements SettingDao {
         List<Setting> settings = null;
         Session session = hibernateSessionFactory.getSession();
         settings = (List<Setting>) session.createCriteria(Setting.class)
-                                          .add(Restrictions.in("settingName", settingsName))
+                                          .add(Restrictions.in("settingName", settingsName[0]))
                                           .list();
 
 
