@@ -16,7 +16,6 @@ import ru.antowka.entity.MessageResponse;
 import ru.antowka.entity.Ticket;
 import ru.antowka.entity.User;
 import ru.antowka.service.EmailSender;
-import ru.antowka.service.MessageResponseService;
 import ru.antowka.utils.UtilsHibernate;
 
 import java.util.ArrayList;
