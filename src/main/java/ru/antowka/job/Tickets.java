@@ -3,25 +3,26 @@ package ru.antowka.job;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import ru.antowka.entity.Setting;
-import ru.antowka.service.SettingsService;
+import ru.antowka.service.TicketService;
+import ru.antowka.service.impl.SettingsServiceImpl;
 import ru.antowka.service.impl.TicketServiceImpl;
 
 /**
- * Created by Anton Nik on 06.09.15.
+ * Job for works with with Tickets by scheduler
  */
 public class Tickets {
 
     @Autowired
-    private TicketServiceImpl ticketService;
+    private TicketService ticketService;
 
     @Autowired
-    private SettingsService settingsService;
+    private SettingsServiceImpl settingsService;
 
     @Autowired
     private Setting setting;
 
     @Async
-    public void updateCounterInSettings(){
+    public void updateCounterInSettings() {
 
         //update counter public tickets
         System.out.println("CRON EXECUTE!");

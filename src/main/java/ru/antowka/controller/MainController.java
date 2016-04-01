@@ -6,8 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-import ru.antowka.entity.*;
-import ru.antowka.service.*;
+import ru.antowka.service.SettingsService;
 
 import java.util.*;
 

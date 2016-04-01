@@ -1,27 +1,27 @@
 package ru.antowka.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import ru.antowka.dao.TicketCategoryDao;
 import ru.antowka.entity.TicketCategory;
 
 import java.util.List;
 
 /**
- * Created by Anton Nik on 06.08.15.
+ * Interface for ticketCategoryService
  */
-@Service
-public class TicketCategoryService {
+public interface TicketCategoryService {
 
-    @Autowired
-    private TicketCategoryDao ticketCategoryDao;
+    /**
+     * Method response TicketCategory by Id
+     *
+     * @param categoryId
+     *
+     * @return
+     */
+    TicketCategory getCategoryById(int categoryId);
 
-
-    public TicketCategory getCategoryById(int categoryId){
-        return ticketCategoryDao.findTicketCategoryById(categoryId);
-    }
-
-    public List<TicketCategory> getAllCategories(){
-        return ticketCategoryDao.findAllTicketCategories();
-    }
+    /**
+     * Method response list TicketCategories
+     *
+     * @return
+     */
+    List<TicketCategory> getAllCategories();
 }

@@ -7,8 +7,8 @@ import ru.antowka.entity.Ticket;
 import ru.antowka.entity.TicketCategory;
 import ru.antowka.entity.User;
 import ru.antowka.service.TicketCategoryService;
+import ru.antowka.service.impl.TicketCategoryServiceImpl;
 import ru.antowka.service.TicketService;
-import ru.antowka.service.impl.TicketServiceImpl;
 
 import java.util.List;
 
