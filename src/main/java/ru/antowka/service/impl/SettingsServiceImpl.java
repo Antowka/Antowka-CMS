@@ -23,23 +23,18 @@ public class SettingsServiceImpl implements SettingsService {
 
     public Setting getSetting(String settingName){
 
-        Setting setting = null;
-
-        setting = settingDao.findSettingByName(settingName);
-
-        return setting;
+        return settingDao.findSettingByName(settingName);
     }
 
     public Map<String, String> getSettings(String[] settingsName){
 
-        List<Setting> settingsList = null;
-
-        settingsList = settingDao.findSettingsByName(settingsName);
+        List<Setting> settingsList = settingDao.findSettingsByName(settingsName);
 
         Map<String, String> settings = new HashMap<String, String>();
 
         settingsList.stream()
-                .forEach(setting -> settings.put(setting.getSettingName(), setting.getValue()));
+                .forEach(setting -> settings
+                .put(setting.getSettingName(), setting.getValue()));
 
         return settings;
     }

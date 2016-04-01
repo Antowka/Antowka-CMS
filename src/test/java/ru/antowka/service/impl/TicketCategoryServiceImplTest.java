@@ -7,7 +7,6 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 import ru.antowka.dao.TicketCategoryDao;
-import ru.antowka.entity.Ticket;
 import ru.antowka.entity.TicketCategory;
 
 
