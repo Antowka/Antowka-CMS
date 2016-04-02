@@ -12,7 +12,6 @@ import ru.antowka.entity.Setting;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.StringJoiner;
 
 import static org.junit.Assert.*;
 
@@ -68,5 +67,18 @@ public class SettingsServiceImplTest {
     @Test
     public void updateSetting() throws Exception {
 
+        Setting settingUpdated = new Setting();
+        settingUpdated.setSettingName("DemoSetting");
+        settingUpdated.setValue("500");
+
+        Setting settingStart = new Setting();
+        settingStart.setSettingName("DemoSetting");
+        settingStart.setValue("100");
+
+        Mockito.when(settingDao.updateSetting(settingStart)).thenReturn(settingUpdated);
+
+        Setting resultSetting = settingsService.updateSetting(settingStart);
+
+        assertEquals(resultSetting.getValue(), "500");
     }
 }

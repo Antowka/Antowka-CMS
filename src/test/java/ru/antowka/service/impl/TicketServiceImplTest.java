@@ -1,7 +1,5 @@
 package ru.antowka.service.impl;
 
-import org.junit.Assert;
-import org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,7 +13,7 @@ import ru.antowka.dao.TicketDao;
 import ru.antowka.entity.MessageResponse;
 import ru.antowka.entity.Ticket;
 import ru.antowka.entity.User;
-import ru.antowka.service.EmailSender;
+import ru.antowka.service.EmailSenderService;
 import ru.antowka.utils.UtilsHibernate;
 
 import java.util.ArrayList;
@@ -36,7 +34,7 @@ public class TicketServiceImplTest {
     private TicketDao ticketDao;
 
     @Mock
-    private EmailSender emailSender;
+    private EmailSenderService emailSenderService;
 
     List<Ticket> ticketList = new ArrayList<>();
 
@@ -102,7 +100,7 @@ public class TicketServiceImplTest {
         Ticket ticket = new Ticket();
         ticket.setTicketId(1);
         Mockito.when(ticketDao.createTicket(ticket)).thenReturn(ticket);
-        Mockito.doCallRealMethod().when(emailSender).newTicketCreated(ticket.getEmail());
+        Mockito.doCallRealMethod().when(emailSenderService).newTicketCreated(ticket.getEmail());
 
         MessageResponse messageResponse = ticketService.createTicket(ticket);
         assertTrue(messageResponse.getCode() == 1);

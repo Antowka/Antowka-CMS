@@ -1,4 +1,4 @@
-package ru.antowka.service;
+package ru.antowka.service.impl;
 
 import org.apache.velocity.app.VelocityEngine;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,21 +9,32 @@ import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.velocity.VelocityEngineUtils;
+import ru.antowka.service.EmailSenderService;
+
 import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by Anton Nik on 02.10.15.
+ * Service for send alerts to email
  */
 @Service
-public class EmailSender {
+public class EmailSenderServiceImpl implements EmailSenderService{
 
+    /**
+     * Email Sender
+     */
     @Autowired
     private JavaMailSender mailSender;
 
+    /**
+     * set Email address for sender
+     */
     @Value("${email.senderAddress}")
     private String fromSend;
 
+    /**
+     * Template engine
+     */
     @Autowired
     private VelocityEngine velocityEngine;
 
@@ -32,6 +43,11 @@ public class EmailSender {
 
     }
 
+    /**
+     * Method generate alert about new Ticket
+     *
+     * @param email - email recipient
+     */
     @Async
     public void newTicketCreated(String email){
 
@@ -67,8 +83,6 @@ public class EmailSender {
 
             message.setText(text, true);
         });
-
-
     }
 
     /**

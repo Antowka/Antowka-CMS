@@ -6,12 +6,10 @@ import ru.antowka.dao.TicketDao;
 import ru.antowka.dao.TicketStatusDao;
 import ru.antowka.entity.MessageResponse;
 import ru.antowka.entity.Ticket;
-import ru.antowka.entity.TicketStatus;
 import ru.antowka.entity.User;
-import ru.antowka.service.EmailSender;
+import ru.antowka.service.EmailSenderService;
 import ru.antowka.service.MessageResponseService;
 import ru.antowka.service.TicketService;
-import ru.antowka.service.impl.AttachmentServiceImpl;
 import ru.antowka.utils.UtilsHibernate;
 
 import java.util.List;
@@ -35,7 +33,7 @@ public class TicketServiceImpl implements TicketService{
     private MessageResponseService messageResponseService;
 
     @Autowired
-    EmailSender emailSender;
+    EmailSenderService emailSenderService;
 
     public List<Ticket> getAllTickets(int limit, int offset, String order, String orderField){
 
@@ -70,7 +68,7 @@ public class TicketServiceImpl implements TicketService{
 
         //send email about create ticket
         if(ticket.getTicketId() != 0) {
-            emailSender.newTicketCreated(ticket.getEmail());
+            emailSenderService.newTicketCreated(ticket.getEmail());
         }
 
         return messageResponseService.getResponseForCreateEntity(
